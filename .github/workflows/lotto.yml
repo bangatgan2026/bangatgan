@@ -1,0 +1,32 @@
+name: lotto-update
+
+on:
+  schedule:
+    - cron: '30 12 * * 6'
+    - cron: '0 1 * * 0'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: fetch
+        run: node scripts/update-lotto.js
+      - name: commit
+        run: |
+          git config user.name "lotto-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add data/draws.json assets/lotto-data.js
+          if git diff --staged --quiet; then
+            echo "no change"
+          else
+            git commit -m "lotto update"
+            git push
+          fi
