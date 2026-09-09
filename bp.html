@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0E1320">
+<title>혈압 단계 확인 | 참새방앗간</title>
+<meta name="description" content="수축기와 이완기 혈압을 넣으면 대한고혈압학회 기준으로 어느 단계에 해당하는지 확인합니다.">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-section="health">
+<div class="wrap">
+  <aside class="side"></aside>
+  <main>
+    <h1 class="page-h">혈압 단계 확인</h1>
+    <p class="page-lead">재신 혈압이 어느 구간에 속하는지 확인합니다. 진단이 아니라 기준 안내입니다.</p>
+    <div class="callout" style="margin:0 0 16px"><b>정상은 "120 미만 그리고 80 미만"입니다.</b><br>
+    미만이라는 말이 중요합니다. 119/79는 정상이지만, 120/80은 딱 경계에 걸려 다음 단계로 넘어갑니다.</div>
+    <div class="card">
+      <h2>혈압 수치</h2>
+      <div class="row2">      <div class="field">
+        <label for="sys">수축기 <span class="hint">높은 쪽</span></label>
+        <div class="inbox"><input id="sys" inputmode="numeric" placeholder="수축기 (정상은 120 미만)"><span class="unit">mmHg</span></div>
+      </div>      <div class="field">
+        <label for="dia">이완기 <span class="hint">낮은 쪽</span></label>
+        <div class="inbox"><input id="dia" inputmode="numeric" placeholder="이완기 (정상은 80 미만)"><span class="unit">mmHg</span></div>
+      </div></div>
+      <button class="btn" id="go">단계 확인</button>
+    </div>
+
+    <div id="out" hidden>
+      <div class="result">
+        <div class="lab" id="lab">결과</div>
+        <div class="big" id="big"></div>
+        <div class="note" id="note"></div>
+        <div class="kpi" id="kpi"></div>
+      </div>
+      <div class="card">
+        <h2>혈압 분류 기준</h2>
+        <p class="sub" id="tsub"></p>
+        <table class="t"><tbody id="rows"></tbody></table>
+      </div>
+      <div class="card">
+        <h2>이어서 보기</h2>
+        <div class="next" id="nextTools"></div>
+      </div>
+    </div>
+
+    <div class="ad wide"><span>광고 자리</span></div>
+    <div class="card">
+      <h2>혈압을 제대로 재는 방법</h2>
+      <div class="prose">
+
+        <h3>120에 80은 정상이 아닌가요</h3>
+        <p>많은 분이 "120에 80이면 정상"으로 알고 계십니다. 그런데 학회 기준은 <b>수축기 120 "미만", 이완기 80 "미만"</b>입니다. 미만이라는 말 때문에 119/79는 정상이지만 120/80은 정상이 아닙니다. 딱 그 숫자부터 다음 단계로 넘어갑니다.</p>
+        <p>120/80은 <b>고혈압 전단계</b>로 분류됩니다. 이완기 80이 80~89 구간에 들어가기 때문입니다. 수축기가 120으로 낮아도, 수축기와 이완기 중 하나라도 높은 쪽에 걸리면 그 단계로 봅니다.</p>
+        <p><b>그럼 위험한 걸까요. 아닙니다.</b> 전단계는 질병이 아닙니다. 학회도 이 구간을 질환 단계로 보지 않습니다. 고혈압으로 진행할 수 있으니 생활습관을 살펴보라는 신호에 가깝습니다. 우리나라 성인의 상당수가 이 구간에 속합니다.</p>
+
+        <h3>한 번 재고 판단하지 마세요</h3>
+        <p>혈압은 하루에도 크게 변합니다. 아침과 저녁이 다르고, 방금 걸었거나 커피를 마셨거나 긴장했으면 올라갑니다. 병원에서만 높게 나오는 <b>백의고혈압</b>도 흔합니다.</p>
+        <p>제대로 재려면 5분 이상 앉아서 쉰 뒤, 팔을 심장 높이에 두고, 2분 간격으로 두 번 재서 평균을 냅니다. 여러 날에 걸쳐 같은 시간대에 재는 것이 정확합니다.</p>
+        <h3>수축기와 이완기</h3>
+        <p>수축기는 심장이 짜낼 때의 압력, 이완기는 심장이 늘어날 때의 압력입니다. 둘 중 하나만 높아도 그 단계로 봅니다. 나이가 들면 혈관이 굳어져 수축기만 높아지는 경우가 많습니다.</p>
+        <div class="callout"><b>이 결과는 의학적 진단이 아닙니다.</b><br>
+        대한고혈압학회의 분류 기준을 안내하는 것뿐입니다. 수치가 높게 나왔다면 반드시 의료기관에서 확인하시고, 이미 약을 드시는 중이라면 임의로 조절하지 마세요.<br>
+        수축기 180 이상 또는 이완기 120 이상이면서 두통, 시야 이상, 가슴 통증 같은 증상이 있다면 즉시 응급실을 찾아야 합니다.</div>
+    
+      </div>
+    </div>
+  </main>
+  <aside class="rail"><div class="ad tall"><span>광고 자리</span></div></aside>
+</div>
+
+<script src="assets/site.js"></script>
+<script>
+(function(){
+"use strict";
+var $=function(s){return document.querySelector(s);};
+function row(k,v,c){ return '<tr><td>'+k+(c?'<div class="c">'+c+'</div>':'')+'</td><td>'+v+'</td></tr>'; }
+function sumrow(k,v){ return '<tr class="sum"><td>'+k+'</td><td>'+v+'</td></tr>'; }
+
+U.comma($('#sys')); U.comma($('#dia'));
+function run(){
+  if(!U.need($('#sys'),'수축기 혈압')) return;
+  if(!U.need($('#dia'),'이완기 혈압')) return;
+  var s=U.num($('#sys')), d=U.num($('#dia'));
+  if(!s||!d){ $('#out').hidden=true; return; }
+  var stage;
+  if(s>=180||d>=120) stage='고혈압 위기';
+  else if(s>=160||d>=100) stage='2기 고혈압';
+  else if(s>=140||d>=90) stage='1기 고혈압';
+  else if(s>=130||d>=80) stage='고혈압 전단계';
+  else if(s>=120) stage='주의 혈압';
+  else stage='정상';
+
+  var msg={
+    '정상':'적정 범위입니다. 지금 상태를 유지하세요.',
+    '주의 혈압':'아직 고혈압은 아니지만 관리가 필요한 구간입니다.',
+    '고혈압 전단계':'생활습관 관리가 권장되는 구간입니다. 정기적으로 확인해 보세요.',
+    '1기 고혈압':'의료기관에서 확인해 보시는 것이 좋습니다.',
+    '2기 고혈압':'의료진 상담이 필요한 수치입니다.',
+    '고혈압 위기':'즉시 의료기관을 찾으시기 바랍니다.'
+  }[stage];
+
+  $('#out').hidden=false;
+  $('#lab').textContent='혈압 단계';
+  $('#big').textContent=s+' / '+d+' · '+stage;
+  var why='';
+  if(stage!=='정상'){
+    var a = s>=120, bq = d>=80;
+    if(a&&bq) why='수축기 '+s+'과 이완기 '+d+' 모두 정상 범위(120 미만, 80 미만)를 넘습니다. ';
+    else if(a) why='이완기 '+d+'은 정상이지만 수축기 '+s+'이 120 이상입니다. ';
+    else why='수축기 '+s+'은 정상이지만 이완기 '+d+'이 80 이상입니다. ';
+    why+='수축기와 이완기 중 하나라도 걸리면 그 단계로 봅니다. ';
+  }
+  $('#note').textContent='대한고혈압학회 기준으로 '+stage+'에 해당합니다. '+why+msg;
+  $('#kpi').innerHTML=
+    '<div><b>'+s+'</b><span>수축기</span></div>'+
+    '<div><b>'+d+'</b><span>이완기</span></div>'+
+    '<div><b>'+stage+'</b><span>분류</span></div>'+
+    '<div><b>'+(s-d)+'</b><span>맥압 (수축기−이완기)</span></div>';
+  $('#tsub').textContent='수축기와 이완기 중 하나라도 해당되면 더 높은 단계로 봅니다.';
+  var t=[['120 미만 그리고 80 미만','정상'],['120~129 그리고 80 미만','주의 혈압'],
+         ['130~139 또는 80~89','고혈압 전단계'],['140~159 또는 90~99','1기 고혈압'],
+         ['160~179 또는 100~119','2기 고혈압'],['180 이상 또는 120 이상','고혈압 위기']];
+  var html='<tr><th>수축기 / 이완기</th><th>분류</th></tr>';
+  t.forEach(function(p){
+    var on=p[1]===stage;
+    html+='<tr><td'+(on?' style="color:var(--gold)"':'')+'>'+p[0]+'</td><td'+(on?' style="color:var(--gold);font-weight:700"':'')+'>'+p[1]+(on?' ← 현재':'')+'</td></tr>';
+  });
+  $('#rows').innerHTML=html;
+  $('#nextTools').innerHTML=
+    '<a href="bmi.html"><b>BMI 체질량지수</b><span>체중도 혈압에 영향을 줍니다</span></a>'+
+    '<a href="walk.html"><b>걷기 칼로리 소모</b><span>걷기는 혈압 관리에 도움이 됩니다</span></a>';
+  U.saveState({sys:s,dia:d});
+}
+$('#go').onclick=run;
+var st=U.loadState();
+if(st.sys){ $('#sys').value=st.sys; $('#dia').value=st.dia; run(); }
+
+})();
+</script>
+</body>
+</html>

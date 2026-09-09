@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0E1320">
+<title>하루 필요 칼로리 계산기 | 참새방앗간</title>
+<meta name="description" content="기초대사량과 활동량으로 하루 필요 칼로리를 계산하고, 목표 체중까지 걸리는 기간을 함께 보여줍니다.">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-section="health">
+<div class="wrap">
+  <aside class="side"></aside>
+  <main>
+    <h1 class="page-h">하루 필요 칼로리 계산기</h1>
+    <p class="page-lead">지금 체중을 유지하는 데 필요한 칼로리와, 목표 체중까지 필요한 기간을 계산합니다.</p>
+    <div class="card">
+      <h2>신체 정보와 목표</h2>
+      <div class="field">
+        <label for="sex">성별 </label>
+        <div class="inbox"><select id="sex"><option value="m">남성</option><option value="f">여성</option></select></div>
+      </div>      <div class="row3">      <div class="field">
+        <label for="age">나이 </label>
+        <div class="inbox"><input id="age" inputmode="numeric" placeholder="나이"><span class="unit">세</span></div>
+      </div>      <div class="field">
+        <label for="h">키 </label>
+        <div class="inbox"><input id="h" inputmode="numeric" placeholder="키"><span class="unit">cm</span></div>
+      </div>      <div class="field">
+        <label for="w">현재 몸무게 </label>
+        <div class="inbox"><input id="w" inputmode="numeric" placeholder="몸무게"><span class="unit">kg</span></div>
+      </div></div>      <div class="field">
+        <label for="act">활동량 </label>
+        <div class="inbox"><select id="act"><option value="1.2">거의 안 움직임</option><option value="1.375">가벼운 활동 (주 1~3회)</option><option value="1.55">보통 활동 (주 3~5회)</option><option value="1.725">활발한 활동 (주 6~7회)</option></select></div>
+      </div>      <div class="field">
+        <label for="target">목표 몸무게 <span class="hint">없으면 비워두세요</span></label>
+        <div class="inbox"><input id="target" inputmode="numeric" placeholder="목표 몸무게 (선택)"><span class="unit">kg</span></div>
+      </div>
+      <button class="btn" id="go">필요 칼로리 계산</button>
+    </div>
+
+    <div id="out" hidden>
+      <div class="result">
+        <div class="lab" id="lab">결과</div>
+        <div class="big" id="big"></div>
+        <div class="note" id="note"></div>
+        <div class="kpi" id="kpi"></div>
+      </div>
+      <div class="card">
+        <h2>목표별 계획</h2>
+        <p class="sub" id="tsub"></p>
+        <table class="t"><tbody id="rows"></tbody></table>
+      </div>
+      <div class="card">
+        <h2>이어서 보기</h2>
+        <div class="next" id="nextTools"></div>
+      </div>
+    </div>
+
+    <div class="ad wide"><span>광고 자리</span></div>
+    <div class="card">
+      <h2>칼로리와 체중의 관계</h2>
+      <div class="prose">
+
+        <h3>1kg을 빼려면</h3>
+        <p>체지방 1kg은 대략 7,700kcal에 해당합니다. 하루에 500kcal씩 덜 먹으면 이론적으로 약 15일에 1kg이 줄어듭니다. 주당 0.5kg 정도가 무리 없는 속도로 권장됩니다.</p>
+        <h3>계산대로 되지 않는 이유</h3>
+        <p>체중이 줄면 기초대사량도 함께 줄어듭니다. 몸이 가벼워지면 같은 활동에도 에너지가 덜 들기 때문입니다. 그래서 처음엔 잘 빠지다가 어느 시점부터 정체됩니다. 이건 실패가 아니라 정상적인 과정입니다.</p>
+        <p>수분과 근육량 변화, 소금 섭취에 따라 체중은 하루에도 1~2kg씩 오르내립니다. 매일 재기보다 주 단위 평균을 보는 것이 낫습니다.</p>
+        <div class="callout"><b>기초대사량 아래로 내려가지 마세요.</b><br>
+        하루 섭취량이 기초대사량보다 크게 적으면 근육이 먼저 빠지고 대사량이 떨어집니다. 체중 조절 계획은 의료진이나 영양 전문가와 상의하시는 것이 안전합니다. 이 계산은 일반적인 공식에 따른 참고값입니다.</div>
+    
+      </div>
+    </div>
+  </main>
+  <aside class="rail"><div class="ad tall"><span>광고 자리</span></div></aside>
+</div>
+
+<script src="assets/site.js"></script>
+<script>
+(function(){
+"use strict";
+var $=function(s){return document.querySelector(s);};
+function row(k,v,c){ return '<tr><td>'+k+(c?'<div class="c">'+c+'</div>':'')+'</td><td>'+v+'</td></tr>'; }
+function sumrow(k,v){ return '<tr class="sum"><td>'+k+'</td><td>'+v+'</td></tr>'; }
+
+['age','h','w','target'].forEach(function(id){ U.comma($('#'+id)); });
+function run(){
+  if(!U.need($('#age'),'나이')) return;
+  if(!U.need($('#h'),'키')) return;
+  if(!U.need($('#w'),'현재 몸무게')) return;
+  var sex=$('#sex').value, age=U.num($('#age')), h=U.num($('#h')), w=U.num($('#w'));
+  var act=Number($('#act').value)||1.375, target=U.num($('#target'));
+  if(!age||!h||!w){ $('#out').hidden=true; return; }
+  var bmr = sex==='m' ? 88.362+13.397*w+4.799*h-5.677*age : 447.593+9.247*w+3.098*h-4.330*age;
+  var tdee = bmr*act;
+
+  $('#out').hidden=false;
+  $('#lab').textContent='하루 필요 칼로리';
+  $('#big').textContent=Math.round(tdee).toLocaleString()+' kcal';
+  $('#note').textContent='지금 체중을 유지하려면 하루에 이 정도를 먹으면 됩니다. 기초대사량은 '+Math.round(bmr).toLocaleString()+'kcal입니다.';
+  $('#kpi').innerHTML=
+    '<div><b>'+Math.round(bmr).toLocaleString()+'</b><span>기초대사량</span></div>'+
+    '<div><b>'+Math.round(tdee).toLocaleString()+'</b><span>유지 칼로리</span></div>'+
+    '<div><b>'+Math.round(tdee-500).toLocaleString()+'</b><span>감량 · 주 약 0.5kg</span></div>'+
+    '<div><b>'+Math.round(tdee+300).toLocaleString()+'</b><span>증량</span></div>';
+  var html='<tr><th>목표</th><th>하루 섭취</th><th>속도</th></tr>'+
+    '<tr><td>체중 유지</td><td>'+Math.round(tdee).toLocaleString()+' kcal</td><td>변화 없음</td></tr>'+
+    '<tr><td>천천히 감량</td><td>'+Math.round(tdee-300).toLocaleString()+' kcal</td><td>주 약 0.3kg</td></tr>'+
+    '<tr><td>보통 감량</td><td>'+Math.round(tdee-500).toLocaleString()+' kcal</td><td>주 약 0.5kg</td></tr>';
+  if(target>0 && target<w){
+    var diff=w-target, days=Math.round(diff*7700/500);
+    html+='<tr class="sum"><td>목표 '+target+'kg까지</td><td>'+Math.round(tdee-500).toLocaleString()+' kcal</td><td>약 '+days+'일 ('+Math.round(days/7)+'주)</td></tr>';
+    $('#tsub').textContent='하루 500kcal를 덜 먹는다고 가정했을 때 '+diff+'kg 감량에 약 '+Math.round(days/7)+'주가 걸립니다.';
+  } else {
+    $('#tsub').textContent='목표 체중을 넣으면 걸리는 기간도 계산됩니다.';
+  }
+  $('#rows').innerHTML=html;
+  $('#nextTools').innerHTML=
+    '<a href="bmi.html?h='+h+'&w='+w+'"><b>BMI 체질량지수</b><span>지금 체중이 어느 단계인지</span></a>'+
+    '<a href="walk.html?w='+w+'"><b>걷기 칼로리 소모</b><span>얼마나 걸으면 얼마가 소모되는지</span></a>';
+  U.saveState({sex:sex,age:age,h:h,w:w,act:act,target:target});
+}
+$('#go').onclick=run;
+var st=U.loadState();
+if(st.age){ $('#sex').value=st.sex||'m'; $('#age').value=st.age; $('#h').value=st.h; $('#w').value=st.w;
+  if(st.act)$('#act').value=st.act; if(st.target)$('#target').value=st.target; run(); }
+
+})();
+</script>
+</body>
+</html>

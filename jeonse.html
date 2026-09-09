@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0E1320">
+<title>전월세 전환 계산기 | 참새방앗간</title>
+<meta name="description" content="전세보증금을 월세로 바꾸거나 월세를 전세로 환산할 때의 금액을 전월세전환율로 계산합니다.">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-section="money">
+
+<div class="wrap">
+  <aside class="side"></aside>
+  <main>
+    <h1 class="page-h">전월세 전환 계산기</h1>
+    <p class="page-lead">보증금을 낮추고 월세를 내는 조건이 유리한지, 숫자로 비교해 보세요.</p>
+
+    <div class="card">
+      <h2>전환 조건</h2>
+      <div class="field">
+        <label for="deposit">현재 전세보증금 </label>
+        <div class="inbox"><input id="deposit" inputmode="numeric" placeholder="예: 30000 (3억)"><span class="unit">만원</span></div>
+      </div>      <div class="field">
+        <label for="newdep">바꿀 보증금 <span class="hint">월세로 돌릴 때 남길 보증금</span></label>
+        <div class="inbox"><input id="newdep" inputmode="numeric" placeholder="예: 5000 (5천만원)"><span class="unit">만원</span></div>
+      </div>      <div class="field">
+        <label for="rate">전환율 <span class="hint">보통 4~6%</span></label>
+        <div class="inbox"><input id="rate" type="text" placeholder="이율" value="5.5"><span class="unit">%</span></div>
+      </div>
+      <button class="btn" id="go">전환 금액 계산</button>
+    </div>
+
+    <div id="out" hidden>
+      <div class="result">
+        <div class="lab" id="lab">결과</div>
+        <div class="big" id="big"></div>
+        <div class="note" id="note"></div>
+        <div class="kpi" id="kpi"></div>
+      </div>
+
+      <div class="card">
+        <h2>전환 결과</h2>
+        <p class="sub" id="tsub"></p>
+        <table class="t"><tbody id="rows"></tbody></table>
+      </div>
+
+      <div class="card">
+        <h2>이어서 계산해 보기</h2>
+        <div class="next" id="nextTools"></div>
+      </div>
+    </div>
+
+    <div class="ad wide"><span>광고 자리</span></div>
+
+    <div class="card">
+      <h2>전월세전환율이란</h2>
+      <div class="prose">
+
+        <h3>계산 방식</h3>
+        <p>전세보증금 중에서 월세로 돌리는 금액에 전환율을 곱하고 12로 나누면 월세가 됩니다.</p>
+        <div class="callout"><b>월세 = (기존 보증금 − 새 보증금) × 전환율 ÷ 12</b></div>
+        <h3>전환율은 마음대로 정할 수 없습니다</h3>
+        <p>주택임대차보호법은 전환율의 상한을 정해두고 있습니다. 기준금리에 일정 비율을 더한 값과 법에서 정한 비율 중 낮은 쪽입니다. 다만 이 상한은 <b>계약 기간 중에 전세를 월세로 바꿀 때</b> 적용되고, 새로 계약을 맺을 때는 강제되지 않습니다.</p>
+        <h3>어느 쪽이 유리한가</h3>
+        <p>단순하게 보면 <b>전환율과 예금 금리를 비교</b>하면 됩니다. 보증금을 돌려받아 예금에 넣었을 때 받는 이자보다 내야 하는 월세가 크면 전세가 유리합니다. 전환율 5.5%인데 예금 금리가 3%라면 월세로 돌리는 게 손해입니다.</p>
+        <p>다만 대출을 끼고 있다면 계산이 달라집니다. 전세자금대출 금리가 전환율보다 낮으면 전세가 유리하고, 반대면 월세가 나을 수 있습니다.</p>
+        <div class="callout"><b>세금과 공제도 함께 보세요.</b><br>
+        월세는 조건을 갖추면 세액공제를 받을 수 있고, 전세자금대출 이자도 소득공제 대상이 될 수 있습니다. 실제 부담은 이걸 반영해서 따져야 정확합니다.</div>
+    
+      </div>
+    </div>
+  </main>
+  <aside class="rail"><div class="ad tall"><span>광고 자리</span></div></aside>
+</div>
+
+<script src="assets/site.js"></script>
+<script>
+(function(){
+"use strict";
+var $=function(s){return document.querySelector(s);};
+function row(k,v,c){ return '<tr><td>'+k+(c?'<div class="c">'+c+'</div>':'')+'</td><td>'+v+'</td></tr>'; }
+function sumrow(k,v){ return '<tr class="sum"><td>'+k+'</td><td>'+v+'</td></tr>'; }
+
+U.comma($('#deposit')); U.comma($('#newdep'));
+function run(){
+  if(!U.need($('#deposit'),'현재 전세보증금')) return;
+  if(!U.need($('#rate'),'전환율')) return;
+  var D=U.man($('#deposit')), N=U.man($('#newdep')), rate=Number($('#rate').value)||0;
+  if(D<=0){ $('#out').hidden=true; return; }
+  if(N>D){ alert('바꿀 보증금이 기존 보증금보다 클 수 없습니다.'); return; }
+  var conv=D-N;
+  var monthly=conv*(rate/100)/12;
+
+  $('#out').hidden=false;
+  $('#lab').textContent='예상 월세';
+  $('#big').textContent=U.won(monthly);
+  $('#note').textContent='보증금 '+U.won(D)+' 중 '+U.won(conv)+'을 월세로 돌릴 때입니다.';
+  $('#kpi').innerHTML=
+    '<div><b>'+U.won(N)+'</b><span>남기는 보증금</span></div>'+
+    '<div><b>'+U.won(monthly)+'</b><span>월세</span></div>'+
+    '<div><b>'+U.won(monthly*12)+'</b><span>연간 월세</span></div>'+
+    '<div><b>'+rate+'%</b><span>전환율</span></div>';
+  $('#tsub').textContent='전환율을 바꿔가며 비교해 보세요.';
+  var rows='';
+  [4,4.5,5,5.5,6,6.5].forEach(function(r){
+    rows+='<tr><td>전환율 '+r+'%</td><td>'+U.won(conv*(r/100)/12)+'</td></tr>';
+  });
+  $('#rows').innerHTML=
+    row('기존 보증금', U.won(D),'')+
+    row('새 보증금', U.won(N),'')+
+    row('월세로 돌리는 금액', U.won(conv),'')+
+    sumrow('월세', U.won(monthly))+
+    '<tr><th>전환율별 월세</th><th></th></tr>'+rows;
+  $('#nextTools').innerHTML=
+    '<a href="savings.html?amount='+conv+'"><b>돌려받은 보증금을 예금하면</b><span>이자와 월세를 비교해 보세요</span></a>'+
+    '<a href="loan.html"><b>전세자금대출 이자</b><span>대출을 끼면 어느 쪽이 유리한지</span></a>';
+  U.saveState({deposit:D,newdep:N,rate:rate});
+}
+$('#go').onclick=run;
+var st=U.loadState();
+if(st.deposit){ $('#deposit').value=(Number(st.deposit)/10000).toLocaleString();
+  if(st.newdep)$('#newdep').value=(Number(st.newdep)/10000).toLocaleString();
+  if(st.rate)$('#rate').value=st.rate; run(); }
+
+})();
+</script>
+</body>
+</html>

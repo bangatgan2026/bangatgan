@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0E1320">
+<title>예금·적금 이자 계산기 | 참새방앗간</title>
+<meta name="description" content="예금과 적금의 만기 수령액을 계산합니다. 이자소득세 15.4%를 뗀 실수령액을 보여줍니다.">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-section="money">
+
+<div class="wrap">
+  <aside class="side"></aside>
+  <main>
+    <h1 class="page-h">예금·적금 이자 계산기</h1>
+    <p class="page-lead">이자에는 세금이 붙습니다. 세금을 떼고 만기에 실제로 받는 금액을 계산합니다.</p>
+
+    <div class="card">
+      <h2>가입 조건</h2>
+      <div class="field">
+        <label for="kind">종류 </label>
+        <div class="inbox"><select id="kind"><option value="deposit">예금 (목돈을 한 번에 맡김)</option><option value="saving">적금 (매달 넣음)</option></select></div>
+      </div>      <div class="field">
+        <label for="amount">금액 <span class="hint">예금은 원금, 적금은 매달 넣는 돈</span></label>
+        <div class="inbox"><input id="amount" inputmode="numeric" placeholder="예금 1000 / 적금 50"><span class="unit">만원</span></div>
+      </div>      <div class="row2">      <div class="field">
+        <label for="rate">연 이율 </label>
+        <div class="inbox"><input id="rate" type="text" placeholder="이율" value="3.5"><span class="unit">%</span></div>
+      </div>      <div class="field">
+        <label for="months">기간 </label>
+        <div class="inbox"><input id="months" type="text" placeholder="개월" value="12"><span class="unit">개월</span></div>
+      </div></div>      <div class="field">
+        <label for="tax">세금 <span class="hint">가입 조건에 따라 다릅니다</span></label>
+        <div class="inbox"><select id="tax">
+          <option value="15.4">일반과세 15.4%</option>
+          <option value="1.4">상호금융 1.4% (조합원)</option>
+          <option value="5">상호금융 5% (고소득)</option>
+          <option value="0">비과세 0%</option>
+        </select></div>
+      </div>
+      <button class="btn" id="go">이자 계산</button>
+    </div>
+
+    <div id="out" hidden>
+      <div class="result">
+        <div class="lab" id="lab">결과</div>
+        <div class="big" id="big"></div>
+        <div class="note" id="note"></div>
+        <div class="kpi" id="kpi"></div>
+      </div>
+
+      <div class="card">
+        <h2>계산 결과</h2>
+        <p class="sub" id="tsub"></p>
+        <table class="t"><tbody id="rows"></tbody></table>
+      </div>
+
+      <div class="card">
+        <h2>이어서 계산해 보기</h2>
+        <div class="next" id="nextTools"></div>
+      </div>
+    </div>
+
+    <div class="ad wide"><span>광고 자리</span></div>
+
+    <div class="card">
+      <h2>이자 계산에서 헷갈리는 것들</h2>
+      <div class="prose">
+
+        <h3>적금 금리가 생각보다 적은 이유</h3>
+        <p>연 3.5% 적금에 매달 100만원씩 1년을 넣으면 이자가 42만원일 것 같지만 실제로는 그 절반쯤입니다. 첫 달에 넣은 돈은 12개월치 이자를 받지만, 마지막 달에 넣은 돈은 한 달치 이자만 받기 때문입니다. 적금의 실제 수익률은 표시 금리의 <b>대략 절반</b>이라고 보면 감이 맞습니다.</p>
+        <h3>단리와 복리</h3>
+        <p>단리는 원금에만 이자가 붙고, 복리는 이자에 다시 이자가 붙습니다. 은행 예금은 대부분 단리이거나 월복리 상품입니다. 기간이 짧으면 차이가 크지 않지만, 몇 년 이상 두면 차이가 벌어집니다.</p>
+        <h3>이자소득세 15.4%</h3>
+        <p>이자에는 소득세 14%와 지방소득세 1.4%를 합쳐 15.4%가 붙습니다. 원금이 아니라 이자에만 붙습니다. 이자 42만원이 나오면 약 6만 5천원을 떼고 받게 됩니다.</p>
+        <div class="callout"><b>금융소득이 연 2천만원을 넘으면</b><br>
+        다른 소득과 합쳐 종합과세 대상이 됩니다. 세율이 크게 올라갈 수 있으니 이자가 많다면 미리 확인해 보세요.</div>
+
+        <h3>세금을 덜 내는 방법</h3>
+        <p>농협·신협·새마을금고 같은 <b>상호금융의 조합원</b>이 되면 예탁금 3,000만원까지 이자소득세 14%가 면제되고 농어촌특별세 1.4%만 냅니다. 3,000만원을 연 4%로 넣어 이자가 120만원 나오면, 일반 은행에서는 18만 4,800원을 떼지만 여기서는 1만 6,800원만 냅니다.</p>
+        <p>다만 <b>2026년부터 소득 조건이 생겼습니다.</b> 총급여 7,000만원(종합소득 6,000만원)을 넘으면 이 혜택에서 빠지고, 2026년에는 5%, 2027년부터는 9%가 부과됩니다. 그 이하 소득이면 1.4%가 유지됩니다.</p>
+        <p><b>비과세종합저축</b>은 세금을 아예 안 냅니다. 만 65세 이상 기초연금 수급 대상자, 장애인, 독립유공자 등이 대상이고 전 금융기관을 합쳐 원금 5,000만원까지입니다. 2026년부터 만 65세 이상이라고 무조건 되는 게 아니라 기초연금 수급 대상이어야 합니다.</p>
+
+        <div class="callout"><b>가입 전에 확인하세요.</b><br>
+        조건과 한도는 해마다 바뀝니다. 본인이 어느 세율에 해당하는지는 가입하려는 금융기관에서 확인하시는 것이 정확합니다.</div>
+    
+      </div>
+    </div>
+  </main>
+  <aside class="rail"><div class="ad tall"><span>광고 자리</span></div></aside>
+</div>
+
+<script src="assets/site.js"></script>
+<script>
+(function(){
+"use strict";
+var $=function(s){return document.querySelector(s);};
+function row(k,v,c){ return '<tr><td>'+k+(c?'<div class="c">'+c+'</div>':'')+'</td><td>'+v+'</td></tr>'; }
+function sumrow(k,v){ return '<tr class="sum"><td>'+k+'</td><td>'+v+'</td></tr>'; }
+
+U.comma($('#amount'));
+function run(){
+  if(!U.need($('#amount'),'금액')) return;
+  if(!U.manOk($('#amount'),'금액')) return;
+  if(!U.need($('#rate'),'연 이율')) return;
+  var kind=$('#kind').value, A=U.man($('#amount'));
+  var rate=Number($('#rate').value)||0, n=Number($('#months').value)||12;
+  var taxRate=Number($('#tax').value)/100;
+  if(A<=0){ $('#out').hidden=true; return; }
+  var principal, interest;
+  if(kind==='deposit'){
+    principal=A; interest=A*(rate/100)*(n/12);
+  } else {
+    principal=A*n;
+    interest=A*(rate/100/12)*(n*(n+1)/2);
+  }
+  var tax=interest*taxRate, net=interest-tax, total=principal+net;
+
+  $('#out').hidden=false;
+  $('#lab').textContent='만기에 받는 돈';
+  $('#big').textContent=U.won(total);
+  $('#note').textContent=(kind==='deposit'?'예금 ':'적금 ')+U.won(A)+(kind==='saving'?'씩 ':' ')+n+'개월 · 연 '+rate+'% 기준입니다.';
+  $('#kpi').innerHTML=
+    '<div><b>'+U.won(principal)+'</b><span>원금</span></div>'+
+    '<div><b>'+U.won(interest)+'</b><span>세전 이자</span></div>'+
+    '<div><b>'+U.won(net)+'</b><span>세후 이자</span></div>'+
+    '<div><b>'+(principal? (Math.round(net/principal*1000)/10):0)+'%</b><span>실질 수익률</span></div>';
+  $('#tsub').textContent = kind==='saving'
+    ? '적금은 먼저 넣은 돈일수록 이자가 오래 붙습니다. 그래서 표시 금리보다 실제 수익률이 낮습니다.'
+    : '예금은 원금 전체에 기간만큼 이자가 붙습니다.';
+  $('#rows').innerHTML=
+    row('원금', U.won(principal), kind==='saving'? U.won(A)+' × '+n+'개월':'')+
+    row('세전 이자', U.won(interest),'')+
+    row('이자소득세', '-'+U.won(tax), (taxRate*100)+'%')+
+    row('세후 이자', U.won(net),'')+
+    sumrow('만기 수령액', U.won(total));
+  $('#nextTools').innerHTML=
+    '<a href="loan.html"><b>대출 이자와 비교</b><span>빌릴 때 내는 이자는 얼마인지</span></a>'+
+    '<a href="salary.html"><b>연봉 실수령액</b><span>매달 얼마를 모을 수 있는지</span></a>';
+  U.saveState({kind:kind,amount:A,rate:rate,months:n,tax:$('#tax').value});
+}
+$('#go').onclick=run;
+var st=U.loadState();
+if(st.amount){ $('#amount').value=(Number(st.amount)/10000).toLocaleString();
+  if(st.kind)$('#kind').value=st.kind; if(st.rate)$('#rate').value=st.rate;
+  if(st.months)$('#months').value=st.months; if(st.tax)$('#tax').value=st.tax; run(); }
+
+})();
+</script>
+</body>
+</html>

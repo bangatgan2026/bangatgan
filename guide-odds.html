@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0E1320">
+<title>로또 1등 확률 | 참새방앗간</title>
+<meta name="description" content="로또 6/45의 등수별 당첨 확률을 계산 과정과 함께 정리했습니다.">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="assets/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "여러 게임을 사면 확률이 얼마나 올라가나요?", "acceptedAnswer": {"@type": "Answer", "text": "산 게임 수만큼 비례해서 올라갑니다. 다섯 게임이면 다섯 배입니다. 다만 814만분의 5는 여전히 163만분의 1이라 체감할 만한 수준은 아닙니다."}}, {"@type": "Question", "name": "3등 확률이 35,724분의 1인 이유는 뭔가요?", "acceptedAnswer": {"@type": "Answer", "text": "당첨번호 6개 중 5개를 맞히는 방법이 6가지이고, 남은 한 자리는 보너스를 뺀 38개 중 하나여야 합니다. 6 곱하기 38이 228이고 이를 전체 경우의 수로 나눈 값입니다."}}, {"@type": "Question", "name": "5등은 얼마나 자주 되나요?", "acceptedAnswer": {"@type": "Answer", "text": "45분의 1이라 한 게임을 사면 45번에 한 번꼴로 5,000원을 돌려받는 셈입니다."}}]}</script>
+</head>
+<body data-section="info">
+<div class="wrap">
+  <aside class="side"></aside>
+  <main>
+    <h1 class="page-h">1등 확률 814만분의 1은 어느 정도일까</h1>
+    <div class="pdate">2026.09.07 작성</div>
+    <p class="page-lead">숫자로만 보면 감이 잘 안 옵니다. 어떻게 나온 숫자인지, 그리고 그 크기가 실제로 어느 정도인지 정리했습니다.</p>
+    <div class="card"><div class="prose">
+      <h2>계산은 의외로 단순합니다</h2>
+      <p>로또 6/45는 1부터 45까지 45개의 번호 중 6개를 고릅니다. 순서는 상관없습니다. 이런 경우의 수는 조합으로 계산합니다. 45개 중 6개를 뽑는 경우의 수는 8,145,060가지입니다.</p>
+      <p>1등은 이 중 정확히 한 조합입니다. 그래서 1등 확률은 8,145,060분의 1입니다. 흔히 814만분의 1이라고 말하는 숫자가 이것입니다.</p>
+      <h2>등수별 확률</h2>
+      <table>
+      <tr><th>등수</th><th>기준</th><th>경우의 수</th><th>확률</th></tr>
+      <tr><td>1등</td><td>6개 일치</td><td>1</td><td>1 / 8,145,060</td></tr>
+      <tr><td>2등</td><td>5개 + 보너스</td><td>6</td><td>1 / 1,357,510</td></tr>
+      <tr><td>3등</td><td>5개 일치</td><td>228</td><td>1 / 35,724</td></tr>
+      <tr><td>4등</td><td>4개 일치</td><td>11,115</td><td>1 / 733</td></tr>
+      <tr><td>5등</td><td>3개 일치</td><td>182,780</td><td>1 / 45</td></tr>
+      </table>
+      <p>3등의 228은 이렇게 나옵니다. 당첨번호 6개 중 5개를 맞히는 방법이 6가지이고, 남은 한 자리는 보너스를 뺀 38개 번호 중 하나여야 합니다. 6 곱하기 38이 228입니다. 여기서 보너스가 걸리면 3등이 아니라 2등이 됩니다.</p>
+      <p>5등은 45분의 1이라 한 게임을 사면 45번에 한 번꼴로 5,000원을 돌려받는 셈입니다. 다섯 게임을 사면 5등 하나가 나올 확률이 대략 10퍼센트를 조금 넘습니다.</p>
+      <h2>814만분의 1의 크기</h2>
+      <ul>
+      <li>매주 다섯 게임씩 사면 1등이 나오기까지 산술적으로 3만 년 넘게 걸립니다.</li>
+      <li>한국의 한 해 교통사고 사망자 수를 인구로 나눈 확률이 이보다 훨씬 큽니다.</li>
+      <li>동전을 스물세 번 던져 전부 앞면이 나올 확률과 비슷합니다.</li>
+      </ul>
+      <p>그렇다고 로또가 사기라는 뜻은 아닙니다. 확률이 정확히 공개되어 있고 추첨은 공개적으로 진행됩니다. 다만 이 숫자를 알고 사는 것과 모르고 사는 것은 다릅니다.</p>
+      <div class="note"><b>기억할 점</b><br>여러 게임을 사면 확률은 그만큼 커집니다. 다섯 게임이면 1등 확률이 다섯 배가 됩니다. 하지만 814만분의 5는 여전히 163만분의 1입니다. 구입 금액이 커져도 확률은 우리가 체감할 만한 수준으로 올라오지 않습니다.</div>
+    </div></div>
+    <div class="card faqbox">
+      <h2>자주 묻는 질문</h2>
+      <div class="prose">
+        <div class="faq"><b>여러 게임을 사면 확률이 얼마나 올라가나요?</b><p>산 게임 수만큼 비례해서 올라갑니다. 다섯 게임이면 다섯 배입니다. 다만 814만분의 5는 여전히 163만분의 1이라 체감할 만한 수준은 아닙니다.</p></div>
+        <div class="faq"><b>3등 확률이 35,724분의 1인 이유는 뭔가요?</b><p>당첨번호 6개 중 5개를 맞히는 방법이 6가지이고, 남은 한 자리는 보너스를 뺀 38개 중 하나여야 합니다. 6 곱하기 38이 228이고 이를 전체 경우의 수로 나눈 값입니다.</p></div>
+        <div class="faq"><b>5등은 얼마나 자주 되나요?</b><p>45분의 1이라 한 게임을 사면 45번에 한 번꼴로 5,000원을 돌려받는 셈입니다.</p></div>
+      </div>
+    </div>
+
+    <div class="ad wide"><span>광고 자리</span></div>
+    <div class="card">
+      <h2>관련 계산기</h2>
+      <div class="next">
+      <a href="lotto-gen.html"><b>번호 뽑기</b><span>조건을 정해서 무작위로</span></a>
+      <a href="lotto-stat.html"><b>번호 통계</b><span>지금까지 나온 기록</span></a>
+      </div>
+    </div>
+  </main>
+  <aside class="rail"><div class="ad tall"><span>광고 자리</span></div></aside>
+</div>
+<script src="assets/site.js"></script>
+</body>
+</html>

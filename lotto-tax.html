@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0E1320">
+<title>로또 당첨금 실수령액 계산기 | 참새방앗간</title>
+<meta name="description" content="로또 당첨금에서 세금을 뗀 실제 수령액을 계산합니다. 200만원 이하 비과세, 3억 이하 22%, 3억 초과 33% 기준입니다.">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-section="lotto">
+<div class="wrap">
+  <aside class="side"></aside>
+  <main>
+    <h1 class="page-h">당첨금 실수령액 계산기</h1>
+    <p class="page-lead">당첨금에서 세금을 떼고 통장에 실제로 들어오는 금액을 계산합니다.</p>
+
+    <div class="card">
+      <h2>당첨금 입력</h2>
+      <div class="field">
+        <label for="prize">당첨금 <span class="hint">세금 떼기 전 금액</span></label>
+        <div class="inbox"><input id="prize" inputmode="numeric" placeholder="예: 20000 (2억)"><span class="unit">만원</span></div>
+        <div class="callout" style="margin:12px 0 0">
+          <b>4등 5만원과 5등 5천원은 세금이 없습니다.</b><br>
+          200만원 이하라 그대로 받습니다. 1등부터 3등까지는 회차마다 당첨금이 다르니 실제 받으신 금액을 넣어 확인하세요.
+        </div>
+      </div>
+      <button class="btn" id="go">실수령액 계산</button>
+    </div>
+
+    <div id="out" hidden>
+      <div class="result">
+        <div class="lab">실제로 받는 금액</div>
+        <div class="big" id="big"></div>
+        <div class="note" id="note"></div>
+        <div class="kpi" id="kpi"></div>
+      </div>
+      <div class="card">
+        <h2>세금 내역</h2>
+        <p class="sub" id="tsub"></p>
+        <table class="t"><tbody id="rows"></tbody></table>
+      </div>
+      <div class="card">
+        <h2>이어서 보기</h2>
+        <div class="next" id="nextTools"></div>
+      </div>
+    </div>
+
+    <div class="ad wide"><span>광고 자리</span></div>
+
+    <div class="card">
+      <h2>당첨금에 붙는 세금</h2>
+      <div class="prose">
+        <p>복권 당첨금은 기타소득으로 분류되어 세금을 뗍니다. 지급할 때 미리 떼고 주기 때문에 따로 신고할 일은 없습니다.</p>
+        <h3>세 구간으로 나뉩니다</h3>
+        <ul>
+          <li><b>200만원 이하</b> — 세금이 없습니다. 과세 최저한에 해당합니다.</li>
+          <li><b>3억원 이하</b> — 22%. 소득세 20%에 지방소득세 2%를 더한 값입니다.</li>
+          <li><b>3억원 초과분</b> — 33%. 소득세 30%에 지방소득세 3%를 더한 값입니다.</li>
+        </ul>
+        <div class="callout"><b>3억을 넘어도 전체에 33%가 붙지는 않습니다.</b><br>
+        3억까지는 22%, 그것을 넘는 부분에만 33%가 붙습니다. 20억에 당첨되면 3억에 대해 6,600만원, 나머지 17억에 대해 5억 6,100만원을 떼는 식입니다. 흔히 하는 오해라 짚어둡니다.</div>
+        <h3>4등과 5등은 세금이 없습니다</h3>
+        <p>4등 5만원, 5등 5천원은 200만원에 한참 못 미치므로 세금이 붙지 않습니다. 받은 금액 그대로입니다.</p>
+        <h3>여러 장이 당첨되면</h3>
+        <p>세금은 <b>장당 지급액을 기준으로</b> 계산합니다. 같은 번호로 여러 게임을 사서 각각 당첨되면 장마다 따로 계산합니다.</p>
+        <h3>지급 기한은 1년</h3>
+        <p>당첨금은 지급 개시일부터 1년 안에 받아야 합니다. 넘기면 소멸되어 복권기금으로 넘어갑니다. 5등 5천원도 마찬가지입니다.</p>
+        <div class="callout"><b>정확한 금액은 지급 기관에서 확인하세요.</b><br>
+        이 계산은 일반적인 기준에 따른 추정치입니다. 실제 지급액은 지급 기관의 산정에 따릅니다.</div>
+      </div>
+    </div>
+  </main>
+  <aside class="rail"><div class="ad tall"><span>광고 자리</span></div></aside>
+</div>
+<script src="assets/site.js"></script>
+<script>
+(function(){
+"use strict";
+var $=function(s){return document.querySelector(s);};
+function row(k,v,c){ return '<tr><td>'+k+(c?'<div class="c">'+c+'</div>':'')+'</td><td>'+v+'</td></tr>'; }
+function sumrow(k,v){ return '<tr class="sum"><td>'+k+'</td><td>'+v+'</td></tr>'; }
+U.comma($('#prize'));
+
+function run(){
+  if(!U.need($('#prize'),'당첨금')) return;
+  if(!U.manOk($('#prize'),'당첨금')) return;
+  var p=U.man($('#prize'));
+  var tax1=0, tax2=0;
+  if(p>2000000){
+    tax1 = Math.min(p,300000000)*0.22;
+    if(p>300000000) tax2 = (p-300000000)*0.33;
+  }
+  var tax=tax1+tax2, net=p-tax;
+
+  $('#out').hidden=false;
+  $('#big').textContent=U.won(net);
+  $('#note').textContent = p<=2000000
+    ? '200만원 이하는 세금이 붙지 않습니다. 당첨금 전액을 받습니다.'
+    : '당첨금 '+U.won(p)+'에서 세금 '+U.won(tax)+'을 뗀 금액입니다. '+
+      '전체의 '+(Math.round(tax/p*1000)/10)+'%가 세금으로 나갑니다.';
+  $('#kpi').innerHTML=
+    '<div><b>'+U.won(p)+'</b><span>당첨금</span></div>'+
+    '<div><b>'+U.won(tax)+'</b><span>세금</span></div>'+
+    '<div><b>'+(Math.round((p?tax/p:0)*1000)/10)+'%</b><span>실효 세율</span></div>'+
+    '<div><b>'+U.won(net)+'</b><span>실수령액</span></div>';
+  $('#tsub').textContent='3억까지는 22%, 3억을 넘는 부분에만 33%가 적용됩니다.';
+  var html='';
+  if(p<=2000000){
+    html = row('당첨금', U.won(p),'')+row('세금','없음','200만원 이하는 비과세')+sumrow('실수령액', U.won(net));
+  } else {
+    html = row('당첨금', U.won(p),'');
+    html += row('3억 이하분 세금', U.won(tax1), U.won(Math.min(p,300000000))+' × 22%');
+    if(tax2>0) html += row('3억 초과분 세금', U.won(tax2), U.won(p-300000000)+' × 33%');
+    html += row('세금 합계', U.won(tax),'소득세 + 지방소득세');
+    html += sumrow('실수령액', U.won(net));
+  }
+  $('#rows').innerHTML=html;
+  $('#nextTools').innerHTML=
+    '<a href="savings.html?amount='+Math.round(net)+'"><b>예금에 넣으면</b><span>이자가 얼마나 붙는지</span></a>'+
+    '<a href="guide-claim.html"><b>당첨금 받는 방법</b><span>어디서 어떻게 받는지</span></a>';
+  U.saveState({prize:p});
+}
+$('#go').onclick=run;
+var st=U.loadState();
+if(st.prize){ $('#prize').value=(Number(st.prize)/10000).toLocaleString(); run(); }
+})();
+</script>
+</body>
+</html>

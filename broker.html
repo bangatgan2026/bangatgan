@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0E1320">
+<title>부동산 중개수수료 계산기 | 참새방앗간</title>
+<meta name="description" content="매매와 전월세의 중개보수 상한요율을 적용해 부동산 중개수수료를 계산합니다.">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-section="estate">
+<div class="wrap">
+  <aside class="side"></aside>
+  <main>
+    <h1 class="page-h">중개수수료 계산기</h1>
+    <p class="page-lead">법으로 정해진 상한요율로 계산합니다. 실제 금액은 이 범위 안에서 협의로 정합니다.</p>
+
+    <div class="card">
+      <h2>거래 조건</h2>
+      <div class="field">
+        <label for="kind">거래 종류 </label>
+        <div class="inbox"><select id="kind"><option value="sale">매매·교환</option><option value="rent">전세·월세</option></select></div>
+      </div>      <div class="field">
+        <label for="price">거래 금액 <span class="hint">월세면 아래 안내 참고</span></label>
+        <div class="inbox"><input id="price" inputmode="numeric" placeholder="예: 60000 (6억)"><span class="unit">만원</span></div>
+      </div>
+      <button class="btn" id="go">수수료 계산</button>
+    </div>
+
+    <div id="out" hidden>
+      <div class="result">
+        <div class="lab" id="lab">결과</div>
+        <div class="big" id="big"></div>
+        <div class="note" id="note"></div>
+        <div class="kpi" id="kpi"></div>
+      </div>
+      <div class="card">
+        <h2>계산 내역</h2>
+        <p class="sub" id="tsub"></p>
+        <table class="t"><tbody id="rows"></tbody></table>
+      </div>
+      <div class="card">
+        <h2>이어서 계산해 보기</h2>
+        <div class="next" id="nextTools"></div>
+      </div>
+    </div>
+
+    <div class="ad wide"><span>광고 자리</span></div>
+
+    <div class="card">
+      <h2>중개수수료는 협의 대상입니다</h2>
+      <div class="prose">
+
+        <h3>상한요율이지 정해진 금액이 아닙니다</h3>
+        <p>법이 정하는 건 <b>최대 얼마까지 받을 수 있는가</b>입니다. 그 안에서 얼마로 할지는 중개사와 의뢰인이 협의해서 정합니다. 상한요율대로 다 내야 하는 게 아니라는 뜻입니다. 계약 전에 미리 이야기하는 것이 좋습니다. 계약이 끝난 뒤에는 협의가 어렵습니다.</p>
+
+        <h3>매매 요율</h3>
+        <ul>
+          <li>5천만원 미만 — 0.6% (최대 25만원)</li>
+          <li>5천만 ~ 2억원 — 0.5% (최대 80만원)</li>
+          <li>2억 ~ 9억원 — 0.4%</li>
+          <li>9억 ~ 12억원 — 0.5%</li>
+          <li>12억 ~ 15억원 — 0.6%</li>
+          <li>15억원 이상 — 0.7%</li>
+        </ul>
+
+        <h3>전월세 요율</h3>
+        <ul>
+          <li>5천만원 미만 — 0.5% (최대 20만원)</li>
+          <li>5천만 ~ 1억원 — 0.4% (최대 30만원)</li>
+          <li>1억 ~ 6억원 — 0.3%</li>
+          <li>6억 ~ 12억원 — 0.4%</li>
+          <li>12억 ~ 15억원 — 0.5%</li>
+          <li>15억원 이상 — 0.6%</li>
+        </ul>
+
+        <div class="callout"><b>월세는 환산보증금으로 계산합니다.</b><br>
+        보증금 + (월세 × 100)이 기준입니다. 이 값이 5천만원 미만이면 보증금 + (월세 × 70)으로 다시 계산합니다.<br>
+        예를 들어 보증금 1억에 월세 50만원이면 1억 + 5천만 = 1억 5천만원이 기준 금액입니다.</div>
+
+        <h3>부가세는 별도입니다</h3>
+        <p>중개사무소가 일반과세자면 수수료에 부가가치세 10%가 더 붙습니다. 간이과세자는 4%입니다. 계산된 금액이 최종 금액이 아니니 확인하세요.</p>
+
+        <h3>양쪽에서 받습니다</h3>
+        <p>매매에서는 파는 사람과 사는 사람 양쪽이 각각 냅니다. 전세도 집주인과 세입자가 각각 냅니다. 여기 나오는 금액은 <b>한 사람이 내는 금액</b>입니다.</p>
+    
+      </div>
+    </div>
+  </main>
+  <aside class="rail"><div class="ad tall"><span>광고 자리</span></div></aside>
+</div>
+<script src="assets/site.js"></script>
+<script>
+(function(){
+"use strict";
+var $=function(s){return document.querySelector(s);};
+function row(k,v,c){ return '<tr><td>'+k+(c?'<div class="c">'+c+'</div>':'')+'</td><td>'+v+'</td></tr>'; }
+function sumrow(k,v){ return '<tr class="sum"><td>'+k+'</td><td>'+v+'</td></tr>'; }
+
+U.comma($('#price'));
+var SALE=[[50000000,0.006,250000],[200000000,0.005,800000],[900000000,0.004,0],
+          [1200000000,0.005,0],[1500000000,0.006,0],[Infinity,0.007,0]];
+var RENT=[[50000000,0.005,200000],[100000000,0.004,300000],[600000000,0.003,0],
+          [1200000000,0.004,0],[1500000000,0.005,0],[Infinity,0.006,0]];
+function run(){
+  if(!U.need($('#price'),'거래 금액')) return;
+  if(!U.manOk($('#price'),'거래 금액')) return;
+  var p=U.man($('#price')), kind=$('#kind').value;
+  var t = kind==='sale' ? SALE : RENT;
+  var rate, cap;
+  for(var i=0;i<t.length;i++) if(p<t[i][0]){ rate=t[i][1]; cap=t[i][2]; break; }
+  var fee = p*rate;
+  var capped = cap>0 && fee>cap;
+  if(capped) fee=cap;
+  var vat = fee*0.1;
+
+  $('#out').hidden=false;
+  $('#lab').textContent='중개수수료 상한';
+  $('#big').textContent=U.won(fee);
+  $('#note').textContent=U.won(p)+' '+(kind==='sale'?'매매':'임대차')+' 기준 상한요율 '+(rate*100)+'%입니다. '+
+    (capped? '한도가 적용되어 '+U.won(cap)+'까지만 받을 수 있습니다. ' : '') +
+    '이 금액은 최대치이며 실제로는 협의로 정합니다. 부가세는 별도입니다.';
+  $('#kpi').innerHTML=
+    '<div><b>'+(rate*100)+'%</b><span>상한요율</span></div>'+
+    '<div><b>'+U.won(fee)+'</b><span>수수료 상한</span></div>'+
+    '<div><b>'+U.won(vat)+'</b><span>부가세 10%</span></div>'+
+    '<div><b>'+U.won(fee+vat)+'</b><span>부가세 포함</span></div>';
+  $('#tsub').textContent='매매는 파는 쪽과 사는 쪽이 각각 냅니다. 아래는 한 사람이 내는 금액입니다.';
+  $('#rows').innerHTML=
+    row('거래 금액', U.won(p), kind==='sale'?'매매가':'보증금 또는 환산보증금')+
+    row('상한요율', (rate*100)+'%', capped? '한도 '+U.won(cap)+' 적용' : '')+
+    row('수수료 상한', U.won(fee),'')+
+    row('부가가치세', U.won(vat),'일반과세자 기준 10%')+
+    sumrow('부가세 포함', U.won(fee+vat));
+  $('#nextTools').innerHTML=
+    '<a href="acquisition.html?price='+p+'"><b>취득세는 얼마</b><span>집 살 때 내는 세금</span></a>'+
+    '<a href="ltv.html?price='+p+'"><b>대출 한도 확인</b><span>얼마까지 빌릴 수 있는지</span></a>';
+  U.saveState({price:p,kind:kind});
+}
+$('#go').onclick=run;
+var st=U.loadState();
+if(st.price){ $('#price').value=(Number(st.price)/10000).toLocaleString();
+  if(st.kind)$('#kind').value=st.kind; run(); }
+
+})();
+</script>
+</body>
+</html>

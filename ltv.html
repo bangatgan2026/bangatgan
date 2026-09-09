@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0E1320">
+<title>주택담보대출 한도 계산기 (LTV·DSR) | 참새방앗간</title>
+<meta name="description" content="집값과 소득으로 LTV 한도와 DSR 한도를 각각 계산하고, 실제로 빌릴 수 있는 금액을 보여줍니다.">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-section="estate">
+<div class="wrap">
+  <aside class="side"></aside>
+  <main>
+    <h1 class="page-h">주택담보대출 한도 계산기</h1>
+    <p class="page-lead">집값으로 정해지는 한도(LTV)와 소득으로 정해지는 한도(DSR) 중 낮은 쪽이 실제 한도가 됩니다.</p>
+
+    <div class="card">
+      <h2>대출 조건</h2>
+      <div class="field">
+        <label for="price">집값 <span class="hint">매매가 또는 감정가</span></label>
+        <div class="inbox"><input id="price" inputmode="numeric" placeholder="예: 60000 (6억)"><span class="unit">만원</span></div>
+      </div>      <div class="row2">      <div class="field">
+        <label for="ltv">LTV 비율 <span class="hint">지역·조건에 따라 다름</span></label>
+        <div class="inbox"><input id="ltv" inputmode="numeric" placeholder="예: 70"><span class="unit">%</span></div>
+      </div>      <div class="field">
+        <label for="income">연 소득 <span class="hint">세전</span></label>
+        <div class="inbox"><input id="income" inputmode="numeric" placeholder="예: 5000 (5천만원)"><span class="unit">만원</span></div>
+      </div></div>      <div class="row2">      <div class="field">
+        <label for="rate">금리 </label>
+        <div class="inbox"><input id="rate" inputmode="numeric" placeholder="예: 4.2"><span class="unit">%</span></div>
+      </div>      <div class="field">
+        <label for="years">대출 기간 </label>
+        <div class="inbox"><input id="years" inputmode="numeric" placeholder="예: 30"><span class="unit">년</span></div>
+      </div></div>      <div class="field">
+        <label for="other">기존 대출 연간 상환액 <span class="hint">신용대출 등, 없으면 0</span></label>
+        <div class="inbox"><input id="other" inputmode="numeric" placeholder="없으면 0"><span class="unit">만원</span></div>
+      </div>
+      <button class="btn" id="go">한도 계산</button>
+    </div>
+
+    <div id="out" hidden>
+      <div class="result">
+        <div class="lab" id="lab">결과</div>
+        <div class="big" id="big"></div>
+        <div class="note" id="note"></div>
+        <div class="kpi" id="kpi"></div>
+      </div>
+      <div class="card">
+        <h2>한도 비교</h2>
+        <p class="sub" id="tsub"></p>
+        <table class="t"><tbody id="rows"></tbody></table>
+      </div>
+      <div class="card">
+        <h2>이어서 계산해 보기</h2>
+        <div class="next" id="nextTools"></div>
+      </div>
+    </div>
+
+    <div class="ad wide"><span>광고 자리</span></div>
+
+    <div class="card">
+      <h2>LTV와 DSR, 두 개의 벽</h2>
+      <div class="prose">
+
+        <h3>LTV — 집값이 정하는 한도</h3>
+        <p>집값 대비 얼마까지 빌려주느냐입니다. LTV 70%면 6억 집에 4억 2천만원까지입니다. 비율은 지역, 주택 수, 생애최초 여부에 따라 달라지고 정책에 따라 자주 바뀝니다. 은행이나 주택금융공사에서 본인 조건의 비율을 먼저 확인한 뒤 넣어 보세요.</p>
+
+        <h3>DSR — 소득이 정하는 한도</h3>
+        <p>연 소득 대비 <b>모든 대출의 연간 원리금 상환액</b> 비율입니다. 은행권은 보통 40%가 기준입니다. 연 소득 5천만원이면 매년 갚는 돈이 2천만원을 넘으면 안 된다는 뜻입니다.</p>
+        <p>여기서 중요한 건 <b>모든 대출을 합쳐서</b> 본다는 점입니다. 신용대출이나 자동차 할부가 있으면 그만큼 주택담보대출 한도가 줄어듭니다. 집을 살 계획이라면 미리 정리하는 편이 낫습니다.</p>
+
+        <div class="callout"><b>둘 중 낮은 쪽이 실제 한도입니다.</b><br>
+        LTV로는 4억까지 되는데 DSR로 3억까지밖에 안 되면 3억이 한도입니다. 소득이 부족하면 집값이 아무리 낮아도 한도가 늘지 않습니다.</div>
+
+        <h3>스트레스 DSR</h3>
+        <p>금리가 오를 상황까지 감안해 실제 금리보다 높은 금리를 적용해 한도를 계산하는 제도가 시행 중입니다. 그래서 은행에서 실제로 나오는 한도는 이 계산보다 <b>더 적을 수 있습니다.</b> 여유를 두고 계획하세요.</p>
+
+        <h3>기간을 늘리면 한도가 늘어납니다</h3>
+        <p>DSR은 연간 상환액으로 계산하므로, 기간을 늘려 매달 갚는 돈을 줄이면 한도가 올라갑니다. 다만 총 이자는 늘어납니다. 한도를 맞추려고 무리하게 기간을 늘리면 이자로 더 냅니다.</p>
+    
+      </div>
+    </div>
+  </main>
+  <aside class="rail"><div class="ad tall"><span>광고 자리</span></div></aside>
+</div>
+<script src="assets/site.js"></script>
+<script>
+(function(){
+"use strict";
+var $=function(s){return document.querySelector(s);};
+function row(k,v,c){ return '<tr><td>'+k+(c?'<div class="c">'+c+'</div>':'')+'</td><td>'+v+'</td></tr>'; }
+function sumrow(k,v){ return '<tr class="sum"><td>'+k+'</td><td>'+v+'</td></tr>'; }
+
+['price','income','other'].forEach(function(id){ U.comma($('#'+id)); });
+function run(){
+  if(!U.need($('#price'),'집값')) return;
+  if(!U.manOk($('#price'),'집값')) return;
+  if(!U.need($('#ltv'),'LTV 비율')) return;
+  if(!U.need($('#income'),'연 소득')) return;
+  if(!U.manOk($('#income'),'연 소득')) return;
+  if(!U.need($('#rate'),'금리')) return;
+  if(!U.need($('#years'),'대출 기간')) return;
+  var price=U.man($('#price')), ltv=Number($('#ltv').value)||0;
+  var income=U.man($('#income')), rate=Number($('#rate').value)||0;
+  var years=Number($('#years').value)||30, other=U.man($('#other'));
+
+  var ltvLimit = price*ltv/100;
+  var n=years*12, r=rate/100/12;
+  /* 연 소득의 40%에서 기존 대출 상환액을 뺀 금액이 새 대출에 쓸 수 있는 한도 */
+  var room = income*0.4 - other;
+  var dsrLimit = 0;
+  if(room > 0){
+    var monthly = room/12;
+    dsrLimit = r===0 ? monthly*n : monthly*(Math.pow(1+r,n)-1)/(r*Math.pow(1+r,n));
+  }
+  var limit = Math.max(0, Math.min(ltvLimit, dsrLimit));
+  var payA = r===0 ? limit/n : limit*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
+  var need = price - limit;
+
+  $('#out').hidden=false;
+  $('#lab').textContent='빌릴 수 있는 금액';
+  $('#big').textContent=U.won(limit);
+  $('#note').textContent = room<=0
+    ? '기존 대출의 연간 상환액이 이미 소득의 40%를 넘어 추가 대출이 어렵습니다.'
+    : (ltvLimit<=dsrLimit
+        ? '집값으로 정해지는 한도(LTV)가 더 낮아 이 금액이 한도가 됩니다. 매달 '+U.won(payA)+'씩 갚게 됩니다.'
+        : '소득으로 정해지는 한도(DSR)가 더 낮아 이 금액이 한도가 됩니다. 소득이 늘거나 기존 대출을 줄이면 한도가 올라갑니다.');
+  $('#kpi').innerHTML=
+    '<div><b>'+U.won(ltvLimit)+'</b><span>LTV 한도</span></div>'+
+    '<div><b>'+U.won(dsrLimit)+'</b><span>DSR 한도</span></div>'+
+    '<div><b>'+U.won(payA)+'</b><span>월 상환액</span></div>'+
+    '<div><b>'+U.won(need)+'</b><span>필요한 자기 자금</span></div>';
+  $('#tsub').textContent='둘 중 낮은 쪽이 실제 한도가 됩니다. 스트레스 DSR이 적용되면 은행 한도는 이보다 적을 수 있습니다.';
+  $('#rows').innerHTML=
+    row('집값', U.won(price),'')+
+    row('LTV 한도', U.won(ltvLimit), '집값의 '+ltv+'%')+
+    row('DSR 한도', U.won(dsrLimit), '연 소득의 40% 이내로 갚을 수 있는 금액')+
+    row('기존 대출 연간 상환액', U.won(other), other>0? 'DSR 한도에서 차감됩니다':'없음')+
+    sumrow('실제 한도', U.won(limit))+
+    row('필요한 자기 자금', U.won(need),'취득세와 중개수수료는 별도입니다');
+  $('#nextTools').innerHTML=
+    '<a href="loan.html?amount='+Math.round(limit)+'&rate='+rate+'&months='+Math.round(years*12)+'"><b>상환 계획 보기</b><span>이 금액으로 매달 얼마씩 갚는지</span></a>'+
+    '<a href="acquisition.html?price='+price+'"><b>취득세 계산</b><span>집값 말고 더 드는 돈</span></a>';
+  U.saveState({price:price,ltv:ltv,income:income,rate:rate,years:years,other:other});
+}
+$('#go').onclick=run;
+var st=U.loadState();
+if(st.price){
+  $('#price').value=(Number(st.price)/10000).toLocaleString();
+  if(st.ltv)$('#ltv').value=st.ltv;
+  if(st.income)$('#income').value=(Number(st.income)/10000).toLocaleString();
+  if(st.rate)$('#rate').value=st.rate; if(st.years)$('#years').value=st.years;
+  if(st.other)$('#other').value=(Number(st.other)/10000).toLocaleString();
+  if(st.income) run();
+}
+
+})();
+</script>
+</body>
+</html>

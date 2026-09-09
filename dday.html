@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0E1320">
+<title>디데이 계산기 | 참새방앗간</title>
+<meta name="description" content="목표한 날까지 며칠 남았는지, 지나온 날은 며칠인지 계산합니다. 100일, 1000일 기념일도 함께 알려줍니다.">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-section="date">
+
+<div class="wrap">
+  <aside class="side"></aside>
+  <main>
+    <h1 class="page-h">디데이 계산기</h1>
+    <p class="page-lead">시험일, 전역일, 기념일까지 남은 날을 셉니다. 지나간 날짜를 넣으면 며칠이 지났는지 알려줍니다.</p>
+
+    <div class="card">
+      <h2>날짜 입력</h2>
+      <div class="field">
+        <label for="target">기준 날짜 </label>
+        <div class="inbox"><input id="target" type="date" placeholder="목표 몸무게 (선택)"></div>
+      </div>      <div class="field">
+        <label for="mode">세는 방식 </label>
+        <div class="inbox"><select id="mode"><option value="exclude">오늘을 1일로 세지 않음 (D-day 방식)</option><option value="include">오늘을 1일로 셈 (기념일 방식)</option></select></div>
+      </div>
+      <button class="btn" id="go">디데이 계산</button>
+    </div>
+
+    <div id="out" hidden>
+      <div class="result">
+        <div class="lab" id="lab">결과</div>
+        <div class="big" id="big"></div>
+        <div class="note" id="note"></div>
+        <div class="kpi" id="kpi"></div>
+      </div>
+
+      <div class="card">
+        <h2>기념일</h2>
+        <p class="sub" id="tsub"></p>
+        <table class="t"><tbody id="rows"></tbody></table>
+      </div>
+
+      <div class="card">
+        <h2>이어서 계산해 보기</h2>
+        <div class="next" id="nextTools"></div>
+      </div>
+    </div>
+
+    <div class="ad wide"><span>광고 자리</span></div>
+
+    <div class="card">
+      <h2>디데이를 셀 때 헷갈리는 것</h2>
+      <div class="prose">
+
+        <h3>D-1과 1일 전은 다릅니다</h3>
+        <p>시험이 내일이면 <b>D-1</b>입니다. 오늘은 D-1이 아니라 시험 하루 전이죠. 시험 당일이 D-day, 즉 D-0입니다. 이 계산기의 기본값은 이 방식입니다.</p>
+        <h3>사귄 지 100일은 왜 다를까</h3>
+        <p>연인 사이의 기념일은 <b>만난 날을 1일로 셉니다.</b> 그래서 100일은 만난 날로부터 99일 뒤입니다. 하루 차이로 다투는 일이 여기서 생깁니다. 위에서 '기념일 방식'을 고르면 이 계산으로 나옵니다.</p>
+        <h3>군 전역일</h3>
+        <p>전역일은 복무 만료일이며, 그날 부대를 나옵니다. 전역일 자체가 D-day입니다.</p>
+        <div class="callout"><b>윤년은 자동으로 반영됩니다.</b><br>
+        2월 29일이 낀 구간도 정확히 계산됩니다. 다만 2월 29일생의 기념일은 평년에는 3월 1일로 보는 것이 일반적입니다.</div>
+    
+      </div>
+    </div>
+  </main>
+  <aside class="rail"><div class="ad tall"><span>광고 자리</span></div></aside>
+</div>
+
+<script src="assets/site.js"></script>
+<script>
+(function(){
+"use strict";
+var $=function(s){return document.querySelector(s);};
+function row(k,v,c){ return '<tr><td>'+k+(c?'<div class="c">'+c+'</div>':'')+'</td><td>'+v+'</td></tr>'; }
+function sumrow(k,v){ return '<tr class="sum"><td>'+k+'</td><td>'+v+'</td></tr>'; }
+
+function run(){
+  if(!U.needDate($('#target'),'기준 날짜')) return;
+  var t=$('#target').value, mode=$('#mode').value;
+  if(!t){ $('#out').hidden=true; return; }
+  var td=new Date(t); td.setHours(0,0,0,0);
+  var now=new Date(); now.setHours(0,0,0,0);
+  var diff=Math.round((td-now)/86400000);
+  var WD=['일','월','화','수','목','금','토'];
+
+  $('#out').hidden=false;
+  if(diff>0){
+    $('#lab').textContent='남은 날';
+    $('#big').textContent='D-'+diff;
+    $('#note').textContent=t.replace(/-/g,'.')+' ('+WD[td.getDay()]+'요일)까지 '+diff+'일 남았습니다.';
+  } else if(diff===0){
+    $('#lab').textContent='오늘';
+    $('#big').textContent='D-day';
+    $('#note').textContent='바로 오늘입니다.';
+  } else {
+    var passed=mode==='include' ? -diff+1 : -diff;
+    $('#lab').textContent='지나온 날';
+    $('#big').textContent=passed.toLocaleString()+'일째';
+    $('#note').textContent=t.replace(/-/g,'.')+' ('+WD[td.getDay()]+'요일)부터 '+passed.toLocaleString()+'일이 지났습니다.';
+  }
+  $('#kpi').innerHTML=
+    '<div><b>'+Math.abs(diff).toLocaleString()+'일</b><span>날짜 차이</span></div>'+
+    '<div><b>'+Math.floor(Math.abs(diff)/7).toLocaleString()+'주</b><span>주로 환산</span></div>'+
+    '<div><b>'+WD[td.getDay()]+'요일</b><span>그날의 요일</span></div>'+
+    '<div><b>'+(diff>0?'미래':'과거')+'</b><span>기준</span></div>';
+
+  var add = mode==='include' ? -1 : 0;
+  function fmt(d){ return d.getFullYear()+'.'+String(d.getMonth()+1).padStart(2,'0')+'.'+String(d.getDate()).padStart(2,'0')+' ('+WD[d.getDay()]+')'; }
+  var marks=[50,100,200,300,365,500,1000,2000];
+  var html='';
+  marks.forEach(function(m){
+    var d=new Date(td.getTime()+(m+add)*86400000);
+    var left=Math.round((d-now)/86400000);
+    html+='<tr><td>'+m+'일<div class="c">'+(left>0?'D-'+left:(left===0?'오늘':'지남'))+'</div></td><td>'+fmt(d)+'</td></tr>';
+  });
+  $('#tsub').textContent = mode==='include' ? '만난 날을 1일로 세는 방식입니다.' : '기준일 다음 날부터 세는 방식입니다.';
+  $('#rows').innerHTML=html;
+  $('#nextTools').innerHTML=
+    '<a href="datecalc.html"><b>날짜 더하기·빼기</b><span>며칠 뒤가 무슨 요일인지</span></a>'+
+    '<a href="birthday.html"><b>생년월일 종합</b><span>나이와 띠를 한 번에</span></a>';
+  U.saveState({target:t,mode:mode});
+}
+$('#go').onclick=run;
+var st=U.loadState();
+if(st.target){ $('#target').value=st.target; if(st.mode)$('#mode').value=st.mode; run(); }
+
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0E1320">
+<title>부동산 취득세 계산기 | 참새방앗간</title>
+<meta name="description" content="집값과 보유 주택 수, 조정대상지역 여부를 넣으면 취득세와 지방교육세, 농어촌특별세를 합한 실제 납부액을 계산합니다.">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-section="estate">
+<div class="wrap">
+  <aside class="side"></aside>
+  <main>
+    <h1 class="page-h">부동산 취득세 계산기</h1>
+    <p class="page-lead">집을 살 때 내는 세금입니다. 취득세만 있는 게 아니라 지방교육세와 농어촌특별세가 함께 붙습니다.</p>
+
+    <div class="card">
+      <h2>취득 조건</h2>
+      <div class="field">
+        <label for="price">취득 가격 <span class="hint">매매가</span></label>
+        <div class="inbox"><input id="price" inputmode="numeric" placeholder="예: 60000 (6억)"><span class="unit">만원</span></div>
+      </div>      <div class="field">
+        <label for="owned">취득 후 보유 주택 수 </label>
+        <div class="inbox"><select id="owned"><option value="1">1주택 (무주택자가 사는 경우 포함)</option><option value="2">2주택</option><option value="3">3주택</option><option value="4">4주택 이상</option></select></div>
+      </div>      <div class="field">
+        <label for="area">전용면적 </label>
+        <div class="inbox"><select id="area"><option value="under">85㎡ 이하 (국민주택규모)</option><option value="over">85㎡ 초과</option></select></div>
+      </div>      <div class="field">
+        <label for="zone">조정대상지역 </label>
+        <div class="inbox"><select id="zone"><option value="no">아니다</option><option value="yes">맞다</option></select></div>
+      </div>
+      <button class="btn" id="go">취득세 계산</button>
+    </div>
+
+    <div id="out" hidden>
+      <div class="result">
+        <div class="lab" id="lab">결과</div>
+        <div class="big" id="big"></div>
+        <div class="note" id="note"></div>
+        <div class="kpi" id="kpi"></div>
+      </div>
+      <div class="card">
+        <h2>세금 내역</h2>
+        <p class="sub" id="tsub"></p>
+        <table class="t"><tbody id="rows"></tbody></table>
+      </div>
+      <div class="card">
+        <h2>이어서 계산해 보기</h2>
+        <div class="next" id="nextTools"></div>
+      </div>
+    </div>
+
+    <div class="ad wide"><span>광고 자리</span></div>
+
+    <div class="card">
+      <h2>취득세, 이렇게 정해집니다</h2>
+      <div class="prose">
+
+        <h3>1주택이면 1%에서 3%</h3>
+        <p>무주택자가 처음 사거나 1주택이 되는 경우에는 집값에 따라 세율이 정해집니다.</p>
+        <ul>
+          <li><b>6억원 이하</b> — 1%</li>
+          <li><b>6억 ~ 9억원</b> — 1%에서 3% 사이로 가격에 비례해 올라갑니다</li>
+          <li><b>9억원 초과</b> — 3%</li>
+        </ul>
+        <p>6억~9억 구간은 계단이 아니라 완만한 경사입니다. 세율(%)은 <b>집값(억) × 2 ÷ 3 − 3</b>으로 구합니다. 7억 5천만원이면 정확히 2%가 됩니다. 6억을 조금 넘었다고 세율이 확 뛰지는 않으니 매매가를 6억 아래로 억지로 맞출 필요는 없습니다.</p>
+
+        <h3>다주택이면 중과됩니다</h3>
+        <p>조정대상지역에서 2주택이 되면 8%, 3주택 이상이면 12%가 적용됩니다. 조정대상지역이 아니면 3주택일 때 8%, 4주택 이상일 때 12%입니다. 12%면 세금만 집값의 12%가 넘게 나가니 매수 자체를 다시 생각해야 하는 수준입니다.</p>
+
+        <h3>취득세만이 아닙니다</h3>
+        <p><b>지방교육세</b>가 취득세의 10%만큼 따라붙습니다. 그리고 전용면적 <b>85㎡를 넘으면 농어촌특별세</b>가 추가로 붙습니다. 그래서 "세율 1%"라고 들었어도 실제로는 1.1%에서 1.3% 정도가 나갑니다.</p>
+
+        <div class="callout"><b>이 계산에 반영되지 않은 것들</b><br>
+        생애최초 구입 감면(최대 200만원), 일시적 2주택 특례, 신혼·출산 가구 감면, 지방 미분양 주택 감면, 상속·증여 취득은 반영하지 않았습니다. 해당된다면 실제 세액이 더 줄어들 수 있으니 관할 시군구청이나 세무 전문가에게 확인하세요.</div>
+
+        <h3>기한을 놓치면 가산세</h3>
+        <p>취득세는 <b>잔금일로부터 60일 이내</b>에 신고하고 납부해야 합니다. 늦으면 가산세가 붙습니다. 잔금 치르는 날 달력에 미리 표시해 두세요.</p>
+    
+      </div>
+    </div>
+  </main>
+  <aside class="rail"><div class="ad tall"><span>광고 자리</span></div></aside>
+</div>
+<script src="assets/site.js"></script>
+<script>
+(function(){
+"use strict";
+var $=function(s){return document.querySelector(s);};
+function row(k,v,c){ return '<tr><td>'+k+(c?'<div class="c">'+c+'</div>':'')+'</td><td>'+v+'</td></tr>'; }
+function sumrow(k,v){ return '<tr class="sum"><td>'+k+'</td><td>'+v+'</td></tr>'; }
+
+U.comma($('#price'));
+function baseRate(p){
+  var eok = p/100000000;
+  if(eok<=6) return 1;
+  if(eok>=9) return 3;
+  return eok*2/3 - 3;
+}
+function run(){
+  if(!U.need($('#price'),'취득 가격')) return;
+  if(!U.manOk($('#price'),'취득 가격')) return;
+  var p=U.man($('#price'));
+  var owned=Number($('#owned').value), over=$('#area').value==='over', adj=$('#zone').value==='yes';
+  var rate, kind;
+  if(owned<=1){ rate=baseRate(p); kind='일반세율'; }
+  else if(adj){
+    if(owned===2){ rate=8; kind='조정대상지역 2주택 중과'; }
+    else { rate=12; kind='조정대상지역 3주택 이상 중과'; }
+  } else {
+    if(owned<=2){ rate=baseRate(p); kind='비조정지역 2주택 일반세율'; }
+    else if(owned===3){ rate=8; kind='비조정지역 3주택 중과'; }
+    else { rate=12; kind='비조정지역 4주택 이상 중과'; }
+  }
+  var tax = p*rate/100;
+  var edu = rate>=8 ? p*0.004 : tax*0.1;
+  var farm = over ? (rate>=12 ? p*0.01 : rate>=8 ? p*0.006 : p*0.002) : 0;
+  var total = tax+edu+farm;
+
+  $('#out').hidden=false;
+  $('#lab').textContent='총 납부 세금';
+  $('#big').textContent=U.won(total);
+  $('#note').textContent=U.won(p)+' 주택 · '+kind+' '+(Math.round(rate*100)/100)+'% 적용입니다. '+
+    '집값의 '+(Math.round(total/p*1000)/10)+'%가 세금으로 나갑니다.'+
+    (over? '' : ' 85㎡ 이하라 농어촌특별세는 붙지 않습니다.');
+  $('#kpi').innerHTML=
+    '<div><b>'+(Math.round(rate*100)/100)+'%</b><span>취득세율</span></div>'+
+    '<div><b>'+U.won(tax)+'</b><span>취득세</span></div>'+
+    '<div><b>'+U.won(edu+farm)+'</b><span>부가되는 세금</span></div>'+
+    '<div><b>'+U.won(total)+'</b><span>합계</span></div>';
+  $('#tsub').textContent='잔금일로부터 60일 이내에 신고하고 납부해야 합니다.';
+  $('#rows').innerHTML=
+    row('취득세', U.won(tax), kind+' '+(Math.round(rate*100)/100)+'%')+
+    row('지방교육세', U.won(edu), rate>=8 ? '취득가액의 0.4%' : '취득세의 10%')+
+    row('농어촌특별세', over? U.won(farm) : '해당 없음', over? '85㎡ 초과분' : '85㎡ 이하는 면제')+
+    sumrow('총 납부액', U.won(total));
+  $('#nextTools').innerHTML=
+    '<a href="broker.html?price='+p+'"><b>중개수수료는 얼마</b><span>집값이 그대로 넘어갑니다</span></a>'+
+    '<a href="ltv.html?price='+p+'"><b>대출은 얼마까지</b><span>LTV와 DSR로 한도 확인</span></a>';
+  U.saveState({price:p,owned:owned,area:$('#area').value,zone:$('#zone').value});
+}
+$('#go').onclick=run;
+var st=U.loadState();
+if(st.price){ $('#price').value=(Number(st.price)/10000).toLocaleString();
+  if(st.owned)$('#owned').value=st.owned; if(st.area)$('#area').value=st.area;
+  if(st.zone)$('#zone').value=st.zone; run(); }
+
+})();
+</script>
+</body>
+</html>

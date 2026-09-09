@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0E1320">
+<title>차량 할부 계산기 | 참새방앗간</title>
+<meta name="description" content="차량 가격과 선수금, 이율, 기간을 넣으면 매달 낼 할부금과 이자 총액, 총 비용을 계산합니다.">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-section="money">
+
+<div class="wrap">
+  <aside class="side"></aside>
+  <main>
+    <h1 class="page-h">차량 할부 계산기</h1>
+    <p class="page-lead">차값에서 선수금을 뺀 금액을 몇 년에 걸쳐 나눠 낼 때, 매달 얼마씩 내고 이자는 모두 얼마인지 계산합니다.</p>
+
+    <div class="card">
+      <h2>차량 조건</h2>
+      <div class="field">
+        <label for="price">차량 가격 <span class="hint">옵션 포함</span></label>
+        <div class="inbox"><input id="price" inputmode="numeric" placeholder="예: 3000 (3천만원)"><span class="unit">만원</span></div>
+      </div>      <div class="row2">      <div class="field">
+        <label for="down">선수금 <span class="hint">미리 내는 돈</span></label>
+        <div class="inbox"><input id="down" inputmode="numeric" placeholder="없으면 0"><span class="unit">만원</span></div>
+      </div>      <div class="field">
+        <label for="rate">연 이율 <span class="hint">할부 금리</span></label>
+        <div class="inbox"><input id="rate" type="text" placeholder="이율" value="5.9"><span class="unit">%</span></div>
+      </div></div>      <div class="row2">      <div class="field">
+        <label for="months">할부 기간 </label>
+        <div class="inbox"><select id="months"><option value="12">12개월</option><option value="24">24개월</option><option value="36">36개월</option><option value="48">48개월</option><option value="60">60개월</option><option value="72">72개월</option></select></div>
+      </div>      <div class="field">
+        <label for="resid">유예금(잔가) <span class="hint">만기에 한 번에 낼 금액</span></label>
+        <div class="inbox"><input id="resid" inputmode="numeric" placeholder="없으면 0"><span class="unit">만원</span></div>
+      </div></div>
+      <button class="btn" id="go">할부금 계산</button>
+    </div>
+
+    <div id="out" hidden>
+      <div class="result">
+        <div class="lab" id="lab">결과</div>
+        <div class="big" id="big"></div>
+        <div class="note" id="note"></div>
+        <div class="kpi" id="kpi"></div>
+      </div>
+
+      <div class="card">
+        <h2>비용 내역</h2>
+        <p class="sub" id="tsub"></p>
+        <table class="t"><tbody id="rows"></tbody></table>
+      </div>
+
+      <div class="card">
+        <h2>이어서 계산해 보기</h2>
+        <div class="next" id="nextTools"></div>
+      </div>
+    </div>
+
+    <div class="ad wide"><span>광고 자리</span></div>
+
+    <div class="card">
+      <h2>할부로 살 때 알아둘 것</h2>
+      <div class="prose">
+
+        <p>차량 할부는 대출과 같습니다. 다만 금리 표시 방식이 달라서 헷갈리기 쉽습니다.</p>
+        <h3>유예형 할부의 함정</h3>
+        <p>월 납입금을 낮춰 준다며 <b>유예금</b>을 남기는 상품이 있습니다. 예를 들어 3천만원 차를 사면서 1천만원을 만기까지 미뤄두는 식입니다. 매달 내는 돈은 확실히 줄어듭니다. 그런데 미뤄둔 금액에도 이자는 계속 붙고, 만기에 목돈을 한 번에 갚아야 합니다. 그때 돈이 없으면 다시 대출을 받게 됩니다.</p>
+        <h3>선수금을 늘리면</h3>
+        <p>선수금을 늘릴수록 빌리는 돈이 줄어 이자가 확실히 줄어듭니다. 다만 당장 목돈이 나가므로 생활비까지 끌어 쓰면 안 됩니다.</p>
+        <h3>할부 말고 드는 돈</h3>
+        <ul>
+          <li><b>취득세</b> — 승용차는 차량 가격의 7% 수준입니다. 적지 않은 금액이라 미리 계산해 두어야 합니다.</li>
+          <li><b>보험료</b> — 나이와 운전 경력에 따라 크게 달라집니다.</li>
+          <li><b>공채 매입</b> — 지역과 차종에 따라 다릅니다. 대개 즉시 할인해서 처리합니다.</li>
+        </ul>
+        <div class="callout"><b>이 계산은 원리금균등 기준입니다.</b><br>
+        실제 할부는 회사마다 계산 방식과 수수료가 조금씩 다릅니다. 계약 전에 안내받은 총 납입금과 비교해 보세요.</div>
+    
+      </div>
+    </div>
+  </main>
+  <aside class="rail"><div class="ad tall"><span>광고 자리</span></div></aside>
+</div>
+
+<script src="assets/site.js"></script>
+<script>
+(function(){
+"use strict";
+var $=function(s){return document.querySelector(s);};
+function row(k,v,c){ return '<tr><td>'+k+(c?'<div class="c">'+c+'</div>':'')+'</td><td>'+v+'</td></tr>'; }
+function sumrow(k,v){ return '<tr class="sum"><td>'+k+'</td><td>'+v+'</td></tr>'; }
+
+var ids=['price','down','resid'];
+ids.forEach(function(id){ U.comma($('#'+id)); });
+function run(){
+  if(!U.need($('#price'),'차량 가격')) return;
+  if(!U.manOk($('#price'),'차량 가격')) return;
+  if(!U.need($('#rate'),'연 이율')) return;
+  var price=U.man($('#price')), down=U.man($('#down')), resid=U.man($('#resid'));
+  var rate=Number($('#rate').value)||0, n=Number($('#months').value)||36;
+  var principal=price-down-resid;
+  if(price<=0||principal<=0){ $('#out').hidden=true; return; }
+  var r=rate/100/12;
+  var pay = r===0 ? principal/n : principal*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
+  var residInterest = resid*r*n;
+  var totalPay=pay*n;
+  var interest=totalPay-principal+residInterest;
+  var totalCost=down+totalPay+resid+residInterest;
+
+  $('#out').hidden=false;
+  $('#lab').textContent='매달 내는 돈';
+  $('#big').textContent=U.won(pay + (resid? resid*r : 0));
+  $('#note').textContent='차량가 '+U.won(price)+' 중 '+U.won(principal)+'을 '+n+'개월로 나눠 냅니다.'
+    + (resid? ' 만기에 유예금 '+U.won(resid)+'을 따로 갚아야 합니다.' : '');
+  $('#kpi').innerHTML=
+    '<div><b>'+U.won(interest)+'</b><span>이자 총액</span></div>'+
+    '<div><b>'+U.won(totalCost)+'</b><span>총 비용</span></div>'+
+    '<div><b>'+U.won(price*0.07)+'</b><span>취득세 예상</span></div>'+
+    '<div><b>'+n+'개월</b><span>할부 기간</span></div>';
+  $('#tsub').textContent='취득세와 보험료는 할부에 포함되지 않는 별도 비용입니다.';
+  $('#rows').innerHTML=
+    row('차량 가격','',U.won(price)).replace('<td></td>','')+
+    row('선수금', U.won(down),'계약할 때 내는 돈')+
+    row('할부 원금', U.won(principal),'실제로 빌리는 금액')+
+    row('월 납입금', U.won(pay+(resid?resid*r:0)), n+'개월 동안')+
+    row('이자 총액', U.won(interest),'')+
+    row('취득세(참고)', U.won(price*0.07),'승용차 7% 기준, 할부와 별도')+
+    sumrow('총 비용', U.won(totalCost));
+  $('#nextTools').innerHTML=
+    '<a href="loan.html?amount='+principal+'&rate='+rate+'"><b>대출로 사면 어떨까</b><span>같은 금액을 대출로 계산해 봅니다</span></a>'+
+    '<a href="salary.html"><b>내 월급으로 가능할까</b><span>실수령액을 먼저 확인해 보세요</span></a>';
+  U.saveState({price:price,down:down,rate:rate,months:n,resid:resid});
+}
+$('#go').onclick=run;
+var st=U.loadState();
+if(st.price){ $('#price').value=(Number(st.price)/10000).toLocaleString();
+  if(st.down)$('#down').value=(Number(st.down)/10000).toLocaleString();
+  if(st.rate)$('#rate').value=st.rate; if(st.months)$('#months').value=st.months;
+  if(st.resid)$('#resid').value=(Number(st.resid)/10000).toLocaleString(); run(); }
+
+})();
+</script>
+</body>
+</html>

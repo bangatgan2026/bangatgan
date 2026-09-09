@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0E1320">
+<title>중도상환수수료 계산기 | 참새방앗간</title>
+<meta name="description" content="대출을 미리 갚을 때 내는 중도상환수수료를 계산합니다. 남은 기간에 따라 금액이 달라집니다.">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-section="money">
+
+<div class="wrap">
+  <aside class="side"></aside>
+  <main>
+    <h1 class="page-h">중도상환수수료 계산기</h1>
+    <p class="page-lead">대출을 예정보다 일찍 갚으면 수수료가 붙습니다. 얼마나 나오는지 미리 확인해 보세요.</p>
+
+    <div class="card">
+      <h2>상환 조건</h2>
+      <div class="field">
+        <label for="amount">미리 갚을 금액 </label>
+        <div class="inbox"><input id="amount" inputmode="numeric" placeholder="예: 30000 (3억)"><span class="unit">만원</span></div>
+      </div>      <div class="row2">      <div class="field">
+        <label for="rate">수수료율 <span class="hint">보통 0.5~1.5%</span></label>
+        <div class="inbox"><input id="rate" type="text" placeholder="이율" value="1.2"><span class="unit">%</span></div>
+      </div>      <div class="field">
+        <label for="free">면제 기간 <span class="hint">보통 3년</span></label>
+        <div class="inbox"><input id="free" type="text" placeholder="면제 개월" value="36"><span class="unit">개월</span></div>
+      </div></div>      <div class="field">
+        <label for="passed">지난 기간 <span class="hint">대출받은 뒤 흐른 개월</span></label>
+        <div class="inbox"><input id="passed" type="text" placeholder="지난 개월"><span class="unit">개월</span></div>
+      </div>
+      <button class="btn" id="go">수수료 계산</button>
+    </div>
+
+    <div id="out" hidden>
+      <div class="result">
+        <div class="lab" id="lab">결과</div>
+        <div class="big" id="big"></div>
+        <div class="note" id="note"></div>
+        <div class="kpi" id="kpi"></div>
+      </div>
+
+      <div class="card">
+        <h2>계산 내역</h2>
+        <p class="sub" id="tsub"></p>
+        <table class="t"><tbody id="rows"></tbody></table>
+      </div>
+
+      <div class="card">
+        <h2>이어서 계산해 보기</h2>
+        <div class="next" id="nextTools"></div>
+      </div>
+    </div>
+
+    <div class="ad wide"><span>광고 자리</span></div>
+
+    <div class="card">
+      <h2>중도상환수수료, 언제 내고 언제 안 낼까</h2>
+      <div class="prose">
+
+        <h3>왜 받는 걸까</h3>
+        <p>은행은 돈을 오래 빌려주는 것을 전제로 자금을 마련합니다. 예정보다 일찍 돌려받으면 계획이 어긋나므로 그 손해를 수수료로 메웁니다.</p>
+        <h3>시간이 지날수록 줄어듭니다</h3>
+        <p>대부분 <b>슬라이딩 방식</b>입니다. 면제 기간(보통 3년)에서 이미 지난 기간을 뺀 만큼만 비례해서 매깁니다. 그래서 대출받은 직후에 갚으면 수수료가 가장 크고, 3년이 가까워질수록 0에 가까워집니다.</p>
+        <div class="callout"><b>수수료 = 미리 갚는 금액 × 수수료율 × (남은 면제기간 ÷ 전체 면제기간)</b></div>
+        <h3>3년이 지나면 대개 없습니다</h3>
+        <p>3년만 채우면 수수료 없이 갚을 수 있는 상품이 많습니다. 곧 3년이 되는 상황이라면 조금 기다렸다 갚는 게 유리할 수 있습니다.</p>
+        <h3>미리 갚는 게 항상 이득일까</h3>
+        <p>대출 금리가 예금 금리보다 높다면 대개 갚는 쪽이 유리합니다. 다만 수수료가 아낄 이자보다 크면 손해입니다. 그리고 목돈을 다 넣어버려서 비상금이 없어지는 것도 위험합니다. 갑자기 돈이 필요할 때 더 비싼 대출을 받게 될 수 있습니다.</p>
+    
+      </div>
+    </div>
+  </main>
+  <aside class="rail"><div class="ad tall"><span>광고 자리</span></div></aside>
+</div>
+
+<script src="assets/site.js"></script>
+<script>
+(function(){
+"use strict";
+var $=function(s){return document.querySelector(s);};
+function row(k,v,c){ return '<tr><td>'+k+(c?'<div class="c">'+c+'</div>':'')+'</td><td>'+v+'</td></tr>'; }
+function sumrow(k,v){ return '<tr class="sum"><td>'+k+'</td><td>'+v+'</td></tr>'; }
+
+U.comma($('#amount'));
+function run(){
+  if(!U.need($('#amount'),'미리 갚을 금액')) return;
+  if(!U.manOk($('#amount'),'미리 갚을 금액')) return;
+  if(!U.need($('#rate'),'수수료율')) return;
+  var A=U.man($('#amount')), rate=Number($('#rate').value)||0;
+  var free=Number($('#free').value)||36, passed=Number($('#passed').value)||0;
+  if(A<=0){ $('#out').hidden=true; return; }
+  var left=Math.max(0, free-passed);
+  var fee=A*(rate/100)*(left/free);
+
+  $('#out').hidden=false;
+  $('#lab').textContent='중도상환수수료';
+  $('#big').textContent=U.won(fee);
+  $('#note').textContent = left===0
+    ? '면제 기간 '+free+'개월이 이미 지나서 수수료가 붙지 않습니다.'
+    : '면제 기간 '+free+'개월 중 '+passed+'개월이 지나 '+left+'개월이 남았습니다.';
+  $('#kpi').innerHTML=
+    '<div><b>'+U.won(A)+'</b><span>미리 갚는 금액</span></div>'+
+    '<div><b>'+left+'개월</b><span>남은 면제기간</span></div>'+
+    '<div><b>'+(Math.round(fee/A*10000)/100)+'%</b><span>실제 부담률</span></div>'+
+    '<div><b>'+U.won(A+fee)+'</b><span>실제로 필요한 돈</span></div>';
+  $('#tsub').textContent='금융사와 상품에 따라 방식이 다를 수 있습니다. 약정서를 확인해 보세요.';
+  $('#rows').innerHTML=
+    row('미리 갚을 금액', U.won(A),'')+
+    row('수수료율', rate+'%','약정서에 적힌 요율')+
+    row('남은 면제기간', left+'개월 / '+free+'개월','')+
+    sumrow('수수료', U.won(fee));
+  var months=[];
+  for(var m=passed; m<=free; m+=Math.max(1,Math.round(free/6))){
+    months.push('<tr><td>'+m+'개월 지난 시점</td><td>'+U.won(A*(rate/100)*(Math.max(0,free-m)/free))+'</td></tr>');
+  }
+  $('#rows').innerHTML += '<tr><th>기다렸다 갚으면</th><th>수수료</th></tr>'+months.join('');
+  $('#nextTools').innerHTML=
+    '<a href="loan.html"><b>대출 이자 계산</b><span>계속 갚으면 이자가 얼마인지</span></a>'+
+    '<a href="savings.html"><b>예금에 두면</b><span>갚는 대신 예치하면 이자가 얼마인지</span></a>';
+  U.saveState({amount:A,rate:rate,free:free,passed:passed});
+}
+$('#go').onclick=run;
+var st=U.loadState();
+if(st.amount){ $('#amount').value=(Number(st.amount)/10000).toLocaleString();
+  if(st.rate)$('#rate').value=st.rate; if(st.free)$('#free').value=st.free;
+  if(st.passed)$('#passed').value=st.passed; run(); }
+
+})();
+</script>
+</body>
+</html>

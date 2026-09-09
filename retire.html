@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0E1320">
+<title>퇴직금 계산기 | 참새방앗간</title>
+<meta name="description" content="입사일과 퇴사일, 최근 3개월 급여를 넣으면 평균임금 기준 예상 퇴직금을 계산합니다.">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-section="money">
+
+<div class="wrap">
+  <aside class="side"></aside>
+  <main>
+    <h1 class="page-h">퇴직금 계산기</h1>
+    <p class="page-lead">1년 이상 일했다면 퇴직금을 받습니다. 마지막 3개월 급여를 기준으로 계산합니다.</p>
+
+    <div class="card">
+      <h2>근무 조건</h2>
+      <div class="field">
+        <label>입사일</label>
+        <div class="row3">
+          <div class="inbox"><select id="sy"></select></div>
+          <div class="inbox"><select id="sm"></select></div>
+          <div class="inbox"><select id="sd"></select></div>
+        </div>
+      </div>
+      <div class="field">
+        <label>퇴사일 <span class="hint">마지막 근무일 다음 날</span></label>
+        <div class="row3">
+          <div class="inbox"><select id="ey"></select></div>
+          <div class="inbox"><select id="em"></select></div>
+          <div class="inbox"><select id="ed"></select></div>
+        </div>
+      </div>      <div class="field">
+        <label for="salary">월 급여 <span class="hint">최근 3개월 평균, 세전</span></label>
+        <div class="inbox"><input id="salary" inputmode="numeric" placeholder="예: 350 (350만원)"><span class="unit">만원</span></div>
+      </div>      <div class="row2">      <div class="field">
+        <label for="bonus">연간 상여금 <span class="hint">없으면 0</span></label>
+        <div class="inbox"><input id="bonus" inputmode="numeric" placeholder="없으면 0"><span class="unit">만원</span></div>
+      </div>      <div class="field">
+        <label for="annual">연차수당 <span class="hint">없으면 0</span></label>
+        <div class="inbox"><input id="annual" inputmode="numeric" placeholder="예: 5000 (5천만원)"><span class="unit">만원</span></div>
+      </div></div>
+      <button class="btn" id="go">퇴직금 계산</button>
+    </div>
+
+    <div id="out" hidden>
+      <div class="result">
+        <div class="lab" id="lab">결과</div>
+        <div class="big" id="big"></div>
+        <div class="note" id="note"></div>
+        <div class="kpi" id="kpi"></div>
+      </div>
+
+      <div class="card">
+        <h2>계산 과정</h2>
+        <p class="sub" id="tsub"></p>
+        <table class="t"><tbody id="rows"></tbody></table>
+      </div>
+
+      <div class="card">
+        <h2>이어서 계산해 보기</h2>
+        <div class="next" id="nextTools"></div>
+      </div>
+    </div>
+
+    <div class="ad wide"><span>광고 자리</span></div>
+
+    <div class="card">
+      <h2>퇴직금은 이렇게 계산됩니다</h2>
+      <div class="prose">
+
+        <h3>평균임금이 기준입니다</h3>
+        <p>퇴직금은 <b>퇴직 직전 3개월 동안 받은 임금 총액을 그 기간의 날수로 나눈 금액</b>, 즉 1일 평균임금을 기준으로 합니다. 여기에 30일을 곱하고, 근속연수를 곱하면 퇴직금이 됩니다.</p>
+        <div class="callout"><b>퇴직금 = 1일 평균임금 × 30일 × (재직일수 ÷ 365)</b></div>
+        <h3>상여금과 연차수당도 들어갑니다</h3>
+        <p>연간 상여금과 전년도 연차수당은 3개월치에 해당하는 만큼(연간 금액의 4분의 3이 아니라 12분의 3) 평균임금에 더합니다. 이걸 빠뜨리면 실제보다 적게 계산됩니다.</p>
+        <h3>1년을 못 채우면 못 받습니다</h3>
+        <p>계속 근로기간이 1년 이상이어야 하고, 주 15시간 이상 일해야 합니다. 하루 차이로 못 받는 경우가 실제로 있으니 퇴사일을 정할 때 확인해 보세요.</p>
+        <h3>퇴직연금이라면 다릅니다</h3>
+        <p>회사가 퇴직연금(DC형)에 가입했다면 매년 회사가 넣어준 돈과 그 운용 수익이 퇴직급여가 됩니다. 이 계산기는 <b>퇴직금 제도(또는 DB형)</b> 기준입니다. DC형은 운용 결과에 따라 금액이 달라지므로 가입 기관에서 확인하셔야 합니다.</p>
+        <h3>세금</h3>
+        <p>퇴직소득세는 근속연수가 길수록 크게 줄어드는 구조입니다. 같은 금액이라도 오래 근무했으면 세금이 적습니다. 정확한 세액은 회사나 세무 담당자를 통해 확인하세요.</p>
+    
+      </div>
+    </div>
+  </main>
+  <aside class="rail"><div class="ad tall"><span>광고 자리</span></div></aside>
+</div>
+
+<script src="assets/site.js"></script>
+<script>
+(function(){
+"use strict";
+var $=function(s){return document.querySelector(s);};
+function row(k,v,c){ return '<tr><td>'+k+(c?'<div class="c">'+c+'</div>':'')+'</td><td>'+v+'</td></tr>'; }
+function sumrow(k,v){ return '<tr class="sum"><td>'+k+'</td><td>'+v+'</td></tr>'; }
+
+['salary','bonus','annual'].forEach(function(id){ U.comma($('#'+id)); });
+
+/* 날짜는 직접 적지 않고 목록에서 고릅니다 */
+function fill(sel, from, to, suffix, val){
+  var el=$('#'+sel); el.innerHTML='';
+  for(var i=from;i<=to;i++){
+    var o=document.createElement('option');
+    o.value=i; o.textContent=i+suffix;
+    if(i===val) o.selected=true;
+    el.appendChild(o);
+  }
+}
+var now=new Date();
+fill('sy',1980,now.getFullYear(),'년', 2020);
+fill('sm',1,12,'월',3); fill('sd',1,31,'일',1);
+fill('ey',1980,now.getFullYear()+1,'년', now.getFullYear());
+fill('em',1,12,'월', now.getMonth()+1); fill('ed',1,31,'일', now.getDate());
+
+function pickDate(y,m,d){
+  var dt=new Date(Number($('#'+y).value), Number($('#'+m).value)-1, Number($('#'+d).value));
+  dt.setHours(0,0,0,0);
+  return dt;
+}
+function run(){
+  if(!U.need($('#salary'),'월 급여')) return;
+  if(!U.manOk($('#salary'),'월 급여')) return;
+  var sd=pickDate('sy','sm','sd'), ed=pickDate('ey','em','ed');
+  var pay=U.man($('#salary')), bonus=U.man($('#bonus')), ann=U.man($('#annual'));
+  if(isNaN(sd.getTime())||isNaN(ed.getTime())){ U.toast('날짜를 확인해 주세요'); return; }
+  if(!(ed>sd)){ U.toast('퇴사일이 입사일보다 뒤여야 합니다'); return; }
+  var days=Math.round((ed-sd)/86400000);
+  function fmt(x){ return x.getFullYear()+'년 '+(x.getMonth()+1)+'월 '+x.getDate()+'일'; }
+
+  if(days<365){
+    $('#out').hidden=false;
+    $('#lab').textContent='퇴직금';
+    $('#big').textContent='대상 아님';
+    $('#note').textContent='재직일수가 '+days+'일입니다. 퇴직금은 계속 근로기간이 1년(365일) 이상일 때 받을 수 있습니다.';
+    $('#kpi').innerHTML=''; $('#rows').innerHTML=''; $('#tsub').textContent='';
+    $('#nextTools').innerHTML='<a href="salary.html"><b>연봉 실수령액</b><span>월급에서 얼마가 빠지는지</span></a>';
+    return;
+  }
+  var m3 = pay*3 + bonus*3/12 + ann*3/12;
+  var avg = m3/91;
+  var money = avg*30*(days/365);
+  var y=Math.floor(days/365), rd=days%365;
+
+  $('#out').hidden=false;
+  $('#lab').textContent='예상 퇴직금 (세전)';
+  $('#big').textContent=U.won(money);
+  $('#note').textContent=fmt(sd)+'부터 '+fmt(ed)+'까지 재직 '+days.toLocaleString()+'일 ('+y+'년 '+rd+'일) 기준입니다.';
+  $('#kpi').innerHTML=
+    '<div><b>'+U.won(avg)+'</b><span>1일 평균임금</span></div>'+
+    '<div><b>'+y+'년</b><span>근속연수</span></div>'+
+    '<div><b>'+U.won(avg*30)+'</b><span>30일분</span></div>'+
+    '<div><b>'+U.won(money)+'</b><span>예상 퇴직금</span></div>';
+  $('#tsub').textContent='퇴직 직전 3개월을 91일로 보고 계산한 값입니다.';
+  $('#rows').innerHTML=
+    row('3개월 임금','월 급여 × 3', U.won(pay*3))+
+    row('상여금 반영','연간 상여금 × 3/12', U.won(bonus*3/12))+
+    row('연차수당 반영','연차수당 × 3/12', U.won(ann*3/12))+
+    row('1일 평균임금','3개월 임금총액 ÷ 91일', U.won(avg))+
+    row('30일분','1일 평균임금 × 30', U.won(avg*30))+
+    sumrow('퇴직금', U.won(money));
+  $('#nextTools').innerHTML=
+    '<a href="salary.html?annual='+Math.round(pay*12)+'"><b>연봉 실수령액</b><span>지금 넣은 월급이 그대로 들어갑니다</span></a>'+
+    '<a href="savings.html?amount='+Math.round(money)+'"><b>이 돈을 예금에 넣으면</b><span>이자가 얼마나 붙는지</span></a>';
+}
+$('#go').onclick=run;
+})();
+</script>
+</body>
+</html>

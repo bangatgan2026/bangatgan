@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0E1320">
+<title>참새방앗간 · 오늘 필요한 계산과 조회</title>
+<meta name="description" content="연봉 실수령액, 대출 이자, 퇴직금, BMI, 만 나이, 디데이, 로또 당첨번호까지. 자주 쓰는 계산과 조회를 한곳에서 해결합니다.">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-section="">
+
+<div class="wrap" style="grid-template-columns:minmax(0,1fr) 300px">
+  <main>
+    <div class="hero">
+      <svg class="heroart" viewBox="0 0 900 260" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <defs>
+          <radialGradient id="glow" cx="50%" cy="50%">
+            <stop offset="0%" stop-color="#E3B75B" stop-opacity=".22"/>
+            <stop offset="100%" stop-color="#E3B75B" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="roof" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#3A4763"/><stop offset="100%" stop-color="#28324A"/>
+          </linearGradient>
+          <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#2B3550"/><stop offset="100%" stop-color="#1E2739"/>
+          </linearGradient>
+          <radialGradient id="seed" cx="35%" cy="30%">
+            <stop offset="0%" stop-color="#FFE9A8"/><stop offset="60%" stop-color="#E3B75B"/>
+            <stop offset="100%" stop-color="#B4842A"/>
+          </radialGradient>
+        </defs>
+
+        <!-- 방앗간 -->
+        <g class="mill">
+          <ellipse cx="720" cy="215" rx="120" ry="14" fill="#0A0E18" opacity=".55"/>
+          <rect x="648" y="132" width="146" height="76" rx="7" fill="url(#wall)"/>
+          <path d="M636 134 L721 84 L806 134 Z" fill="url(#roof)"/>
+          <rect x="700" y="160" width="42" height="48" rx="4" fill="#131A28"/>
+          <rect x="662" y="150" width="26" height="24" rx="4" fill="#131A28"/>
+          <rect x="754" y="150" width="26" height="24" rx="4" fill="#131A28"/>
+          <rect x="700" y="160" width="42" height="26" rx="3" fill="#E3B75B" opacity=".22"/>
+          <!-- 처마 아래 매달린 볍씨 다발 -->
+          <g class="sway">
+            <path d="M672 134 q6 16 2 30" stroke="#5A6B8C" stroke-width="2" fill="none"/>
+            <circle cx="673" cy="169" r="4" fill="url(#seed)"/>
+            <circle cx="679" cy="176" r="3.4" fill="url(#seed)"/>
+            <circle cx="667" cy="177" r="3.4" fill="url(#seed)"/>
+          </g>
+        </g>
+
+        <!-- 바닥에 흩어진 볍씨 -->
+        <g class="grains">
+          <circle cx="606" cy="212" r="4" fill="url(#seed)"/>
+          <circle cx="626" cy="218" r="3.2" fill="url(#seed)"/>
+          <circle cx="588" cy="219" r="3" fill="url(#seed)"/>
+          <circle cx="646" cy="213" r="3.4" fill="url(#seed)"/>
+        </g>
+        <circle cx="720" cy="150" r="150" fill="url(#glow)"/>
+
+        <!-- 참새 -->
+        <g class="sparrow" style="transform-box:fill-box">
+          <g class="bob">
+            <!-- 물고 가는 볍씨 -->
+            <circle class="carry" cx="30" cy="4" r="5" fill="url(#seed)"/>
+            <!-- 꼬리 -->
+            <path d="M-16 2 L-30 -5 L-28 6 Z" fill="#7A6142"/>
+            <!-- 몸통 -->
+            <ellipse cx="0" cy="0" rx="17" ry="12.5" fill="#A98457"/>
+            <path d="M-14 -4 q14 -9 27 -2 q-13 5 -27 2z" fill="#C9A374"/>
+            <!-- 배 -->
+            <ellipse cx="2" cy="5" rx="12" ry="7" fill="#E4D2B4"/>
+            <!-- 날개 -->
+            <path class="wing" d="M-4 -3 q13 -19 24 -6 q-11 9 -24 6z" fill="#8A6B45"/>
+            <!-- 머리 -->
+            <circle cx="15" cy="-6" r="9.5" fill="#A98457"/>
+            <path d="M8 -12 q7 -6 15 -1 q-8 -2 -15 1z" fill="#5E4A31"/>
+            <circle cx="19" cy="-8" r="2.1" fill="#15100A"/>
+            <circle cx="19.7" cy="-8.7" r=".7" fill="#fff"/>
+            <!-- 부리 -->
+            <path d="M24 -5 L32 -3 L24 -1 Z" fill="#E3B75B"/>
+          </g>
+        </g>
+      </svg>
+
+      <div class="herotext">
+        <div class="lab">참새방앗간</div>
+        <div class="big">그냥 지나치지 못하는 곳</div>
+        <div class="note">월급에서 얼마가 빠져나가는지, 대출 이자가 얼마인지, 내 나이가 만으로 몇인지,
+          이번 주 로또 번호가 뭐였는지. 하루에 한 번쯤 필요한 계산과 조회를 여기서 끝냅니다.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>많이 찾는 계산</h2>
+      <div class="toolgrid">
+        <a href="salary.html"><b>연봉 실수령액</b><span>세금과 4대보험을 떼면 월 얼마가 들어오는지</span></a>
+        <a href="loan.html"><b>대출 이자 계산</b><span>매달 얼마씩, 이자는 모두 얼마인지</span></a>
+        <a href="bmi.html"><b>BMI 체질량지수</b><span>키와 몸무게로 비만도 확인</span></a>
+        <a href="birthday.html"><b>생년월일 종합</b><span>생일 하나로 나이·띠·학교 연도까지</span></a>
+      </div>
+    </div>
+
+    <div class="ad wide"><span>광고 자리</span></div>
+
+    <div class="card">
+      <h2>금융계산기</h2>
+      <p class="sub">돈이 걸린 계산은 한 번 더 확인하는 게 좋습니다. 결과 아래에 왜 그렇게 나오는지 설명을 붙였습니다.</p>
+      <div class="toolgrid">
+        <a href="salary.html"><b>연봉 실수령액</b><span>공제 항목별로 얼마씩 빠지는지</span></a>
+        <a href="car.html"><b>차량 할부</b><span>월 납입금과 총 비용</span></a>
+        <a href="loan.html"><b>대출 이자</b><span>상환 방식 세 가지 비교</span></a>
+        <a href="retire.html"><b>퇴직금</b><span>입사일과 퇴사일만 넣으면</span></a>
+        <a href="savings.html"><b>예금·적금 이자</b><span>세금 떼고 만기에 받는 돈</span></a>
+        <a href="insurance.html"><b>4대보험료</b><span>근로자와 회사 부담액</span></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>건강계산기</h2>
+      <p class="sub">공개된 학회 기준과 공식에 따른 참고용 계산입니다. 진단이 아닙니다.</p>
+      <div class="toolgrid">
+        <a href="bmi.html"><b>BMI 체질량지수</b><span>대한비만학회 기준으로 확인</span></a>
+        <a href="bmr.html"><b>기초대사량</b><span>하루에 쓰는 최소 칼로리</span></a>
+        <a href="bp.html"><b>혈압 단계 확인</b><span>어느 구간에 속하는지</span></a>
+        <a href="walk.html"><b>걷기 칼로리 소모</b><span>걸음 수와 거리까지</span></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>날짜계산기</h2>
+      <p class="sub">계산기를 여러 개 오갈 필요 없이, 한 번 넣으면 필요한 답을 모아서 보여줍니다.</p>
+      <div class="toolgrid">
+        <a href="birthday.html"><b>생년월일 종합</b><span>나이·띠·별자리·학교 연도·다음 생일</span></a>
+        <a href="age.html"><b>만 나이</b><span>기준일을 정해서 계산</span></a>
+        <a href="dday.html"><b>디데이</b><span>남은 날과 지나온 날</span></a>
+        <a href="baby.html"><b>아기 100일·돌</b><span>백일상과 돌잔치 날짜</span></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>로또</h2>
+      <p class="sub">역대 당첨번호와 등수별 당첨금을 봅니다. 통계는 다음 회차와 관련이 없습니다.</p>
+      <div class="toolgrid">
+        <a href="lotto.html"><b>당첨번호 조회</b><span>회차별 번호와 1등부터 5등까지</span></a>
+        <a href="lotto-gen.html"><b>번호 뽑기</b><span>포함·제외 번호를 정해서</span></a>
+        <a href="lotto-stat.html"><b>번호 통계</b><span>출현 횟수와 미출현 기간</span></a>
+        <a href="lotto-my.html"><b>내 번호</b><span>저장해 두면 자동으로 대조</span></a>
+      </div>
+    </div>
+  </main>
+
+  <aside class="rail">
+    <div class="ad tall"><span>광고 자리</span></div>
+  </aside>
+</div>
+
+<script src="assets/site.js"></script>
+</body>
+</html>

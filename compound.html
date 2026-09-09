@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0E1320">
+<title>복리 계산기 · 적립식 투자 | 참새방앗간</title>
+<meta name="description" content="매달 일정 금액을 넣고 연 수익률로 굴렸을 때 얼마가 되는지 복리로 계산합니다.">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-section="money">
+<div class="wrap">
+  <aside class="side"></aside>
+  <main>
+    <h1 class="page-h">복리 계산기</h1>
+    <p class="page-lead">매달 넣는 돈과 수익률, 기간을 넣으면 원금과 수익이 어떻게 불어나는지 보여줍니다.</p>
+
+    <div class="card">
+      <h2>투자 조건</h2>
+      <div class="field">
+        <label for="start">처음 넣는 목돈 <span class="hint">없으면 0</span></label>
+        <div class="inbox"><input id="start" inputmode="numeric" placeholder="없으면 0"><span class="unit">만원</span></div>
+      </div>      <div class="field">
+        <label for="monthly">매달 넣는 돈 </label>
+        <div class="inbox"><input id="monthly" inputmode="numeric" placeholder="예: 50 (50만원)"><span class="unit">만원</span></div>
+      </div>      <div class="row2">      <div class="field">
+        <label for="rate">연 수익률 </label>
+        <div class="inbox"><input id="rate" inputmode="numeric" placeholder="예: 7"><span class="unit">%</span></div>
+      </div>      <div class="field">
+        <label for="years">기간 </label>
+        <div class="inbox"><input id="years" inputmode="numeric" placeholder="예: 20"><span class="unit">년</span></div>
+      </div></div>
+      <button class="btn" id="go">복리 계산</button>
+    </div>
+
+    <div id="out" hidden>
+      <div class="result">
+        <div class="lab" id="lab">결과</div>
+        <div class="big" id="big"></div>
+        <div class="note" id="note"></div>
+        <div class="kpi" id="kpi"></div>
+      </div>
+      <div class="card">
+        <h2>연도별 변화</h2>
+        <p class="sub" id="tsub"></p>
+        <table class="t"><tbody id="rows"></tbody></table>
+      </div>
+      <div class="card">
+        <h2>이어서 계산해 보기</h2>
+        <div class="next" id="nextTools"></div>
+      </div>
+    </div>
+
+    <div class="ad wide"><span>광고 자리</span></div>
+
+    <div class="card">
+      <h2>복리가 왜 강한가</h2>
+      <div class="prose">
+
+        <h3>72의 법칙</h3>
+        <p>72를 연 수익률로 나누면 원금이 두 배가 되는 데 걸리는 햇수가 나옵니다. 연 7%면 72÷7로 약 10년, 연 4%면 18년입니다. 수익률이 조금만 달라져도 시간이 크게 벌어집니다.</p>
+
+        <h3>시간이 돈보다 큽니다</h3>
+        <p>매달 50만원씩 연 7%로 굴린다면, 20년을 넣으면 원금 1억 2천만원이 대략 2억 6천만원이 됩니다. 그런데 10년만 넣으면 원금 6천만원에 8천 6백만원 정도입니다. 기간이 두 배가 되면 결과는 세 배가 됩니다. 늘어난 기간 동안 이자에 또 이자가 붙기 때문입니다.</p>
+
+        <div class="callout"><b>수익률은 보장되지 않습니다.</b><br>
+        예금과 달리 투자 수익률은 매년 다릅니다. 연 7%는 장기 평균을 가정한 숫자일 뿐, 어떤 해는 마이너스가 납니다. 이 계산은 매년 똑같은 수익률이 난다고 가정한 <b>단순 모형</b>입니다. 실제 결과는 다릅니다.</p>
+
+        <h3>세금과 물가</h3>
+        <p>여기 나오는 금액은 세금을 떼기 전이고, 물가 상승도 반영하지 않았습니다. 20년 뒤의 2억 6천만원은 지금의 2억 6천만원과 가치가 다릅니다. 물가가 매년 2%씩 오르면 20년 뒤 돈의 가치는 지금의 3분의 2 정도입니다.</p>
+
+        <h3>중간에 빼면 무너집니다</h3>
+        <p>복리의 힘은 건드리지 않고 두는 데서 나옵니다. 중간에 빼 쓰면 그 뒤로 붙었어야 할 이자가 통째로 사라집니다. 비상금은 따로 두고 시작하세요.</p>
+    
+      </div>
+    </div>
+  </main>
+  <aside class="rail"><div class="ad tall"><span>광고 자리</span></div></aside>
+</div>
+<script src="assets/site.js"></script>
+<script>
+(function(){
+"use strict";
+var $=function(s){return document.querySelector(s);};
+function row(k,v,c){ return '<tr><td>'+k+(c?'<div class="c">'+c+'</div>':'')+'</td><td>'+v+'</td></tr>'; }
+function sumrow(k,v){ return '<tr class="sum"><td>'+k+'</td><td>'+v+'</td></tr>'; }
+
+['start','monthly'].forEach(function(id){ U.comma($('#'+id)); });
+function run(){
+  if(!U.need($('#monthly'),'매달 넣는 돈')) return;
+  if(!U.manOk($('#monthly'),'매달 넣는 돈')) return;
+  if(!U.need($('#rate'),'연 수익률')) return;
+  if(!U.need($('#years'),'기간')) return;
+  var S=U.man($('#start')), M=U.man($('#monthly'));
+  var rate=Number($('#rate').value)||0, years=Number($('#years').value)||1;
+  var r=rate/100/12, n=years*12;
+  var fvStart = S*Math.pow(1+r,n);
+  var fvMonthly = r===0 ? M*n : M*((Math.pow(1+r,n)-1)/r)*(1+r);
+  var total = fvStart+fvMonthly;
+  var principal = S + M*n;
+  var profit = total - principal;
+  var double = rate>0 ? Math.round(72/rate*10)/10 : 0;
+
+  $('#out').hidden=false;
+  $('#lab').textContent=years+'년 뒤 예상 금액';
+  $('#big').textContent=U.won(total);
+  $('#note').textContent='원금 '+U.won(principal)+'에 수익 '+U.won(profit)+'이 붙은 결과입니다. '+
+    (rate>0? '연 '+rate+'%면 원금이 두 배가 되는 데 약 '+double+'년이 걸립니다. ' : '')+
+    '세금과 물가는 반영하지 않았습니다.';
+  $('#kpi').innerHTML=
+    '<div><b>'+U.won(principal)+'</b><span>넣은 원금</span></div>'+
+    '<div><b>'+U.won(profit)+'</b><span>수익</span></div>'+
+    '<div><b>'+Math.round(profit/principal*100)+'%</b><span>원금 대비</span></div>'+
+    '<div><b>'+U.won(total)+'</b><span>최종 금액</span></div>';
+  $('#tsub').textContent='매년 같은 수익률이 난다고 가정한 단순 계산입니다.';
+  var html='<tr><th>시점</th><th>넣은 원금</th><th>평가 금액</th></tr>';
+  var step = years<=5?1 : years<=15?Math.ceil(years/5) : Math.ceil(years/6);
+  for(var y=step; y<=years; y+=step){
+    var nn=y*12;
+    var v = S*Math.pow(1+r,nn) + (r===0? M*nn : M*((Math.pow(1+r,nn)-1)/r)*(1+r));
+    html+='<tr><td>'+y+'년 뒤</td><td>'+U.won(S+M*nn)+'</td><td>'+U.won(v)+'</td></tr>';
+  }
+  html+='<tr class="sum"><td>'+years+'년 뒤</td><td>'+U.won(principal)+'</td><td>'+U.won(total)+'</td></tr>';
+  $('#rows').innerHTML=html;
+  $('#nextTools').innerHTML=
+    '<a href="savings.html"><b>예금·적금과 비교</b><span>확정 이자와 얼마나 다른지</span></a>'+
+    '<a href="salary.html"><b>연봉 실수령액</b><span>매달 얼마를 넣을 수 있는지</span></a>';
+  U.saveState({start:S,monthly:M,rate:rate,years:years});
+}
+$('#go').onclick=run;
+var st=U.loadState();
+if(st.monthly){
+  if(st.start)$('#start').value=(Number(st.start)/10000).toLocaleString();
+  $('#monthly').value=(Number(st.monthly)/10000).toLocaleString();
+  $('#rate').value=st.rate; $('#years').value=st.years; run();
+}
+
+})();
+</script>
+</body>
+</html>

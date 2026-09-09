@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0E1320">
+<title>대출 이자 계산기 | 참새방앗간</title>
+<meta name="description" content="대출금과 금리, 기간을 넣으면 원리금균등·원금균등·만기일시 방식별로 월 상환액과 총 이자를 계산합니다.">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-section="money">
+
+<div class="wrap">
+  <aside class="side"></aside>
+  <main>
+    <h1 class="page-h">대출 이자 계산기</h1>
+    <p class="page-lead">같은 돈을 빌려도 갚는 방식에 따라 매달 나가는 돈과 총 이자가 달라집니다. 세 가지 방식을 나란히 비교해 보세요.</p>
+
+    <div class="card">
+      <h2>대출 조건</h2>
+      <div class="field">
+        <label for="amount">대출 금액 </label>
+        <div class="inbox"><input id="amount" inputmode="numeric" placeholder="예: 30000 (3억)"><span class="unit">만원</span></div>
+      </div>      <div class="row2">      <div class="field">
+        <label for="rate">연 금리</label>
+        <div class="inbox"><input id="rate" type="text" placeholder="예: 4.2"><span class="unit">%</span></div>
+      </div>      <div class="field">
+        <label for="months">대출 기간 <span class="hint">개월 수</span></label>
+        <div class="inbox"><input id="months" type="text" placeholder="예: 360 (30년)"><span class="unit">개월</span></div>
+      </div></div>
+      <div class="field">
+        <label for="grace">거치 기간 <span class="hint">이자만 내는 기간, 없으면 0</span></label>
+        <div class="inbox"><input id="grace" type="text" placeholder="예: 12"><span class="unit">개월</span></div>
+      </div>
+      <button class="btn" id="go">상환액 계산</button>
+    </div>
+
+    <div id="out" hidden>
+      <div class="result">
+        <div class="lab" id="lab">결과</div>
+        <div class="big" id="big"></div>
+        <div class="note" id="note"></div>
+        <div class="kpi" id="kpi"></div>
+      </div>
+
+      <div class="card">
+        <h2>상환 방식 비교</h2>
+        <p class="sub" id="tsub"></p>
+        <table class="t"><tbody id="rows"></tbody></table>
+      </div>
+
+      <div class="card">
+        <h2>이어서 계산해 보기</h2>
+        <div class="next" id="nextTools"></div>
+      </div>
+    </div>
+
+    <div class="ad wide"><span>광고 자리</span></div>
+
+    <div class="card">
+      <h2>갚는 방식에 따라 이렇게 달라집니다</h2>
+      <div class="prose">
+
+        <h3>원리금균등</h3>
+        <p>매달 같은 금액을 냅니다. 초반에는 낸 돈의 대부분이 이자로 가고, 뒤로 갈수록 원금 비중이 커집니다. 매달 나가는 돈이 일정해서 계획을 세우기 쉽습니다. 주택담보대출에서 가장 많이 쓰는 방식입니다.</p>
+        <h3>원금균등</h3>
+        <p>원금을 기간으로 나눠 똑같이 갚고, 남은 원금에 대한 이자를 더해 냅니다. 그래서 첫 달이 가장 부담스럽고 갈수록 줄어듭니다. <b>총 이자는 원리금균등보다 적습니다.</b> 초반 부담을 감당할 수 있다면 이쪽이 유리합니다.</p>
+        <h3>거치 기간</h3>
+        <p>처음 얼마 동안은 원금을 갚지 않고 <b>이자만 내는 기간</b>입니다. 매달 나가는 돈이 크게 줄어들어 부담이 가볍습니다. 집을 사고 입주 준비를 하는 동안이나, 곧 소득이 늘어날 예정일 때 씁니다.</p>
+        <p>대신 두 가지를 감수해야 합니다. 거치 기간 동안 원금이 전혀 줄지 않으니 <b>총 이자가 늘어납니다.</b> 그리고 거치가 끝나면 남은 기간 안에 원금을 다 갚아야 해서 <b>매달 내는 돈이 확 뜁니다.</b> 30년 대출에 3년 거치를 걸면 27년 안에 원금을 갚아야 합니다.</p>
+
+        <h3>만기일시</h3>
+        <p>기간 내내 이자만 내다가 만기에 원금을 한 번에 갚습니다. 매달 나가는 돈이 가장 적지만 <b>총 이자는 가장 많습니다.</b> 원금이 전혀 줄지 않기 때문입니다. 곧 목돈이 들어올 예정이거나 짧게 쓸 때만 의미가 있습니다.</p>
+        <div class="callout"><b>금리는 고정이 아닐 수 있습니다.</b><br>
+        변동금리라면 시장 금리에 따라 매달 내는 돈이 바뀝니다. 이 계산은 금리가 끝까지 그대로라는 가정입니다. 변동금리로 빌릴 계획이라면 금리를 1~2%p 올려서도 계산해 보고, 그래도 감당이 되는지 확인해 보세요.</div>
+        <h3>DSR도 함께 보세요</h3>
+        <p>은행은 연 소득 대비 원리금 상환액 비율(DSR)을 봅니다. 기존 대출까지 합쳐 이 비율이 넘으면 원하는 만큼 빌릴 수 없습니다. 계산기로 나온 금액이 곧 승인 금액은 아니라는 뜻입니다.</p>
+    
+      </div>
+    </div>
+  </main>
+  <aside class="rail"><div class="ad tall"><span>광고 자리</span></div></aside>
+</div>
+
+<script src="assets/site.js"></script>
+<script>
+(function(){
+"use strict";
+var $=function(s){return document.querySelector(s);};
+function row(k,v,c){ return '<tr><td>'+k+(c?'<div class="c">'+c+'</div>':'')+'</td><td>'+v+'</td></tr>'; }
+function sumrow(k,v){ return '<tr class="sum"><td>'+k+'</td><td>'+v+'</td></tr>'; }
+
+U.comma($('#amount'));
+function run(){
+  if(!U.need($('#amount'),'대출 금액')) return;
+  if(!U.manOk($('#amount'),'대출 금액')) return;
+  if(!U.need($('#rate'),'연 금리')) return;
+  if(!U.need($('#months'),'대출 기간')) return;
+  var P=U.man($('#amount')), rate=Number($('#rate').value)||0;
+  var n=Math.round(Number($('#months').value)||0);
+  var g=Math.round(Number($('#grace').value)||0);
+  if(g>=n){ U.toast('거치 기간은 대출 기간보다 짧아야 합니다'); return; }
+  var r=rate/100/12, pay=n-g;
+
+  /* 원리금균등 (거치 후 남은 기간 동안 상환) */
+  var payA = r===0 ? P/pay : P*r*Math.pow(1+r,pay)/(Math.pow(1+r,pay)-1);
+  var graceInt = P*r*g;
+  var totalA = payA*pay + graceInt, intA = totalA-P;
+
+  /* 원금균등 */
+  var firstB = P/pay + P*r, lastB = P/pay + (P/pay)*r;
+  var intB = graceInt; for(var i=0;i<pay;i++) intB += (P - P/pay*i)*r;
+  var totalB = P + intB;
+
+  /* 만기일시 */
+  var payC = P*r, intC = payC*n, totalC = P + intC;
+
+  $('#out').hidden=false;
+  $('#lab').textContent = g>0 ? '거치 후 매달 갚는 돈 (원리금균등)' : '원리금균등 · 매달 갚는 돈';
+  $('#big').textContent=U.won(payA);
+  var yrs = Math.round(n/12*10)/10;
+  $('#note').textContent = U.won(P)+'을 연 '+rate+'%로 '+n+'개월('+yrs+'년) 빌릴 때입니다.'
+    + (g>0 ? ' 처음 '+g+'개월은 이자만 '+U.won(P*r)+'씩 내고, 이후 '+pay+'개월 동안 원금과 이자를 함께 갚습니다.' : '')
+    + ' 이자로만 '+U.won(intA)+'이 나갑니다.';
+  $('#kpi').innerHTML=
+    '<div><b>'+U.won(totalA)+'</b><span>총 상환액</span></div>'+
+    '<div><b>'+U.won(intA)+'</b><span>이자 총액</span></div>'+
+    '<div><b>'+Math.round(intA/P*100)+'%</b><span>원금 대비 이자</span></div>'+
+    '<div><b>'+n+'회</b><span>상환 횟수</span></div>';
+  $('#tsub').textContent='같은 조건에서 갚는 방식만 바꾼 결과입니다.'
+    + (g>0 ? ' 거치 기간 '+g+'개월이 반영되어 있습니다.' : '');
+  $('#rows').innerHTML=
+    '<tr><th>방식</th><th>매달</th><th>이자 총액</th></tr>'+
+    '<tr><td>원리금균등<div class="c">'+(g>0?'거치 후 ':'')+'매달 같은 금액</div></td><td>'+U.won(payA)+'</td><td>'+U.won(intA)+'</td></tr>'+
+    '<tr><td>원금균등<div class="c">첫 달 '+U.won(firstB)+' → 마지막 달 '+U.won(lastB)+'</div></td><td>점점 감소</td><td>'+U.won(intB)+'</td></tr>'+
+    '<tr><td>만기일시<div class="c">만기에 원금 '+U.won(P)+' 한 번에</div></td><td>'+U.won(payC)+'</td><td>'+U.won(intC)+'</td></tr>'+
+    (g>0 ? '<tr class="sum"><td>거치 기간에 낸 이자</td><td>'+g+'개월</td><td>'+U.won(graceInt)+'</td></tr>' : '');
+  $('#nextTools').innerHTML=
+    '<a href="prepay.html?amount='+P+'"><b>중도상환수수료</b><span>미리 갚으면 얼마를 더 내야 하는지</span></a>'+
+    '<a href="salary.html"><b>연봉 실수령액</b><span>월급에서 이만큼 낼 수 있는지</span></a>';
+  U.saveState({amount:P,rate:rate,months:n,grace:g});
+}
+$('#go').onclick=run;
+var st=U.loadState();
+if(st.amount){ $('#amount').value=(Number(st.amount)/10000).toLocaleString();
+  if(st.rate)$('#rate').value=st.rate;
+  if(st.months)$('#months').value=st.months;
+  if(st.grace)$('#grace').value=st.grace; run(); }
+
+})();
+</script>
+</body>
+</html>

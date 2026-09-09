@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0E1320">
+<title>걷기 칼로리 소모 계산기 | 참새방앗간</title>
+<meta name="description" content="체중과 걷는 시간, 속도로 소모 칼로리와 걸음 수, 거리를 계산합니다.">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-section="health">
+<div class="wrap">
+  <aside class="side"></aside>
+  <main>
+    <h1 class="page-h">걷기 칼로리 소모 계산기</h1>
+    <p class="page-lead">얼마나 걸으면 얼마가 소모되는지 계산합니다.</p>
+    <div class="card">
+      <h2>걷기 조건</h2>
+      <div class="field">
+        <label for="w">몸무게 </label>
+        <div class="inbox"><input id="w" inputmode="numeric" placeholder="몸무게"><span class="unit">kg</span></div>
+      </div>      <div class="row2">      <div class="field">
+        <label for="min">걷는 시간 </label>
+        <div class="inbox"><input id="min" inputmode="numeric" placeholder="걷는 시간"><span class="unit">분</span></div>
+      </div>      <div class="field">
+        <label for="speed">속도 </label>
+        <div class="inbox"><select id="speed"><option value="3.0">천천히 (시속 4km)</option><option value="3.5">보통 (시속 5km)</option><option value="4.3">빠르게 (시속 6km)</option><option value="5.0">매우 빠르게 (시속 6.5km)</option></select></div>
+      </div></div>
+      <button class="btn" id="go">소모 칼로리 계산</button>
+    </div>
+
+    <div id="out" hidden>
+      <div class="result">
+        <div class="lab" id="lab">결과</div>
+        <div class="big" id="big"></div>
+        <div class="note" id="note"></div>
+        <div class="kpi" id="kpi"></div>
+      </div>
+      <div class="card">
+        <h2>시간별 소모량</h2>
+        <p class="sub" id="tsub"></p>
+        <table class="t"><tbody id="rows"></tbody></table>
+      </div>
+      <div class="card">
+        <h2>이어서 보기</h2>
+        <div class="next" id="nextTools"></div>
+      </div>
+    </div>
+
+    <div class="ad wide"><span>광고 자리</span></div>
+    <div class="card">
+      <h2>걷기에 대해</h2>
+      <div class="prose">
+
+        <h3>계산 방식</h3>
+        <p>운동 강도를 나타내는 MET 값을 씁니다. 소모 칼로리 = MET × 체중(kg) × 시간(시간)으로 계산합니다. 보통 속도로 걷는 것은 3.5MET 정도입니다.</p>
+        <h3>하루 만 보의 근거</h3>
+        <p>만 보는 1960년대 일본에서 만보계를 팔며 쓴 표현이 퍼진 것이지 의학적 기준은 아닙니다. 최근 연구들은 <b>하루 7,000~8,000보만 걸어도 건강상 이득의 대부분을 얻는다</b>고 봅니다. 만 보를 못 채웠다고 실망할 필요가 없습니다.</p>
+        <h3>속도가 중요합니다</h3>
+        <p>같은 시간을 걸어도 빠르게 걸으면 소모량이 크게 늘어납니다. 대화는 되지만 노래는 부르기 힘든 정도가 적당한 강도입니다.</p>
+        <div class="callout"><b>참고용 계산입니다.</b><br>
+        실제 소모량은 체성분, 지형, 보폭, 개인차에 따라 달라집니다. 무릎이나 심장에 질환이 있다면 운동 강도는 의료진과 상의하세요.</div>
+    
+      </div>
+    </div>
+  </main>
+  <aside class="rail"><div class="ad tall"><span>광고 자리</span></div></aside>
+</div>
+
+<script src="assets/site.js"></script>
+<script>
+(function(){
+"use strict";
+var $=function(s){return document.querySelector(s);};
+function row(k,v,c){ return '<tr><td>'+k+(c?'<div class="c">'+c+'</div>':'')+'</td><td>'+v+'</td></tr>'; }
+function sumrow(k,v){ return '<tr class="sum"><td>'+k+'</td><td>'+v+'</td></tr>'; }
+
+U.comma($('#w')); U.comma($('#min'));
+function dist(km){ return km<1 ? Math.round(km*1000)+'m' : (Math.round(km*10)/10)+'km'; }
+function run(){
+  if(!U.need($('#w'),'몸무게')) return;
+  if(!U.need($('#min'),'걷는 시간')) return;
+  var w=U.num($('#w')), min=U.num($('#min')), met=Number($('#speed').value)||3.5;
+  if(!w||!min){ $('#out').hidden=true; return; }
+  var kcal=met*w*(min/60);
+  var kmh = met===3.0?4 : met===3.5?5 : met===4.3?6 : 6.5;
+  var km = kmh*(min/60);
+  var steps = Math.round(km*1000/0.7);
+
+  $('#out').hidden=false;
+  $('#lab').textContent='소모 칼로리';
+  $('#big').textContent=Math.round(kcal).toLocaleString()+' kcal';
+  $('#note').textContent=min+'분 동안 시속 '+kmh+'km로 걸었을 때입니다. 약 '+dist(km)+', '+steps.toLocaleString()+'걸음에 해당합니다.';
+  $('#kpi').innerHTML=
+    '<div><b>'+Math.round(kcal).toLocaleString()+'</b><span>소모 칼로리</span></div>'+
+    '<div><b>'+dist(km)+'</b><span>거리</span></div>'+
+    '<div><b>'+steps.toLocaleString()+'</b><span>걸음 수</span></div>'+
+    '<div><b>'+(kcal/7700*1000).toFixed(0)+'g</b><span>체지방 환산</span></div>';
+  $('#tsub').textContent='같은 속도로 시간만 늘렸을 때의 소모량입니다.';
+  var html='<tr><th>걷는 시간</th><th>소모 칼로리</th><th>거리</th></tr>';
+  [10,20,30,60,90].forEach(function(m){
+    html+='<tr><td>'+m+'분</td><td>'+Math.round(met*w*(m/60)).toLocaleString()+' kcal</td><td>'+(kmh*(m/60)).toFixed(1)+'km</td></tr>';
+  });
+  $('#rows').innerHTML=html;
+  $('#nextTools').innerHTML=
+    '<a href="calorie.html?w='+w+'"><b>하루 필요 칼로리</b><span>먹는 쪽도 함께 계산해 보세요</span></a>'+
+    '<a href="bmi.html?w='+w+'"><b>BMI 체질량지수</b><span>지금 체중이 어느 단계인지</span></a>';
+  U.saveState({w:w,min:min,speed:met});
+}
+$('#go').onclick=run;
+var st=U.loadState();
+if(st.w){ $('#w').value=Number(st.w).toLocaleString(); $('#min').value=st.min; if(st.speed)$('#speed').value=st.speed; run(); }
+
+})();
+</script>
+</body>
+</html>

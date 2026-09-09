@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0E1320">
+<title>4대보험료 계산기 | 참새방앗간</title>
+<meta name="description" content="월 급여를 넣으면 국민연금, 건강보험, 장기요양, 고용보험의 근로자 부담액과 회사 부담액을 계산합니다.">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-section="money">
+
+<div class="wrap">
+  <aside class="side"></aside>
+  <main>
+    <h1 class="page-h">4대보험료 계산기</h1>
+    <p class="page-lead">급여명세서에 찍히는 보험료가 맞는지 확인해 보세요. 회사가 함께 내는 금액도 같이 보여줍니다.</p>
+
+    <div class="card">
+      <h2>급여 입력</h2>
+      <div class="field">
+        <label for="pay">월 급여 <span class="hint">세전, 비과세 제외</span></label>
+        <div class="inbox"><input id="pay" inputmode="numeric" placeholder="예: 350 (350만원)"><span class="unit">만원</span></div>
+      </div>
+      <button class="btn" id="go">보험료 계산</button>
+    </div>
+
+    <div id="out" hidden>
+      <div class="result">
+        <div class="lab" id="lab">결과</div>
+        <div class="big" id="big"></div>
+        <div class="note" id="note"></div>
+        <div class="kpi" id="kpi"></div>
+      </div>
+
+      <div class="card">
+        <h2>보험료 내역 <span style="font-size:11px;color:var(--dim);font-weight:600">2026년 기준</span></h2>
+        <p class="sub" id="tsub"></p>
+        <table class="t"><tbody id="rows"></tbody></table>
+      </div>
+
+      <div class="card">
+        <h2>이어서 계산해 보기</h2>
+        <div class="next" id="nextTools"></div>
+      </div>
+    </div>
+
+    <div class="ad wide"><span>광고 자리</span></div>
+
+    <div class="card">
+      <h2>4대보험, 누가 얼마씩 낼까</h2>
+      <div class="prose">
+
+        <h3>절반은 회사가 냅니다</h3>
+        <p>국민연금과 건강보험, 장기요양보험은 근로자와 회사가 절반씩 냅니다. 고용보험은 실업급여 부분만 절반씩이고, 고용안정·직업능력개발 부담분은 회사가 더 냅니다. <b>산재보험은 전액 회사 부담</b>이라 급여에서 빠지지 않습니다.</p>
+        <p>급여명세서에 찍히는 건 근로자 부담분입니다. 실제로 내 이름으로 들어가는 돈은 그 두 배 가까이 된다고 보시면 됩니다.</p>
+        <h3>2026년에 국민연금이 올랐습니다</h3>
+        <p>1998년부터 9%로 고정되어 있던 국민연금 보험료율이 2026년 1월부터 9.5%로 인상되었습니다. 근로자와 회사가 절반씩 부담하므로 월급에서 빠지는 비율은 <b>4.5%에서 4.75%로</b> 올랐습니다. 2033년 13%가 될 때까지 매년 0.5%p씩 오릅니다.</p>
+        <p>건강보험도 함께 올랐습니다. 직장 건강보험료율이 7.09%에서 7.19%가 되어 근로자 부담은 3.595%, 장기요양보험료는 건강보험료의 13.14%가 되었습니다.</p>
+
+        <h3>국민연금에는 상한이 있습니다</h3>
+        <p>기준소득월액에 상한과 하한이 있어서, 급여가 아주 높아도 일정 금액 이상은 보험료가 더 오르지 않습니다. 매년 7월에 조정되며, 2026년 7월부터는 월 41만원에서 659만원 사이입니다.</p>
+        <h3>건강보험은 연말에 정산합니다</h3>
+        <p>보수가 오르거나 내리면 다음 해 4월에 정산합니다. 급여가 오른 해에는 4월 급여에서 추가로 떼가는 일이 흔합니다. 갑자기 실수령액이 줄었다면 대개 이 정산 때문입니다.</p>
+        <div class="callout"><b>요율은 해마다 바뀝니다.</b><br>
+        이 계산기는 최근 기준 요율을 씁니다. 정확한 금액은 국민건강보험공단이나 국민연금공단의 안내를 확인하세요.</div>
+    
+      </div>
+    </div>
+  </main>
+  <aside class="rail"><div class="ad tall"><span>광고 자리</span></div></aside>
+</div>
+
+<script src="assets/site.js"></script>
+<script>
+(function(){
+"use strict";
+var $=function(s){return document.querySelector(s);};
+function row(k,v,c){ return '<tr><td>'+k+(c?'<div class="c">'+c+'</div>':'')+'</td><td>'+v+'</td></tr>'; }
+function sumrow(k,v){ return '<tr class="sum"><td>'+k+'</td><td>'+v+'</td></tr>'; }
+
+U.comma($('#pay'));
+var R={pension:0.0475,pensionMax:6590000,pensionMin:410000,health:0.03595,care:0.1314,emp:0.009};
+function run(){
+  if(!U.need($('#pay'),'월 급여')) return;
+  if(!U.manOk($('#pay'),'월 급여')) return;
+  var m=U.man($('#pay'));
+  if(m<=0){ $('#out').hidden=true; return; }
+  var base=Math.min(Math.max(m,R.pensionMin),R.pensionMax);
+  var pension=base*R.pension, health=m*R.health, care=health*R.care, emp=m*R.emp;
+  var total=pension+health+care+emp;
+  var empPension=pension, empHealth=health, empCare=care, empEmp=m*0.0115;
+  var companyTotal=empPension+empHealth+empCare+empEmp;
+
+  $('#out').hidden=false;
+  $('#lab').textContent='근로자 부담 합계';
+  $('#big').textContent=U.won(total);
+  $('#note').textContent='월 급여 '+U.won(m)+' 기준으로 매달 급여에서 빠지는 금액입니다. 회사도 약 '+U.won(companyTotal)+'을 함께 냅니다.';
+  $('#kpi').innerHTML=
+    '<div><b>'+U.won(pension)+'</b><span>국민연금</span></div>'+
+    '<div><b>'+U.won(health+care)+'</b><span>건강+장기요양</span></div>'+
+    '<div><b>'+U.won(emp)+'</b><span>고용보험</span></div>'+
+    '<div><b>'+(Math.round(total/m*1000)/10)+'%</b><span>급여 대비</span></div>';
+  $('#tsub').textContent='회사 부담분은 고용안정·직업능력개발 부담금을 포함한 대략적인 금액이며, 산재보험은 업종에 따라 따로 부과됩니다.';
+  $('#rows').innerHTML=
+    '<tr><th>항목</th><th>근로자</th><th>회사</th></tr>'+
+    '<tr><td>국민연금<div class="c">4.75%씩</div></td><td>'+U.won(pension)+'</td><td>'+U.won(empPension)+'</td></tr>'+
+    '<tr><td>건강보험<div class="c">3.595%씩</div></td><td>'+U.won(health)+'</td><td>'+U.won(empHealth)+'</td></tr>'+
+    '<tr><td>장기요양<div class="c">건강보험료의 13.14%</div></td><td>'+U.won(care)+'</td><td>'+U.won(empCare)+'</td></tr>'+
+    '<tr><td>고용보험<div class="c">근로자 0.9%</div></td><td>'+U.won(emp)+'</td><td>'+U.won(empEmp)+'</td></tr>'+
+    '<tr class="sum"><td>합계</td><td>'+U.won(total)+'</td><td>'+U.won(companyTotal)+'</td></tr>';
+  $('#nextTools').innerHTML=
+    '<a href="salary.html?annual='+Math.round(m*12)+'"><b>연봉 실수령액</b><span>세금까지 뺀 실제 통장 입금액</span></a>'+
+    '<a href="retire.html?salary='+Math.round(m)+'"><b>퇴직금 계산</b><span>지금 월급 기준으로</span></a>';
+  U.saveState({pay:m});
+}
+$('#go').onclick=run;
+var st=U.loadState();
+if(st.pay){ $('#pay').value=(Number(st.pay)/10000).toLocaleString(); run(); }
+
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0E1320">
+<title>로또 당첨번호 조회 | 참새방앗간</title>
+<meta name="description" content="역대 로또 6/45 회차별 당첨번호와 1등부터 5등까지 당첨금, 당첨 게임 수를 확인합니다.">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-section="lotto">
+<div class="wrap">
+  <aside class="side"></aside>
+  <main>
+    <h1 class="page-h">로또 당첨번호 조회</h1>
+    <p class="page-lead">회차를 고르면 그 회차의 당첨번호와 등수별 당첨금을 볼 수 있습니다.</p>
+    <div class="result">
+      <div class="lab" id="heroNo"></div>
+      <div class="balls" id="winBalls" style="margin:16px 0 20px"></div>
+      <div class="lab">1등 당첨금</div>
+      <div class="big" id="bigAmt"></div>
+      <div class="note" id="bigNote"></div>
+      <div class="kpi" id="summary"></div>
+    </div>
+
+    <div class="card">
+      <h2>1등 당첨 정보</h2>
+      <p class="sub" id="prizeSub"></p>
+      <table class="t"><tbody id="prizeBox"></tbody></table>
+      <div class="drawnav">
+        <button class="arrow" id="prevDraw" aria-label="이전 회차">‹</button>
+        <select id="selDraw" aria-label="회차 선택"></select>
+        <button class="arrow" id="nextDraw" aria-label="다음 회차">›</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>내 번호와 대조</h2>
+      <div id="checkList"></div>
+    </div>
+
+    <div class="card">
+      <h2>최근 회차</h2>
+      <div id="recentList"></div>
+    </div>
+
+    <div class="ad wide"><span>광고 자리</span></div>
+    <div class="card">
+      <h2>당첨금은 왜 회차마다 다를까</h2>
+      <div class="prose">
+
+        <p>로또 1등 당첨금은 정해진 금액이 아닙니다. 그 회차 판매액에서 일정 비율을 떼어 당첨금 총액을 만들고 그 안에서 나눕니다. 그래서 두 가지로 금액이 흔들립니다.</p>
+        <ul>
+          <li><b>얼마나 팔렸는가</b> — 많이 팔리면 나눌 돈이 커집니다.</li>
+          <li><b>1등이 몇 명인가</b> — 같은 돈을 더 많은 사람이 나누면 1인당 금액이 줄어듭니다.</li>
+        </ul>
+        <p>1등이 한 명뿐인 회차에 금액이 크게 튀고, 스무 명이 넘으면 10억 아래로 내려가는 것도 이 구조 때문입니다. 4등 5만원과 5등 5천원만 금액이 고정되어 있습니다.</p>
+        <div class="callout"><b>이 사이트는 예측을 하지 않습니다.</b><br>
+        여기 있는 모든 정보는 이미 발표된 과거 결과입니다. 다음 회차 결과와는 아무 관련이 없습니다.</div>
+    
+      </div>
+    </div>
+  </main>
+  <aside class="rail"><div class="ad tall"><span>광고 자리</span></div></aside>
+</div>
+<script src="assets/lotto-data.js"></script>
+<script src="assets/site.js"></script>
+<script>
+(function(){
+"use strict";
+var $=function(s){return document.querySelector(s);};
+function row(k,v,c){ return '<tr><td>'+k+(c?'<div class="c">'+c+'</div>':'')+'</td><td>'+v+'</td></tr>'; }
+function sumrow(k,v){ return '<tr class="sum"><td>'+k+'</td><td>'+v+'</td></tr>'; }
+
+var D=LOTTO.draws, L=LOTTO.latest, view=L.no;
+var sel=$('#selDraw');
+D.slice().reverse().forEach(function(d){
+  var o=document.createElement('option'); o.value=d.no; o.textContent=d.no+'회 · '+d.date; sel.appendChild(o);
+});
+function byNo(no){ for(var i=D.length-1;i>=0;i--) if(D[i].no===no) return D[i]; return L; }
+function render(){
+  var d=byNo(view);
+  sel.value=d.no;
+  $('#prevDraw').disabled = d.no<=D[0].no;
+  $('#nextDraw').disabled = d.no>=L.no;
+  $('#heroNo').textContent=d.no+'회 · '+d.date+' 추첨';
+
+  var w=$('#winBalls'); w.innerHTML='';
+  d.n.forEach(function(x){ w.appendChild(LOTTO.ball(x,'md')); });
+  var p=document.createElement('span'); p.className='plus'; p.textContent='+'; w.appendChild(p);
+  w.appendChild(LOTTO.ball(d.b,'md'));
+
+  if(d.w1>0){
+    $('#bigAmt').textContent=LOTTO.comma(d.amt);
+    var rank=LOTTO.amtRank.map[d.no];
+    var vsAvg=Math.round((d.amt/LOTTO.avgAmt-1)*100);
+    $('#bigNote').textContent='1등 '+d.w1+'게임이 나와 1게임당 이 금액을 받았습니다. '+
+      '역대 1등 당첨금 가운데 '+rank+'위입니다. 평균보다 '+
+      (vsAvg>=0? vsAvg+'% 많습니다.' : Math.abs(vsAvg)+'% 적습니다.');
+  } else {
+    $('#bigAmt').textContent='당첨자 없음';
+    $('#bigNote').textContent='이 회차에는 1등 당첨자가 나오지 않았습니다. 당첨금은 다음 회차로 이월되었습니다.';
+  }
+
+  var sum=d.n.reduce(function(a,b){return a+b;},0);
+  var odd=d.n.filter(function(x){return x%2;}).length;
+  var low=d.n.filter(function(x){return x<=22;}).length;
+  var runs=0; for(var k=1;k<6;k++) if(d.n[k]===d.n[k-1]+1) runs++;
+  $('#summary').innerHTML=
+    '<div><b>'+sum+'</b><span>번호 합</span></div>'+
+    '<div><b>'+odd+':'+(6-odd)+'</b><span>홀 · 짝</span></div>'+
+    '<div><b>'+low+':'+(6-low)+'</b><span>저 · 고</span></div>'+
+    '<div><b>'+(runs?runs+'쌍':'없음')+'</b><span>연속 번호</span></div>';
+
+  // 1등 당첨 정보
+  var prev = byNo(d.no-1);
+  var overlap = d.no>1 ? d.n.filter(function(x){ return prev.n.indexOf(x)>-1 || x===prev.b; }).length : 0;
+  var rows='';
+  if(d.w1>0){
+    rows+=row('당첨 게임 수', d.w1.toLocaleString()+'게임','6개 번호를 모두 맞힌 게임');
+    rows+=row('1게임당 당첨금', LOTTO.comma(d.amt),'세금을 떼기 전 금액');
+    rows+=row('1등 당첨금 총액', LOTTO.comma(d.amt*d.w1),'');
+    rows+=row('역대 순위', LOTTO.amtRank.map[d.no]+'위',
+              '1등이 나온 '+LOTTO.amtRank.total+'개 회차 가운데');
+    rows+=row('역대 평균과 비교', LOTTO.comma(LOTTO.avgAmt),'1등 당첨금 평균');
+  } else {
+    rows+=row('당첨 게임 수','0게임','1등 당첨자가 없었습니다');
+  }
+  rows+=row('직전 회차와 겹친 번호', overlap+'개', d.no>1 ? (d.no-1)+'회 번호와 보너스를 합쳐 비교' : '');
+  $('#prizeBox').innerHTML=rows;
+  $('#prizeSub').textContent = d.w1>0
+    ? '당첨금은 회차마다 다릅니다. 판매액과 1등 당첨자 수에 따라 나뉘기 때문입니다.'
+    : '1등이 없으면 당첨금은 다음 회차로 넘어갑니다.';
+
+  var my=LOTTO.saved.get(), C=$('#checkList'); C.innerHTML='';
+  if(!my.length){
+    C.innerHTML='<div class="prose" style="text-align:center;padding:14px 0">저장한 번호가 없습니다. '+
+      '<a href="lotto-gen.html" style="color:var(--gold)">번호 뽑기</a>에서 저장해 두면 회차마다 자동으로 대조합니다.</div>';
+  } else {
+    var shown=0;
+    my.forEach(function(it){
+      /* 저장한 시점보다 뒤에 추첨된 회차만 대조합니다 */
+      var savedAt = it.at || 0;
+      if(d.no <= savedAt) return;
+      shown++;
+      var r=LOTTO.rank(it.n,d.n,d.b);
+      var div=document.createElement('div'); div.className='lrow';
+      var bs=document.createElement('div'); bs.className='balls';
+      it.n.forEach(function(x){
+        var bb=LOTTO.ball(x,'md');
+        if(d.n.indexOf(x)<0&&x!==d.b) bb.style.opacity='.25';
+        bs.appendChild(bb);
+      });
+      div.appendChild(bs);
+      var t=document.createElement('span'); t.className='tag'+(r?' hit':''); t.textContent=r?r+'등':'미당첨';
+      div.appendChild(t); C.appendChild(div);
+    });
+    if(!shown){
+      C.innerHTML='<div class="prose" style="text-align:center;padding:14px 0">'+
+        '저장한 번호는 '+(my[0].at+1)+'회 이후 추첨분과 대조합니다.<br>'+
+        '지금 보고 계신 '+d.no+'회는 저장 전에 이미 추첨된 회차입니다.</div>';
+    }
+  }
+  var R=$('#recentList'); R.innerHTML='';
+  D.slice(-10).reverse().forEach(function(x){
+    var div=document.createElement('div'); div.className='lrow'; div.style.cursor='pointer';
+    var no=document.createElement('span'); no.className='no'; no.textContent=x.no+'회'; div.appendChild(no);
+    var bs=document.createElement('div'); bs.className='balls';
+    x.n.forEach(function(v){ bs.appendChild(LOTTO.ball(v,'md')); });
+    var p2=document.createElement('span'); p2.className='plus'; p2.textContent='+'; bs.appendChild(p2);
+    bs.appendChild(LOTTO.ball(x.b,'md'));
+    div.appendChild(bs);
+    div.onclick=function(){ view=x.no; render(); window.scrollTo({top:0,behavior:'smooth'}); };
+    R.appendChild(div);
+  });
+  U.saveState({no:view});
+}
+sel.onchange=function(){ view=+sel.value; render(); };
+$('#prevDraw').onclick=function(){ view--; render(); };
+$('#nextDraw').onclick=function(){ view++; render(); };
+var st=U.loadState(); if(st.no) view=Number(st.no);
+render();
+
+})();
+</script>
+</body>
+</html>

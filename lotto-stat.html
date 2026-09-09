@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0E1320">
+<title>로또 번호 통계 | 참새방앗간</title>
+<meta name="description" content="번호별 출현 횟수, 마지막으로 나온 뒤 지난 회차, 합계와 구간 분포를 회차 범위별로 확인합니다.">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-section="lotto">
+<div class="wrap">
+  <aside class="side"></aside>
+  <main>
+    <h1 class="page-h">로또 번호 통계</h1>
+    <p class="page-lead">지금까지 나온 번호를 정리했습니다. 다음 회차와는 관련이 없는 지난 기록입니다.</p>
+    <div class="card">
+      <h2>집계 기간</h2>
+      <div class="seg" id="segRange"></div>
+    </div>
+
+    <div class="card">
+      <h2>번호별 나온 횟수</h2>
+      <p class="sub" id="statSub"></p>
+      <div class="barmap" id="heatmap"></div>
+
+    </div>
+
+    <div class="card">
+      <h2>많이 나온 번호</h2>
+      <div class="balls" id="hotChips"></div>
+    </div>
+
+    <div class="card">
+      <h2>오래 안 나온 번호</h2>
+      <p class="sub">숫자는 마지막으로 나온 뒤 지난 회차 수입니다.</p>
+      <div id="coldList"></div>
+    </div>
+
+    <div class="card">
+      <h2>번호 합계 분포</h2>
+      <table class="t"><tbody id="sumDist"></tbody></table>
+    </div>
+
+    <div class="card">
+      <h2>홀짝 구성</h2>
+      <table class="t"><tbody id="oeDist"></tbody></table>
+    </div>
+
+    <div class="ad wide"><span>광고 자리</span></div>
+    <div class="card">
+      <h2>많이 나온 번호는 다음에도 잘 나올까</h2>
+      <div class="prose">
+
+        <p>추첨기 안의 공 45개는 매주 같은 조건에서 섞입니다. 지난주에 7번이 나왔든 안 나왔든, 이번 주에 나올 확률은 언제나 같습니다. 이런 성질을 <b>독립시행</b>이라고 합니다.</p>
+        <p>"이 번호는 30회나 안 나왔으니 이제 나올 때가 됐다"는 생각은 <b>도박사의 오류</b>라고 불리는 유명한 착각입니다. 공에는 균형을 맞추려는 의지가 없습니다.</p>
+        <h3>그러면 출현 횟수 차이는 뭘까</h3>
+        <p>1,200회쯤 추첨했다면 각 번호는 평균 160번 정도 나옵니다. 그런데 실제로는 175번인 번호도, 145번인 번호도 있습니다. 이 차이는 무작위에서 자연스럽게 생기는 흔들림입니다. 동전을 1,000번 던져 앞면이 정확히 500번 나오지 않는 것과 같습니다.</p>
+        <div class="callout"><b>통계는 지난 일의 기록입니다.</b><br>
+        이 페이지의 어떤 숫자도 다음 회차를 알려주지 않습니다. 이 사이트는 당첨 확률을 높여준다고 주장하지 않습니다.</div>
+    
+      </div>
+    </div>
+  </main>
+  <aside class="rail"><div class="ad tall"><span>광고 자리</span></div></aside>
+</div>
+<script src="assets/lotto-data.js"></script>
+<script src="assets/site.js"></script>
+<script>
+(function(){
+"use strict";
+var $=function(s){return document.querySelector(s);};
+function row(k,v,c){ return '<tr><td>'+k+(c?'<div class="c">'+c+'</div>':'')+'</td><td>'+v+'</td></tr>'; }
+function sumrow(k,v){ return '<tr class="sum"><td>'+k+'</td><td>'+v+'</td></tr>'; }
+
+var D=LOTTO.draws, range=100;
+function scope(){ return range==='all'? D : D.slice(-range); }
+function render(){
+  var ds=scope(), i;
+  var cnt=new Array(46).fill(0), last=new Array(46).fill(-1);
+  ds.forEach(function(d,idx){ d.n.forEach(function(x){ cnt[x]++; last[x]=idx; }); });
+  $('#statSub').textContent=ds[0].no+'회부터 '+ds[ds.length-1].no+'회까지 '+ds.length+'회 기준입니다. 막대가 높을수록 자주 나온 번호이고, 막대 색은 그 번호의 공 색입니다.';
+  var mn=Math.min.apply(null,cnt.slice(1)), mx=Math.max.apply(null,cnt.slice(1));
+  var H=$('#heatmap'); H.innerHTML='';
+  var CV={c1:'--y',c2:'--bl',c3:'--r',c4:'--g',c5:'--gr'};
+  for(i=1;i<=45;i++){
+    var t = mx===0 ? 0 : cnt[i]/mx;
+    var col=document.createElement('div'); col.className='bcol';
+    var tr=document.createElement('div'); tr.className='btrack';
+    var f=document.createElement('div'); f.className='bfill';
+    f.style.height=Math.max(4, Math.round(t*100))+'%';
+    f.style.background='var('+CV[LOTTO.color(i)]+')';
+    tr.appendChild(f); col.appendChild(tr);
+    var lb=document.createElement('div'); lb.className='blab';
+    lb.innerHTML='<b>'+i+'</b><span>'+cnt[i]+'회</span>';
+    col.appendChild(lb);
+    col.title=i+'번 '+cnt[i]+'회';
+    H.appendChild(col);
+  }
+  var order=[]; for(i=1;i<=45;i++) order.push([i,cnt[i]]);
+  var hot=order.slice().sort(function(a,b){return b[1]-a[1];}).slice(0,8);
+  var HC=$('#hotChips'); HC.innerHTML='';
+  hot.forEach(function(p){
+    var wrap=document.createElement('div');
+    wrap.style.cssText='display:flex;flex-direction:column;align-items:center;gap:5px';
+    wrap.appendChild(LOTTO.ball(p[0],'lg'));
+    var s=document.createElement('span');
+    s.style.cssText='font-size:11px;color:var(--dim);font-weight:600';
+    s.textContent=p[1]+'회'; wrap.appendChild(s);
+    HC.appendChild(wrap);
+  });
+  var cold=[]; for(i=1;i<=45;i++) cold.push([i, last[i]<0?ds.length:ds.length-1-last[i]]);
+  cold.sort(function(a,b){return b[1]-a[1];});
+  var CL=$('#coldList'); CL.innerHTML='';
+  cold.slice(0,6).forEach(function(p){
+    var div=document.createElement('div'); div.className='lrow';
+    div.appendChild(LOTTO.ball(p[0],'lg'));
+    var s=document.createElement('span');
+    s.style.cssText='margin-left:auto;font-size:13px;color:var(--ink2);font-weight:650';
+    s.textContent=p[1]+'회 동안 안 나옴'; div.appendChild(s);
+    CL.appendChild(div);
+  });
+  var buckets=[[0,90],[91,120],[121,150],[151,180],[181,210],[211,255]], bc=new Array(6).fill(0);
+  ds.forEach(function(d){
+    var s=d.n.reduce(function(a,b){return a+b;},0);
+    for(i=0;i<6;i++) if(s>=buckets[i][0]&&s<=buckets[i][1]){ bc[i]++; break; }
+  });
+  var html='<tr><th>번호 합</th><th>회차 수</th><th>비율</th></tr>';
+  buckets.forEach(function(b,idx){
+    var label = b[0]===0?'90 이하':(b[1]===255?'211 이상':b[0]+'~'+b[1]);
+    html+='<tr><td>'+label+'</td><td>'+bc[idx]+'회</td><td>'+(Math.round(bc[idx]/ds.length*1000)/10)+'%</td></tr>';
+  });
+  $('#sumDist').innerHTML=html;
+  var oe=new Array(7).fill(0);
+  ds.forEach(function(d){ oe[d.n.filter(function(x){return x%2;}).length]++; });
+  var h2='<tr><th>구성</th><th>회차 수</th><th>비율</th></tr>';
+  oe.forEach(function(v,idx){
+    h2+='<tr><td>홀 '+idx+' · 짝 '+(6-idx)+'</td><td>'+v+'회</td><td>'+(Math.round(v/ds.length*1000)/10)+'%</td></tr>';
+  });
+  $('#oeDist').innerHTML=h2;
+}
+var s=$('#segRange');
+[[50,'최근 50회'],[100,'최근 100회'],['all','전체 회차']].forEach(function(p){
+  var b=document.createElement('button');
+  b.className=range===p[0]?'on':''; b.textContent=p[1];
+  b.onclick=function(){
+    range=p[0];
+    [].forEach.call(s.children,function(c,i){ c.classList.toggle('on',[50,100,'all'][i]===range); });
+    render();
+  };
+  s.appendChild(b);
+});
+render();
+
+})();
+</script>
+</body>
+</html>
