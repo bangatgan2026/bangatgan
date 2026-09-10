@@ -20,11 +20,11 @@
     <div class="card">
       <h2>당첨금 입력</h2>
       <div class="field">
-        <label for="prize">당첨금 <span class="hint">세금 떼기 전 금액</span></label>
-        <div class="inbox"><input id="prize" inputmode="numeric" placeholder="예: 20000 (2억)"><span class="unit">만원</span></div>
+        <label for="prize">당첨금 <span class="hint">세금 떼기 전, 당첨증에 적힌 금액 그대로</span></label>
+        <div class="inbox"><input id="prize" inputmode="numeric" placeholder="예: 1791817758"><span class="unit">원</span></div>
         <div class="slidebox">
           <input type="range" id="prizeRange" min="0" max="1000" value="640" aria-label="당첨금 조절">
-          <div class="sticks"><span>5만</span><span>500만</span><span>5천만</span><span>5억</span><span>50억</span></div>
+          <div class="sticks"><span>5만원</span><span>500만</span><span>5천만</span><span>5억</span><span>50억</span></div>
         </div>
       </div>
       <button class="btn" id="go">실수령액 계산</button>
@@ -86,14 +86,15 @@ var $=function(s){return document.querySelector(s);};
 function row(k,v,c){ return '<tr><td>'+k+(c?'<div class="c">'+c+'</div>':'')+'</td><td>'+v+'</td></tr>'; }
 function sumrow(k,v){ return '<tr class="sum"><td>'+k+'</td><td>'+v+'</td></tr>'; }
 U.comma($('#prize'));
+/* 이 화면만 원 단위로 받습니다. 당첨증 금액을 그대로 넣게 하기 위해서입니다. */
+function won(el){ return Number(String(el.value).replace(/[^0-9]/g,'')) || 0; }
 
 function run(quiet){
-  if(quiet){ if(!(U.man($('#prize'))>0)) return; }
+  if(quiet){ if(!(won($('#prize'))>0)) return; }
   else {
     if(!U.need($('#prize'),'당첨금')) return;
-    if(!U.manOk($('#prize'),'당첨금')) return;
   }
-  var p=U.man($('#prize'));
+  var p=won($('#prize'));
   var tax1=0, tax2=0;
   if(p>2000000){
     tax1 = Math.min(p,300000000)*0.22;
@@ -148,16 +149,16 @@ function amt2t(a){
 var rng=$('#prizeRange');
 rng.oninput=function(){
   var a=t2amt(+rng.value);
-  $('#prize').value=(a/10000).toLocaleString();
+  $('#prize').value=a.toLocaleString();
   run(true);
 };
 $('#prize').addEventListener('input', function(){
-  var a=U.man($('#prize'));
+  var a=won($('#prize'));
   if(a>0){ rng.value=amt2t(a); run(true); }
 });
 $('#go').onclick=function(){ run(); };
 var st=U.loadState();
-if(st.prize){ $('#prize').value=(Number(st.prize)/10000).toLocaleString(); rng.value=amt2t(Number(st.prize)); run(true); }
+if(st.prize){ $('#prize').value=Number(st.prize).toLocaleString(); rng.value=amt2t(Number(st.prize)); run(true); }
 else { rng.dispatchEvent(new Event('input')); }
 })();
 </script>

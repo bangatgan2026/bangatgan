@@ -234,7 +234,7 @@ bangatgan/
 - 브라우저 확인: `/opt/pw-browsers/chromium-1194/chrome-linux/chrome`
   (Playwright는 `/home/claude/.npm-global/lib/node_modules/playwright`)
 - 전달 시 `/mnt/user-data/outputs/bangatgan/`에 복사 후 zip
-- 파일명은 `bangatgan-v번호.zip` (현재 v24까지 나감)
+- 파일명은 `bangatgan-v번호.zip` (현재 v25까지 나감)
 - **작업 환경에서 동행복권 서버 접속 불가.** 로또 갱신은 GitHub Actions가 처리
 - 전체 페이지 자동 점검 스크립트를 만들어 매번 오류 0건을 확인할 것
 
@@ -373,3 +373,12 @@ bangatgan/
 **공통**
 - 전 페이지 폭 점검(412/360/320/280) 0건, JS 오류 0건
 - 연봉 5천만 실수령 3,553,723원 유지 확인 (기존 계산기 영향 없음)
+
+### v24 → v25 (당첨금 입력을 원 단위로)
+- **lotto-tax.html만 예외로 원 단위 입력.** 다른 계산기는 만원 단위 그대로
+- 이유: 당첨금은 "1,791,817,758원"처럼 딱 떨어지지 않음. 만원으로 바꾸려면
+  이용자가 나눗셈을 해야 함. 당첨증 금액을 그대로 넣는 것이 맞음
+- 페이지 안에 `won(el)` 함수를 따로 둠. `U.man()`·`U.manOk()`는 이 페이지에서 쓰지 않음
+- `.kpi b`에 `white-space:nowrap` + clamp 글자크기. 30억 같은 큰 금액이 두 줄로 깨졌음.
+  모바일에서 `.kpi`는 2열로 (기존 auto-fit은 좁은 화면에서 1열이 되어 허전했음)
+- 검증: 1,791,817,758원 → 1,233,517,898원 / 3,000,000,000원 → 2,043,000,000원
