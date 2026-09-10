@@ -1,4 +1,5 @@
 :root{
+  color-scheme:dark;
   --bg:#0E1320; --panel:#151C2B; --card:#1A2233; --card2:#212B3E; --edge:#2A3448;
   --ink:#EDF1F8; --ink2:#BFC9DA; --dim:#8492A8;
   --gold:#E3B75B; --gold2:#F0CE7E; --ok:#4ED08A; --warn:#F0A64E;
@@ -6,6 +7,7 @@
   --head-h:60px;
 }
 *{box-sizing:border-box}
+html{color-scheme:dark}
 html,body{margin:0;padding:0;background:var(--bg)}
 body{
   font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,system-ui,"Apple SD Gothic Neo",sans-serif;
@@ -15,14 +17,21 @@ body{
 a{color:inherit}
 button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
 :focus-visible{outline:2.5px solid var(--gold);outline-offset:2px}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media(prefers-reduced-motion:reduce){
+  /* 움직임을 줄이도록 설정한 분에게는 장식 움직임만 늦춥니다.
+     번호를 뽑는 연출처럼 뜻이 있는 움직임까지 끄면 결과를 알 수 없습니다. */
+  .grains circle,.sway{animation:none!important}
+  .sparrow{animation-duration:26s!important}
+  .wing{animation-duration:.5s!important}
+}
 
 /* ===== 상단 ===== */
 .topbar{position:sticky;top:0;z-index:50;background:#0B0F1A;border-bottom:1px solid var(--edge)}
 .topin{max-width:1280px;margin:0 auto;padding:0 24px;height:var(--head-h);display:flex;align-items:center;gap:28px}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;flex:0 0 auto}
 .brand .bird{width:26px;height:26px;border-radius:50%;
-  background:radial-gradient(circle at 34% 28%,#FFE063,#FBC400 46%,#D79B00);
+  background-color:#FBC400;
+  background-image:radial-gradient(circle at 34% 28%,#FFE063,#FBC400 46%,#D79B00);
   box-shadow:inset 0 -3px 5px rgba(0,0,0,.3),inset 0 2px 3px rgba(255,255,255,.5)}
 .brand b{font-size:17px;font-weight:750;letter-spacing:-.03em}
 .brand b em{font-style:normal;color:var(--gold)}
@@ -92,8 +101,8 @@ aside.rail{position:sticky;top:calc(var(--head-h) + 24px)}
   border-radius:16px;padding:24px;margin-bottom:16px;position:relative;overflow:hidden}
 .result .lab{font-size:12.5px;color:var(--dim);font-weight:600}
 .result .big{font-size:38px;font-weight:800;letter-spacing:-.045em;line-height:1.15;margin-top:6px;
-  background:linear-gradient(96deg,#FFF3D4 6%,var(--gold2) 42%,#C99A3C 98%);
-  -webkit-background-clip:text;background-clip:text;color:transparent}
+  color:var(--gold2);text-shadow:0 2px 14px rgba(227,183,91,.18)}
+
 .result .note{font-size:13px;color:var(--ink2);margin-top:10px}
 .kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-top:20px}
 .kpi div{background:rgba(255,255,255,.045);border-radius:11px;padding:12px 10px;text-align:center}
@@ -392,8 +401,8 @@ select{color-scheme:dark}
 .herotext{position:relative;z-index:2;padding:30px 32px 34px;max-width:600px}
 .herotext .lab{font-size:12.5px;color:var(--dim);font-weight:600}
 .herotext .big{font-size:33px;font-weight:800;letter-spacing:-.045em;line-height:1.2;margin-top:8px;
-  background:linear-gradient(96deg,#FFF3D4 6%,var(--gold2) 42%,#C99A3C 98%);
-  -webkit-background-clip:text;background-clip:text;color:transparent}
+  color:var(--gold2);text-shadow:0 2px 14px rgba(227,183,91,.18)}
+
 .herotext .note{font-size:13.5px;color:var(--ink2);margin-top:14px;line-height:1.75;max-width:520px}
 
 /* 참새가 날아와 볍씨를 물고 돌아가는 움직임 */
@@ -437,10 +446,18 @@ select{color-scheme:dark}
 }
 /* 참새가 땅에 앉아 있는 동안에는 날갯짓을 늦춥니다 */
 @media(prefers-reduced-motion:reduce){
-  .sparrow,.bob,.wing,.carry,.sway,.grains circle{animation:none}
-  .carry{opacity:1}
+  .bob{animation:none}
 }
 @media(max-width:900px){
+  /* 좁은 화면에서는 그림 좌우가 잘리므로 참새가 보이는 구간만 오가게 합니다 */
+  @keyframes fly{
+    0%   {transform:translate(430px,206px) scale(1)}
+    22%  {transform:translate(566px,202px) scale(1.15)}
+    30%  {transform:translate(600px,210px) scale(1.15)}
+    52%  {transform:translate(600px,210px) scale(1.15)}
+    62%  {transform:translate(648px,200px) scale(1.15) scaleX(-1)}
+    100% {transform:translate(440px,204px) scale(1) scaleX(-1)}
+  }
   .hero{min-height:0}
   .herotext{padding:24px 20px 26px}
   .herotext .big{font-size:25px}
@@ -765,7 +782,7 @@ select{color-scheme:dark}
 .gobar .gcnt button{flex:1;background:var(--card2);border:1px solid var(--edge);color:var(--dim);
   border-radius:9px;padding:7px 0;font:inherit;font-size:12.5px;font-weight:700;cursor:pointer;min-width:0}
 .gobar .gcnt button.on{background:#241F12;border-color:var(--gold);color:var(--gold)}
-.gobar .gbtn{flex:0 0 auto;background:linear-gradient(180deg,#F0CB72,#E3B75B);color:#221803;
+.gobar .gbtn{flex:0 0 auto;background-color:#E3B75B;background-image:linear-gradient(180deg,#F0CB72,#E3B75B);color:#221803;
   border:none;border-radius:13px;padding:0 22px;height:60px;font:inherit;font-size:16px;font-weight:800;
   cursor:pointer;box-shadow:0 4px 16px -4px rgba(227,183,91,.45);white-space:nowrap}
 .gobar .gbtn:disabled{opacity:.5;cursor:default}
@@ -845,7 +862,7 @@ body.hasgobar .fab{display:flex}
 .tipbox i.i3{border:1.5px solid #2E3950}
 
 /* 토글 스위치: 켜졌을 때 은은한 빛 */
-.sw.on{background:linear-gradient(135deg,#F2D387,#E3B75B 55%,#C79A3E)!important;
+.sw.on{background-color:#E3B75B!important;background-image:linear-gradient(135deg,#F2D387,#E3B75B 55%,#C79A3E)!important;
   box-shadow:0 0 0 1px rgba(227,183,91,.4), 0 0 14px -2px rgba(227,183,91,.55)}
 
 /* 무대 안 뽑기 바는 세로로 정돈 */
@@ -945,7 +962,7 @@ body.hasgobar .fab{display:flex}
 .hlegend{display:flex;align-items:center;gap:9px;margin-top:14px;
   font-size:11.5px;color:var(--dim);justify-content:center}
 .hlegend i{flex:0 0 auto;width:120px;height:9px;border-radius:999px;
-  background:linear-gradient(90deg,rgba(227,183,91,.08),rgba(227,183,91,.92))}
+  background-color:rgba(227,183,91,.5);background-image:linear-gradient(90deg,rgba(227,183,91,.08),rgba(227,183,91,.92))}
 @media(max-width:900px){
   .barmap{grid-template-columns:repeat(7,1fr);gap:6px}
   .hcell{border-radius:10px}
@@ -959,21 +976,21 @@ body.hasgobar .fab{display:flex}
 .slidebox input[type=range]{width:100%;-webkit-appearance:none;appearance:none;
   background:transparent;height:26px;cursor:pointer;display:block}
 .slidebox input[type=range]::-webkit-slider-runnable-track{
-  height:6px;border-radius:999px;background:linear-gradient(90deg,#2A3448,#3A465F)}
+  height:6px;border-radius:999px;background-color:#33405A;background-image:linear-gradient(90deg,#2A3448,#3A465F)}
 .slidebox input[type=range]::-moz-range-track{
-  height:6px;border-radius:999px;background:linear-gradient(90deg,#2A3448,#3A465F)}
+  height:6px;border-radius:999px;background-color:#33405A;background-image:linear-gradient(90deg,#2A3448,#3A465F)}
 .slidebox input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;
   width:24px;height:24px;border-radius:50%;margin-top:-9px;border:none;
-  background:linear-gradient(180deg,#F2D387,#E3B75B);
+  background-color:#E3B75B;background-image:linear-gradient(180deg,#F2D387,#E3B75B);
   box-shadow:0 0 0 1px rgba(0,0,0,.35),0 3px 12px -2px rgba(227,183,91,.6)}
 .slidebox input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;border:none;
-  background:linear-gradient(180deg,#F2D387,#E3B75B);box-shadow:0 3px 12px -2px rgba(227,183,91,.6)}
+  background-color:#E3B75B;background-image:linear-gradient(180deg,#F2D387,#E3B75B);box-shadow:0 3px 12px -2px rgba(227,183,91,.6)}
 .slidebox .sticks{display:flex;justify-content:space-between;margin-top:2px;
   font-size:10.5px;color:var(--dim)}
 .gauge{height:16px;border-radius:999px;background:#3A2A32;overflow:hidden;
   margin:14px auto 8px;max-width:460px;position:relative}
 .gnet{height:100%;border-radius:999px 0 0 999px;
-  background:linear-gradient(90deg,#C9A24E,#F2D387);transition:width .3s ease;position:relative}
+  background-color:#E3B75B;background-image:linear-gradient(90deg,#C9A24E,#F2D387);transition:width .3s ease;position:relative}
 .gnet i{position:absolute;inset:0;border-radius:inherit;
   background:linear-gradient(90deg,transparent,rgba(255,255,255,.28))}
 .glabel{display:flex;justify-content:space-between;max-width:460px;margin:0 auto 4px;
@@ -986,3 +1003,8 @@ body.hasgobar .fab{display:flex}
   max-width:340px;margin:0 auto 16px}
 .emptybox span b{display:inline;font-size:inherit;color:var(--gold)}
 .emptybox .btn{display:inline-block;text-decoration:none;padding:10px 20px}
+/* 큰 금액이 요약 칸에서 두 줄로 깨지지 않도록 */
+.kpi b{font-size:clamp(12.5px,3.6vw,16px);white-space:nowrap;
+  font-variant-numeric:tabular-nums;letter-spacing:-.3px}
+@media(max-width:900px){ .kpi{grid-template-columns:repeat(2,1fr);gap:8px}
+  .kpi div{padding:11px 6px} }
