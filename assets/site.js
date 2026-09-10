@@ -305,6 +305,103 @@ var U = {
     if (first) m.insertBefore(card, first); else m.appendChild(card);
   })();
 
+  /* ===== 날짜 입력 =====
+     달력에서 고르거나, 19960909처럼 여덟 자리를 그대로 칠 수 있습니다.
+     원래의 input[type=date]는 값 보관용으로 숨겨 두고, 기존 계산 코드는 그대로 씁니다. */
+  (function () {
+    var pad = function (n) { return (n < 10 ? "0" : "") + n; };
+    var iso = function (d) { return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()); };
+    var today = new Date();
+    var far = new Date(today.getFullYear() + 30, 11, 31);
+
+    [].forEach.call(document.querySelectorAll('input[type="date"]'), function (dt) {
+      if (!dt.getAttribute("min")) dt.setAttribute("min", "1900-01-01");
+      if (!dt.getAttribute("max")) {
+        dt.setAttribute("max", dt.dataset.max === "today" ? iso(today) : iso(far));
+      }
+
+      var box = dt.parentElement;                 /* .inbox */
+      var wrap = document.createElement("div");
+      wrap.className = "dateln";
+
+      var txt = document.createElement("input");
+      txt.type = "text";
+      txt.className = "datetxt";
+      txt.setAttribute("inputmode", "numeric");
+      txt.setAttribute("placeholder", "1996-09-09");
+      txt.setAttribute("autocomplete", "off");
+
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "datebtn";
+      btn.setAttribute("aria-label", "달력에서 고르기");
+      btn.innerHTML =
+        '<svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.9">' +
+        '<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>';
+
+      box.insertBefore(wrap, dt);
+      wrap.appendChild(txt);
+      wrap.appendChild(btn);
+      dt.classList.add("datehide");
+
+      /* 숫자만 남겨 1996-09-09 꼴로 다듬습니다 */
+      function shape(v) {
+        var n = String(v).replace(/[^0-9]/g, "").slice(0, 8);
+        if (n.length > 6) return n.slice(0, 4) + "-" + n.slice(4, 6) + "-" + n.slice(6);
+        if (n.length > 4) return n.slice(0, 4) + "-" + n.slice(4);
+        return n;
+      }
+      function valid(v) {
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(v)) return false;
+        var a = v.split("-"), y = +a[0], m = +a[1], d = +a[2];
+        if (m < 1 || m > 12 || d < 1 || d > 31) return false;
+        var dd = new Date(y, m - 1, d);
+        return dd.getFullYear() === y && dd.getMonth() === m - 1 && dd.getDate() === d;
+      }
+
+      txt.addEventListener("input", function () {
+        var before = txt.value, pos = txt.selectionStart;
+        txt.value = shape(before);
+        if (pos === before.length) txt.selectionStart = txt.selectionEnd = txt.value.length;
+        if (valid(txt.value)) {
+          dt.value = txt.value;
+          txt.classList.remove("bad");
+        } else {
+          dt.value = "";
+          txt.classList.toggle("bad", txt.value.length === 10);
+        }
+      });
+      txt.addEventListener("blur", function () {
+        if (txt.value && !valid(txt.value)) txt.classList.add("bad");
+      });
+
+      btn.addEventListener("click", function () {
+        if (typeof dt.showPicker === "function") { try { dt.showPicker(); return; } catch (e) {} }
+        dt.classList.remove("datehide");
+        dt.focus();
+        dt.click();
+      });
+
+      dt.addEventListener("change", function () {
+        if (dt.value) { txt.value = dt.value; txt.classList.remove("bad"); }
+        dt.classList.add("datehide");
+      });
+
+      if (dt.value) txt.value = dt.value;
+    });
+
+    /* 직접 칠 수 있다는 것을 모르는 분이 많아 한 줄 안내를 답니다 */
+    var first = document.querySelector('input[type="date"]');
+    if (first) {
+      var card = first.closest(".card");
+      var btn = card && card.querySelector("button.btn");
+      if (card && btn && !card.querySelector(".datetip")) {
+        var tip = h('<div class="tipbox datetip">달력에서 고르거나, <b>19960909</b>처럼 숫자 여덟 자리를 그대로 쳐도 됩니다.</div>');
+        btn.parentNode.insertBefore(tip, btn);
+      }
+    }
+  })();
+
   /* ===== 오류 신고 줄 (도구 페이지 본문 맨 아래) ===== */
   (function () {
     var m = document.querySelector("main");

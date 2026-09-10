@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#0E1320">
 <meta name="color-scheme" content="dark">
 <title>만 나이 계산기 | 참새방앗간</title>
-<meta name="description" content="생년월일과 기준일을 넣으면 만 나이와 연 나이, 세는 나이를 함께 보여줍니다.">
+<meta name="description" content="생년월일만 넣으면 오늘 기준 만 나이와 연 나이, 세는 나이를 함께 보여줍니다.">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="stylesheet" href="assets/style.css">
@@ -17,17 +17,14 @@
   <aside class="side"></aside>
   <main>
     <h1 class="page-h">만 나이 계산기</h1>
-    <p class="page-lead">기준일을 정해서 그날의 나이를 계산합니다. 과거나 미래의 특정 날짜 기준으로도 확인할 수 있습니다.</p>
+    <p class="page-lead">생년월일만 넣으면 오늘 기준으로 만 나이, 연 나이, 세는 나이를 함께 보여줍니다.</p>
 
     <div class="card">
       <h2>날짜 입력</h2>
-      <div class="row2">      <div class="field">
-        <label for="birth">생년월일 </label>
-        <div class="inbox"><input id="birth" type="date" placeholder="" value=""></div>
-      </div>      <div class="field">
-        <label for="base">기준일 <span class="hint">비워두면 오늘</span></label>
-        <div class="inbox"><input id="base" type="date" placeholder="" value=""></div>
-      </div></div>
+      <div class="field">
+        <label for="birth">생년월일</label>
+        <div class="inbox"><input id="birth" type="date" data-max="today" placeholder="" value=""></div>
+      </div>
       <button class="btn" id="go">나이 계산</button>
     </div>
 
@@ -86,11 +83,11 @@ function sumrow(k,v){ return '<tr class="sum"><td>'+k+'</td><td>'+v+'</td></tr>'
 
 function run(){
   if(!U.needDate($('#birth'),'생년월일')) return;
-  var b=$('#birth').value, base=$('#base').value;
+  var b=$('#birth').value;
   if(!b){ $('#out').hidden=true; return; }
-  var bd=new Date(b), now=base? new Date(base) : new Date();
+  var bd=new Date(b), now=new Date();
   now.setHours(0,0,0,0);
-  if(bd>now){ alert('기준일이 생년월일보다 뒤여야 합니다.'); return; }
+  if(bd>now){ alert('생년월일이 오늘보다 뒤일 수는 없습니다.'); return; }
   var age=now.getFullYear()-bd.getFullYear();
   if(now.getMonth()<bd.getMonth()||(now.getMonth()===bd.getMonth()&&now.getDate()<bd.getDate())) age--;
   var yearAge=now.getFullYear()-bd.getFullYear();
@@ -101,7 +98,7 @@ function run(){
   $('#out').hidden=false;
   $('#lab').textContent='만 나이';
   $('#big').textContent=age+'세';
-  $('#note').textContent=(base? base.replace(/-/g,'.')+' 기준' : '오늘 기준')+' · 태어난 지 '+days.toLocaleString()+'일이 지났습니다.';
+  $('#note').textContent='오늘 기준 · 태어난 지 '+days.toLocaleString()+'일이 지났습니다.';
   $('#kpi').innerHTML=
     '<div><b>'+age+'세</b><span>만 나이</span></div>'+
     '<div><b>'+yearAge+'세</b><span>연 나이</span></div>'+
@@ -117,11 +114,11 @@ function run(){
   $('#nextTools').innerHTML=
     '<a href="birthday.html?y='+bd.getFullYear()+'&m='+(bd.getMonth()+1)+'&d='+bd.getDate()+'"><b>생년월일 종합</b><span>띠, 별자리, 학교 연도까지 한 번에</span></a>'+
     '<a href="dday.html"><b>디데이 계산</b><span>중요한 날까지 며칠 남았는지</span></a>';
-  U.saveState({birth:b,base:base});
+  U.saveState({birth:b});
 }
 $('#go').onclick=run;
 var st=U.loadState();
-if(st.birth){ $('#birth').value=st.birth; if(st.base)$('#base').value=st.base; run(); }
+if(st.birth){ $('#birth').value=st.birth; run(); }
 
 })();
 </script>
