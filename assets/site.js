@@ -173,7 +173,15 @@ var U = {
 
   document.body.insertBefore(h(
     '<header class="topbar"><div class="topin">' +
-      '<a class="brand" href="index.html"><span class="bird"></span><b>참새<em>방앗간</em></b></a>' +
+      '<a class="brand" href="index.html">' +
+        '<svg class="bird" viewBox="0 0 26 26" width="26" height="26" aria-hidden="true">' +
+          '<defs><radialGradient id="bgd" cx="34%" cy="28%">' +
+            '<stop offset="0" stop-color="#FFE063"/><stop offset="46%" stop-color="#FBC400"/>' +
+            '<stop offset="100%" stop-color="#D79B00"/></radialGradient></defs>' +
+          '<circle cx="13" cy="13" r="13" fill="url(#bgd)"/>' +
+          '<circle cx="13" cy="13" r="13" fill="none" stroke="rgba(0,0,0,.18)" stroke-width="1"/>' +
+        '</svg>' +
+        '<b>참새<em>방앗간</em></b></a>' +
       '<nav class="gnb" id="gnb">' + gnb + '</nav>' +
       '<button class="menubtn" id="menubtn" aria-label="메뉴 열기">' +
       '<svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>' +
