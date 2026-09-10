@@ -55,10 +55,10 @@ var SECTIONS = [
   },
   {
     id: "lotto", name: "로또", home: "lotto.html",
-    desc: "역대 당첨번호와 번호 뽑기",
+    desc: "역대 당첨번호 조회와 번호 생성기",
     items: [
-      { href: "lotto.html",      name: "당첨번호 조회", desc: "회차별 번호와 등수별 당첨금" },
-      { href: "lotto-gen.html",  name: "번호 뽑기",     desc: "포함·제외 번호를 정해서" },
+      { href: "lotto.html",      name: "역대 로또번호 조회", desc: "회차별 번호와 등수별 당첨금" },
+      { href: "lotto-gen.html",  name: "로또번호 생성기", desc: "조건을 정해서 번호를 뽑습니다" },
       { href: "lotto-stat.html", name: "번호 통계",     desc: "출현 횟수와 미출현 기간" },
       { href: "lotto-my.html",   name: "내 번호",       desc: "저장해 두면 자동으로 대조" },
       { href: "lotto-tax.html",  name: "당첨금 실수령액", desc: "세금 떼고 얼마를 받는지" }
@@ -303,6 +303,28 @@ var U = {
     var card = h('<div class="card"><h2>자주 쓰는 것</h2><div class="toolgrid">' + cards + '</div></div>');
     var first = m.querySelector(".card");
     if (first) m.insertBefore(card, first); else m.appendChild(card);
+  })();
+
+  /* ===== 오류 신고 줄 (도구 페이지 본문 맨 아래) ===== */
+  (function () {
+    var m = document.querySelector("main");
+    if (!m || !item) return;
+    var h1 = document.querySelector("h1");
+    var pageName = h1 ? h1.textContent.trim() : (item.name || "");
+    var subj = encodeURIComponent("[참새방앗간] " + pageName + " — 의견 보내기");
+    var body = encodeURIComponent(
+      "어떤 점이 이상한지, 또는 무엇이 있으면 좋겠는지 편하게 적어 주세요.\n\n" +
+      "페이지: " + pageName + "\n" +
+      "주소: " + location.href + "\n\n" +
+      "내용:\n"
+    );
+    m.appendChild(h(
+      '<div class="report">' +
+        '<span>계산이 이상하거나 정보가 틀렸나요. 이런 기능이 있으면 좋겠다는 의견도 좋습니다. 읽고 반영하겠습니다.</span>' +
+        '<a href="mailto:escort2023@naver.com?subject=' + subj + '&body=' + body + '">의견 보내기</a>' +
+        '<em>escort2023@naver.com</em>' +
+      '</div>'
+    ));
   })();
 
   /* ===== 하단 ===== */

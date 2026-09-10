@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#0E1320">
-<title>로또 당첨번호 조회 | 참새방앗간</title>
+<title>역대 로또번호 조회 | 참새방앗간</title>
 <meta name="description" content="역대 로또 6/45 회차별 당첨번호와 1등부터 5등까지 당첨금, 당첨 게임 수를 확인합니다.">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
@@ -14,7 +14,7 @@
 <div class="wrap">
   <aside class="side"></aside>
   <main>
-    <h1 class="page-h">로또 당첨번호 조회</h1>
+    <h1 class="page-h">역대 로또번호 조회</h1>
     <p class="page-lead">회차를 고르면 그 회차의 당첨번호와 등수별 당첨금을 볼 수 있습니다.</p>
     <div class="result">
       <div class="lab" id="heroNo"></div>
@@ -137,7 +137,7 @@ function render(){
   var my=LOTTO.saved.get(), C=$('#checkList'); C.innerHTML='';
   if(!my.length){
     C.innerHTML='<div class="prose" style="text-align:center;padding:14px 0">저장한 번호가 없습니다. '+
-      '<a href="lotto-gen.html" style="color:var(--gold)">번호 뽑기</a>에서 저장해 두면 회차마다 자동으로 대조합니다.</div>';
+      '<a href="lotto-gen.html" style="color:var(--gold)">로또번호 생성기</a>에서 저장해 두면 회차마다 자동으로 대조합니다.</div>';
   } else {
     var shown=0;
     my.forEach(function(it){
