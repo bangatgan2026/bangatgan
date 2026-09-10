@@ -489,7 +489,10 @@ var U = {
 
     document.getElementById("fabShare").onclick = function () {
       var url = location.href;
-      var title = item.name + " · 참새방앗간";
+      /* 홈·소개처럼 도구가 아닌 화면에는 item이 없습니다. 없으면 문서 제목을 씁니다 */
+      var h1 = document.querySelector("h1");
+      var title = item ? item.name + " · 참새방앗간"
+                : (h1 ? h1.textContent.trim() + " · 참새방앗간" : document.title);
       function fallback() { showShareBox(title, url); }
       try {
         if (navigator.share) {
