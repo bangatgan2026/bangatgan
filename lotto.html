@@ -16,24 +16,30 @@
   <main>
     <h1 class="page-h">역대 로또번호 조회</h1>
     <p class="page-lead">회차를 고르면 그 회차의 당첨번호와 등수별 당첨금을 볼 수 있습니다.</p>
-    <div class="result">
-      <div class="lab" id="heroNo"></div>
-      <div class="balls" id="winBalls" style="margin:16px 0 20px"></div>
-      <div class="lab">1등 당첨금</div>
-      <div class="big" id="bigAmt"></div>
-      <div class="note" id="bigNote"></div>
-      <div class="kpi" id="summary"></div>
+    <div class="drawpick">
+      <button class="arrow" id="prevDraw" aria-label="이전 회차">‹</button>
+      <select id="selDraw" aria-label="회차 선택"></select>
+      <button class="arrow" id="nextDraw" aria-label="다음 회차">›</button>
+    </div>
+
+    <div class="receipt">
+      <div class="rtop">
+        <span class="rno" id="heroNo"></span>
+        <span class="rtag">당첨 결과</span>
+      </div>
+      <div class="balls" id="winBalls"></div>
+      <div class="rcut"></div>
+      <div class="rlab">1등 당첨금 <em>1게임당</em></div>
+      <div class="ramt" id="bigAmt"></div>
+      <div class="rnote" id="bigNote"></div>
+      <div class="rcut"></div>
+      <div class="rchips" id="summary"></div>
     </div>
 
     <div class="card">
       <h2>1등 당첨 정보</h2>
       <p class="sub" id="prizeSub"></p>
       <table class="t"><tbody id="prizeBox"></tbody></table>
-      <div class="drawnav">
-        <button class="arrow" id="prevDraw" aria-label="이전 회차">‹</button>
-        <select id="selDraw" aria-label="회차 선택"></select>
-        <button class="arrow" id="nextDraw" aria-label="다음 회차">›</button>
-      </div>
     </div>
 
     <div class="card">
@@ -109,10 +115,10 @@ function render(){
   var low=d.n.filter(function(x){return x<=22;}).length;
   var runs=0; for(var k=1;k<6;k++) if(d.n[k]===d.n[k-1]+1) runs++;
   $('#summary').innerHTML=
-    '<div><b>'+sum+'</b><span>번호 합</span></div>'+
-    '<div><b>'+odd+':'+(6-odd)+'</b><span>홀 · 짝</span></div>'+
-    '<div><b>'+low+':'+(6-low)+'</b><span>저 · 고</span></div>'+
-    '<div><b>'+(runs?runs+'쌍':'없음')+'</b><span>연속 번호</span></div>';
+    '<div><span>번호 합</span><b>'+sum+'</b></div>'+
+    '<div><span>홀·짝</span><b>'+odd+':'+(6-odd)+'</b></div>'+
+    '<div><span>저·고</span><b>'+low+':'+(6-low)+'</b></div>'+
+    '<div><span>연속</span><b>'+(runs?runs+'쌍':'없음')+'</b></div>';
 
   // 1등 당첨 정보
   var prev = byNo(d.no-1);

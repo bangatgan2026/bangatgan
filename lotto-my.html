@@ -17,19 +17,24 @@
     <h1 class="page-h">내 번호</h1>
     <p class="page-lead">저장한 번호는 이 기기 안에만 보관됩니다. 서버로 전송되지 않습니다.</p>
     <div class="card">
-      <h2>번호 직접 입력</h2>
-      <p class="sub">여섯 개를 고르고 저장하면 회차마다 자동으로 대조합니다.</p>
-      <div class="grid45" id="gridManual"></div>
-      <div style="display:flex;gap:8px;margin-top:14px">
-        <button class="btn ghost sm" style="flex:1" id="btnClear">선택 지우기</button>
-        <button class="btn sm" style="flex:1" id="btnSave">저장</button>
-      </div>
-    </div>
-
-    <div class="card">
       <h2>저장한 번호</h2>
       <p class="sub" id="mySub"></p>
       <div id="myList"></div>
+    </div>
+
+    <div class="card">
+      <div class="genrow" id="manTog">
+        <h2>번호 직접 넣기</h2>
+        <span class="protog"><span class="sw" id="manSw"></span></span>
+      </div>
+      <div class="acc" id="manAcc"><div class="inner">
+        <div class="tipbox" style="margin-top:2px;margin-bottom:14px">편의점에서 산 번호나 직접 고른 번호를 넣어 두면, 추첨된 뒤 자동으로 대조합니다. 여섯 개를 고르고 저장을 누르세요.</div>
+        <div class="grid45" id="gridManual"></div>
+        <div style="display:flex;gap:8px;margin-top:14px">
+          <button class="btn ghost sm" style="flex:1" id="btnClear">선택 지우기</button>
+          <button class="btn sm" style="flex:1" id="btnSave">저장</button>
+        </div>
+      </div></div>
     </div>
 
     <div class="card">
@@ -92,7 +97,12 @@ function renderList(){
   $('#mySub').textContent='저장한 뒤에 추첨된 회차와 대조합니다. 아직 추첨 전이면 대기로 표시됩니다.';
   box.innerHTML='';
   if(!my.length){
-    box.innerHTML='<div class="prose" style="text-align:center;padding:16px 0">저장한 번호가 없습니다.</div>';
+    box.innerHTML='<div class="emptybox">'+
+      '<b>아직 저장한 번호가 없습니다</b>'+
+      '<span>편의점에서 산 번호가 있으면 아래 <b>번호 직접 넣기</b>를 열어 넣어 두세요. '+
+      '추첨이 끝나면 몇 등인지 자동으로 알려 드립니다.</span>'+
+      '<a class="btn sm" href="lotto-gen.html">로또번호 생성기에서 뽑기</a>'+
+      '</div>';
     return;
   }
   my.forEach(function(it,idx){
@@ -128,6 +138,23 @@ $('#btnWipe').onclick=function(){
 };
 renderGrid(); renderList();
 
+
+/* 번호 직접 넣기 — 접었다 펼칩니다 */
+(function(){
+  var t=document.getElementById('manTog'), sw=document.getElementById('manSw'),
+      ac=document.getElementById('manAcc'), open=false;
+  if(!t) return;
+  t.onclick=function(){
+    open=!open;
+    sw.classList.toggle('on',open);
+    ac.classList.toggle('open',open);
+    if(open) setTimeout(function(){
+      var r=ac.getBoundingClientRect();
+      if(r.top>window.innerHeight*0.45)
+        window.scrollTo({top:window.scrollY+r.top-88, behavior:'smooth'});
+    },200);
+  };
+})();
 })();
 </script>
 </body>

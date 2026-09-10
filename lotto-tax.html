@@ -22,18 +22,21 @@
       <div class="field">
         <label for="prize">당첨금 <span class="hint">세금 떼기 전 금액</span></label>
         <div class="inbox"><input id="prize" inputmode="numeric" placeholder="예: 20000 (2억)"><span class="unit">만원</span></div>
-        <div class="callout" style="margin:12px 0 0">
-          <b>4등 5만원과 5등 5천원은 세금이 없습니다.</b><br>
-          200만원 이하라 그대로 받습니다. 1등부터 3등까지는 회차마다 당첨금이 다르니 실제 받으신 금액을 넣어 확인하세요.
+        <div class="slidebox">
+          <input type="range" id="prizeRange" min="0" max="1000" value="640" aria-label="당첨금 조절">
+          <div class="sticks"><span>5만</span><span>500만</span><span>5천만</span><span>5억</span><span>50억</span></div>
         </div>
       </div>
       <button class="btn" id="go">실수령액 계산</button>
+      <div class="tipbox" style="margin-top:14px"><b style="color:var(--gold)">4등 5만원과 5등 5천원은 세금이 없습니다.</b><br>200만원 이하는 그대로 받습니다. 1등부터 3등까지는 회차마다 당첨금이 다르니 실제 받으신 금액을 넣어 확인하세요.</div>
     </div>
 
     <div id="out" hidden>
       <div class="result">
         <div class="lab">실제로 받는 금액</div>
         <div class="big" id="big"></div>
+        <div class="gauge"><div class="gnet" id="gNet"><i></i></div></div>
+        <div class="glabel"><span class="ln">실수령 <b id="gNetP">0%</b></span><span class="lt"><b id="gTaxP">0%</b> 세금</span></div>
         <div class="note" id="note"></div>
         <div class="kpi" id="kpi"></div>
       </div>
@@ -84,9 +87,12 @@ function row(k,v,c){ return '<tr><td>'+k+(c?'<div class="c">'+c+'</div>':'')+'</
 function sumrow(k,v){ return '<tr class="sum"><td>'+k+'</td><td>'+v+'</td></tr>'; }
 U.comma($('#prize'));
 
-function run(){
-  if(!U.need($('#prize'),'당첨금')) return;
-  if(!U.manOk($('#prize'),'당첨금')) return;
+function run(quiet){
+  if(quiet){ if(!(U.man($('#prize'))>0)) return; }
+  else {
+    if(!U.need($('#prize'),'당첨금')) return;
+    if(!U.manOk($('#prize'),'당첨금')) return;
+  }
   var p=U.man($('#prize'));
   var tax1=0, tax2=0;
   if(p>2000000){
@@ -106,6 +112,10 @@ function run(){
     '<div><b>'+U.won(tax)+'</b><span>세금</span></div>'+
     '<div><b>'+(Math.round((p?tax/p:0)*1000)/10)+'%</b><span>실효 세율</span></div>'+
     '<div><b>'+U.won(net)+'</b><span>실수령액</span></div>';
+  var netP = p>0 ? net/p*100 : 100;
+  $('#gNet').style.width=netP.toFixed(1)+'%';
+  $('#gNetP').textContent=Math.round(netP*10)/10+'%';
+  $('#gTaxP').textContent=Math.round((100-netP)*10)/10+'%';
   $('#tsub').textContent='3억까지는 22%, 3억을 넘는 부분에만 33%가 적용됩니다.';
   var html='';
   if(p<=2000000){
@@ -123,9 +133,32 @@ function run(){
     '<a href="guide-claim.html"><b>당첨금 받는 방법</b><span>어디서 어떻게 받는지</span></a>';
   U.saveState({prize:p});
 }
-$('#go').onclick=run;
+/* 슬라이더 — 금액 폭이 넓어 로그 눈금을 씁니다 */
+var RMIN=50000, RMAX=5000000000;
+var lgMin=Math.log(RMIN), lgMax=Math.log(RMAX);
+function t2amt(t){
+  var v=Math.exp(lgMin+(t/1000)*(lgMax-lgMin));
+  var unit = v<1000000?10000 : v<100000000?100000 : 1000000;
+  return Math.max(RMIN, Math.round(v/unit)*unit);
+}
+function amt2t(a){
+  a=Math.min(RMAX,Math.max(RMIN,a));
+  return Math.round((Math.log(a)-lgMin)/(lgMax-lgMin)*1000);
+}
+var rng=$('#prizeRange');
+rng.oninput=function(){
+  var a=t2amt(+rng.value);
+  $('#prize').value=(a/10000).toLocaleString();
+  run(true);
+};
+$('#prize').addEventListener('input', function(){
+  var a=U.man($('#prize'));
+  if(a>0){ rng.value=amt2t(a); run(true); }
+});
+$('#go').onclick=function(){ run(); };
 var st=U.loadState();
-if(st.prize){ $('#prize').value=(Number(st.prize)/10000).toLocaleString(); run(); }
+if(st.prize){ $('#prize').value=(Number(st.prize)/10000).toLocaleString(); rng.value=amt2t(Number(st.prize)); run(true); }
+else { rng.dispatchEvent(new Event('input')); }
 })();
 </script>
 </body>

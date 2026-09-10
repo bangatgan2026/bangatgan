@@ -25,6 +25,12 @@
       <h2>번호별 나온 횟수</h2>
       <p class="sub" id="statSub"></p>
       <div class="barmap" id="heatmap"></div>
+      <div class="hlegend">
+        <span>적게 나옴</span>
+        <i></i>
+        <span>자주 나옴</span>
+      </div>
+      <div class="tipbox">숫자 아래 작은 수는 그 번호가 나온 횟수입니다. 색이 진하다고 다음에 더 잘 나오는 것은 아닙니다.</div>
 
     </div>
 
@@ -81,23 +87,20 @@ function render(){
   var ds=scope(), i;
   var cnt=new Array(46).fill(0), last=new Array(46).fill(-1);
   ds.forEach(function(d,idx){ d.n.forEach(function(x){ cnt[x]++; last[x]=idx; }); });
-  $('#statSub').textContent=ds[0].no+'회부터 '+ds[ds.length-1].no+'회까지 '+ds.length+'회 기준입니다. 막대가 높을수록 자주 나온 번호이고, 막대 색은 그 번호의 공 색입니다.';
+  $('#statSub').textContent=ds[0].no+'회부터 '+ds[ds.length-1].no+'회까지 '+ds.length+'회 기준입니다. 색이 진할수록 자주 나온 번호입니다.';
   var mn=Math.min.apply(null,cnt.slice(1)), mx=Math.max.apply(null,cnt.slice(1));
   var H=$('#heatmap'); H.innerHTML='';
-  var CV={c1:'--y',c2:'--bl',c3:'--r',c4:'--g',c5:'--gr'};
+  var span = (mx-mn)||1;
   for(i=1;i<=45;i++){
-    var t = mx===0 ? 0 : cnt[i]/mx;
-    var col=document.createElement('div'); col.className='bcol';
-    var tr=document.createElement('div'); tr.className='btrack';
-    var f=document.createElement('div'); f.className='bfill';
-    f.style.height=Math.max(4, Math.round(t*100))+'%';
-    f.style.background='var('+CV[LOTTO.color(i)]+')';
-    tr.appendChild(f); col.appendChild(tr);
-    var lb=document.createElement('div'); lb.className='blab';
-    lb.innerHTML='<b>'+i+'</b><span>'+cnt[i]+'회</span>';
-    col.appendChild(lb);
-    col.title=i+'번 '+cnt[i]+'회';
-    H.appendChild(col);
+    /* 가장 적게 나온 번호를 0, 가장 많이 나온 번호를 1로 두고 색 농도를 정합니다 */
+    var t = (cnt[i]-mn)/span;
+    var cell=document.createElement('div'); cell.className='hcell';
+    cell.style.background='rgba(227,183,91,'+(0.06+t*0.86).toFixed(3)+')';
+    cell.style.borderColor='rgba(227,183,91,'+(0.14+t*0.5).toFixed(3)+')';
+    if(t>0.55){ cell.classList.add('dark'); }
+    cell.innerHTML='<b>'+i+'</b><span>'+cnt[i]+'</span>';
+    cell.title=i+'번 '+cnt[i]+'회';
+    H.appendChild(cell);
   }
   var order=[]; for(i=1;i<=45;i++) order.push([i,cnt[i]]);
   var hot=order.slice().sort(function(a,b){return b[1]-a[1];}).slice(0,8);

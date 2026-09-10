@@ -879,3 +879,110 @@ body.hasgobar .fab{display:flex}
 .genrow#proTog h2{margin:0}
 .genrow#proTog b{color:var(--gold);font-weight:750}
 .acc.open .inner{padding-top:16px}
+
+/* ===== 역대 로또번호 조회 — 회차 선택 + 영수증 카드 ===== */
+.drawpick{display:flex;align-items:center;gap:8px;margin:0 0 18px;
+  background:var(--card);border:1px solid var(--edge);border-radius:14px;padding:8px}
+.drawpick .arrow{flex:0 0 auto;width:44px;height:44px;border-radius:11px;
+  background:var(--card2);border:1px solid var(--edge);color:var(--ink2);
+  font-size:22px;line-height:1;cursor:pointer;font-family:inherit}
+.drawpick .arrow:disabled{opacity:.32;cursor:default}
+.drawpick .arrow:not(:disabled):hover{border-color:var(--gold);color:var(--gold)}
+.drawpick .dsel{flex:1 1 auto;min-width:0}
+.drawpick .dselbtn{width:100%;height:44px;font-size:15px;font-weight:700}
+
+/* 영수증(복권 슬립) 카드 */
+.receipt{background:#F6F4ED;border-radius:16px;padding:22px 20px 24px;margin:0 0 18px;
+  color:#1B2030;text-align:center;position:relative;
+  box-shadow:0 14px 40px -18px rgba(0,0,0,.75)}
+.receipt::before,.receipt::after{content:"";position:absolute;left:0;right:0;height:10px;
+  background-image:radial-gradient(circle at 6px -2px,transparent 6px,#F6F4ED 6.5px);
+  background-size:12px 10px}
+.receipt::before{top:-9px;transform:rotate(180deg)}
+.receipt::after{bottom:-9px}
+.receipt .rtop{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:16px}
+.receipt .rno{font-size:14px;font-weight:800;color:#2B3245;letter-spacing:-.2px}
+.receipt .rtag{font-size:11px;font-weight:800;color:#7A8296;
+  border:1px solid #CFCABB;border-radius:999px;padding:3px 10px;white-space:nowrap}
+.receipt .balls{justify-content:center;margin:0 0 18px}
+.receipt .plus{color:#9AA0AE}
+.receipt .rcut{height:1px;margin:16px 0;
+  background-image:linear-gradient(90deg,#B9B3A4 42%,transparent 0);
+  background-size:8px 1px;background-repeat:repeat-x}
+.receipt .rlab{font-size:12.5px;font-weight:700;color:#6B7387;letter-spacing:.2px}
+.receipt .rlab em{font-style:normal;color:#9AA0AE;font-weight:600;margin-left:4px}
+.receipt .ramt{font-size:clamp(26px,7.6vw,42px);font-weight:850;color:#111726;
+  letter-spacing:-1.4px;line-height:1.15;margin:6px 0 0;
+  font-variant-numeric:tabular-nums;word-break:keep-all}
+.receipt .rnote{font-size:12.5px;color:#6B7387;line-height:1.7;margin-top:10px;
+  max-width:420px;margin-left:auto;margin-right:auto}
+.receipt .rchips{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.receipt .rchips div{background:#EBE8DE;border-radius:11px;padding:9px 4px;min-width:0}
+.receipt .rchips span{display:block;font-size:10.5px;color:#7A8296;font-weight:700;margin-bottom:3px}
+.receipt .rchips b{display:block;font-size:15px;color:#1B2030;font-weight:800;
+  font-variant-numeric:tabular-nums}
+@media(max-width:900px){
+  .receipt{padding:18px 15px 20px}
+  .receipt .rchips{gap:6px}
+  .receipt .rchips div{padding:8px 2px}
+  .receipt .rchips b{font-size:13.5px}
+  .receipt .rchips span{font-size:9.8px}
+  .drawpick .arrow{width:40px;height:40px;font-size:20px}
+  .drawpick .dselbtn{height:40px;font-size:14px}
+}
+
+/* ===== 번호 통계 히트맵 ===== */
+.barmap{grid-template-columns:repeat(9,1fr);gap:7px}
+.hcell{aspect-ratio:1/1;border-radius:12px;border:1px solid;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;
+  min-width:0;transition:transform .12s}
+.hcell b{font-size:15px;font-weight:800;color:#C9D2E2;line-height:1;
+  font-variant-numeric:tabular-nums}
+.hcell span{font-size:10px;color:#8590A6;font-weight:600;line-height:1}
+.hcell.dark b{color:#1A1206}
+.hcell.dark span{color:#5A4A22}
+.hcell:hover{transform:scale(1.07)}
+.hlegend{display:flex;align-items:center;gap:9px;margin-top:14px;
+  font-size:11.5px;color:var(--dim);justify-content:center}
+.hlegend i{flex:0 0 auto;width:120px;height:9px;border-radius:999px;
+  background:linear-gradient(90deg,rgba(227,183,91,.08),rgba(227,183,91,.92))}
+@media(max-width:900px){
+  .barmap{grid-template-columns:repeat(7,1fr);gap:6px}
+  .hcell{border-radius:10px}
+  .hcell b{font-size:13.5px} .hcell span{font-size:9px}
+  .hlegend i{width:90px}
+}
+@media(max-width:360px){ .barmap{gap:5px} .hcell b{font-size:12.5px} }
+
+/* ===== 당첨금 슬라이더 + 게이지 ===== */
+.slidebox{margin-top:14px}
+.slidebox input[type=range]{width:100%;-webkit-appearance:none;appearance:none;
+  background:transparent;height:26px;cursor:pointer;display:block}
+.slidebox input[type=range]::-webkit-slider-runnable-track{
+  height:6px;border-radius:999px;background:linear-gradient(90deg,#2A3448,#3A465F)}
+.slidebox input[type=range]::-moz-range-track{
+  height:6px;border-radius:999px;background:linear-gradient(90deg,#2A3448,#3A465F)}
+.slidebox input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;
+  width:24px;height:24px;border-radius:50%;margin-top:-9px;border:none;
+  background:linear-gradient(180deg,#F2D387,#E3B75B);
+  box-shadow:0 0 0 1px rgba(0,0,0,.35),0 3px 12px -2px rgba(227,183,91,.6)}
+.slidebox input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;border:none;
+  background:linear-gradient(180deg,#F2D387,#E3B75B);box-shadow:0 3px 12px -2px rgba(227,183,91,.6)}
+.slidebox .sticks{display:flex;justify-content:space-between;margin-top:2px;
+  font-size:10.5px;color:var(--dim)}
+.gauge{height:16px;border-radius:999px;background:#3A2A32;overflow:hidden;
+  margin:14px auto 8px;max-width:460px;position:relative}
+.gnet{height:100%;border-radius:999px 0 0 999px;
+  background:linear-gradient(90deg,#C9A24E,#F2D387);transition:width .3s ease;position:relative}
+.gnet i{position:absolute;inset:0;border-radius:inherit;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.28))}
+.glabel{display:flex;justify-content:space-between;max-width:460px;margin:0 auto 4px;
+  font-size:12px;color:var(--dim)}
+.glabel b{font-weight:800;font-variant-numeric:tabular-nums}
+.glabel .ln b{color:var(--gold)} .glabel .lt b{color:#D98B9E}
+.emptybox{text-align:center;padding:22px 10px 6px}
+.emptybox b{display:block;font-size:15px;color:var(--ink2);font-weight:750;margin-bottom:8px}
+.emptybox span{display:block;font-size:12.5px;color:var(--dim);line-height:1.8;
+  max-width:340px;margin:0 auto 16px}
+.emptybox span b{display:inline;font-size:inherit;color:var(--gold)}
+.emptybox .btn{display:inline-block;text-decoration:none;padding:10px 20px}
