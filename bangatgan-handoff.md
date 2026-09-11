@@ -241,7 +241,7 @@ bangatgan/
 - 브라우저 확인: `/opt/pw-browsers/chromium-1194/chrome-linux/chrome`
   (Playwright는 `/home/claude/.npm-global/lib/node_modules/playwright`)
 - 전달 시 `/mnt/user-data/outputs/bangatgan/`에 복사 후 zip
-- 파일명은 `bangatgan-v번호.zip` (현재 v35까지 나감)
+- 파일명은 `bangatgan-v번호.zip` (현재 v36까지 나감)
 - **작업 환경에서 동행복권 서버 접속 불가.** 로또 갱신은 GitHub Actions가 처리
 - 전체 페이지 자동 점검 스크립트를 만들어 매번 오류 0건을 확인할 것
 
@@ -571,3 +571,11 @@ bangatgan/
   4. `info.html`과 해당 분류 페이지(`info-money.html` 등) 목록에 카드 추가 — **최신 글이 맨 위로**
   5. `sitemap.xml`에 주소 추가
 - 계절을 타는 주제는 시기를 보고 쓸 것. 9월이면 연말정산 준비, 10월이면 이사철 같은 식
+
+### v36 (네이버 새 주소 소유확인)
+- 네이버 서치어드바이저에 `https://bangatgan.kr`를 추가하니 **새 확인 파일**을 요구했음
+  (어제 vercel.app용으로 올린 `naver…html`과 파일명이 다름)
+- 파일을 또 받아 올리는 대신 **HTML 태그 방식**을 씀. 55개 페이지 `<head>`에 삽입:
+  `<meta name="naver-site-verification" content="7ea0de7682fd50f2771c43ebd5a723369427b225" />`
+- 구글은 기존 확인 파일이 새 주소에도 그대로 있어 **자동으로 통과**됨
+- 구글 사이트맵 제출 완료. 네이버는 소유확인 후 사이트맵 제출 필요
