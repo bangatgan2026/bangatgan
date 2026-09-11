@@ -8,6 +8,7 @@
 
 **마지막 세율 점검일: 2026년 9월 10일**
 **다음 점검 예정일: 2027년 1월**
+**도메인 만료일: 2027년 9월 11일** (2027년 8월에 연장 안내할 것)
 
 세율·요율·제도는 주로 **1월 1일**과 **7월 1일**에 바뀝니다.
 형은 이 일정을 기억하지 못합니다. **Claude가 먼저 알려야 합니다.**
@@ -67,7 +68,8 @@ Claude가 판단해서 끝까지 진행한 뒤 결과만 보고합니다.
 
 ## 0. 지금 상태 요약 — 배포까지 끝났습니다
 
-**사이트 주소: https://bangatgan.vercel.app**
+**사이트 주소: https://bangatgan.kr** (2026-09-11 연결)
+예전 주소 https://bangatgan.vercel.app 도 계속 열립니다
 
 이미 인터넷에 올라가 있고 누구나 접속할 수 있습니다.
 아래 항목은 **전부 완료된 것**이므로 다시 하지 마세요.
@@ -82,7 +84,8 @@ Claude가 판단해서 끝까지 진행한 뒤 결과만 보고합니다.
 | sitemap.xml, robots.txt | 완료 |
 | 구글 서치 콘솔 등록 + 사이트맵 제출 | 완료 |
 | 네이버 서치어드바이저 등록 + 사이트맵 + 수집요청 | 완료 |
-| 정보나누기 글 13편 (FAQ·날짜·구조화 데이터 포함) | 완료 |
+| 정보나누기 글 14편 (FAQ·날짜·구조화 데이터 포함) | 완료 |
+| 도메인 구입·연결 | 완료 — bangatgan.kr |
 
 ---
 
@@ -111,6 +114,10 @@ Claude가 판단해서 끝까지 진행한 뒤 결과만 보고합니다.
 - 유튜브 **잡학다식의 지식창고** (youtube.com/@JapHakDaSik777) 구독자 841명
 - 사이트 문의 이메일: escort2023@naver.com
 - GitHub 계정: bangatgan2026 / Vercel 팀: bangatgan
+- **도메인: bangatgan.kr** (가비아, 2026-09-11 ~ **2027-09-11**, 연 21,000원)
+  - 가비아 계정 이메일은 escort2023@naver.com 으로 바꿔 두었음. 연장 안내가 이리로 옴
+  - Vercel 연결값: A 레코드 / 호스트 @ / 216.198.79.1
+  - **2027년 8월에 연장 안내를 먼저 할 것.** 만료되면 사이트가 열리지 않음
 
 ---
 
@@ -141,10 +148,10 @@ Claude가 판단해서 끝까지 진행한 뒤 결과만 보고합니다.
 | 날짜계산기 | date.html | birthday(생년월일 종합), age(만 나이), dday(디데이), datecalc(날짜 더하기빼기), baby(아기 100일) |
 | 건강계산기 | health.html | bmi, bmr(기초대사량), calorie(하루 필요 칼로리), bp(혈압), walk(걷기 칼로리) |
 | 로또 | lotto.html | lotto(당첨번호 조회), lotto-gen(번호 뽑기), lotto-stat(번호 통계), lotto-my(내 번호), lotto-tax(당첨금 실수령액) |
-| 정보나누기 | info.html | 분류 4개(info-money, info-estate, info-life, info-lotto) + 글 13편 |
+| 정보나누기 | info.html | 분류 4개(info-money, info-estate, info-life, info-lotto) + 글 14편 |
 
-### 정보나누기 글 13편
-- 금융: info-insurance, info-loan, info-jobless, info-yearend
+### 정보나누기 글 14편
+- 금융: info-insurance, info-loan, info-jobless, info-yearend, info-yearend-plan
 - 부동산: info-buyhome, info-dsr, info-jeonse
 - 생활: info-age, info-pension
 - 로또: guide-odds, guide-prize, guide-stats, guide-claim
@@ -234,7 +241,7 @@ bangatgan/
 - 브라우저 확인: `/opt/pw-browsers/chromium-1194/chrome-linux/chrome`
   (Playwright는 `/home/claude/.npm-global/lib/node_modules/playwright`)
 - 전달 시 `/mnt/user-data/outputs/bangatgan/`에 복사 후 zip
-- 파일명은 `bangatgan-v번호.zip` (현재 v33까지 나감)
+- 파일명은 `bangatgan-v번호.zip` (현재 v35까지 나감)
 - **작업 환경에서 동행복권 서버 접속 불가.** 로또 갱신은 GitHub Actions가 처리
 - 전체 페이지 자동 점검 스크립트를 만들어 매번 오류 0건을 확인할 것
 
@@ -540,3 +547,27 @@ bangatgan/
 
 **앞으로 "어둡게 보인다"는 신고가 오면 브라우저의 어두운 모드 설정부터 확인할 것.**
 사이트 코드 문제가 아닐 때가 많음
+
+### v34 (도메인 연결)
+- **bangatgan.kr** 구입(가비아, 16,500원) 후 Vercel에 연결
+  - 가비아 DNS 관리 > 레코드 수정 > A / @ / 216.198.79.1 / 3600
+  - `.com`은 이미 등록되어 있었음. 국내 이용자만 오는 사이트라 `.kr`로 감
+  - `.shop`·`.xyz` 같은 저가 확장자는 첫해만 싸고 갱신비가 비싸며, 구글 신뢰도도 낮아 피함
+- `sitemap.xml`(54개 주소)과 `robots.txt`를 새 주소로 교체
+- **남은 일: 구글 서치 콘솔·네이버 서치어드바이저에 새 주소로 다시 등록.**
+  기존 vercel.app 등록은 그대로 두어도 되지만, 새 주소를 주력으로 삼아야 함
+
+### v35 (글 한 편 추가 — 연말정산 시기 전략)
+- **info-yearend-plan.html** "연말정산은 12월에 끝납니다" (2026-09-11 작성)
+  - 기존 `info-yearend.html`은 *놓치기 쉬운 공제 항목*, 새 글은 *9월~12월에 할 일*. 주제가 겹치지 않음
+  - 9~10월 카드 사용액 점검 → 10월 말 홈택스 미리보기 → 11~12월 연금저축 → 12/31 마감 → 1월 간소화
+  - 검색으로 확인한 값: 연금저축 단독 600만, IRP 합산 900만,
+    총급여 5,500만 이하 16.5%(최대 148.5만원) / 초과 13.2%(118.8만원),
+    홈택스 미리보기는 매년 10월 말 개시, 간소화는 1월 15일 무렵
+- **새 글을 추가할 때 손댈 곳 네 군데** (하나라도 빠지면 목록·아이콘·의견줄이 안 붙음)
+  1. `글파일.html` 새로 만들기 (FAQ 3~4개 + JSON-LD + 작성일 필수)
+  2. `assets/site.js`의 **items 배열**에 한 줄 — 이게 있어야 의견 보내기 줄과 아이콘이 붙음
+  3. `assets/site.js`의 **아이콘 목록**에 SVG path 한 줄
+  4. `info.html`과 해당 분류 페이지(`info-money.html` 등) 목록에 카드 추가 — **최신 글이 맨 위로**
+  5. `sitemap.xml`에 주소 추가
+- 계절을 타는 주제는 시기를 보고 쓸 것. 9월이면 연말정산 준비, 10월이면 이사철 같은 식

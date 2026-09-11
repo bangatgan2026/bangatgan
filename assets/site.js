@@ -75,6 +75,7 @@ var SECTIONS = [
       { href: "info-lotto.html",  name: "로또",   desc: "확률, 당첨금과 세금, 수령 방법" }
     ],
     items: [
+      { g:"금융", d:"2026-09-11", href:"info-yearend-plan.html", name:"연말정산은 12월에 끝납니다", desc:"9월부터 12월까지 할 일" },
       { g:"금융", d:"2026-09-08", href:"info-insurance.html", name:"4대보험 요율과 계산 방법", desc:"누가 얼마씩 내는지" },
       { g:"금융", d:"2026-09-08", href:"info-loan.html",      name:"대출 갚는 방식, 뭐가 유리할까", desc:"원리금균등과 원금균등" },
       { g:"금융", d:"2026-09-08", href:"info-jobless.html",   name:"실업급여 받는 조건과 기간", desc:"누가 얼마나 받는지" },
@@ -766,6 +767,7 @@ U.needDate = function(el, name){
     "info-insurance.html":'<path d="M12 3l8 3v6c0 5-3.4 8-8 9-4.6-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/>',
     "info-loan.html":'<path d="M3 9l9-6 9 6M5 9v11h14V9"/><path d="M9 20v-6h6v6"/>',
     "info-jobless.html":'<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2"/>',
+    "info-yearend-plan.html":'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M9 15l2 2 4-4"/>',
     "info-yearend.html":'<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h4"/>',
     "info-buyhome.html":'<path d="M4 10l8-6 8 6v10H4z"/><path d="M12 12v5M10 14h4"/>',
     "info-dsr.html":'<path d="M3 20h18M6 20V9l6-5 6 5v11"/><path d="M9 20v-5h6v5"/>',
