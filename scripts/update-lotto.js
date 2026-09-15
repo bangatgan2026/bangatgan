@@ -12,7 +12,11 @@ const path = require('path');
 
 const OUT_JSON = path.join(__dirname, '..', 'data', 'draws.json');
 const OUT_JS   = path.join(__dirname, '..', 'assets', 'lotto-data.js');
-const API = 'https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=';
+/* 깃허브(미국)에서 동행복권에 직접 물으면 차단당합니다(2026-09 확인).
+   그래서 우리 사이트의 중계기(Vercel 서울)를 거쳐 받아옵니다.
+   중계기가 안 될 때를 대비해 직접 접속도 한 번 시도합니다. */
+const PROXY  = 'https://bangatgan.kr/api/lotto?no=';
+const DIRECT = 'https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=';
 
 const HEADERS = {
   'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36',
@@ -29,14 +33,17 @@ function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
    {ok:false, why:'...' }  못 받아왔습니다 (막힘·오류) — 실패로 처리합니다 */
 async function fetchDraw(no){
   let why = '';
+  /* 1~2번째는 중계기, 3번째는 직접 접속으로 시도합니다 */
   for (let t = 1; t <= 3; t++) {
+    const url = (t <= 2 ? PROXY : DIRECT) + no;
+    const via = (t <= 2 ? '중계기' : '직접');
     try {
-      const res = await fetch(API + no, { headers: HEADERS });
+      const res = await fetch(url, { headers: HEADERS });
       const text = await res.text();
 
       if (!res.ok) {
         why = 'HTTP ' + res.status;
-        console.log('  [' + t + '번째] ' + why + ' / 받은 내용 앞부분: ' + text.slice(0,120).replace(/\s+/g,' '));
+        console.log('  [' + t + '번째·' + via + '] ' + why + ' / 받은 내용 앞부분: ' + text.slice(0,200).replace(/\s+/g,' '));
         await sleep(1500);
         continue;
       }
@@ -46,19 +53,30 @@ async function fetchDraw(no){
         j = JSON.parse(text);
       } catch (e) {
         why = 'JSON이 아닌 답이 왔습니다 (차단 페이지일 수 있음)';
-        console.log('  [' + t + '번째] ' + why + ' / 받은 내용 앞부분: ' + text.slice(0,200).replace(/\s+/g,' '));
+        console.log('  [' + t + '번째·' + via + '] ' + why + ' / 받은 내용 앞부분: ' + text.slice(0,200).replace(/\s+/g,' '));
         await sleep(1500);
         continue;
       }
 
-      if (j && j.returnValue === 'success') return { ok:true, data:j };
+      if (j && j.returnValue === 'success') {
+        if (t <= 2) console.log('  (중계기를 거쳐 받았습니다)');
+        return { ok:true, data:j };
+      }
 
-      console.log('  서버 응답: ' + JSON.stringify(j).slice(0,200));
+      /* 중계기가 돌려준 오류 */
+      if (j && j.error) {
+        why = '중계기: ' + j.error;
+        console.log('  [' + t + '번째·' + via + '] ' + why + ' ' + JSON.stringify(j).slice(0,220));
+        await sleep(1500);
+        continue;
+      }
+
+      console.log('  서버 응답(' + via + '): ' + JSON.stringify(j).slice(0,200));
       return { ok:true, data:null };
 
     } catch (e) {
       why = '연결 실패: ' + e.message;
-      console.log('  [' + t + '번째] ' + why);
+      console.log('  [' + t + '번째·' + via + '] ' + why);
       await sleep(1500);
     }
   }
@@ -124,9 +142,19 @@ function expectedDrawNo(){
     draws.sort(function(a, b){ return a.drwNo - b.drwNo; });
     fs.writeFileSync(OUT_JSON, JSON.stringify(draws));
 
+    /* 중요: 이 파일에는 회차 목록 말고도 공 그리기·금액 표시·등수 판정 같은
+       기능이 함께 들어 있습니다. 파일을 통째로 새로 쓰면 그 기능이 전부 지워져
+       로또 페이지가 통째로 먹통이 됩니다. (2026-09-15에 실제로 확인했습니다)
+       그래서 LOTTO_RAW 배열 한 곳만 갈아끼웁니다. */
     const compact = draws.map(function(d){ return [d.drwNo, d.date].concat(d.n, [d.b, d.w1, d.w1amt]); });
-    const head = '/* 로또 회차 데이터 (실제) · [회차,날짜,n1~n6,보너스,1등 게임수,1등 1게임당 금액] */\nvar LOTTO_RAW = ';
-    fs.writeFileSync(OUT_JS, head + JSON.stringify(compact) + ';\n');
+    let js = fs.readFileSync(OUT_JS, 'utf8');
+    const m = js.match(/var LOTTO_RAW = (\[[\s\S]*?\]);/);
+    if (!m) {
+      console.error('lotto-data.js 에서 LOTTO_RAW 를 찾지 못했습니다. 덮어쓰지 않고 멈춥니다.');
+      process.exit(1);
+    }
+    js = js.replace(m[1], JSON.stringify(compact));
+    fs.writeFileSync(OUT_JS, js);
     console.log(added + '개 회차를 추가했습니다. 이제 ' + draws.length + '회까지 있습니다.');
   } else {
     console.log('새 회차가 없습니다.');
