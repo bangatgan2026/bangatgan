@@ -10,7 +10,7 @@
 <meta name="description" content="로또당첨번호 조회. 역대 로또 6/45 회차별 당첨번호와 1등부터 5등까지 당첨금, 당첨 게임 수를 확인합니다.">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="assets/style.css?v=40">
+<link rel="stylesheet" href="assets/style.css?v=42">
 </head>
 <body data-section="lotto">
 <div class="wrap">
@@ -39,6 +39,13 @@
     </div>
 
     <div class="card">
+      <h2>등수별 당첨금</h2>
+      <p class="sub">1등부터 5등까지 당첨 게임 수와 1게임당 당첨금입니다. 세금을 떼기 전 금액입니다.</p>
+      <table class="t"><thead><tr><th>등수</th><th>맞힌 개수</th><th>당첨 게임</th><th>1게임당</th></tr></thead>
+        <tbody id="rankBox"></tbody></table>
+    </div>
+
+    <div class="card">
       <h2>1등 당첨 정보</h2>
       <p class="sub" id="prizeSub"></p>
       <table class="t"><tbody id="prizeBox"></tbody></table>
@@ -64,7 +71,7 @@
           <li><b>얼마나 팔렸는가</b> — 많이 팔리면 나눌 돈이 커집니다.</li>
           <li><b>1등이 몇 명인가</b> — 같은 돈을 더 많은 사람이 나누면 1인당 금액이 줄어듭니다.</li>
         </ul>
-        <p>1등이 한 명뿐인 회차에 금액이 크게 튀고, 스무 명이 넘으면 10억 아래로 내려가는 것도 이 구조 때문입니다. 4등 5만원과 5등 5천원만 금액이 고정되어 있습니다.</p>
+        <p>1등이 한 명뿐인 회차에 금액이 크게 튀고, 스무 명이 넘으면 10억 아래로 내려가는 것도 이 구조 때문입니다. 4등 5만원과 5등 5천원만 금액이 고정되어 있습니다. 다만 초기 회차에는 4·5등도 판매액에 따라 달라졌습니다.</p>
         <div class="callout"><b>이 사이트는 예측을 하지 않습니다.</b><br>
         여기 있는 모든 정보는 이미 발표된 과거 결과입니다. 다음 회차 결과와는 아무 관련이 없습니다.</div>
     
@@ -73,8 +80,8 @@
   </main>
   <aside class="rail"><div class="ad tall"><span>광고 자리</span></div></aside>
 </div>
-<script src="assets/lotto-data.js?v=40"></script>
-<script src="assets/site.js?v=40"></script>
+<script src="assets/lotto-data.js?v=42"></script>
+<script src="assets/site.js?v=42"></script>
 <script>
 (function(){
 "use strict";
@@ -138,6 +145,16 @@ function render(){
   }
   rows+=row('직전 회차와 겹친 번호', overlap+'개', d.no>1 ? (d.no-1)+'회 번호와 보너스를 합쳐 비교' : '');
   $('#prizeBox').innerHTML=rows;
+
+  // 등수별 당첨금 (1~5등)
+  var HIT=['6개','5개 + 보너스','5개','4개','3개'];
+  var rk='';
+  (d.ranks||[]).forEach(function(r,i){
+    rk+='<tr><td><b>'+(i+1)+'등</b></td><td>'+HIT[i]+'</td>'+
+        '<td>'+(r.w?r.w.toLocaleString()+'게임':'없음')+'</td>'+
+        '<td>'+(r.w?LOTTO.comma(r.amt):'-')+'</td></tr>';
+  });
+  $('#rankBox').innerHTML=rk;
   $('#prizeSub').textContent = d.w1>0
     ? '당첨금은 회차마다 다릅니다. 판매액과 1등 당첨자 수에 따라 나뉘기 때문입니다.'
     : '1등이 없으면 당첨금은 다음 회차로 넘어갑니다.';

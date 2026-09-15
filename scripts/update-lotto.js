@@ -1,99 +1,95 @@
-/* 동행복권에서 회차 정보를 받아 data/draws.json 을 갱신합니다.
+/* 로또 회차를 받아 data/draws.json 과 assets/lotto-data.js 를 갱신합니다.
    매주 토요일 밤 GitHub Actions 가 자동으로 실행합니다.
 
-   2026-09-15 고침:
-   - 예전에는 접속이 막혀도 "아직 추첨 전"으로 처리하고 조용히 끝냈습니다.
-     그래서 실패해도 초록색으로 표시되어 아무도 몰랐습니다.
-   - 이제 받아온 내용을 그대로 기록하고, 받아오기 자체가 실패하면
-     작업을 빨간색으로 끝냅니다(exit 1). 그래야 눈에 보입니다. */
+   2026-09-15 고침 (출처 교체):
+   - 동행복권이 프로그램 접속을 전면 차단했습니다. 해외 IP만이 아니라
+     서울(Vercel icn1)에서도 로그인 페이지만 돌아옵니다.
+   - 그래서 공개 미러 두 곳에서 받아옵니다. 둘 다 깃허브에 있으므로
+     깃허브 액션에서 막힘 없이 받을 수 있습니다.
+   - 두 곳의 당첨번호가 서로 다르면 넣지 않고 빨간색으로 실패시킵니다.
+     한 곳이 틀려도 우리 사이트에 틀린 번호가 올라가지 않게 하려는 것입니다.
+
+   출처
+     A. https://raw.githubusercontent.com/uriseozz/lotto-data/main/lotto.json
+        1회부터 최신까지. 등수별 상세까지 들어 있음
+     B. https://raw.githubusercontent.com/smok95/lotto/master/results/all.json
+        262회부터 최신까지
+
+   ※ api/lotto.js (Vercel 중계기)는 출처가 막혀 쓰지 않습니다.
+      나중에 동행복권이 다시 열리면 그 파일만 고쳐 되살릴 수 있습니다. */
 
 const fs = require('fs');
 const path = require('path');
 
 const OUT_JSON = path.join(__dirname, '..', 'data', 'draws.json');
 const OUT_JS   = path.join(__dirname, '..', 'assets', 'lotto-data.js');
-/* 깃허브(미국)에서 동행복권에 직접 물으면 차단당합니다(2026-09 확인).
-   그래서 우리 사이트의 중계기(Vercel 서울)를 거쳐 받아옵니다.
-   중계기가 안 될 때를 대비해 직접 접속도 한 번 시도합니다. */
-const PROXY  = 'https://bangatgan.kr/api/lotto?no=';
-const DIRECT = 'https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=';
 
-const HEADERS = {
-  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36',
-  'Accept': 'application/json, text/plain, */*',
-  'Accept-Language': 'ko-KR,ko;q=0.9',
-  'Referer': 'https://www.dhlottery.co.kr/gameResult.do?method=byWin'
-};
+const SRC_A = 'https://raw.githubusercontent.com/uriseozz/lotto-data/main/lotto.json';
+const SRC_B = 'https://raw.githubusercontent.com/smok95/lotto/master/results/all.json';
 
-function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
-
-/* 돌려주는 값
-   {ok:true,  data:{...}}  정상으로 받아왔습니다
-   {ok:true,  data:null }  서버가 "그런 회차 없다"고 했습니다 (아직 추첨 전)
-   {ok:false, why:'...' }  못 받아왔습니다 (막힘·오류) — 실패로 처리합니다 */
-async function fetchDraw(no){
-  let why = '';
-  /* 1~2번째는 중계기, 3번째는 직접 접속으로 시도합니다 */
+async function getJson(url, name){
   for (let t = 1; t <= 3; t++) {
-    const url = (t <= 2 ? PROXY : DIRECT) + no;
-    const via = (t <= 2 ? '중계기' : '직접');
     try {
-      const res = await fetch(url, { headers: HEADERS });
+      const res = await fetch(url, { headers: { 'User-Agent': 'bangatgan-lotto-updater' } });
       const text = await res.text();
-
       if (!res.ok) {
-        why = 'HTTP ' + res.status;
-        console.log('  [' + t + '번째·' + via + '] ' + why + ' / 받은 내용 앞부분: ' + text.slice(0,200).replace(/\s+/g,' '));
-        await sleep(1500);
+        console.log('  [' + name + ' ' + t + '번째] HTTP ' + res.status + ' / ' + text.slice(0,150).replace(/\s+/g,' '));
+        await new Promise(function(r){ setTimeout(r, 2000); });
         continue;
       }
-
-      let j;
-      try {
-        j = JSON.parse(text);
-      } catch (e) {
-        why = 'JSON이 아닌 답이 왔습니다 (차단 페이지일 수 있음)';
-        console.log('  [' + t + '번째·' + via + '] ' + why + ' / 받은 내용 앞부분: ' + text.slice(0,200).replace(/\s+/g,' '));
-        await sleep(1500);
-        continue;
-      }
-
-      if (j && j.returnValue === 'success') {
-        if (t <= 2) console.log('  (중계기를 거쳐 받았습니다)');
-        return { ok:true, data:j };
-      }
-
-      /* 중계기가 돌려준 오류 */
-      if (j && j.error) {
-        why = '중계기: ' + j.error;
-        console.log('  [' + t + '번째·' + via + '] ' + why + ' ' + JSON.stringify(j).slice(0,220));
-        await sleep(1500);
-        continue;
-      }
-
-      console.log('  서버 응답(' + via + '): ' + JSON.stringify(j).slice(0,200));
-      return { ok:true, data:null };
-
+      return JSON.parse(text);
     } catch (e) {
-      why = '연결 실패: ' + e.message;
-      console.log('  [' + t + '번째·' + via + '] ' + why);
-      await sleep(1500);
+      console.log('  [' + name + ' ' + t + '번째] ' + e.message);
+      await new Promise(function(r){ setTimeout(r, 2000); });
     }
   }
-  return { ok:false, why: why };
+  return null;
 }
 
-function toRow(j){
-  const n = [j.drwtNo1, j.drwtNo2, j.drwtNo3, j.drwtNo4, j.drwtNo5, j.drwtNo6]
-    .map(Number).sort(function(a, b){ return a - b; });
-  return {
-    drwNo: j.drwNo,
-    date:  j.drwNoDate,
-    n: n, b: Number(j.bnusNo),
-    w1: Number(j.firstPrzwnerCo || 0),
-    w1amt: Number(j.firstWinamnt || 0),
-    sales: Number(j.totSellamnt || 0)
-  };
+/* 두 출처의 모양이 달라서 우리 모양으로 맞춥니다 */
+function normA(j){
+  const m = new Map();
+  ((j && j.rounds) || []).forEach(function(r){
+    m.set(Number(r.id), {
+      drwNo: Number(r.id),
+      date:  String(r.draw_date).slice(0,10),
+      n: [r.n1,r.n2,r.n3,r.n4,r.n5,r.n6].map(Number).sort(function(a,b){ return a-b; }),
+      b: Number(r.bonus),
+      w1: Number(r.first_winners || 0),
+      w1amt: Number(r.first_prize_each || 0),
+      w2: Number(r.second_winners || 0),
+      w2amt: Number(r.second_prize_each || 0),
+      w3: Number(r.third_winners || 0),
+      w3amt: Number(r.third_prize_each || 0),
+      w4: Number(r.fourth_winners || 0),
+      w4amt: Number(r.fourth_prize_each || 0),
+      w5: Number(r.fifth_winners || 0),
+      w5amt: Number(r.fifth_prize_each || 0),
+      sales: Number(r.total_sales || 0)
+    });
+  });
+  return m;
+}
+function normB(list){
+  const m = new Map();
+  (list || []).forEach(function(r){
+    const dv = r.divisions || [];
+    const d1 = dv[0] || {};
+    m.set(Number(r.draw_no), {
+      drwNo: Number(r.draw_no),
+      date:  String(r.date).slice(0,10),
+      n: (r.numbers || []).map(Number).sort(function(a,b){ return a-b; }),
+      b: Number(r.bonus_no),
+      w1: Number(d1.winners || 0),
+      w1amt: Number(d1.prize || 0),
+      sales: Number(r.total_sales_amount || 0)
+    });
+  });
+  return m;
+}
+
+function same(a, b){
+  return a.b === b.b && a.n.join(',') === b.n.join(',') && a.date === b.date;
 }
 
 /* 1회 추첨일이 2002-12-07(토)이므로, 그 뒤 지난 주 수 + 1 이 대략 최신 회차입니다. */
@@ -102,40 +98,61 @@ function expectedDrawNo(){
   return Math.floor((Date.now() - first) / (7 * 24 * 60 * 60 * 1000)) + 1;
 }
 
-(async () => {
+(async function(){
   let draws = [];
   try { draws = JSON.parse(fs.readFileSync(OUT_JSON, 'utf8')); } catch (e) {}
   const have = new Set(draws.map(function(d){ return d.drwNo; }));
-  let next = draws.length ? Math.max.apply(null, draws.map(function(d){ return d.drwNo; })) + 1 : 1;
+  const mine = draws.length ? Math.max.apply(null, draws.map(function(d){ return d.drwNo; })) : 0;
+
+  console.log('현재 보유 회차:', draws.length, '/ 가장 최근:', mine);
+
+  const both = await Promise.all([ getJson(SRC_A, 'A'), getJson(SRC_B, 'B') ]);
+  const ja = both[0], jb = both[1];
+  if (!ja && !jb) {
+    console.error('두 출처 모두 받아오지 못했습니다.');
+    process.exit(1);
+  }
+
+  const A = ja ? normA(ja) : new Map();
+  const B = jb ? normB(jb) : new Map();
+  const maxA = A.size ? Math.max.apply(null, Array.from(A.keys())) : 0;
+  const maxB = B.size ? Math.max.apply(null, Array.from(B.keys())) : 0;
+  console.log('출처 A 최신:', maxA, '/ 출처 B 최신:', maxB);
 
   const expect = expectedDrawNo();
-  console.log('현재 보유 회차:', draws.length, '/ 다음 조회:', next);
   console.log('날짜로 따진 예상 최신 회차:', expect);
 
   let added = 0;
   let failed = null;
 
-  while (true) {
-    const r = await fetchDraw(next);
+  for (let no = mine + 1; no <= Math.max(maxA, maxB); no++) {
+    if (have.has(no)) continue;
+    const a = A.get(no), b = B.get(no);
 
-    if (!r.ok) { failed = next + '회를 받아오지 못했습니다 — ' + r.why; break; }
-
-    if (!r.data) {
-      console.log(next + '회는 서버에 아직 없습니다.');
-      if (next <= expect - 1) {
-        failed = next + '회는 날짜로 보면 이미 추첨된 회차인데 서버가 없다고 답했습니다. 차단이 의심됩니다.';
+    if (a && b) {
+      if (!same(a, b)) {
+        failed = no + '회에서 두 출처의 번호가 다릅니다. 넣지 않았습니다.\n' +
+                 '  A: ' + a.date + ' ' + a.n.join(',') + ' +' + a.b + '\n' +
+                 '  B: ' + b.date + ' ' + b.n.join(',') + ' +' + b.b;
+        break;
       }
-      break;
+      draws.push(a);
+      added++;
+      console.log('추가:', no, a.date, a.n.join(','), '+' + a.b,
+                  '/ 1등 ' + a.w1 + '명 ' + a.w1amt.toLocaleString() + '원');
+      continue;
     }
 
-    if (!have.has(r.data.drwNo)) {
-      draws.push(toRow(r.data));
-      added++;
-      console.log('추가:', r.data.drwNo, r.data.drwNoDate);
-    }
-    next++;
-    await sleep(400);
-    if (added > 60) break;
+    /* 한 곳에만 있으면 아직 반영 중일 수 있으니 이번에는 넘어갑니다.
+       다음 실행(일요일)에 두 곳이 맞춰지면 그때 들어갑니다. */
+    console.log(no + '회는 한 곳에만 있습니다. 이번에는 넣지 않습니다. (A:' + !!a + ' / B:' + !!b + ')');
+    break;
+  }
+
+  /* 날짜상 이미 나왔어야 할 회차가 양쪽 어디에도 없으면 알려야 합니다 */
+  if (!failed && Math.max(maxA, maxB) < expect - 1) {
+    failed = '예상 최신 회차는 ' + expect + '인데 두 출처 모두 ' +
+             Math.max(maxA, maxB) + '회에서 멈춰 있습니다. 출처가 끊겼는지 확인이 필요합니다.';
   }
 
   if (added) {
@@ -146,7 +163,12 @@ function expectedDrawNo(){
        기능이 함께 들어 있습니다. 파일을 통째로 새로 쓰면 그 기능이 전부 지워져
        로또 페이지가 통째로 먹통이 됩니다. (2026-09-15에 실제로 확인했습니다)
        그래서 LOTTO_RAW 배열 한 곳만 갈아끼웁니다. */
-    const compact = draws.map(function(d){ return [d.drwNo, d.date].concat(d.n, [d.b, d.w1, d.w1amt]); });
+    /* [회차,날짜,n1~n6,보너스, 1등게임수,1등금액, 2등…, 3등…, 4등…, 5등…] 19칸 */
+    const compact = draws.map(function(d){
+      return [d.drwNo, d.date].concat(d.n, [d.b,
+        d.w1||0, d.w1amt||0, d.w2||0, d.w2amt||0, d.w3||0, d.w3amt||0,
+        d.w4||0, d.w4amt||0, d.w5||0, d.w5amt||0]);
+    });
     let js = fs.readFileSync(OUT_JS, 'utf8');
     const m = js.match(/var LOTTO_RAW = (\[[\s\S]*?\]);/);
     if (!m) {
@@ -164,7 +186,6 @@ function expectedDrawNo(){
     console.error('');
     console.error('=== 문제가 있습니다 ===');
     console.error(failed);
-    console.error('동행복권이 해외 접속을 막고 있을 수 있습니다.');
     process.exit(1);
   }
 })();
