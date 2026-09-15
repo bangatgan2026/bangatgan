@@ -10,7 +10,7 @@
 <meta name="description" content="칼로리 계산기. 기초대사량과 활동량으로 하루 필요 칼로리를 계산하고, 목표 체중까지 걸리는 기간을 함께 보여줍니다.">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="assets/style.css?v=37">
+<link rel="stylesheet" href="assets/style.css?v=39">
 </head>
 <body data-section="health">
 <div class="wrap">
@@ -79,7 +79,7 @@
   <aside class="rail"><div class="ad tall"><span>광고 자리</span></div></aside>
 </div>
 
-<script src="assets/site.js?v=37"></script>
+<script src="assets/site.js?v=39"></script>
 <script>
 (function(){
 "use strict";
@@ -120,8 +120,8 @@ function run(){
   }
   $('#rows').innerHTML=html;
   $('#nextTools').innerHTML=
-    '<a href="bmi.html?h='+h+'&w='+w+'"><b>BMI 체질량지수</b><span>지금 체중이 어느 단계인지</span></a>'+
-    '<a href="walk.html?w='+w+'"><b>걷기 칼로리 소모</b><span>얼마나 걸으면 얼마가 소모되는지</span></a>';
+    '<a href="bmi.html?h='+h+'&w='+w+'"><b>BMI 계산기</b><span>지금 체중이 어느 단계인지</span></a>'+
+    '<a href="walk.html?w='+w+'"><b>걷기 칼로리 계산기</b><span>얼마나 걸으면 얼마가 소모되는지</span></a>';
   U.saveState({sex:sex,age:age,h:h,w:w,act:act,target:target});
 }
 $('#go').onclick=run;

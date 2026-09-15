@@ -10,7 +10,7 @@
 <meta name="description" content="아기 100일 계산기. 출생일을 넣으면 50일, 100일, 200일, 돌, 두 돌 날짜를 한 번에 알려줍니다.">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="assets/style.css?v=37">
+<link rel="stylesheet" href="assets/style.css?v=39">
 </head>
 <body data-section="date">
 
@@ -70,7 +70,7 @@
   <aside class="rail"><div class="ad tall"><span>광고 자리</span></div></aside>
 </div>
 
-<script src="assets/site.js?v=37"></script>
+<script src="assets/site.js?v=39"></script>
 <script>
 (function(){
 "use strict";
@@ -113,8 +113,8 @@ function run(){
   $('#tsub').textContent='50일과 100일, 200일은 태어난 날을 1일로 세었습니다. 돌은 같은 월일 기준입니다.';
   $('#rows').innerHTML=html;
   $('#nextTools').innerHTML=
-    '<a href="birthday.html"><b>생년월일 종합</b><span>띠와 별자리, 학교 연도까지</span></a>'+
-    '<a href="dday.html"><b>디데이 계산</b><span>다른 기념일도 세어 보세요</span></a>';
+    '<a href="birthday.html"><b>생년월일 계산기</b><span>띠와 별자리, 학교 연도까지</span></a>'+
+    '<a href="dday.html"><b>디데이계산기</b><span>다른 기념일도 세어 보세요</span></a>';
   U.saveState({birth:b});
 }
 $('#go').onclick=run;

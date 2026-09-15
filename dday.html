@@ -10,7 +10,7 @@
 <meta name="description" content="디데이계산기. 목표한 날까지 며칠 남았는지, 지나온 날은 며칠인지 계산합니다. 100일, 1000일 기념일도 함께 알려줍니다.">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="assets/style.css?v=37">
+<link rel="stylesheet" href="assets/style.css?v=39">
 </head>
 <body data-section="date">
 
@@ -73,7 +73,7 @@
   <aside class="rail"><div class="ad tall"><span>광고 자리</span></div></aside>
 </div>
 
-<script src="assets/site.js?v=37"></script>
+<script src="assets/site.js?v=39"></script>
 <script>
 (function(){
 "use strict";
@@ -123,8 +123,8 @@ function run(){
   $('#tsub').textContent = mode==='include' ? '만난 날을 1일로 세는 방식입니다.' : '기준일 다음 날부터 세는 방식입니다.';
   $('#rows').innerHTML=html;
   $('#nextTools').innerHTML=
-    '<a href="datecalc.html"><b>날짜 더하기·빼기</b><span>며칠 뒤가 무슨 요일인지</span></a>'+
-    '<a href="birthday.html"><b>생년월일 종합</b><span>나이와 띠를 한 번에</span></a>';
+    '<a href="datecalc.html"><b>날짜 더하기·빼기 계산기</b><span>며칠 뒤가 무슨 요일인지</span></a>'+
+    '<a href="birthday.html"><b>생년월일 계산기</b><span>나이와 띠를 한 번에</span></a>';
   U.saveState({target:t,mode:mode});
 }
 $('#go').onclick=run;

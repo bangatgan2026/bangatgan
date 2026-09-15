@@ -10,7 +10,7 @@
 <meta name="description" content="연봉계산기. 연봉을 넣으면 국민연금·건강보험·고용보험과 소득세를 뺀 월 실수령액을 계산합니다. 공제 항목별 금액을 함께 보여줍니다.">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="assets/style.css?v=37">
+<link rel="stylesheet" href="assets/style.css?v=39">
 </head>
 <body data-section="money">
 
@@ -99,7 +99,7 @@
   </aside>
 </div>
 
-<script src="assets/site.js?v=37"></script>
+<script src="assets/site.js?v=39"></script>
 <script>
 (function(){
 "use strict";
@@ -211,9 +211,9 @@ function run(){
     '<tr class="sum"><td>공제 합계</td><td>'+U.won(totalDeduct)+'</td></tr>';
 
   $('#nextTools').innerHTML =
-    '<a href="retire.html?salary='+Math.round(annual/12)+'"><b>퇴직금은 얼마일까</b>'+
+    '<a href="retire.html?salary='+Math.round(annual/12)+'"><b>퇴직금계산기</b>'+
     '<span>지금 넣은 월급이 그대로 입력됩니다</span></a>'+
-    '<a href="loan.html"><b>대출 이자 계산</b><span>이 월급으로 감당할 수 있는지</span></a>';
+    '<a href="loan.html"><b>대출이자계산기</b><span>이 월급으로 감당할 수 있는지</span></a>';
 
   U.saveState({annual:annual, taxfree:tf, family:family});
 }

@@ -10,7 +10,7 @@
 <meta name="description" content="평수 계산기. 제곱미터를 평으로, 평을 제곱미터로 바로 바꿉니다. 전용면적과 공급면적 환산, 아파트 평형 조견표, 가로세로 면적 계산까지 함께 확인합니다.">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="assets/style.css?v=37">
+<link rel="stylesheet" href="assets/style.css?v=39">
 </head>
 <body data-section="estate">
 <div class="wrap">
@@ -127,7 +127,7 @@
 {"@type":"Question","name":"땅 면적도 평으로 바꿀 수 있나요","acceptedAnswer":{"@type":"Answer","text":"같은 방식으로 바꾸면 됩니다. 다만 넓은 땅은 보통 평 대신 제곱미터나 헥타르를 씁니다. 1헥타르는 10000제곱미터, 약 3025평입니다."}}]}
 </script>
 
-<script src="assets/site.js?v=37"></script>
+<script src="assets/site.js?v=39"></script>
 <script>
 (function(){
 "use strict";
@@ -177,7 +177,7 @@ function supply(m){
   $('#rows2').innerHTML=html;
   $('#nextTools').innerHTML=
     '<a href="acquisition.html"><b>취득세 계산기</b><span>집 살 때 내는 세금</span></a>'+
-    '<a href="broker.html"><b>중개수수료 계산기</b><span>법정 상한요율로 계산</span></a>';
+    '<a href="broker.html"><b>부동산 중개수수료 계산기</b><span>법정 상한요율로 계산</span></a>';
 }
 
 $('#m2').addEventListener('input', fromM2);

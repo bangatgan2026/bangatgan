@@ -10,7 +10,7 @@
 <meta name="description" content="전월세 전환율 계산기. 전세보증금을 월세로 바꾸거나 월세를 전세로 환산할 때의 금액을 계산합니다.">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="assets/style.css?v=37">
+<link rel="stylesheet" href="assets/style.css?v=39">
 </head>
 <body data-section="money">
 
@@ -78,7 +78,7 @@
   <aside class="rail"><div class="ad tall"><span>광고 자리</span></div></aside>
 </div>
 
-<script src="assets/site.js?v=37"></script>
+<script src="assets/site.js?v=39"></script>
 <script>
 (function(){
 "use strict";
@@ -117,8 +117,8 @@ function run(){
     sumrow('월세', U.won(monthly))+
     '<tr><th>전환율별 월세</th><th></th></tr>'+rows;
   $('#nextTools').innerHTML=
-    '<a href="savings.html?amount='+conv+'"><b>돌려받은 보증금을 예금하면</b><span>이자와 월세를 비교해 보세요</span></a>'+
-    '<a href="loan.html"><b>전세자금대출 이자</b><span>대출을 끼면 어느 쪽이 유리한지</span></a>';
+    '<a href="savings.html?amount='+conv+'"><b>적금이자계산기</b><span>이자와 월세를 비교해 보세요</span></a>'+
+    '<a href="loan.html"><b>대출이자계산기</b><span>대출을 끼면 어느 쪽이 유리한지</span></a>';
   U.saveState({deposit:D,newdep:N,rate:rate});
 }
 $('#go').onclick=run;

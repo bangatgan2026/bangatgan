@@ -10,7 +10,7 @@
 <meta name="description" content="주택담보대출 계산기. 집값과 소득으로 LTV 한도와 DSR 한도를 각각 계산하고, 실제로 빌릴 수 있는 금액을 보여줍니다.">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="assets/style.css?v=37">
+<link rel="stylesheet" href="assets/style.css?v=39">
 </head>
 <body data-section="estate">
 <div class="wrap">
@@ -88,7 +88,7 @@
   </main>
   <aside class="rail"><div class="ad tall"><span>광고 자리</span></div></aside>
 </div>
-<script src="assets/site.js?v=37"></script>
+<script src="assets/site.js?v=39"></script>
 <script>
 (function(){
 "use strict";
@@ -144,8 +144,8 @@ function run(){
     sumrow('실제 한도', U.won(limit))+
     row('필요한 자기 자금', U.won(need),'취득세와 중개수수료는 별도입니다');
   $('#nextTools').innerHTML=
-    '<a href="loan.html?amount='+Math.round(limit)+'&rate='+rate+'&months='+Math.round(years*12)+'"><b>상환 계획 보기</b><span>이 금액으로 매달 얼마씩 갚는지</span></a>'+
-    '<a href="acquisition.html?price='+price+'"><b>취득세 계산</b><span>집값 말고 더 드는 돈</span></a>';
+    '<a href="loan.html?amount='+Math.round(limit)+'&rate='+rate+'&months='+Math.round(years*12)+'"><b>대출이자계산기</b><span>이 금액으로 매달 얼마씩 갚는지</span></a>'+
+    '<a href="acquisition.html?price='+price+'"><b>취득세 계산기</b><span>집값 말고 더 드는 돈</span></a>';
   U.saveState({price:price,ltv:ltv,income:income,rate:rate,years:years,other:other});
 }
 $('#go').onclick=run;

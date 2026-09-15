@@ -10,7 +10,7 @@
 <meta name="description" content="생년월일 계산기. 생일 하나로 만 나이, 연 나이, 띠, 별자리, 살아온 날수, 다음 생일까지 남은 날, 학교 입학·졸업 연도를 한 번에 확인합니다.">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="assets/style.css?v=37">
+<link rel="stylesheet" href="assets/style.css?v=39">
 </head>
 <body data-section="date">
 
@@ -86,7 +86,7 @@
   </aside>
 </div>
 
-<script src="assets/site.js?v=37"></script>
+<script src="assets/site.js?v=39"></script>
 <script>
 (function(){
 "use strict";
@@ -164,8 +164,8 @@ function run(){
     row('대학교', (s+12)+'년 입학','4년제 기준 '+(s+16)+'년 졸업');
 
   $('#nextTools').innerHTML=
-    '<a href="dday.html"><b>디데이 계산</b><span>중요한 날까지 며칠 남았는지</span></a>'+
-    '<a href="salary.html"><b>연봉 실수령액</b><span>월급에서 얼마가 빠지는지</span></a>';
+    '<a href="dday.html"><b>디데이계산기</b><span>중요한 날까지 며칠 남았는지</span></a>'+
+    '<a href="salary.html"><b>연봉계산기</b><span>월급에서 얼마가 빠지는지</span></a>';
 
   U.saveState({y:y,m:m,d:d});
 }

@@ -10,7 +10,7 @@
 <meta name="description" content="복리계산기. 매달 일정 금액을 넣고 연 수익률로 굴렸을 때 얼마가 되는지 복리로 계산합니다.">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="assets/style.css?v=37">
+<link rel="stylesheet" href="assets/style.css?v=39">
 </head>
 <body data-section="money">
 <div class="wrap">
@@ -81,7 +81,7 @@
   </main>
   <aside class="rail"><div class="ad tall"><span>광고 자리</span></div></aside>
 </div>
-<script src="assets/site.js?v=37"></script>
+<script src="assets/site.js?v=39"></script>
 <script>
 (function(){
 "use strict";
@@ -127,8 +127,8 @@ function run(){
   html+='<tr class="sum"><td>'+years+'년 뒤</td><td>'+U.won(principal)+'</td><td>'+U.won(total)+'</td></tr>';
   $('#rows').innerHTML=html;
   $('#nextTools').innerHTML=
-    '<a href="savings.html"><b>예금·적금과 비교</b><span>확정 이자와 얼마나 다른지</span></a>'+
-    '<a href="salary.html"><b>연봉 실수령액</b><span>매달 얼마를 넣을 수 있는지</span></a>';
+    '<a href="savings.html"><b>적금이자계산기</b><span>확정 이자와 얼마나 다른지</span></a>'+
+    '<a href="salary.html"><b>연봉계산기</b><span>매달 얼마를 넣을 수 있는지</span></a>';
   U.saveState({start:S,monthly:M,rate:rate,years:years});
 }
 $('#go').onclick=run;

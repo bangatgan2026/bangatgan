@@ -10,7 +10,7 @@
 <meta name="description" content="걷기 칼로리 계산기. 체중과 걷는 시간, 속도로 소모 칼로리와 걸음 수, 거리를 계산합니다.">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="assets/style.css?v=37">
+<link rel="stylesheet" href="assets/style.css?v=39">
 </head>
 <body data-section="health">
 <div class="wrap">
@@ -71,7 +71,7 @@
   <aside class="rail"><div class="ad tall"><span>광고 자리</span></div></aside>
 </div>
 
-<script src="assets/site.js?v=37"></script>
+<script src="assets/site.js?v=39"></script>
 <script>
 (function(){
 "use strict";
@@ -107,8 +107,8 @@ function run(){
   });
   $('#rows').innerHTML=html;
   $('#nextTools').innerHTML=
-    '<a href="calorie.html?w='+w+'"><b>하루 필요 칼로리</b><span>먹는 쪽도 함께 계산해 보세요</span></a>'+
-    '<a href="bmi.html?w='+w+'"><b>BMI 체질량지수</b><span>지금 체중이 어느 단계인지</span></a>';
+    '<a href="calorie.html?w='+w+'"><b>칼로리 계산기</b><span>먹는 쪽도 함께 계산해 보세요</span></a>'+
+    '<a href="bmi.html?w='+w+'"><b>BMI 계산기</b><span>지금 체중이 어느 단계인지</span></a>';
   U.saveState({w:w,min:min,speed:met});
 }
 $('#go').onclick=run;

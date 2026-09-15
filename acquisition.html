@@ -10,7 +10,7 @@
 <meta name="description" content="취득세 계산기. 집값과 보유 주택 수, 조정대상지역 여부를 넣으면 취득세와 지방교육세, 농어촌특별세를 합한 실제 납부액을 계산합니다.">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="assets/style.css?v=37">
+<link rel="stylesheet" href="assets/style.css?v=39">
 </head>
 <body data-section="estate">
 <div class="wrap">
@@ -87,7 +87,7 @@
   </main>
   <aside class="rail"><div class="ad tall"><span>광고 자리</span></div></aside>
 </div>
-<script src="assets/site.js?v=37"></script>
+<script src="assets/site.js?v=39"></script>
 <script>
 (function(){
 "use strict";
@@ -140,8 +140,8 @@ function run(){
     row('농어촌특별세', over? U.won(farm) : '해당 없음', over? '85㎡ 초과분' : '85㎡ 이하는 면제')+
     sumrow('총 납부액', U.won(total));
   $('#nextTools').innerHTML=
-    '<a href="broker.html?price='+p+'"><b>중개수수료는 얼마</b><span>집값이 그대로 넘어갑니다</span></a>'+
-    '<a href="ltv.html?price='+p+'"><b>대출은 얼마까지</b><span>LTV와 DSR로 한도 확인</span></a>';
+    '<a href="broker.html?price='+p+'"><b>부동산 중개수수료 계산기</b><span>집값이 그대로 넘어갑니다</span></a>'+
+    '<a href="ltv.html?price='+p+'"><b>주택담보대출 계산기</b><span>LTV와 DSR로 한도 확인</span></a>';
   U.saveState({price:p,owned:owned,area:$('#area').value,zone:$('#zone').value});
 }
 $('#go').onclick=run;

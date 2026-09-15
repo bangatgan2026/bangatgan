@@ -10,7 +10,7 @@
 <meta name="description" content="대출이자계산기. 대출금과 금리, 기간을 넣으면 원리금균등·원금균등·만기일시 방식별로 월 상환액과 총 이자를 계산합니다.">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="assets/style.css?v=37">
+<link rel="stylesheet" href="assets/style.css?v=39">
 </head>
 <body data-section="money">
 
@@ -86,7 +86,7 @@
   <aside class="rail"><div class="ad tall"><span>광고 자리</span></div></aside>
 </div>
 
-<script src="assets/site.js?v=37"></script>
+<script src="assets/site.js?v=39"></script>
 <script>
 (function(){
 "use strict";
@@ -140,8 +140,8 @@ function run(){
     '<tr><td>만기일시<div class="c">만기에 원금 '+U.won(P)+' 한 번에</div></td><td>'+U.won(payC)+'</td><td>'+U.won(intC)+'</td></tr>'+
     (g>0 ? '<tr class="sum"><td>거치 기간에 낸 이자</td><td>'+g+'개월</td><td>'+U.won(graceInt)+'</td></tr>' : '');
   $('#nextTools').innerHTML=
-    '<a href="prepay.html?amount='+P+'"><b>중도상환수수료</b><span>미리 갚으면 얼마를 더 내야 하는지</span></a>'+
-    '<a href="salary.html"><b>연봉 실수령액</b><span>월급에서 이만큼 낼 수 있는지</span></a>';
+    '<a href="prepay.html?amount='+P+'"><b>중도상환수수료 계산기</b><span>미리 갚으면 얼마를 더 내야 하는지</span></a>'+
+    '<a href="salary.html"><b>연봉계산기</b><span>월급에서 이만큼 낼 수 있는지</span></a>';
   U.saveState({amount:P,rate:rate,months:n,grace:g});
 }
 $('#go').onclick=run;

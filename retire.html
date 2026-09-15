@@ -10,7 +10,7 @@
 <meta name="description" content="퇴직금계산기. 입사일과 퇴사일, 최근 3개월 급여를 넣으면 평균임금 기준 예상 퇴직금을 계산합니다.">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="assets/style.css?v=37">
+<link rel="stylesheet" href="assets/style.css?v=39">
 </head>
 <body data-section="money">
 
@@ -94,7 +94,7 @@
   <aside class="rail"><div class="ad tall"><span>광고 자리</span></div></aside>
 </div>
 
-<script src="assets/site.js?v=37"></script>
+<script src="assets/site.js?v=39"></script>
 <script>
 (function(){
 "use strict";
@@ -141,7 +141,7 @@ function run(){
     $('#big').textContent='대상 아님';
     $('#note').textContent='재직일수가 '+days+'일입니다. 퇴직금은 계속 근로기간이 1년(365일) 이상일 때 받을 수 있습니다.';
     $('#kpi').innerHTML=''; $('#rows').innerHTML=''; $('#tsub').textContent='';
-    $('#nextTools').innerHTML='<a href="salary.html"><b>연봉 실수령액</b><span>월급에서 얼마가 빠지는지</span></a>';
+    $('#nextTools').innerHTML='<a href="salary.html"><b>연봉계산기</b><span>월급에서 얼마가 빠지는지</span></a>';
     return;
   }
   var m3 = pay*3 + bonus*3/12 + ann*3/12;
@@ -167,8 +167,8 @@ function run(){
     row('30일분','1일 평균임금 × 30', U.won(avg*30))+
     sumrow('퇴직금', U.won(money));
   $('#nextTools').innerHTML=
-    '<a href="salary.html?annual='+Math.round(pay*12)+'"><b>연봉 실수령액</b><span>지금 넣은 월급이 그대로 들어갑니다</span></a>'+
-    '<a href="savings.html?amount='+Math.round(money)+'"><b>이 돈을 예금에 넣으면</b><span>이자가 얼마나 붙는지</span></a>';
+    '<a href="salary.html?annual='+Math.round(pay*12)+'"><b>연봉계산기</b><span>지금 넣은 월급이 그대로 들어갑니다</span></a>'+
+    '<a href="savings.html?amount='+Math.round(money)+'"><b>적금이자계산기</b><span>이자가 얼마나 붙는지</span></a>';
 }
 $('#go').onclick=run;
 })();

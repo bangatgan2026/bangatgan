@@ -11,49 +11,49 @@ var SECTIONS = [
     id: "money", name: "금융계산기", home: "money.html",
     desc: "월급, 대출, 차량처럼 돈이 걸린 계산",
     items: [
-      { href: "salary.html",    name: "연봉 실수령액",    desc: "세금과 4대보험 떼고 월 얼마" },
-      { href: "car.html",       name: "차량 할부",        desc: "월 납입금과 총 비용" },
-      { href: "loan.html",      name: "대출 이자",        desc: "상환방식별 월 상환액" },
-      { href: "retire.html",    name: "퇴직금",           desc: "근무기간과 평균임금으로" },
-      { href: "savings.html",   name: "예금·적금 이자",   desc: "세금 떼고 만기 수령액" },
-      { href: "prepay.html",    name: "중도상환수수료",   desc: "미리 갚을 때 드는 돈" },
-      { href: "jeonse.html",    name: "전월세 전환",      desc: "전세와 월세 바꿔보기" },
-      { href: "insurance.html", name: "4대보험료",        desc: "근로자와 회사 부담액" },
-      { href: "compound.html",  name: "복리 계산",        desc: "매달 넣으면 얼마가 되는지" },
-      { href: "vat.html",       name: "부가세",           desc: "공급가액과 합계금액을 갈라서" },
-      { href: "cartax.html",    name: "자동차세",         desc: "배기량과 연식으로, 취득세까지" }
+      { href: "salary.html",    name: "연봉계산기",    desc: "세금과 4대보험 떼고 월 얼마" },
+      { href: "car.html",       name: "차량할부계산기",        desc: "월 납입금과 총 비용" },
+      { href: "loan.html",      name: "대출이자계산기",        desc: "상환방식별 월 상환액" },
+      { href: "retire.html",    name: "퇴직금계산기",           desc: "근무기간과 평균임금으로" },
+      { href: "savings.html",   name: "적금이자계산기",   desc: "세금 떼고 만기 수령액" },
+      { href: "prepay.html",    name: "중도상환수수료 계산기",   desc: "미리 갚을 때 드는 돈" },
+      { href: "jeonse.html",    name: "전월세 전환율 계산기",      desc: "전세와 월세 바꿔보기" },
+      { href: "insurance.html", name: "4대보험 계산기",        desc: "근로자와 회사 부담액" },
+      { href: "compound.html",  name: "복리계산기",        desc: "매달 넣으면 얼마가 되는지" },
+      { href: "vat.html",       name: "부가세 계산기",           desc: "공급가액과 합계금액을 갈라서" },
+      { href: "cartax.html",    name: "자동차세 계산기",         desc: "배기량과 연식으로, 취득세까지" }
     ]
   },
   {
     id: "estate", name: "부동산", home: "estate.html",
     desc: "집 살 때 드는 돈을 미리 계산",
     items: [
-      { href: "acquisition.html", name: "취득세",      desc: "집 살 때 내는 세금" },
-      { href: "ltv.html",         name: "대출 한도",   desc: "LTV와 DSR로 얼마까지" },
-      { href: "broker.html",      name: "중개수수료",  desc: "법정 상한요율로 계산" },
-      { href: "pyeong.html",      name: "평수 계산",   desc: "제곱미터와 평을 서로 바꾸기" }
+      { href: "acquisition.html", name: "취득세 계산기",      desc: "집 살 때 내는 세금" },
+      { href: "ltv.html",         name: "주택담보대출 계산기",   desc: "LTV와 DSR로 얼마까지" },
+      { href: "broker.html",      name: "부동산 중개수수료 계산기",  desc: "법정 상한요율로 계산" },
+      { href: "pyeong.html",      name: "평수 계산기",   desc: "제곱미터와 평을 서로 바꾸기" }
     ]
   },
   {
     id: "date", name: "날짜계산기", home: "date.html",
     desc: "나이와 날짜를 한 번에",
     items: [
-      { href: "birthday.html", name: "생년월일 종합",    desc: "생일 하나로 여러 답을 한 번에" },
-      { href: "age.html",      name: "만나이",          desc: "오늘 기준으로 몇 살인지" },
-      { href: "dday.html",     name: "디데이",           desc: "남은 날과 지나온 날" },
-      { href: "datecalc.html", name: "날짜 더하기·빼기", desc: "며칠 뒤가 언제인지" },
-      { href: "baby.html",     name: "아기 100일·돌",    desc: "백일과 돌 날짜" }
+      { href: "birthday.html", name: "생년월일 계산기",    desc: "생일 하나로 여러 답을 한 번에" },
+      { href: "age.html",      name: "만나이계산기",          desc: "오늘 기준으로 몇 살인지" },
+      { href: "dday.html",     name: "디데이계산기",           desc: "남은 날과 지나온 날" },
+      { href: "datecalc.html", name: "날짜 더하기·빼기 계산기", desc: "며칠 뒤가 언제인지" },
+      { href: "baby.html",     name: "아기 100일 계산기",    desc: "백일과 돌 날짜" }
     ]
   },
   {
     id: "health", name: "건강계산기", home: "health.html",
     desc: "몸 상태를 숫자로 확인",
     items: [
-      { href: "bmi.html",     name: "BMI 체질량지수", desc: "키와 몸무게로 비만도" },
-      { href: "bmr.html",     name: "기초대사량",     desc: "하루에 쓰는 최소 칼로리" },
-      { href: "calorie.html", name: "하루 필요 칼로리", desc: "활동량까지 넣어서" },
-      { href: "bp.html",      name: "혈압 단계 확인", desc: "학회 기준으로 어느 구간인지" },
-      { href: "walk.html",    name: "걷기 칼로리 소모", desc: "얼마 걸으면 얼마가 소모되는지" }
+      { href: "bmi.html",     name: "BMI 계산기", desc: "키와 몸무게로 비만도" },
+      { href: "bmr.html",     name: "기초대사량 계산기",     desc: "하루에 쓰는 최소 칼로리" },
+      { href: "calorie.html", name: "칼로리 계산기", desc: "활동량까지 넣어서" },
+      { href: "bp.html",      name: "혈압 계산기", desc: "학회 기준으로 어느 구간인지" },
+      { href: "walk.html",    name: "걷기 칼로리 계산기", desc: "얼마 걸으면 얼마가 소모되는지" }
     ]
   },
   {
@@ -63,8 +63,8 @@ var SECTIONS = [
       { href: "lotto.html",      name: "로또당첨번호 조회", desc: "회차별 번호와 등수별 당첨금" },
       { href: "lotto-gen.html",  name: "로또번호 생성기", desc: "조건을 정해서 번호를 뽑습니다" },
       { href: "lotto-stat.html", name: "로또번호 통계",     desc: "출현 횟수와 미출현 기간" },
-      { href: "lotto-my.html",   name: "내 번호",       desc: "저장해 두면 자동으로 대조" },
-      { href: "lotto-tax.html",  name: "당첨금 계산기", desc: "세금 떼고 얼마를 받는지" }
+      { href: "lotto-my.html",   name: "내 로또번호 저장",       desc: "저장해 두면 자동으로 대조" },
+      { href: "lotto-tax.html",  name: "로또 당첨금 계산기", desc: "세금 떼고 얼마를 받는지" }
     ]
   },
   {
