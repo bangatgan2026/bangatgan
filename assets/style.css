@@ -1,7 +1,7 @@
 :root{
   color-scheme:dark;
   --bg:#0E1320; --panel:#151C2B; --card:#1A2233; --card2:#212B3E; --edge:#2A3448;
-  --ink:#EDF1F8; --ink2:#BFC9DA; --dim:#8492A8;
+  --ink:#EDF1F8; --ink2:#BFC9DA; --dim:#8492A8; --dim2:#A3AFC2;
   --gold:#E3B75B; --gold2:#F0CE7E; --ok:#4ED08A; --warn:#F0A64E;
   --y:#FBC400; --bl:#4FB4EE; --r:#FF6E6E; --g:#98A3B4; --gr:#8FC33A;
   --head-h:60px;
@@ -136,7 +136,7 @@ table.t .c{font-size:11.5px;color:var(--dim);font-weight:500}
   padding:14px 16px;text-decoration:none}
 .next a:hover{border-color:#3D4A66}
 .next b{display:block;font-size:14px;font-weight:650;color:var(--ink)}
-.next span{display:block;font-size:12px;color:var(--dim);margin-top:3px;line-height:1.5}
+.next span{display:block;font-size:12px;color:var(--dim2);margin-top:3px;line-height:1.5}
 
 .ad{min-height:250px;border-radius:14px;background:var(--panel);border:1px solid var(--edge);
   display:flex;align-items:center;justify-content:center;color:#3D4759;font-size:11px;
@@ -232,7 +232,7 @@ footer{border-top:1px solid var(--edge);background:#0B0F1A;margin-top:40px}
   padding:18px 20px;text-decoration:none;transition:.15s}
 .toolgrid a:hover{border-color:#3E4B69;background:var(--card2)}
 .toolgrid b{display:block;font-size:15px;font-weight:700;color:var(--ink)}
-.toolgrid span{display:block;font-size:12.5px;color:var(--dim);margin-top:5px;line-height:1.55}
+.toolgrid span{display:block;font-size:12.5px;color:var(--dim2);margin-top:5px;line-height:1.55}
 
 @media(max-width:900px){
   .gnb{padding:8px}
@@ -399,9 +399,10 @@ select{color-scheme:dark}
 .heroart{position:absolute;inset:0;width:100%;height:100%;display:block}
 .herotext{position:relative;z-index:2;padding:30px 32px 34px;max-width:600px}
 .herotext .lab{font-size:12.5px;color:var(--dim);font-weight:600}
-.herotext .big{font-size:33px;font-weight:800;letter-spacing:-.045em;line-height:1.2;margin-top:8px;
+.herotext .big{font-size:33px;font-weight:800;margin:8px 0 0;letter-spacing:-.045em;line-height:1.2;margin-top:8px;
   color:var(--gold2);text-shadow:0 2px 14px rgba(227,183,91,.18)}
 
+.herotext .sig{font-size:14px;color:var(--ink2);font-weight:600;margin-top:9px;letter-spacing:-.01em}
 .herotext .note{font-size:13.5px;color:var(--ink2);margin-top:14px;line-height:1.75;max-width:520px}
 
 /* 참새가 날아와 볍씨를 물고 돌아가는 움직임 */
