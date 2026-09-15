@@ -1031,3 +1031,29 @@ body.hasgobar .fab{display:flex}
   opacity:0;pointer-events:none;margin:0;padding:0;border:0}
 .datetip{margin-bottom:16px}
 .datetip b{color:var(--gold);font-variant-numeric:tabular-nums}
+
+/* ===== 생성기: 바로 뽑기 · 쌓임 목록 · 최근 당첨번호 (v37) ===== */
+.gbtns{display:flex;gap:8px;width:100%}
+.gfast{flex:0 0 38%;height:58px;border-radius:14px;cursor:pointer;
+  background-color:#1E2739;background-image:linear-gradient(180deg,#232D42,#1A2334);
+  border:1px solid #3A4661;color:#C3CEE0;font-weight:700;font-size:15px}
+.gfast:hover{border-color:#56658A;color:#E6ECF7}
+.gfast:disabled{opacity:.5;cursor:default}
+.drawstage .gobar .gbtn{flex:1 1 auto;width:auto}
+@media(max-width:400px){ .gfast{font-size:13.5px;flex:0 0 36%} }
+
+.stackhead{display:flex;align-items:center;gap:10px;margin-top:18px;
+  font-size:12px;color:var(--dim);font-weight:600}
+.stackhead b{color:var(--gold)}
+.stackhead .btn{margin-left:auto}
+.stackdiv{text-align:center;font-size:11px;color:#5A6579;font-weight:600;
+  padding:9px 0 7px;border-top:1px dashed #2E3A54;margin-top:4px}
+
+.ldhead{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.ldhead h2{margin:0}
+.ldhead .btn{margin-left:auto;flex:0 0 auto}
+.ldrow{display:flex;align-items:baseline;gap:8px;margin-bottom:12px}
+.ldno{font-size:17px;font-weight:800;color:var(--gold2)}
+.lddate{font-size:12px;color:var(--dim)}
+.ldballs{display:flex;align-items:center;justify-content:center;gap:7px;flex-wrap:wrap}
+.ldplus{color:var(--dim);font-weight:700;margin:0 2px}

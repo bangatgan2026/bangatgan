@@ -19,7 +19,9 @@ var SECTIONS = [
       { href: "prepay.html",    name: "중도상환수수료",   desc: "미리 갚을 때 드는 돈" },
       { href: "jeonse.html",    name: "전월세 전환",      desc: "전세와 월세 바꿔보기" },
       { href: "insurance.html", name: "4대보험료",        desc: "근로자와 회사 부담액" },
-      { href: "compound.html",  name: "복리 계산",        desc: "매달 넣으면 얼마가 되는지" }
+      { href: "compound.html",  name: "복리 계산",        desc: "매달 넣으면 얼마가 되는지" },
+      { href: "vat.html",       name: "부가세",           desc: "공급가액과 합계금액을 갈라서" },
+      { href: "cartax.html",    name: "자동차세",         desc: "배기량과 연식으로, 취득세까지" }
     ]
   },
   {
@@ -28,7 +30,8 @@ var SECTIONS = [
     items: [
       { href: "acquisition.html", name: "취득세",      desc: "집 살 때 내는 세금" },
       { href: "ltv.html",         name: "대출 한도",   desc: "LTV와 DSR로 얼마까지" },
-      { href: "broker.html",      name: "중개수수료",  desc: "법정 상한요율로 계산" }
+      { href: "broker.html",      name: "중개수수료",  desc: "법정 상한요율로 계산" },
+      { href: "pyeong.html",      name: "평수 계산",   desc: "제곱미터와 평을 서로 바꾸기" }
     ]
   },
   {
@@ -36,7 +39,7 @@ var SECTIONS = [
     desc: "나이와 날짜를 한 번에",
     items: [
       { href: "birthday.html", name: "생년월일 종합",    desc: "생일 하나로 여러 답을 한 번에" },
-      { href: "age.html",      name: "만 나이",          desc: "기준일을 정해서 계산" },
+      { href: "age.html",      name: "만나이",          desc: "오늘 기준으로 몇 살인지" },
       { href: "dday.html",     name: "디데이",           desc: "남은 날과 지나온 날" },
       { href: "datecalc.html", name: "날짜 더하기·빼기", desc: "며칠 뒤가 언제인지" },
       { href: "baby.html",     name: "아기 100일·돌",    desc: "백일과 돌 날짜" }
@@ -57,11 +60,11 @@ var SECTIONS = [
     id: "lotto", name: "로또", home: "lotto.html",
     desc: "역대 당첨번호 조회와 번호 생성기",
     items: [
-      { href: "lotto.html",      name: "역대 로또번호 조회", desc: "회차별 번호와 등수별 당첨금" },
+      { href: "lotto.html",      name: "로또당첨번호 조회", desc: "회차별 번호와 등수별 당첨금" },
       { href: "lotto-gen.html",  name: "로또번호 생성기", desc: "조건을 정해서 번호를 뽑습니다" },
-      { href: "lotto-stat.html", name: "번호 통계",     desc: "출현 횟수와 미출현 기간" },
+      { href: "lotto-stat.html", name: "로또번호 통계",     desc: "출현 횟수와 미출현 기간" },
       { href: "lotto-my.html",   name: "내 번호",       desc: "저장해 두면 자동으로 대조" },
-      { href: "lotto-tax.html",  name: "당첨금 실수령액", desc: "세금 떼고 얼마를 받는지" }
+      { href: "lotto-tax.html",  name: "당첨금 계산기", desc: "세금 떼고 얼마를 받는지" }
     ]
   },
   {
@@ -75,6 +78,9 @@ var SECTIONS = [
       { href: "info-lotto.html",  name: "로또",   desc: "확률, 당첨금과 세금, 수령 방법" }
     ],
     items: [
+      { g:"금융", d:"2026-09-15", href:"info-savings.html",    name:"적금 이자가 생각보다 적은 이유", desc:"연 4%인데 왜 절반일까" },
+      { g:"금융", d:"2026-09-15", href:"info-retire.html",     name:"퇴직금, 회사 계산과 내 계산이 다른 이유", desc:"상여금과 연차수당을 빼먹으면" },
+      { g:"부동산", d:"2026-09-15", href:"info-jeonse-rate.html", name:"전세를 월세로 바꾸자고 할 때", desc:"법정 상한이 5.00%로 올랐습니다" },
       { g:"금융", d:"2026-09-11", href:"info-yearend-plan.html", name:"연말정산은 12월에 끝납니다", desc:"9월부터 12월까지 할 일" },
       { g:"금융", d:"2026-09-08", href:"info-insurance.html", name:"4대보험 요율과 계산 방법", desc:"누가 얼마씩 내는지" },
       { g:"금융", d:"2026-09-08", href:"info-loan.html",      name:"대출 갚는 방식, 뭐가 유리할까", desc:"원리금균등과 원금균등" },
@@ -744,6 +750,12 @@ U.needDate = function(el, name){
     /* 부동산 */
     "acquisition.html":'<path d="M4 10l8-6 8 6v10H4z"/><path d="M12 12v5M10 14h4"/>',
     "ltv.html":       '<path d="M3 20h18M6 20V9l6-5 6 5v11"/><path d="M9 20v-5h6v5"/>',
+    "info-savings.html":     '<path d="M3 7h18v12H3z"/><path d="M3 11h18M7 15h4"/>',
+    "info-retire.html":      '<path d="M4 20v-2a5 5 0 015-5h6a5 5 0 015 5v2"/><circle cx="12" cy="7" r="4"/>',
+    "info-jeonse-rate.html": '<path d="M4 21V9l8-6 8 6v12"/><path d="M9 21v-6h6v6"/>',
+    "vat.html":       '<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/>',
+    "cartax.html":    '<path d="M4 16v-3l2-5h12l2 5v3"/><path d="M4 16h16v3h-3v-3M7 19H4v-3"/><circle cx="7.5" cy="16.5" r="1"/><circle cx="16.5" cy="16.5" r="1"/>',
+    "pyeong.html":    '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M11 10v10"/>',
     "broker.html":    '<path d="M4 21V8l8-5 8 5v13"/><path d="M9 21v-6h6v6"/><circle cx="12" cy="10" r="1.5"/>',
     /* 날짜 */
     "birthday.html":  '<rect x="3" y="10" width="18" height="11" rx="2"/><path d="M12 10V6M9 6a3 3 0 013-3 3 3 0 013 3M3 15h18"/>',

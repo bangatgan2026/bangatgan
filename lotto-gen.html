@@ -7,10 +7,10 @@
 <meta name="color-scheme" content="dark">
 <meta name="naver-site-verification" content="7ea0de7682fd50f2771c43ebd5a723369427b225" />
 <title>로또번호 생성기 | 참새방앗간</title>
-<meta name="description" content="포함할 번호와 제외할 번호를 정해서 무작위로 로또 번호를 뽑습니다. 뽑은 번호는 저장해 두고 회차마다 자동으로 대조합니다.">
+<meta name="description" content="로또번호 생성기. 포함할 번호와 제외할 번호를 정해서 무작위로 번호를 뽑습니다. 뽑은 번호는 저장해 두고 회차마다 자동으로 대조합니다.">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="assets/style.css?v=36">
+<link rel="stylesheet" href="assets/style.css?v=37">
 </head>
 <body data-section="lotto">
 <div class="wrap">
@@ -71,17 +71,33 @@
             <div class="gsum" id="goSum"></div>
             <div class="gcnt" id="segCount"></div>
           </div>
-          <button class="gbtn" id="go">번호 뽑기</button>
+          <div class="gbtns">
+            <button class="gfast" id="goFast">바로 뽑기</button>
+            <button class="gbtn" id="go">번호 뽑기</button>
+          </div>
         </div>
       </div>
 
       <div class="skipnote" id="skipNote" hidden></div>
       <div class="stageballs" id="stage"></div>
+      <div class="stackhead" id="stackHead" hidden>
+        <span>뽑은 번호 <b id="stackCnt">0</b>줄</span>
+        <button class="btn ghost sm" id="btnWipe">목록 비우기</button>
+      </div>
       <div class="stacked" id="stacked"></div>
       <div class="savebar" id="saveBar" hidden>
         <button class="btn ghost sm" style="flex:1" id="btnCopy">번호 복사</button>
         <button class="btn ghost sm" style="flex:1" id="btnSave">저장하기</button>
       </div>
+    </div>
+
+    <div class="card" id="lastDrawCard" hidden>
+      <div class="ldhead">
+        <h2>최근 당첨번호</h2>
+        <a class="btn ghost sm" href="lotto.html">회차별로 보기</a>
+      </div>
+      <div class="ldrow"><span class="ldno" id="ldNo"></span><span class="lddate" id="ldDate"></span></div>
+      <div class="ldballs" id="ldBalls"></div>
     </div>
 
     <div class="ad wide"><span>광고 자리</span></div>
@@ -101,8 +117,8 @@
   </main>
   <aside class="rail"><div class="ad tall"><span>광고 자리</span></div></aside>
 </div>
-<script src="assets/lotto-data.js?v=36"></script>
-<script src="assets/site.js?v=36"></script>
+<script src="assets/lotto-data.js?v=37"></script>
+<script src="assets/site.js?v=37"></script>
 <script>
 (function(){
 "use strict";
@@ -227,7 +243,7 @@ function pick(pool,w,k){
   return out;
 }
 var lastSets=[];
-function run(){
+function run(instant){
   var pool=[],i;
   for(i=1;i<=45;i++) if(state.bans.indexOf(i)<0&&state.picks.indexOf(i)<0) pool.push(i);
   var need=6-state.picks.length;
@@ -262,12 +278,12 @@ function run(){
       window.scrollTo({top:window.scrollY+r.top-150, behavior:'smooth'});
     }
   }
-  spin(out);
+  spin(out, instant);
   return;
 }
 
 /* ---- 한 게임씩 굴러가서 아래에 쌓이는 연출 ---- */
-var stage=$('#stage'), stacked=$('#stacked'), busy=false;
+var stage=$('#stage'), stacked=$('#stacked'), busy=false, anchor=null;
 function makeSlots(){
   stage.innerHTML='';
   for(var i=0;i<6;i++){
@@ -276,13 +292,45 @@ function makeSlots(){
 }
 makeSlots();
 
-function spin(sets){
+function spin(sets, instant){
   if(busy) return;
   busy=true;
   $('#go').disabled=true;
+  $('#goFast').disabled=true;
   $('#saveBar').hidden=true;
-  stacked.innerHTML='';
-  rollOne(sets, 0);
+  /* 이번에 뽑는 줄은 늘 맨 위에, 지난 번호는 그 아래로 밀립니다 */
+  anchor=null;
+  if(stacked.firstChild){
+    var dv=document.createElement('div');
+    dv.className='stackdiv';
+    var t=new Date();
+    dv.textContent=('0'+t.getHours()).slice(-2)+':'+('0'+t.getMinutes()).slice(-2)+' 이전에 뽑은 번호';
+    stacked.insertBefore(dv, stacked.firstChild);
+    anchor=dv;
+  }
+  if(instant){
+    for(var i=0;i<sets.length;i++) addLine(sets, i);
+    finish(sets);
+  } else {
+    rollOne(sets, 0);
+  }
+}
+function finish(sets){
+  $('#stageCap').textContent = sets.length>1
+    ? sets.length+'게임을 뽑았습니다'
+    : '번호를 뽑았습니다';
+  stage.innerHTML='';
+  $('#go').disabled=false;
+  $('#goFast').disabled=false;
+  busy=false;
+  $('#saveBar').hidden=false;
+  trim();
+}
+function trim(){
+  while(stacked.children.length>60) stacked.removeChild(stacked.lastChild);
+  var n=stacked.querySelectorAll('.stackline').length;
+  $('#stackCnt').textContent=n;
+  $('#stackHead').hidden = n===0;
 }
 
 function rollOne(sets, idx){
@@ -317,8 +365,8 @@ function rollOne(sets, idx){
   }
 }
 
-/* 완성된 한 줄을 아래로 내려 쌓습니다 */
-function drop(sets, idx){
+/* 완성된 한 줄을 맨 위에 쌓습니다 (새로 뽑은 것이 늘 위) */
+function addLine(sets, idx){
   var target=sets[idx];
   var line=document.createElement('div');
   line.className='stackline';
@@ -333,8 +381,12 @@ function drop(sets, idx){
   var info=document.createElement('span');
   info.className='sinfo'; info.textContent='합 '+sum+' · 홀'+odd+' 짝'+(6-odd);
   line.appendChild(info);
-  stacked.appendChild(line);
+  stacked.insertBefore(line, anchor);
+  trim();
+}
 
+function drop(sets, idx){
+  addLine(sets, idx);
   stage.classList.add('flash');
   setTimeout(function(){ stage.classList.remove('flash'); },600);
   makeSlots();
@@ -342,17 +394,27 @@ function drop(sets, idx){
   if(idx+1 < sets.length){
     setTimeout(function(){ rollOne(sets, idx+1); }, 420);
   } else {
-    $('#stageCap').textContent = sets.length>1
-      ? sets.length+'게임을 모두 뽑았습니다'
-      : '번호를 뽑았습니다';
-    stage.innerHTML='';
-    $('#go').disabled=false;
-    busy=false;
-    $('#saveBar').hidden=false;
+    finish(sets);
   }
 }
 
-$('#go').onclick=run;
+$('#go').onclick=function(){ run(false); };
+$('#goFast').onclick=function(){ run(true); };
+$('#btnWipe').onclick=function(){ stacked.innerHTML=''; trim(); $('#saveBar').hidden=true; };
+
+/* 최근 당첨번호 한 줄 */
+(function(){
+  if(!window.LOTTO || !D || !D.length) return;
+  var d=D[D.length-1];
+  $('#ldNo').textContent=d.no+'회';
+  $('#ldDate').textContent=d.date;
+  var box=$('#ldBalls'); box.innerHTML='';
+  d.n.forEach(function(x){ box.appendChild(LOTTO.ball(x,'md')); });
+  var plus=document.createElement('span'); plus.className='ldplus'; plus.textContent='+';
+  box.appendChild(plus);
+  box.appendChild(LOTTO.ball(d.b,'md'));
+  $('#lastDrawCard').hidden=false;
+})();
 $('#btnClear').onclick=function(){
   state.picks=[]; state.bans=[]; renderGrid();
   $('#cntPick').textContent=0; $('#cntBan').textContent=0; sumUp();

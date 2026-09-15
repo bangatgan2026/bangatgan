@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0E1320">
+<meta name="color-scheme" content="dark">
+<meta name="naver-site-verification" content="7ea0de7682fd50f2771c43ebd5a723369427b225" />
+<title>평수 계산기 — 제곱미터 평 변환 | 참새방앗간</title>
+<meta name="description" content="평수 계산기. 제곱미터를 평으로, 평을 제곱미터로 바로 바꿉니다. 전용면적과 공급면적 환산, 아파트 평형 조견표, 가로세로 면적 계산까지 함께 확인합니다.">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="assets/style.css?v=37">
+</head>
+<body data-section="estate">
+<div class="wrap">
+  <aside class="side"></aside>
+  <main>
+    <h1 class="page-h">평수 계산기</h1>
+    <p class="page-lead">한쪽에 넣으면 반대쪽이 바로 바뀝니다. 1평은 3.305785㎡입니다.</p>
+
+    <div class="card">
+      <h2>제곱미터 ↔ 평</h2>
+      <div class="row2">      <div class="field">
+        <label for="m2">제곱미터 </label>
+        <div class="inbox"><input id="m2" inputmode="decimal" placeholder="예: 84.95"><span class="unit">㎡</span></div>
+      </div>      <div class="field">
+        <label for="py">평 </label>
+        <div class="inbox"><input id="py" inputmode="decimal" placeholder="예: 25.7"><span class="unit">평</span></div>
+      </div></div>
+      <div class="tipbox">둘 중 아는 쪽 하나만 넣으면 됩니다. 버튼을 누르지 않아도 바로 바뀝니다.</div>
+    </div>
+
+    <div id="out" hidden>
+      <div class="result">
+        <div class="lab">면적</div>
+        <div class="big" id="big"></div>
+        <div class="note" id="note"></div>
+        <div class="kpi" id="kpi"></div>
+      </div>
+
+      <div class="card">
+        <h2>전용면적으로 넣었다면</h2>
+        <p class="sub">분양 광고에 적힌 평형은 공급면적 기준입니다. 전용률을 넣으면 몇 평형으로 불리는지 나옵니다.</p>
+        <div class="field">
+          <label for="rate">전용률 <span class="hint">아파트 보통 70~80%</span></label>
+          <div class="inbox"><input id="rate" inputmode="decimal" value="75"><span class="unit">%</span></div>
+        </div>
+        <table class="t"><tbody id="rows2"></tbody></table>
+      </div>
+
+      <div class="card">
+        <h2>이어서 보기</h2>
+        <div class="next" id="nextTools"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>가로세로로 재서 넣기</h2>
+      <p class="sub">방이나 땅의 가로와 세로를 재서 넣으면 면적과 평수가 나옵니다.</p>
+      <div class="row2">      <div class="field">
+        <label for="wd">가로 </label>
+        <div class="inbox"><input id="wd" inputmode="decimal" placeholder="가로"><span class="unit">m</span></div>
+      </div>      <div class="field">
+        <label for="ht">세로 </label>
+        <div class="inbox"><input id="ht" inputmode="decimal" placeholder="세로"><span class="unit">m</span></div>
+      </div></div>
+      <div class="tipbox" id="wh">가로와 세로를 넣으면 여기에 면적이 나옵니다.</div>
+    </div>
+
+    <div class="ad wide"><span>광고 자리</span></div>
+
+    <div class="card">
+      <h2>아파트 평형 조견표</h2>
+      <p class="sub">많이 쓰는 전용면적을 평으로 바꾼 값입니다. 오른쪽은 전용률 75%로 잡았을 때 흔히 부르는 평형입니다.</p>
+      <table class="t"><tbody id="rows3"></tbody></table>
+    </div>
+
+    <div class="card">
+      <h2>평수를 볼 때 알아둘 것</h2>
+      <div class="prose">
+
+        <h3>1평은 3.305785㎡입니다</h3>
+        <p>평은 한 변이 여섯 자인 정사각형의 넓이에서 온 단위입니다. 미터로 고치면 약 1.818m 곱하기 1.818m, 즉 3.305785㎡가 됩니다.</p>
+        <p>간단히 어림잡을 때는 <b>제곱미터를 3.3으로 나누면</b> 대략 맞습니다. 84㎡라면 84 ÷ 3.3 = 약 25.4평입니다.</p>
+
+        <h3>84㎡인데 왜 34평이라고 부를까</h3>
+        <p>이게 사람들이 가장 많이 헷갈려 하는 부분입니다. 답은 <b>두 숫자가 서로 다른 면적을 가리키기 때문</b>입니다.</p>
+        <p>84㎡는 <b>전용면적</b>입니다. 현관문을 열고 들어가면 나오는, 우리 집만 쓰는 공간입니다. 평으로 바꾸면 25.4평입니다.</p>
+        <p>반면 34평의 34는 <b>공급면적</b>을 평으로 바꾼 숫자입니다. 공급면적은 전용면적에 계단, 복도, 엘리베이터처럼 이웃과 나눠 쓰는 공간의 몫을 더한 것입니다.</p>
+        <p>그래서 같은 집을 두고 84㎡라고도 하고 34평이라고도 합니다. 둘 다 맞는 말입니다.</p>
+
+        <h3>전용률이 낮으면 손해일까</h3>
+        <p>전용률은 공급면적에서 전용면적이 차지하는 비율입니다. 같은 34평이라도 전용률이 높으면 실제로 쓰는 공간이 넓습니다.</p>
+        <p>다만 낮다고 무조건 손해는 아닙니다. 복도가 넓거나 엘리베이터가 많으면 전용률은 떨어지지만 사는 것은 더 편할 수 있습니다. 오피스텔이 아파트보다 전용률이 낮은 것도 이런 이유입니다.</p>
+
+        <h3>계약면적은 또 다릅니다</h3>
+        <p>공급면적에 지하주차장과 관리사무소 몫까지 더한 것이 계약면적입니다. 분양 계약서에 적히는 숫자라 가장 큽니다. 평형을 말할 때는 보통 쓰지 않습니다.</p>
+
+        <div class="callout"><b>2007년부터 아파트 면적은 제곱미터로 표기하게 되어 있습니다.</b><br>
+        평은 법정 단위가 아니라 관습적으로 쓰는 말입니다. 계약서나 등기부에는 제곱미터만 적힙니다.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>자주 묻는 질문</h2>
+      <div class="faq">
+        <h3>1평은 정확히 몇 제곱미터인가요</h3>
+        <p>3.305785㎡입니다. 반대로 1㎡는 약 0.3025평입니다. 어림할 때는 3.3으로 나누거나 곱하면 됩니다.</p>
+        <h3>59㎡는 몇 평인가요</h3>
+        <p>전용면적 59㎡는 17.8평입니다. 공급면적으로는 보통 24~25평형이라고 부릅니다.</p>
+        <h3>전용면적과 공급면적 중 무엇을 봐야 하나요</h3>
+        <p>실제로 쓰는 공간이 궁금하면 전용면적을 봅니다. 아파트값을 비교할 때도 전용면적 기준으로 보는 것이 정확합니다.</p>
+        <h3>땅 면적도 평으로 바꿀 수 있나요</h3>
+        <p>같은 방식으로 바꾸면 됩니다. 다만 넓은 땅은 보통 평 대신 제곱미터나 헥타르를 씁니다. 1헥타르는 10,000㎡, 약 3,025평입니다.</p>
+      </div>
+    </div>
+  </main>
+  <aside class="rail"><div class="ad tall"><span>광고 자리</span></div></aside>
+</div>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"1평은 정확히 몇 제곱미터인가요","acceptedAnswer":{"@type":"Answer","text":"3.305785제곱미터입니다. 반대로 1제곱미터는 약 0.3025평입니다. 어림할 때는 3.3으로 나누거나 곱하면 됩니다."}},
+{"@type":"Question","name":"59제곱미터는 몇 평인가요","acceptedAnswer":{"@type":"Answer","text":"전용면적 59제곱미터는 17.8평입니다. 공급면적으로는 보통 24~25평형이라고 부릅니다."}},
+{"@type":"Question","name":"전용면적과 공급면적 중 무엇을 봐야 하나요","acceptedAnswer":{"@type":"Answer","text":"실제로 쓰는 공간이 궁금하면 전용면적을 봅니다. 아파트값을 비교할 때도 전용면적 기준으로 보는 것이 정확합니다."}},
+{"@type":"Question","name":"땅 면적도 평으로 바꿀 수 있나요","acceptedAnswer":{"@type":"Answer","text":"같은 방식으로 바꾸면 됩니다. 다만 넓은 땅은 보통 평 대신 제곱미터나 헥타르를 씁니다. 1헥타르는 10000제곱미터, 약 3025평입니다."}}]}
+</script>
+
+<script src="assets/site.js?v=37"></script>
+<script>
+(function(){
+"use strict";
+var $=function(s){return document.querySelector(s);};
+var PY=3.305785;
+function row(k,v){ return '<tr><td>'+k+'</td><td>'+v+'</td></tr>'; }
+function n1(v){ return (Math.round(v*10)/10).toLocaleString(); }
+function n2(v){ return (Math.round(v*100)/100).toLocaleString(); }
+function val(el){ var v=parseFloat(String(el.value).replace(/[^0-9.]/g,'')); return isNaN(v)?0:v; }
+
+var lock=false;
+function fromM2(){
+  if(lock) return; lock=true;
+  var m=val($('#m2'));
+  $('#py').value = m>0 ? n2(m/PY) : '';
+  lock=false; show(m);
+}
+function fromPy(){
+  if(lock) return; lock=true;
+  var p=val($('#py'));
+  $('#m2').value = p>0 ? n2(p*PY) : '';
+  lock=false; show(p*PY);
+}
+
+function show(m){
+  if(!(m>0)){ $('#out').hidden=true; return; }
+  var p=m/PY;
+  $('#out').hidden=false;
+  $('#big').textContent = n2(m)+'㎡ = '+n2(p)+'평';
+  $('#note').textContent = '전용면적으로 '+n1(p)+'평입니다. 아래에서 공급면적 기준 평형도 확인할 수 있습니다.';
+  $('#kpi').innerHTML=
+    '<div><b>'+n2(p)+'평</b><span>평</span></div>'+
+    '<div><b>'+n2(m)+'㎡</b><span>제곱미터</span></div>'+
+    '<div><b>'+n1(Math.sqrt(m))+'m</b><span>정사각형이면 한 변</span></div>';
+  supply(m);
+}
+
+function supply(m){
+  var r=val($('#rate'));
+  if(!(r>0)||r>100) r=75;
+  var sup=m/(r/100);
+  var supPy=sup/PY;
+  var html='<tr><th>구분</th><th>면적</th></tr>';
+  html+=row('전용면적', n2(m)+'㎡ · '+n2(m/PY)+'평');
+  html+=row('공급면적 <div class="c">전용률 '+n1(r)+'% 기준</div>', n2(sup)+'㎡ · '+n2(supPy)+'평');
+  html+='<tr class="sum"><td>흔히 부르는 평형</td><td>'+Math.round(supPy)+'평형</td></tr>';
+  $('#rows2').innerHTML=html;
+  $('#nextTools').innerHTML=
+    '<a href="acquisition.html"><b>취득세 계산기</b><span>집 살 때 내는 세금</span></a>'+
+    '<a href="broker.html"><b>중개수수료 계산기</b><span>법정 상한요율로 계산</span></a>';
+}
+
+$('#m2').addEventListener('input', fromM2);
+$('#py').addEventListener('input', fromPy);
+$('#rate').addEventListener('input', function(){ var m=val($('#m2')); if(m>0) supply(m); });
+
+/* 가로세로 */
+function wh(){
+  var a=val($('#wd')), b=val($('#ht'));
+  if(!(a>0)||!(b>0)){ $('#wh').textContent='가로와 세로를 넣으면 여기에 면적이 나옵니다.'; return; }
+  var m=a*b;
+  $('#wh').innerHTML='<b>'+n2(m)+'㎡ · '+n2(m/PY)+'평</b>입니다. 위 칸에 넣어서 평형까지 보려면 제곱미터 칸에 '+n2(m)+'을 넣으세요.';
+}
+$('#wd').addEventListener('input', wh);
+$('#ht').addEventListener('input', wh);
+
+/* 조견표 */
+(function(){
+  var list=[39,49,59,74,84,101,114,134,165];
+  var html='<tr><th>전용면적</th><th>평</th><th>흔히 부르는 평형</th></tr>';
+  list.forEach(function(m){
+    var p=m/PY, sup=(m/0.75)/PY;
+    html+='<tr><td>'+m+'㎡</td><td>'+n1(p)+'평</td><td>'+Math.round(sup)+'평형</td></tr>';
+  });
+  $('#rows3').innerHTML=html;
+})();
+
+})();
+</script>
+</body>
+</html>

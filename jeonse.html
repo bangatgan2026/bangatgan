@@ -6,18 +6,18 @@
 <meta name="theme-color" content="#0E1320">
 <meta name="color-scheme" content="dark">
 <meta name="naver-site-verification" content="7ea0de7682fd50f2771c43ebd5a723369427b225" />
-<title>전월세 전환 계산기 | 참새방앗간</title>
-<meta name="description" content="전세보증금을 월세로 바꾸거나 월세를 전세로 환산할 때의 금액을 전월세전환율로 계산합니다.">
+<title>전월세 전환율 계산기 | 참새방앗간</title>
+<meta name="description" content="전월세 전환율 계산기. 전세보증금을 월세로 바꾸거나 월세를 전세로 환산할 때의 금액을 계산합니다.">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="assets/style.css?v=36">
+<link rel="stylesheet" href="assets/style.css?v=37">
 </head>
 <body data-section="money">
 
 <div class="wrap">
   <aside class="side"></aside>
   <main>
-    <h1 class="page-h">전월세 전환 계산기</h1>
+    <h1 class="page-h">전월세 전환율 계산기</h1>
     <p class="page-lead">보증금을 낮추고 월세를 내는 조건이 유리한지, 숫자로 비교해 보세요.</p>
 
     <div class="card">
@@ -29,8 +29,8 @@
         <label for="newdep">바꿀 보증금 <span class="hint">월세로 돌릴 때 남길 보증금</span></label>
         <div class="inbox"><input id="newdep" inputmode="numeric" placeholder="예: 5000 (5천만원)"><span class="unit">만원</span></div>
       </div>      <div class="field">
-        <label for="rate">전환율 <span class="hint">보통 4~6%</span></label>
-        <div class="inbox"><input id="rate" type="text" placeholder="이율" value="5.5"><span class="unit">%</span></div>
+        <label for="rate">전환율 <span class="hint">법정 상한 5.00% (기준금리 3.00% + 2%)</span></label>
+        <div class="inbox"><input id="rate" type="text" placeholder="이율" value="5.0"><span class="unit">%</span></div>
       </div>
       <button class="btn" id="go">전환 금액 계산</button>
     </div>
@@ -65,9 +65,9 @@
         <p>전세보증금 중에서 월세로 돌리는 금액에 전환율을 곱하고 12로 나누면 월세가 됩니다.</p>
         <div class="callout"><b>월세 = (기존 보증금 − 새 보증금) × 전환율 ÷ 12</b></div>
         <h3>전환율은 마음대로 정할 수 없습니다</h3>
-        <p>주택임대차보호법은 전환율의 상한을 정해두고 있습니다. 기준금리에 일정 비율을 더한 값과 법에서 정한 비율 중 낮은 쪽입니다. 다만 이 상한은 <b>계약 기간 중에 전세를 월세로 바꿀 때</b> 적용되고, 새로 계약을 맺을 때는 강제되지 않습니다.</p>
+        <p>주택임대차보호법은 전환율의 상한을 정해두고 있습니다. <b>한국은행 기준금리 + 2%</b>와 연 10% 중 낮은 쪽입니다. 기준금리가 3.00%인 지금은 <b>5.00%</b>가 상한입니다. 다만 이 상한은 <b>계약 기간 중에 전세를 월세로 바꿀 때</b> 적용되고, 새로 계약을 맺을 때는 강제되지 않습니다.</p>
         <h3>어느 쪽이 유리한가</h3>
-        <p>단순하게 보면 <b>전환율과 예금 금리를 비교</b>하면 됩니다. 보증금을 돌려받아 예금에 넣었을 때 받는 이자보다 내야 하는 월세가 크면 전세가 유리합니다. 전환율 5.5%인데 예금 금리가 3%라면 월세로 돌리는 게 손해입니다.</p>
+        <p>단순하게 보면 <b>전환율과 예금 금리를 비교</b>하면 됩니다. 보증금을 돌려받아 예금에 넣었을 때 받는 이자보다 내야 하는 월세가 크면 전세가 유리합니다. 전환율 5%인데 예금 금리가 3%라면 월세로 돌리는 게 손해입니다.</p>
         <p>다만 대출을 끼고 있다면 계산이 달라집니다. 전세자금대출 금리가 전환율보다 낮으면 전세가 유리하고, 반대면 월세가 나을 수 있습니다.</p>
         <div class="callout"><b>세금과 공제도 함께 보세요.</b><br>
         월세는 조건을 갖추면 세액공제를 받을 수 있고, 전세자금대출 이자도 소득공제 대상이 될 수 있습니다. 실제 부담은 이걸 반영해서 따져야 정확합니다.</div>
@@ -78,7 +78,7 @@
   <aside class="rail"><div class="ad tall"><span>광고 자리</span></div></aside>
 </div>
 
-<script src="assets/site.js?v=36"></script>
+<script src="assets/site.js?v=37"></script>
 <script>
 (function(){
 "use strict";
