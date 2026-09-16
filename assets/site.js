@@ -912,22 +912,26 @@ U.needDate = function(el, name){
 
    그림은 세로에 맞춰 확대되므로(slice), 상자가 세로로 길어지면
    좌우가 잘려 나갑니다. 글자가 많을수록 상자가 길어져 더 잘립니다.
-   폰에서는 viewBox 를 방앗간 쪽으로 좁혀, 잘려도 방앗간이 항상
-   가운데 남도록 합니다. 참새 경로는 style.css 의 @media(max-width:719px)
-   안 @keyframes fly 가 이 범위에 맞춰져 있습니다.
+   방앗간은 오른쪽 끝(x 636~806)에 있어서 폰에서는 통째로 잘렸습니다.
+
+   고치는 방법: 폰에서는 자르는 기준을 가운데(xMid)가 아니라
+   오른쪽(xMax)으로 바꾸고, viewBox 오른쪽 끝을 840으로 당깁니다.
+   그러면 잘리는 쪽은 왼쪽 하늘이 되고, 방앗간은 늘 오른쪽에 남습니다.
+   ★ 가운데로 옮기지 말 것. 방앗간은 오른쪽 구석에 있어야 합니다.
+
    ★ 719px 은 style.css 와 반드시 같아야 합니다. 한쪽만 고치면
      참새가 안 보이는 자리를 날아다니게 됩니다.
    ============================================================ */
 (function () {
-  var WIDE = "0 0 900 260";      /* 넓은 화면: 그림 전체 */
-  var NARROW = "480 26 420 260"; /* 좁은 화면: 방앗간(636~806, 84~229)을 한가운데에 */
+  var WIDE   = { vb: "0 0 900 260", par: "xMidYMid slice" };  /* 넓은 화면: 그림 전체 */
+  var NARROW = { vb: "0 0 840 260", par: "xMaxYMid slice" };  /* 좁은 화면: 오른쪽에 붙임 */
 
   function fit() {
     var svg = document.querySelector(".heroart");
     if (!svg) return;
-    var narrow = window.matchMedia("(max-width:719px)").matches;
-    var want = narrow ? NARROW : WIDE;
-    if (svg.getAttribute("viewBox") !== want) svg.setAttribute("viewBox", want);
+    var m = window.matchMedia("(max-width:719px)").matches ? NARROW : WIDE;
+    if (svg.getAttribute("viewBox") !== m.vb) svg.setAttribute("viewBox", m.vb);
+    if (svg.getAttribute("preserveAspectRatio") !== m.par) svg.setAttribute("preserveAspectRatio", m.par);
   }
 
   document.addEventListener("DOMContentLoaded", fit);
