@@ -141,6 +141,17 @@ var U = {
     get: function (k, d) { try { return JSON.parse(localStorage.getItem(k)) || d; } catch (e) { return d; } },
     set: function (k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
   },
+  /* 구글 애널리틱스로 "이 버튼이 눌렸다"를 보냅니다.
+     gtag 가 없는 환경(광고차단·오프라인)에서도 오류가 나지 않도록 감쌉니다.
+     쓰는 법: U.track("share_click", { page: "loan.html" }) */
+  track: function (name, params) {
+    try {
+      if (typeof gtag !== "function") return;
+      var p = params || {};
+      p.page_path = location.pathname.replace(/^\//, "") || "index.html";
+      gtag("event", name, p);
+    } catch (e) {}
+  },
   toast: function (msg) {
     var t = document.getElementById("toast");
     if (!t) { t = document.createElement("div"); t.id = "toast"; t.className = "toast"; document.body.appendChild(t); }
@@ -490,10 +501,12 @@ var U = {
         favs.splice(i, 1);
         U.store.set("favs", favs);
         U.toast("자주 쓰는 것에서 뺐습니다");
+        U.track("favorite_remove", { tool: (item ? item.name : page) });
       } else {
         favs.push(page);
         U.store.set("favs", favs);
         U.toast("왼쪽 '자주 쓰는 것'에 담았습니다");
+        U.track("favorite_add", { tool: (item ? item.name : page) });
       }
       syncFav(); renderFav();
       /* 저장이 안 되는 환경이면 알려 줍니다 */
@@ -508,6 +521,7 @@ var U = {
       var h1 = document.querySelector("h1");
       var title = item ? item.name + " · 참새방앗간"
                 : (h1 ? h1.textContent.trim() + " · 참새방앗간" : document.title);
+      U.track("share_click", { tool: (item ? item.name : (h1 ? h1.textContent.trim() : page)) });
       function fallback() { showShareBox(title, url); }
       try {
         if (navigator.share) {
@@ -849,4 +863,74 @@ U.needDate = function(el, name){
   document.addEventListener("DOMContentLoaded", run);
   if (document.readyState !== "loading") run();
   setTimeout(run, 120);
+})();
+
+/* ============================================================
+   어떤 버튼이 실제로 눌리는지 기록합니다 (구글 애널리틱스)
+
+   페이지마다 코드를 넣지 않고, 문서 전체에서 클릭을 한 번에 받아
+   버튼의 id 를 보고 종류를 가립니다. 새 계산기를 만들 때
+   실행 버튼 id 를 'go' 로 두면 따로 손댈 필요가 없습니다.
+   ============================================================ */
+(function () {
+  /* id → 보낼 사건 이름 */
+  var MAP = {
+    go:       "calc_run",      goA:  "calc_run",   goB: "calc_run",
+    goSum:    "calc_run",
+    goFast:   "lotto_draw_fast",
+    btnCopy:  "lotto_copy",    btnSave: "lotto_save",
+    btnClear: "lotto_clear",   btnWipe: "lotto_wipe"
+  };
+
+  function toolName() {
+    var page = (location.pathname.split("/").pop() || "index.html");
+    if (typeof SECTIONS !== "undefined") {
+      for (var i = 0; i < SECTIONS.length; i++) {
+        var it = SECTIONS[i].items;
+        for (var j = 0; j < it.length; j++) if (it[j].href === page) return it[j].name;
+      }
+    }
+    return page;
+  }
+
+  document.addEventListener("click", function (e) {
+    var b = e.target && e.target.closest ? e.target.closest("button") : null;
+    if (!b) return;
+
+    var name = MAP[b.id];
+
+    /* 로또 번호 뽑기 버튼은 페이지마다 id 가 'go' 라서 따로 가립니다 */
+    if (b.id === "go" && b.classList.contains("gbtn")) name = "lotto_draw";
+
+    if (!name) return;
+    U.track(name, { tool: toolName() });
+  }, true);
+})();
+
+/* ============================================================
+   첫 화면 그림: 좁은 화면에서 방앗간이 잘리지 않게 합니다
+
+   그림은 세로에 맞춰 확대되므로(slice), 상자가 세로로 길어지면
+   좌우가 잘려 나갑니다. 글자가 많을수록 상자가 길어져 더 잘립니다.
+   폰에서는 viewBox 를 방앗간 쪽으로 좁혀, 잘려도 방앗간이 항상
+   가운데 남도록 합니다. 참새 경로는 style.css 의 @media(max-width:719px)
+   안 @keyframes fly 가 이 범위에 맞춰져 있습니다.
+   ★ 719px 은 style.css 와 반드시 같아야 합니다. 한쪽만 고치면
+     참새가 안 보이는 자리를 날아다니게 됩니다.
+   ============================================================ */
+(function () {
+  var WIDE = "0 0 900 260";      /* 넓은 화면: 그림 전체 */
+  var NARROW = "480 26 420 260"; /* 좁은 화면: 방앗간(636~806, 84~229)을 한가운데에 */
+
+  function fit() {
+    var svg = document.querySelector(".heroart");
+    if (!svg) return;
+    var narrow = window.matchMedia("(max-width:719px)").matches;
+    var want = narrow ? NARROW : WIDE;
+    if (svg.getAttribute("viewBox") !== want) svg.setAttribute("viewBox", want);
+  }
+
+  document.addEventListener("DOMContentLoaded", fit);
+  if (document.readyState !== "loading") fit();
+  window.addEventListener("resize", fit);
 })();
