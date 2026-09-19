@@ -82,6 +82,14 @@ function normB(list){
       b: Number(r.bonus_no),
       w1: Number(d1.winners || 0),
       w1amt: Number(d1.prize || 0),
+      w2: Number((dv[1] || {}).winners || 0),
+      w2amt: Number((dv[1] || {}).prize || 0),
+      w3: Number((dv[2] || {}).winners || 0),
+      w3amt: Number((dv[2] || {}).prize || 0),
+      w4: Number((dv[3] || {}).winners || 0),
+      w4amt: Number((dv[3] || {}).prize || 0),
+      w5: Number((dv[4] || {}).winners || 0),
+      w5amt: Number((dv[4] || {}).prize || 0),
       sales: Number(r.total_sales_amount || 0)
     });
   });
@@ -90,6 +98,23 @@ function normB(list){
 
 function same(a, b){
   return a.b === b.b && a.n.join(',') === b.n.join(',') && a.date === b.date;
+}
+
+/* 번호 모양 검사 — 1~45 서로 다른 6개, 보너스 1개, 날짜 모양 */
+function sane(d){
+  if (!d || !Array.isArray(d.n) || d.n.length !== 6) return false;
+  if (new Set(d.n).size !== 6) return false;
+  if (!d.n.every(function(x){ return Number.isInteger(x) && x >= 1 && x <= 45; })) return false;
+  if (!Number.isInteger(d.b) || d.b < 1 || d.b > 45 || d.n.indexOf(d.b) !== -1) return false;
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(d.date)) return false;
+  return true;
+}
+
+/* 추첨은 토요일 20:45(한국) = 11:45 UTC 입니다. 그 뒤로 몇 시간 지났는지 */
+function hoursSinceDraw(date){
+  const t = Date.parse(date + 'T11:45:00Z');
+  if (isNaN(t)) return 0;
+  return (Date.now() - t) / 3600000;
 }
 
 /* 1회 추첨일이 2002-12-07(토)이므로, 그 뒤 지난 주 수 + 1 이 대략 최신 회차입니다. */
@@ -125,6 +150,27 @@ function expectedDrawNo(){
   let added = 0;
   let failed = null;
 
+  /* 최근 3회차를 두 출처와 다시 맞춰 봅니다.
+     한 곳만 보고 넣은 회차가 나중에 틀린 것으로 드러나면 여기서 잡힙니다.
+     고치지는 않고 크게 알리기만 합니다. 사람이 보고 판단할 일입니다. */
+  draws.slice(-3).forEach(function(d){
+    [['A', A.get(d.drwNo)], ['B', B.get(d.drwNo)]].forEach(function(pair){
+      const src = pair[1];
+      if (!src) return;
+      if (src.n.join(',') !== d.n.join(',') || src.b !== d.b || src.date !== d.date) {
+        failed = '이미 넣은 ' + d.drwNo + '회가 출처 ' + pair[0] + '와 다릅니다. 사람이 확인해야 합니다.\n' +
+                 '  우리: ' + d.date + ' ' + d.n.join(',') + ' +' + d.b + '\n' +
+                 '  출처: ' + src.date + ' ' + src.n.join(',') + ' +' + src.b;
+      }
+    });
+  });
+  if (failed) {
+    console.error('');
+    console.error('=== 문제가 있습니다 ===');
+    console.error(failed);
+    process.exit(1);
+  }
+
   for (let no = mine + 1; no <= Math.max(maxA, maxB); no++) {
     if (have.has(no)) continue;
     const a = A.get(no), b = B.get(no);
@@ -143,10 +189,27 @@ function expectedDrawNo(){
       continue;
     }
 
-    /* 한 곳에만 있으면 아직 반영 중일 수 있으니 이번에는 넘어갑니다.
-       다음 실행(일요일)에 두 곳이 맞춰지면 그때 들어갑니다. */
-    console.log(no + '회는 한 곳에만 있습니다. 이번에는 넣지 않습니다. (A:' + !!a + ' / B:' + !!b + ')');
-    break;
+    /* 한 곳에만 있는 경우.
+       추첨 직후에는 한쪽 미러가 늦을 수 있으니 처음에는 기다립니다.
+       그런데 한쪽이 몇 주씩 안 올라오는 일도 있어서, 추첨 후 3시간이 지나면
+       한 곳만 보고도 넣습니다. 대신 아래 두 가지로 안전을 지킵니다.
+         · 넣기 전에 번호 모양을 검사합니다 (sane)
+         · 다음 실행 때 최근 회차를 두 출처와 다시 맞춰 봅니다 (recheck) */
+    const one = a || b;
+    if (!one) break;
+    if (!sane(one)) {
+      failed = no + '회 번호 모양이 이상해서 넣지 않았습니다: ' + JSON.stringify(one);
+      break;
+    }
+    if (hoursSinceDraw(one.date) < 3) {
+      console.log(no + '회는 한 곳에만 있고 추첨 직후입니다. 다음 실행 때 다시 봅니다. (A:' + !!a + ' / B:' + !!b + ')');
+      break;
+    }
+    draws.push(one);
+    added++;
+    console.log('추가(한 곳만):', no, one.date, one.n.join(','), '+' + one.b,
+                '/ 출처 ' + (a ? 'A' : 'B') + ' 단독. 다음 실행 때 다시 맞춰 봅니다');
+    continue;
   }
 
   /* 날짜상 이미 나왔어야 할 회차가 양쪽 어디에도 없으면 알려야 합니다 */
