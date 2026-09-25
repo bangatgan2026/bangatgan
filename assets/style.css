@@ -1072,3 +1072,12 @@ body.hasgobar .fab{display:flex}
 .lddate{font-size:12px;color:var(--dim)}
 .ldballs{display:flex;align-items:center;justify-content:center;gap:7px;flex-wrap:wrap}
 .ldplus{color:var(--dim);font-weight:700;margin:0 2px}
+
+/* 애드센스 승인 전: 빈 광고 자리를 숨김. 승인 후 광고 코드를 넣을 때 이 블록을 지울 것 */
+.ad{display:none!important}
+aside.rail{display:none!important}
+@media(min-width:1181px){
+  .wrap{grid-template-columns:212px minmax(0,1fr);max-width:1180px}
+  .wrap.two{grid-template-columns:minmax(0,1fr)}
+}
+/* 승인 후 되돌릴 때: 위 .ad / aside.rail / @media 세 덩어리를 함께 지울 것 */
