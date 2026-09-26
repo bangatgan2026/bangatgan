@@ -72,12 +72,14 @@ var SECTIONS = [
     desc: "알아두면 도움이 되는 이야기",
     catOnly: true,
     cats: [
-      { href: "info-money.html",  name: "금융",   desc: "보험료, 대출, 실업급여, 연말정산" },
-      { href: "info-estate.html", name: "부동산", desc: "집 살 때 드는 돈, 대출 한도, 전세" },
+      { href: "info-money.html",  name: "금융",   desc: "보험료, 대출, 부가세, 연말정산" },
+      { href: "info-estate.html", name: "부동산", desc: "집 살 때 드는 돈, 평수, 대출 한도, 전세" },
       { href: "info-life.html",   name: "생활",   desc: "만 나이, 기초연금" },
       { href: "info-lotto.html",  name: "로또",   desc: "확률, 당첨금과 세금, 수령 방법" }
     ],
     items: [
+      { g:"금융", d:"2026-09-27", href:"info-vat-oct.html",   name:"10월 부가세 고지서, 왜 오고 언제까지 내나", desc:"2026년 기한은 10월 26일" },
+      { g:"부동산", d:"2026-09-27", href:"info-pyeong.html",  name:"84㎡ 아파트가 왜 34평일까", desc:"전용면적과 공급면적" },
       { g:"금융", d:"2026-09-15", href:"info-savings.html",    name:"적금 이자가 생각보다 적은 이유", desc:"연 4%인데 왜 절반일까" },
       { g:"금융", d:"2026-09-15", href:"info-retire.html",     name:"퇴직금, 회사 계산과 내 계산이 다른 이유", desc:"상여금과 연차수당을 빼먹으면" },
       { g:"부동산", d:"2026-09-15", href:"info-jeonse-rate.html", name:"전세를 월세로 바꾸자고 할 때", desc:"법정 상한이 5.00%로 올랐습니다" },
@@ -764,6 +766,8 @@ U.needDate = function(el, name){
     /* 부동산 */
     "acquisition.html":'<path d="M4 10l8-6 8 6v10H4z"/><path d="M12 12v5M10 14h4"/>',
     "ltv.html":       '<path d="M3 20h18M6 20V9l6-5 6 5v11"/><path d="M9 20v-5h6v5"/>',
+    "info-vat-oct.html":     '<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M12 15v3"/>',
+    "info-pyeong.html":      '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M11 10v10M15 14h3"/>',
     "info-savings.html":     '<path d="M3 7h18v12H3z"/><path d="M3 11h18M7 15h4"/>',
     "info-retire.html":      '<path d="M4 20v-2a5 5 0 015-5h6a5 5 0 015 5v2"/><circle cx="12" cy="7" r="4"/>',
     "info-jeonse-rate.html": '<path d="M4 21V9l8-6 8 6v12"/><path d="M9 21v-6h6v6"/>',
