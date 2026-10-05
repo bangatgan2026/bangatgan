@@ -80,6 +80,11 @@ var SECTIONS = [
       { href: "info-lotto.html",  name: "로또",   desc: "확률, 당첨금과 세금, 수령 방법" }
     ],
     items: [
+      { g:"생활", d:"2026-10-05", t:"dday.html", href:"info-dday.html", name:"디데이 계산법 총정리: 기념일 100일 세는 법과 당일 포함 기준", desc:"같은 100일인데 하루가 달라지는 이유" },
+      { g:"생활", d:"2026-10-05", t:"walk.html", href:"info-walk.html", name:"걷기 1만보 칼로리 계산: 체중별 소모량과 속도별 걸리는 시간 완벽 정리", desc:"체중 60kg과 80kg은 98kcal 차이가 납니다" },
+      { g:"생활", d:"2026-10-05", t:"calorie.html", href:"info-calorie.html", name:"하루 필요 칼로리 계산법: 성별·활동량별 권장 칼로리 완벽 정리", desc:"활동량에 따라 하루 860kcal 차이가 납니다" },
+      { g:"생활", d:"2026-10-05", t:"bmr.html", href:"info-bmr.html", name:"기초대사량 계산법 총정리: 성별·나이·체중별 평균과 공식 비교", desc:"나이가 들면 10년에 57kcal씩 줄어듭니다" },
+      { g:"금융", d:"2026-10-05", t:"car.html", href:"info-car.html", name:"자동차 할부 이자 계산법: 3,000만 원 대출 시 기간·금리별 총이자 비교", desc:"기간이 길면 이자가 191만 원 늘어납니다" },
       { g:"금융", d:"2026-10-04", t:"savings.html", href:"info-interest-tax.html", name:"예적금 이자소득세 15.4% 계산법과 상호금융 1.4% 저율과세 절세 꿀팁", desc:"조합원이면 세율이 다릅니다" },
       { g:"생활", d:"2026-10-04", t:"bmi.html", href:"info-bmi.html", name:"BMI 아시아 태평양 기준 차이점: 서양 기준과 다른 비만 판정 수치 총정리", desc:"기준이 두 개입니다" },
       { g:"금융", d:"2026-10-04", t:"prepay.html", href:"info-prepay.html", name:"대출 중도상환수수료 계산법과 2026년 인하 기준 비교 가이드", desc:"3년만 지나면 0원입니다" },
@@ -789,6 +794,11 @@ U.needDate = function(el, name){
     "info-broker.html": '<path d="M4 21V8l8-5 8 5v13"/><path d="M9 21v-6h6v6"/><circle cx="12" cy="10" r="1.5"/>',
     "info-prepay.html": '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
     "info-bmi.html": '<path d="M4 8h16l1 12H3z"/><path d="M8 8V6a4 4 0 018 0v2"/><path d="M12 12v4M10 14h4"/>',
+    "info-dday.html": '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+    "info-walk.html": '<path d="M8 4c-2 0-3 2-3 4 0 3 2 4 3 7v3h3v-3c0-3 1-4 1-7 0-2-1-4-4-4z"/><path d="M16 9c-1.5 0-2.5 1.5-2.5 3 0 2.5 1.5 3.5 2 5.5v2h2.5v-2c0-2.5 1-3 1-5.5 0-1.5-1-3-3-3z"/>',
+    "info-calorie.html": '<path d="M7 3v8M5 3v5a2 2 0 004 0V3"/><path d="M7 11v10"/><path d="M17 3c-2 1-3 4-3 7h3v11"/>',
+    "info-bmr.html": '<path d="M12 3s5 4 5 9a5 5 0 01-10 0c0-5 5-9 5-9z"/><path d="M12 20v-5"/>',
+    "info-car.html": '<path d="M5 16l1.5-5a2 2 0 011.9-1.4h7.2a2 2 0 011.9 1.4L19 16"/><rect x="3" y="16" width="18" height="4" rx="1.5"/><circle cx="7.5" cy="18" r=".8"/><circle cx="16.5" cy="18" r=".8"/>',
     "info-interest-tax.html": '<path d="M3 7h18v12H3z"/><path d="M3 11h18M7 15h4"/>',
     "info-vat-oct.html":     '<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M12 15v3"/>',
     "info-pyeong.html":      '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M11 10v10M15 14h3"/>',
