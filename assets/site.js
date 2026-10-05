@@ -1,6 +1,8 @@
 /* ============================================================
    사이트 전체 메뉴는 이 파일 한 곳에서만 관리합니다.
    새 도구를 만들면 아래 SECTIONS 의 items 에 한 줄만 추가하세요.
+   새 글은 정보나누기 items 맨 위에 한 줄 추가하고 t:"연결할계산기.html" 을 적으면
+   그 계산기 아래 '관련 글' 목록에 자동으로 맨 앞에 붙습니다.
    상단·좌측·하단 메뉴에 자동으로 반영됩니다.
    ============================================================ */
 
@@ -78,33 +80,36 @@ var SECTIONS = [
       { href: "info-lotto.html",  name: "로또",   desc: "확률, 당첨금과 세금, 수령 방법" }
     ],
     items: [
-      { g:"금융", d:"2026-10-04", href:"info-salary.html", name:"연봉 5천만원인데 월급이 353만원인 이유", desc:"세전과 실수령의 거리" },
-      { g:"생활", d:"2026-10-04", href:"info-bp.html", name:"혈압 120에 80은 정상이 아닙니다", desc:"정상의 조건은 '그리고'" },
-      { g:"금융", d:"2026-10-03", href:"info-compound.html", name:"복리와 단리, 10년이면 얼마나 벌어지나", desc:"1천만원에 80만원 차이" },
-      { g:"부동산", d:"2026-10-03", href:"info-broker.html", name:"집값 1천만원 차이로 중개수수료가 94만원 갈립니다", desc:"구간이 바뀌는 지점" },
-      { g:"금융", d:"2026-10-02", href:"info-vat-split.html", name:"부가세 계산에서 1원이 틀리는 이유", desc:"1.1로 나누면 안 됩니다" },
-      { g:"생활", d:"2026-10-02", href:"info-baby.html", name:"아기 백일과 돌은 세는 법이 다릅니다", desc:"하나는 99일 뒤, 하나는 1년 뒤" },
-      { g:"금융", d:"2026-10-01", href:"info-cartax.html", name:"같은 차인데 자동차세가 다른 이유", desc:"배기량과 차령이 가릅니다" },
-      { g:"부동산", d:"2026-10-01", href:"info-acquisition.html", name:"6억 집과 6억 1천만원 집, 취득세가 다릅니다", desc:"구간이 바뀌는 지점" },
-      { g:"금융", d:"2026-09-27", href:"info-vat-oct.html",   name:"10월 부가세 고지서, 왜 오고 언제까지 내나", desc:"2026년 기한은 10월 26일" },
-      { g:"부동산", d:"2026-09-27", href:"info-pyeong.html",  name:"84㎡ 아파트가 왜 34평일까", desc:"전용면적과 공급면적" },
-      { g:"금융", d:"2026-09-15", href:"info-savings.html",    name:"적금 이자가 생각보다 적은 이유", desc:"연 4%인데 왜 절반일까" },
-      { g:"금융", d:"2026-09-15", href:"info-retire.html",     name:"퇴직금, 회사 계산과 내 계산이 다른 이유", desc:"상여금과 연차수당을 빼먹으면" },
-      { g:"부동산", d:"2026-09-15", href:"info-jeonse-rate.html", name:"전세를 월세로 바꾸자고 할 때", desc:"법정 상한이 5.00%로 올랐습니다" },
-      { g:"금융", d:"2026-09-11", href:"info-yearend-plan.html", name:"연말정산은 12월에 끝납니다", desc:"9월부터 12월까지 할 일" },
-      { g:"금융", d:"2026-09-08", href:"info-insurance.html", name:"4대보험 요율과 계산 방법", desc:"누가 얼마씩 내는지" },
-      { g:"금융", d:"2026-09-08", href:"info-loan.html",      name:"대출 갚는 방식, 뭐가 유리할까", desc:"원리금균등과 원금균등" },
-      { g:"금융", d:"2026-09-08", href:"info-jobless.html",   name:"실업급여 받는 조건과 기간", desc:"누가 얼마나 받는지" },
-      { g:"금융", d:"2026-09-08", href:"info-yearend.html",   name:"연말정산에서 놓치기 쉬운 공제", desc:"직접 챙겨야 하는 것들" },
-      { g:"부동산", d:"2026-09-08", href:"info-buyhome.html", name:"집 살 때 드는 돈 총정리", desc:"집값 말고 더 드는 비용" },
-      { g:"부동산", d:"2026-09-08", href:"info-dsr.html",     name:"DSR과 LTV, 대출 한도를 정하는 두 가지", desc:"둘 중 낮은 쪽이 한도" },
-      { g:"부동산", d:"2026-09-08", href:"info-jeonse.html",  name:"전세 계약할 때 확인할 것", desc:"보증금을 지키는 순서" },
-      { g:"생활", d:"2026-09-08", href:"info-age.html",       name:"만 나이 제도, 무엇이 바뀌었나", desc:"연 나이를 쓰는 곳은 어디인지" },
-      { g:"생활", d:"2026-09-08", href:"info-pension.html",   name:"기초연금 받는 조건", desc:"만 65세면 다 받나" },
-      { g:"로또", d:"2026-09-07", href:"guide-odds.html",     name:"1등 확률 814만분의 1은 어느 정도일까", desc:"등수별 확률 계산" },
-      { g:"로또", d:"2026-09-07", href:"guide-prize.html",    name:"당첨금은 왜 회차마다 다를까", desc:"당첨금과 세금" },
-      { g:"로또", d:"2026-09-07", href:"guide-stats.html",    name:"많이 나온 번호는 다음에도 잘 나올까", desc:"통계를 읽는 법" },
-      { g:"로또", d:"2026-09-07", href:"guide-claim.html",    name:"당첨됐다면 어디서 어떻게 받을까", desc:"기한과 준비물" }
+      { g:"금융", d:"2026-10-04", t:"savings.html", href:"info-interest-tax.html", name:"예적금 이자소득세 15.4% 계산법과 상호금융 1.4% 저율과세 절세 꿀팁", desc:"조합원이면 세율이 다릅니다" },
+      { g:"생활", d:"2026-10-04", t:"bmi.html", href:"info-bmi.html", name:"BMI 아시아 태평양 기준 차이점: 서양 기준과 다른 비만 판정 수치 총정리", desc:"기준이 두 개입니다" },
+      { g:"금융", d:"2026-10-04", t:"prepay.html", href:"info-prepay.html", name:"대출 중도상환수수료 계산법과 2026년 인하 기준 비교 가이드", desc:"3년만 지나면 0원입니다" },
+      { g:"금융", d:"2026-10-04", t:"salary.html", href:"info-salary.html", name:"연봉 5천만원인데 월급이 353만원인 이유", desc:"세전과 실수령의 거리" },
+      { g:"생활", d:"2026-10-04", t:"bp.html", href:"info-bp.html", name:"혈압 120에 80은 정상이 아닙니다", desc:"정상의 조건은 '그리고'" },
+      { g:"금융", d:"2026-10-03", t:"compound.html", href:"info-compound.html", name:"복리와 단리, 10년이면 얼마나 벌어지나", desc:"1천만원에 80만원 차이" },
+      { g:"부동산", d:"2026-10-03", t:"broker.html", href:"info-broker.html", name:"집값 1천만원 차이로 중개수수료가 94만원 갈립니다", desc:"구간이 바뀌는 지점" },
+      { g:"금융", d:"2026-10-02", t:"vat.html", href:"info-vat-split.html", name:"부가세 계산에서 1원이 틀리는 이유", desc:"1.1로 나누면 안 됩니다" },
+      { g:"생활", d:"2026-10-02", t:"baby.html", href:"info-baby.html", name:"아기 백일과 돌은 세는 법이 다릅니다", desc:"하나는 99일 뒤, 하나는 1년 뒤" },
+      { g:"금융", d:"2026-10-01", t:"cartax.html", href:"info-cartax.html", name:"같은 차인데 자동차세가 다른 이유", desc:"배기량과 차령이 가릅니다" },
+      { g:"부동산", d:"2026-10-01", t:"acquisition.html", href:"info-acquisition.html", name:"6억 집과 6억 1천만원 집, 취득세가 다릅니다", desc:"구간이 바뀌는 지점" },
+      { g:"금융", d:"2026-09-27", t:"vat.html", href:"info-vat-oct.html",   name:"10월 부가세 예정고지 총정리: 개인사업자 납부액 계산부터 가산세 방지 팁", desc:"미리 내고 1월에 뺍니다" },
+      { g:"부동산", d:"2026-09-27", t:"pyeong.html", href:"info-pyeong.html",  name:"아파트 평수 계산법 완벽 정리: 84㎡가 34평이 되는 전용면적·공급면적의 비밀", desc:"재는 범위가 다릅니다" },
+      { g:"금융", d:"2026-09-15", t:"savings.html", href:"info-savings.html",    name:"적금 이자가 생각보다 적은 이유와 예금 차이 총정리", desc:"48만원이 아닙니다" },
+      { g:"금융", d:"2026-09-15", t:"retire.html", href:"info-retire.html",     name:"퇴직금 회사 계산과 내 계산이 다른 이유: 상여금과 연차수당 계산법", desc:"상여금과 연차수당을 빼먹으면" },
+      { g:"부동산", d:"2026-09-15", t:"jeonse.html", href:"info-jeonse-rate.html", name:"전월세 전환율 계산법 총정리: 전세 3억을 월세로 바꿀 때 월세 얼마일까?", desc:"전환율 상한은 5%" },
+      { g:"금융", d:"2026-09-11", t:"salary.html", href:"info-yearend-plan.html", name:"연말정산 준비는 12월 31일 전에 끝내야 하는 이유: 홈택스 미리보기 활용법", desc:"2월은 서류만 내는 날" },
+      { g:"금융", d:"2026-09-08", t:"insurance.html", href:"info-insurance.html", name:"2026년 4대보험 요율 개정 총정리: 국민연금 인상과 월급 300만 원 실수령액 변화", desc:"국민연금이 28년 만에 올랐습니다" },
+      { g:"금융", d:"2026-09-08", t:"loan.html", href:"info-loan.html",      name:"원리금균등 vs 원금균등 차이 비교, 나에게 유리한 대출 상환방식은?", desc:"원리금균등과 원금균등" },
+      { g:"금융", d:"2026-09-08", t:"insurance.html", href:"info-jobless.html",   name:"실업급여 조건 총정리: 고용보험 180일 계산법부터 자발적 퇴사 예외까지", desc:"보수 받은 날만 셉니다" },
+      { g:"금융", d:"2026-09-08", t:"salary.html", href:"info-yearend.html",   name:"연말정산 공제 절세 전략: 신용카드 25% 법칙부터 놓치기 쉬운 부양가족 조건까지", desc:"체크카드가 두 배입니다" },
+      { g:"부동산", d:"2026-09-08", t:"acquisition.html", href:"info-buyhome.html", name:"6억 아파트 집 살 때 드는 부대비용 총정리: 취득세부터 등기 비용까지", desc:"집값의 1.8%" },
+      { g:"부동산", d:"2026-09-08", t:"ltv.html", href:"info-dsr.html",     name:"DSR LTV 차이 총정리: 집값과 소득으로 결정되는 대출 한도의 비밀", desc:"연소득 40%의 벽" },
+      { g:"부동산", d:"2026-09-08", t:"jeonse.html", href:"info-jeonse.html",  name:"전세 계약할 때 주의사항 총정리: 전입신고 대항력 시점부터 등기부등본 확인법까지", desc:"효력은 다음 날 0시부터" },
+      { g:"생활", d:"2026-09-08", t:"age.html", href:"info-age.html",       name:"만 나이 계산법 총정리: 세는나이·연나이 차이점과 술·담배 연나이 예외 기준", desc:"태어나면 0세입니다" },
+      { g:"생활", d:"2026-09-08", t:"age.html", href:"info-pension.html",   name:"기초연금 수급 조건 완벽 정리: 소득인정액 계산법부터 부부감액 예방법까지", desc:"재산도 소득으로 환산합니다" },
+      { g:"로또", d:"2026-09-07", t:"lotto-stat.html", href:"guide-odds.html",     name:"로또 1등 확률 계산법: 814만 분의 1 수학적 구조와 조합 원리 분석", desc:"45개 중 6개 고르기" },
+      { g:"로또", d:"2026-09-07", t:"lotto-tax.html", href:"guide-prize.html",    name:"로또 1등 당첨금 세금 계산법: 20억 당첨 시 실제 수령하는 실수령액은 얼마일까?", desc:"3억을 넘으면 33%" },
+      { g:"로또", d:"2026-09-07", t:"lotto-stat.html", href:"guide-stats.html",    name:"로또 번호 통계 분석: 1,244회 출현 횟수로 보는 수학적 무작위성", desc:"무작위라서 생기는 흔들림" },
+      { g:"로또", d:"2026-09-07", t:"lotto-tax.html", href:"guide-claim.html",    name:"로또 당첨금 수령방법 완벽 정리: 금액별 수령 장소와 필수 준비물", desc:"금액에 따라 가는 곳이 다릅니다" }
     ]
   }
 ];
@@ -782,6 +787,9 @@ U.needDate = function(el, name){
     "info-baby.html": '<rect x="3" y="10" width="18" height="11" rx="2"/><path d="M12 10V6M9 6a3 3 0 013-3 3 3 0 013 3M3 15h18"/>',
     "info-compound.html": '<path d="M3 18l5-6 4 3 6-8"/><path d="M14 7h5v5"/>',
     "info-broker.html": '<path d="M4 21V8l8-5 8 5v13"/><path d="M9 21v-6h6v6"/><circle cx="12" cy="10" r="1.5"/>',
+    "info-prepay.html": '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+    "info-bmi.html": '<path d="M4 8h16l1 12H3z"/><path d="M8 8V6a4 4 0 018 0v2"/><path d="M12 12v4M10 14h4"/>',
+    "info-interest-tax.html": '<path d="M3 7h18v12H3z"/><path d="M3 11h18M7 15h4"/>',
     "info-vat-oct.html":     '<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M12 15v3"/>',
     "info-pyeong.html":      '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M11 10v10M15 14h3"/>',
     "info-savings.html":     '<path d="M3 7h18v12H3z"/><path d="M3 11h18M7 15h4"/>',
@@ -957,4 +965,96 @@ U.needDate = function(el, name){
   document.addEventListener("DOMContentLoaded", fit);
   if (document.readyState !== "loading") fit();
   window.addEventListener("resize", fit);
+})();
+
+/* ---------- 계산기 아래 '관련 글' 목록 (검색 + 번호 넘기기) ----------
+   정보나누기 items 에서 t 가 이 계산기와 같은 글을 모아 최신순으로 보여줍니다.
+   글이 하나도 없는 계산기에는 아무것도 붙이지 않습니다. */
+(function () {
+  "use strict";
+  var PER = 20;
+  var page = (location.pathname.split("/").pop() || "index.html");
+  var main = document.querySelector("main");
+  if (!main || typeof SECTIONS === "undefined") return;
+
+  var posts = [], isTool = false;
+  SECTIONS.forEach(function (s) {
+    if (s.id !== "info" && s.items.some(function (x) { return x.href === page; })) isTool = true;
+    if (s.id !== "info") return;
+    s.items.forEach(function (it, i) {
+      if (!it.t) return;
+      var ts = String(it.t).split(",").map(function (x) { return x.trim(); });
+      if (ts.indexOf(page) < 0) return;
+      posts.push({ it: it, i: i });
+    });
+  });
+  if (!isTool) return;
+  posts.sort(function (a, b) {
+    return a.it.d < b.it.d ? 1 : a.it.d > b.it.d ? -1 : a.i - b.i;
+  });
+  posts = posts.map(function (p) { return p.it; });
+
+  function esc(t) {
+    return String(t).replace(/[&<>"]/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
+    });
+  }
+  function norm(t) { return String(t).toLowerCase().replace(/\s+/g, " ").trim(); }
+
+  var card = document.createElement("div");
+  card.className = "card rposts";
+  card.id = "rposts";
+  card.innerHTML =
+    '<h2>관련 글 <span class="rcount" id="rcount"></span></h2>' +
+    '<div class="rsearch"><input type="search" id="rq" placeholder="글 제목으로 찾기 (예: 연말정산, 세금)" ' +
+    'autocomplete="off" enterkeyhint="search" aria-label="관련 글 검색"></div>' +
+    '<div class="postlist" id="rlist"></div>' +
+    '<div class="rempty" id="rempty" hidden>검색어와 맞는 글이 없습니다. 다른 단어로 찾아보세요.</div>' +
+    '<nav class="pager" id="rpager" aria-label="글 목록 페이지"></nav>';
+  main.appendChild(card);
+
+  if (!posts.length) {
+    card.querySelector(".rsearch").hidden = true;
+  }
+  var $q = card.querySelector("#rq"), $list = card.querySelector("#rlist"),
+      $pager = card.querySelector("#rpager"), $empty = card.querySelector("#rempty"),
+      $count = card.querySelector("#rcount");
+  var cur = 1, shown = posts;
+
+  function render(scroll) {
+    var pages = Math.max(1, Math.ceil(shown.length / PER));
+    if (cur > pages) cur = pages;
+    var from = (cur - 1) * PER;
+    $list.innerHTML = shown.slice(from, from + PER).map(function (it) {
+      return '<a class="post rrow" href="' + esc(it.href) + '"><b>' + esc(it.name) +
+        '</b><i>' + esc(it.d.slice(2).replace(/-/g, ".")) + '</i></a>';
+    }).join("");
+    $empty.hidden = shown.length > 0;
+    if (!posts.length) $empty.textContent = "이 계산기와 관련된 글을 준비하고 있습니다.";
+    $count.textContent = !posts.length ? "" : shown.length === posts.length ? posts.length + "편" : shown.length + "/" + posts.length + "편";
+    var h = "";
+    if (pages > 1) {
+      if (cur > 1) h += '<button type="button" data-p="' + (cur - 1) + '">‹ 이전</button>';
+      for (var n = 1; n <= pages; n++)
+        h += '<button type="button" data-p="' + n + '"' + (n === cur ? ' class="on" aria-current="page"' : "") + ">" + n + "</button>";
+      if (cur < pages) h += '<button type="button" data-p="' + (cur + 1) + '">다음 ›</button>';
+    }
+    $pager.innerHTML = h;
+    if (scroll) card.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  $q.addEventListener("input", function () {
+    var words = norm($q.value).split(" ").filter(Boolean);
+    shown = !words.length ? posts : posts.filter(function (it) {
+      var hay = norm(it.name + " " + (it.desc || "") + " " + it.g);
+      return words.every(function (w) { return hay.indexOf(w) >= 0; });
+    });
+    cur = 1; render(false);
+  });
+  $pager.addEventListener("click", function (e) {
+    var b = e.target.closest("button[data-p]");
+    if (!b) return;
+    cur = Number(b.dataset.p); render(true);
+  });
+  render(false);
 })();
