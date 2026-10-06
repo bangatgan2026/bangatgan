@@ -80,6 +80,16 @@ var SECTIONS = [
       { href: "info-lotto.html",  name: "로또",   desc: "확률, 당첨금과 세금, 수령 방법" }
     ],
     items: [
+      { g:"부동산", d:"2026-10-06", t:"broker.html", href:"info-broker-rent.html", name:"월세 중개수수료 계산법: 환산보증금 공식과 상한요율 한눈에 보기", desc:"월세 5만 원이 오르면 환산보증금은 500만 원 늘어납니다" },
+      { g:"금융", d:"2026-10-06", t:"insurance.html", href:"info-nps-rate.html", name:"국민연금 보험료율 인상으로 내 월급 얼마 줄까? 월 300만원 실수령액 변화 계산", desc:"2033년까지 매년 0.5%포인트씩 오릅니다" },
+      { g:"금융", d:"2026-10-06", t:"cartax.html", href:"info-cartax-prepay.html", name:"자동차세 연납 할인 혜택 총정리: 1월부터 9월까지 공제율 및 절세 금액 비교", desc:"1월에 내면 약 4.58%, 9월에 내면 약 1.25% 공제" },
+      { g:"부동산", d:"2026-10-06", t:"acquisition.html", href:"info-multi-home-tax.html", name:"다주택자 취득세 중과 세율 총정리: 2주택 8%·3주택 12% 적용 기준", desc:"같은 6억 집이 660만 원에서 7,440만 원으로" },
+      { g:"금융", d:"2026-10-06", t:"salary.html", href:"info-income-tax.html", name:"월급 소득세 계산 방법: 연봉별 실수령액과 부양가족 감면 혜택 정리", desc:"연봉은 3.3배인데 소득세는 약 30배입니다" },
+      { g:"금융", d:"2026-10-06", t:"jeonse.html", href:"info-rent-credit.html", name:"월세 세액공제 조건부터 환급액 계산까지 한눈에 알아보기", desc:"월세의 15~17%를 최대 170만 원까지 돌려받습니다" },
+      { g:"금융", d:"2026-10-06", t:"salary.html", href:"info-medical-credit.html", name:"연말정산 의료비 세액공제 조건부터 공제율까지 한눈에 보기", desc:"총급여의 3%를 넘은 의료비의 15%를 돌려받습니다" },
+      { g:"부동산", d:"2026-10-06", t:"pyeong.html", href:"info-officetel-area.html", name:"오피스텔 전용률의 비밀: 아파트와 실평수 차이 나는 결정적 이유", desc:"같은 30평인데 실평수가 6평 차이납니다" },
+      { g:"생활", d:"2026-10-06", t:"birthday.html", href:"info-birthday.html", name:"살아온 날 계산법: 내가 태어난 지 며칠째인지 10000일 기념일 확인하는 법", desc:"1만 일은 만 27세 무렵에 옵니다" },
+      { g:"생활", d:"2026-10-06", t:"datecalc.html", href:"info-datecalc.html", name:"날짜 더하기 계산법: '한 달 뒤'와 '30일 뒤'가 다른 이유", desc:"1월 31일에서 한 달 뒤는 2월 28일입니다" },
       { g:"생활", d:"2026-10-05", t:"dday.html", href:"info-dday.html", name:"디데이 계산법 총정리: 기념일 100일 세는 법과 당일 포함 기준", desc:"같은 100일인데 하루가 달라지는 이유" },
       { g:"생활", d:"2026-10-05", t:"walk.html", href:"info-walk.html", name:"걷기 1만보 칼로리 계산: 체중별 소모량과 속도별 걸리는 시간 완벽 정리", desc:"체중 60kg과 80kg은 98kcal 차이가 납니다" },
       { g:"생활", d:"2026-10-05", t:"calorie.html", href:"info-calorie.html", name:"하루 필요 칼로리 계산법: 성별·활동량별 권장 칼로리 완벽 정리", desc:"활동량에 따라 하루 860kcal 차이가 납니다" },
@@ -111,10 +121,10 @@ var SECTIONS = [
       { g:"부동산", d:"2026-09-08", t:"jeonse.html", href:"info-jeonse.html",  name:"전세 계약할 때 주의사항 총정리: 전입신고 대항력 시점부터 등기부등본 확인법까지", desc:"효력은 다음 날 0시부터" },
       { g:"생활", d:"2026-09-08", t:"age.html", href:"info-age.html",       name:"만 나이 계산법 총정리: 세는나이·연나이 차이점과 술·담배 연나이 예외 기준", desc:"태어나면 0세입니다" },
       { g:"생활", d:"2026-09-08", t:"age.html", href:"info-pension.html",   name:"기초연금 수급 조건 완벽 정리: 소득인정액 계산법부터 부부감액 예방법까지", desc:"재산도 소득으로 환산합니다" },
-      { g:"로또", d:"2026-09-07", t:"lotto-stat.html", href:"guide-odds.html",     name:"로또 1등 확률 계산법: 814만 분의 1 수학적 구조와 조합 원리 분석", desc:"45개 중 6개 고르기" },
-      { g:"로또", d:"2026-09-07", t:"lotto-tax.html", href:"guide-prize.html",    name:"로또 1등 당첨금 세금 계산법: 20억 당첨 시 실제 수령하는 실수령액은 얼마일까?", desc:"3억을 넘으면 33%" },
-      { g:"로또", d:"2026-09-07", t:"lotto-stat.html", href:"guide-stats.html",    name:"로또 번호 통계 분석: 1,244회 출현 횟수로 보는 수학적 무작위성", desc:"무작위라서 생기는 흔들림" },
-      { g:"로또", d:"2026-09-07", t:"lotto-tax.html", href:"guide-claim.html",    name:"로또 당첨금 수령방법 완벽 정리: 금액별 수령 장소와 필수 준비물", desc:"금액에 따라 가는 곳이 다릅니다" }
+      { g:"로또", d:"2026-09-07", t:"lotto.html,lotto-gen.html,lotto-stat.html", href:"guide-odds.html",     name:"로또 1등 확률 계산법: 814만 분의 1 수학적 구조와 조합 원리 분석", desc:"45개 중 6개 고르기" },
+      { g:"로또", d:"2026-09-07", t:"lotto.html,lotto-my.html,lotto-tax.html", href:"guide-prize.html",    name:"로또 1등 당첨금 세금 계산법: 20억 당첨 시 실제 수령하는 실수령액은 얼마일까?", desc:"3억을 넘으면 33%" },
+      { g:"로또", d:"2026-09-07", t:"lotto-gen.html,lotto-stat.html,lotto-my.html", href:"guide-stats.html",    name:"로또 번호 통계 분석: 1,244회 출현 횟수로 보는 수학적 무작위성", desc:"무작위라서 생기는 흔들림" },
+      { g:"로또", d:"2026-09-07", t:"lotto.html,lotto-my.html,lotto-tax.html", href:"guide-claim.html",    name:"로또 당첨금 수령방법 완벽 정리: 금액별 수령 장소와 필수 준비물", desc:"금액에 따라 가는 곳이 다릅니다" }
     ]
   }
 ];
@@ -794,6 +804,16 @@ U.needDate = function(el, name){
     "info-broker.html": '<path d="M4 21V8l8-5 8 5v13"/><path d="M9 21v-6h6v6"/><circle cx="12" cy="10" r="1.5"/>',
     "info-prepay.html": '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
     "info-bmi.html": '<path d="M4 8h16l1 12H3z"/><path d="M8 8V6a4 4 0 018 0v2"/><path d="M12 12v4M10 14h4"/>',
+    "info-officetel-area.html": '<path d="M3 17L17 3l4 4L7 21z"/><path d="M7 13l2 2M10 10l2 2M13 7l2 2"/>',
+    "info-medical-credit.html": '<rect x="3" y="3" width="18" height="18" rx="3"/><path d="M12 7v10M7 12h10"/>',
+    "info-rent-credit.html": '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 14h6M9 17h6"/>',
+    "info-income-tax.html": '<circle cx="12" cy="12" r="9"/><path d="M8 9l1.5 6 2.5-5 2.5 5L16 9M7 12h10"/>',
+    "info-multi-home-tax.html": '<path d="M3 11l5-4 5 4"/><path d="M4.5 10v8h7v-8"/><path d="M11 8l5-4 5 4"/><path d="M12.5 7v11h7V7"/>',
+    "info-cartax-prepay.html": '<path d="M5 16l1.5-5a2 2 0 011.9-1.4h7.2a2 2 0 011.9 1.4L19 16"/><rect x="3" y="16" width="18" height="4" rx="1.5"/><circle cx="7.5" cy="18" r=".8"/><circle cx="16.5" cy="18" r=".8"/><path d="M12 3v4M10 5h4"/>',
+    "info-nps-rate.html": '<path d="M3 7h16a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M3 7l12-3v3"/><circle cx="17" cy="13.5" r="1"/>',
+    "info-broker-rent.html": '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/>',
+    "info-birthday.html": '<path d="M4 11h16v9H4z"/><path d="M12 11v9M4 15.5h16"/><path d="M12 11c-2-3-5-3-5-1s3 1 5 1zM12 11c2-3 5-3 5-1s-3 1-5 1z"/>',
+    "info-datecalc.html": '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M12 13v5M9.5 15.5h5"/>',
     "info-dday.html": '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
     "info-walk.html": '<path d="M8 4c-2 0-3 2-3 4 0 3 2 4 3 7v3h3v-3c0-3 1-4 1-7 0-2-1-4-4-4z"/><path d="M16 9c-1.5 0-2.5 1.5-2.5 3 0 2.5 1.5 3.5 2 5.5v2h2.5v-2c0-2.5 1-3 1-5.5 0-1.5-1-3-3-3z"/>',
     "info-calorie.html": '<path d="M7 3v8M5 3v5a2 2 0 004 0V3"/><path d="M7 11v10"/><path d="M17 3c-2 1-3 4-3 7h3v11"/>',
