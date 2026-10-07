@@ -1120,3 +1120,7 @@ aside.rail{display:none!important}
 .rposts .pager button{color:#1B2234;border-color:rgba(60,40,10,.35)}
 .rposts .pager button:hover{border-color:#D98324;color:#B45F06}
 .rposts .pager button.on{background-color:#D98324;border-color:#D98324;color:#fff}
+.rposts .post.rrow{padding:14px 4px}
+.rposts .post.rrow b{font-size:18px;font-weight:700}
+.rposts .post.rrow i{font-size:13px}
+@media(max-width:600px){.rposts .post.rrow b{font-size:17px}}
