@@ -80,6 +80,10 @@ var SECTIONS = [
       { href: "info-lotto.html",  name: "로또",   desc: "확률, 당첨금과 세금, 수령 방법" }
     ],
     items: [
+      { g:"금융", d:"2026-10-07", t:"cartax.html", href:"info-car-acq-tax.html", name:"자동차 취득세 계산법 총정리: 부가세 제외 금액부터 감면 혜택까지", desc:"광고 가격 3,300만 원 신차 취득세 210만 원, 경차·전기차 감면 계산" },
+      { g:"금융", d:"2026-10-07", t:"jeonse.html", href:"info-jeonse-deduction.html", name:"전세대출 이자 연말정산 절세 팁: 원리금 상환액 40% 소득공제 계산법", desc:"이자만 내도 상환액의 40%, 청약저축과 합쳐 연 400만 원 한도" },
+      { g:"금융", d:"2026-10-07", t:"cartax.html", href:"info-ev-cartax.html", name:"전기차 자동차세 13만원의 비밀: 2,000cc 내연기관 자동차세와 10년 유지비 실제 비교", desc:"10년 합계 전기차 130만 원, 2,000cc 약 426만 4천 원" },
+      { g:"금융", d:"2026-10-07", t:"salary.html", href:"info-pension-credit.html", name:"연금저축 IRP 세액공제 한도 및 환급액 계산 방법 (연 900만원 최적 활용법)", desc:"연금저축 600만 원 + IRP 300만 원, 최대 148만 5천 원을 돌려받습니다" },
       { g:"부동산", d:"2026-10-06", t:"broker.html", href:"info-broker-rent.html", name:"월세 중개수수료 계산법: 환산보증금 공식과 상한요율 한눈에 보기", desc:"월세 5만 원이 오르면 환산보증금은 500만 원 늘어납니다" },
       { g:"금융", d:"2026-10-06", t:"insurance.html", href:"info-nps-rate.html", name:"국민연금 보험료율 인상으로 내 월급 얼마 줄까? 월 300만원 실수령액 변화 계산", desc:"2033년까지 매년 0.5%포인트씩 오릅니다" },
       { g:"금융", d:"2026-10-06", t:"cartax.html", href:"info-cartax-prepay.html", name:"자동차세 연납 할인 혜택 총정리: 1월부터 9월까지 공제율 및 절세 금액 비교", desc:"1월에 내면 약 4.58%, 9월에 내면 약 1.25% 공제" },
@@ -804,6 +808,10 @@ U.needDate = function(el, name){
     "info-broker.html": '<path d="M4 21V8l8-5 8 5v13"/><path d="M9 21v-6h6v6"/><circle cx="12" cy="10" r="1.5"/>',
     "info-prepay.html": '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
     "info-bmi.html": '<path d="M4 8h16l1 12H3z"/><path d="M8 8V6a4 4 0 018 0v2"/><path d="M12 12v4M10 14h4"/>',
+    "info-car-acq-tax.html": '<path d="M3 15l2-6h14l2 6"/><path d="M3 15h18v4H3z"/><circle cx="7" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/>',
+    "info-jeonse-deduction.html": '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-5h6v5"/>',
+    "info-ev-cartax.html": '<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>',
+    "info-pension-credit.html": '<ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/>',
     "info-officetel-area.html": '<path d="M3 17L17 3l4 4L7 21z"/><path d="M7 13l2 2M10 10l2 2M13 7l2 2"/>',
     "info-medical-credit.html": '<rect x="3" y="3" width="18" height="18" rx="3"/><path d="M12 7v10M7 12h10"/>',
     "info-rent-credit.html": '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 14h6M9 17h6"/>',
