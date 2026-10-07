@@ -1104,18 +1104,19 @@ aside.rail{display:none!important}
 
 @media(max-width:600px){.prose h3{font-size:17px;margin:32px 0 12px;padding:10px 14px}}
 
-/* 관련 글 칸: 차분한 파랑 */
-.rposts{background-color:#2C4F8C;border:1px solid #5F86C7}
-.rposts h2{color:#fff;font-size:17px}
-.rposts h2::before{background-image:none;background-color:#FFD60A;width:5px;height:18px}
-.rposts h2 .rcount{color:#C9D8F2}
-.rposts .post{border-top-color:rgba(255,255,255,.20)}
-.rposts .post:hover{background:rgba(255,255,255,.08)}
-.rposts .post.rrow b{color:#F2F6FF}
-.rposts .post:hover b{color:#FFE680}
-.rposts .post.rrow i{color:#C9D8F2}
-.rposts .rsearch input{border-color:#5F86C7}
-.rposts .rempty{color:#E3ECFB}
-.rposts .pager button{color:#F2F6FF;border-color:rgba(255,255,255,.45)}
-.rposts .pager button:hover{border-color:#FFD60A;color:#FFE680}
-.rposts .pager button.on{background-color:#FFD60A;border-color:#FFD60A;color:#0E1320}
+/* 관련 글 칸: 따뜻하고 차분한 크림색 */
+.rposts{background-color:#F1E3C8;border:1px solid #D9B97A}
+.rposts h2{color:#1B2234;font-size:17px}
+.rposts h2::before{background-image:none;background-color:#D98324;width:5px;height:18px}
+.rposts h2 .rcount{color:#7A6742}
+.rposts .post{border-top-color:rgba(60,40,10,.18)}
+.rposts .post:hover{background:rgba(60,40,10,.06)}
+.rposts .post.rrow b{color:#1B2234}
+.rposts .post:hover b{color:#B45F06}
+.rposts .post.rrow i{color:#7A6742}
+.rposts .rsearch input{background-color:#FBF3E2;color:#1B2234;border-color:#D9B97A}
+.rposts .rsearch input::placeholder{color:#8A7752}
+.rposts .rempty{color:#5A4A2C}
+.rposts .pager button{color:#1B2234;border-color:rgba(60,40,10,.35)}
+.rposts .pager button:hover{border-color:#D98324;color:#B45F06}
+.rposts .pager button.on{background-color:#D98324;border-color:#D98324;color:#fff}
