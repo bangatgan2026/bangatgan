@@ -1104,18 +1104,7 @@ aside.rail{display:none!important}
 
 @media(max-width:600px){.prose h3{font-size:17px;margin:32px 0 12px;padding:10px 14px}}
 
-/* 관련 글 칸: 눈에 띄는 원색(파랑) */
-.rposts{background-color:#1C57E8;border:2px solid #7FA8FF}
-.rposts h2{color:#fff;font-size:17px}
-.rposts h2::before{background-image:none;background-color:#FFD60A;width:5px;height:18px}
-.rposts h2 .rcount{color:#D6E4FF}
-.rposts .post{border-top-color:rgba(255,255,255,.28)}
-.rposts .post:hover{background:rgba(255,255,255,.10)}
-.rposts .post.rrow b{color:#fff}
-.rposts .post:hover b{color:#FFE680}
-.rposts .post.rrow i{color:#D6E4FF}
-.rposts .rsearch input{border-color:#7FA8FF}
-.rposts .rempty{color:#EAF1FF}
-.rposts .pager button{color:#fff;border-color:rgba(255,255,255,.55)}
-.rposts .pager button:hover{border-color:#FFD60A;color:#FFE680}
-.rposts .pager button.on{background-color:#FFD60A;border-color:#FFD60A;color:#0E1320}
+/* 관련 글 칸: 제목 줄만 노란 띠 */
+.rposts h2{background-color:#FFD60A;color:#0E1320;font-size:17px;font-weight:800;padding:10px 14px;border-radius:10px;margin:0 0 14px}
+.rposts h2::before{display:none}
+.rposts h2 .rcount{color:#3A3F4B;font-weight:700}
