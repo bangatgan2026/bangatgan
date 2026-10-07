@@ -1104,7 +1104,18 @@ aside.rail{display:none!important}
 
 @media(max-width:600px){.prose h3{font-size:17px;margin:32px 0 12px;padding:10px 14px}}
 
-/* 관련 글 칸: 제목 줄만 노란 띠 */
-.rposts h2{background-color:#FFD60A;color:#0E1320;font-size:17px;font-weight:800;padding:10px 14px;border-radius:10px;margin:0 0 14px}
-.rposts h2::before{display:none}
-.rposts h2 .rcount{color:#3A3F4B;font-weight:700}
+/* 관련 글 칸: 차분한 파랑 */
+.rposts{background-color:#2C4F8C;border:1px solid #5F86C7}
+.rposts h2{color:#fff;font-size:17px}
+.rposts h2::before{background-image:none;background-color:#FFD60A;width:5px;height:18px}
+.rposts h2 .rcount{color:#C9D8F2}
+.rposts .post{border-top-color:rgba(255,255,255,.20)}
+.rposts .post:hover{background:rgba(255,255,255,.08)}
+.rposts .post.rrow b{color:#F2F6FF}
+.rposts .post:hover b{color:#FFE680}
+.rposts .post.rrow i{color:#C9D8F2}
+.rposts .rsearch input{border-color:#5F86C7}
+.rposts .rempty{color:#E3ECFB}
+.rposts .pager button{color:#F2F6FF;border-color:rgba(255,255,255,.45)}
+.rposts .pager button:hover{border-color:#FFD60A;color:#FFE680}
+.rposts .pager button.on{background-color:#FFD60A;border-color:#FFD60A;color:#0E1320}
