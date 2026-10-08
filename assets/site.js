@@ -80,6 +80,10 @@ var SECTIONS = [
       { href: "info-lotto.html",  name: "로또",   desc: "확률, 당첨금과 세금, 수령 방법" }
     ],
     items: [
+      { g:"금융", d:"2026-10-09", t:"compound.html,savings.html", href:"info-compound-cycle.html", name:"복리 적금 연복리 월복리 차이, 이자 주기가 수익에 미치는 실전 비교", desc:"1,000만원 10년, 월복리가 연복리보다 105,884원 많습니다" },
+      { g:"금융", d:"2026-10-09", t:"loan.html", href:"info-loan-term.html", name:"대출 상환기간 이자 차이 비교, 기간 길어지면 총이자는 얼마나 늘어날까?", desc:"3억 20년→40년, 월 약 56만 원 줄고 총이자 약 1억 7,600만 원 늘어납니다" },
+      { g:"금융", d:"2026-10-09", t:"car.html", href:"info-car-down.html", name:"자동차 할부 선수금 이자 차이 비교, 선수금 비율에 따른 월 납입금 총정리", desc:"4,000만 원 차, 선수금 30%면 0%보다 총이자 약 175만 원 적습니다" },
+      { g:"부동산", d:"2026-10-09", t:"ltv.html", href:"info-ltv-rate.html", name:"규제지역 LTV 40% vs 비규제지역 70%, 5억 집 살 때 내 돈 얼마 필요할까?", desc:"5억 집, 내 돈 3억 원 vs 1억 5,000만 원" },
       { g:"금융", d:"2026-10-08", t:"salary.html", href:"info-minwage-2027.html", name:"2027년 최저임금 시급 10,700원 확정: 월급 환산액과 실수령액 정리", desc:"시급 10,700원, 월 환산 2,236,300원, 월 실수령액 약 1,986,018원" },
       { g:"생활", d:"2026-10-08", t:"bmi.html", href:"info-bmi-table.html", name:"키별 정상 체중 표와 BMI 계산법: 대한비만학회 기준 정리", desc:"키 170cm 정상 체중 53.5~66.2kg, 키별 표준 체중과 정상 범위" },
       { g:"금융", d:"2026-10-08", t:"loan.html", href:"info-loan-rate.html", name:"대출금리 0.5%p 차이, 3억 주담대 월 상환액과 총이자는 얼마나 달라질까?", desc:"3억 30년, 금리 0.5%p 오르면 월 +88,861원, 총이자 +3,199만 원" },
@@ -821,6 +825,10 @@ U.needDate = function(el, name){
     "info-car-acq-tax.html": '<path d="M3 15l2-6h14l2 6"/><path d="M3 15h18v4H3z"/><circle cx="7" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/>',
     "info-jeonse-deduction.html": '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-5h6v5"/>',
     "info-ev-cartax.html": '<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>',
+    "info-compound-cycle.html": '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/><path d="M8 4l-2 2M16 4l2 2"/>',
+    "info-loan-term.html": '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M8 15h8"/>',
+    "info-car-down.html": '<path d="M5 16l1.5-5a2 2 0 011.9-1.4h7.2a2 2 0 011.9 1.4L19 16"/><rect x="3" y="16" width="18" height="4" rx="1.5"/><circle cx="7.5" cy="18" r=".8"/><circle cx="16.5" cy="18" r=".8"/>',
+    "info-ltv-rate.html": '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-5h6v5"/><path d="M9 13h6"/>',
     "info-pension-credit.html": '<ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/>',
     "info-officetel-area.html": '<path d="M3 17L17 3l4 4L7 21z"/><path d="M7 13l2 2M10 10l2 2M13 7l2 2"/>',
     "info-medical-credit.html": '<rect x="3" y="3" width="18" height="18" rx="3"/><path d="M12 7v10M7 12h10"/>',
