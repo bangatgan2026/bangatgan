@@ -31,7 +31,7 @@ gtag('config', 'G-1M0D88PL01');
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="assets/style.css?v=76">
+<link rel="stylesheet" href="assets/style.css?v=81">
 </head>
 <body data-section="money">
 <div class="wrap">
@@ -161,7 +161,7 @@ gtag('config', 'G-1M0D88PL01');
 {"@type":"Question","name":"하이브리드도 세금을 깎아주나요","acceptedAnswer":{"@type":"Answer","text":"자동차세는 일반 차와 같습니다. 취득세 감면도 2024년 말로 끝났습니다. 전기차와 수소차만 혜택이 남아 있습니다."}}]}
 </script>
 
-<script src="assets/site.js?v=76"></script>
+<script src="assets/site.js?v=81"></script>
 <script>
 (function(){
 "use strict";
@@ -203,10 +203,10 @@ function run(){
   var yr=num($('#yr'));
   var cc=num($('#cc'));
   if(kind!=='ev' && !(cc>0)){ $('#out').hidden=true; return; }
-  if(!(yr>=1950 && yr<=THIS_YEAR)){ $('#out').hidden=true; return; }
+  if(kind!=='ev' && !(yr>=1950 && yr<=THIS_YEAR)){ $('#out').hidden=true; return; }
 
   var age = THIS_YEAR - yr + 1;                   /* 등록한 해가 1년째 */
-  var cut = age<3 ? 0 : Math.min(50, (age-2)*5);  /* 3년째부터 5%씩, 50% 한도 */
+  var cut = (kind==='ev' || age<3) ? 0 : Math.min(50, (age-2)*5);  /* 3년째부터 5%씩, 50% 한도. 전기·수소차는 차령 경감 없음 */
 
   var base, unit;
   if(kind==='ev'){ base=100000; unit=0; }
@@ -222,7 +222,7 @@ function run(){
   $('#out').hidden=false;
   $('#big').textContent=won(year);
   $('#note').textContent = kind==='ev'
-    ? '전기·수소차는 배기량과 상관없이 정액으로 매깁니다. 차령 '+age+'년째라 '+cut+'% 경감이 들어갔습니다.'
+    ? '전기·수소차는 배기량과 상관없이 정액으로 매기고, 차령 경감은 없습니다.'
     : cc+'cc, 차령 '+age+'년째입니다. '+(cut>0 ? '오래 타서 '+cut+'%가 줄었습니다.' : '차령 3년째부터 세금이 줄어듭니다.');
   $('#kpi').innerHTML=
     '<div><b>'+won(year)+'</b><span>연간 합계</span></div>'+
@@ -267,7 +267,7 @@ function acq(){
   var t=$('#atype').value;
   var rates={normal:7, light:4, ev:7, etc:5, biz:4};
   var r=rates[t];
-  var base=Math.floor(p/1.1);            /* 부가세를 뺀 공급가액 */
+  var base=p-Math.round(p/11);           /* 부가세를 뺀 공급가액 (합계×10/110 방식, 1원 오차 방지) */
   var tax=Math.floor(base*r/100);
   var cutName='', cutAmt=0;
   if(t==='light'){ cutName='경차 감면 (75만원 한도)'; cutAmt=Math.min(750000, tax); }
