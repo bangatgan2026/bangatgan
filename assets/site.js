@@ -80,6 +80,11 @@ var SECTIONS = [
       { href: "info-lotto.html",  name: "로또",   desc: "확률, 당첨금과 세금, 수령 방법" }
     ],
     items: [
+      { g:"금융", d:"2026-10-08", t:"salary.html", href:"info-minwage-2027.html", name:"2027년 최저임금 시급 10,700원 확정: 월급 환산액과 실수령액 정리", desc:"시급 10,700원, 월 환산 2,236,300원, 월 실수령액 약 1,986,018원" },
+      { g:"생활", d:"2026-10-08", t:"bmi.html", href:"info-bmi-table.html", name:"키별 정상 체중 표와 BMI 계산법: 대한비만학회 기준 정리", desc:"키 170cm 정상 체중 53.5~66.2kg, 키별 표준 체중과 정상 범위" },
+      { g:"금융", d:"2026-10-08", t:"loan.html", href:"info-loan-rate.html", name:"대출금리 0.5%p 차이, 3억 주담대 월 상환액과 총이자는 얼마나 달라질까?", desc:"3억 30년, 금리 0.5%p 오르면 월 +88,861원, 총이자 +3,199만 원" },
+      { g:"금융", d:"2026-10-08", t:"salary.html", href:"info-raise-net.html", name:"연봉 500만원 인상되면 월급 실수령액은 얼마나 늘어날까?", desc:"500만 원 인상 시 월 실수령액 +317,546원, 인상분의 약 76%" },
+      { g:"금융", d:"2026-10-08", t:"salary.html", href:"info-meal-allowance.html", name:"식대 비과세 20만원에 따른 연봉별 실수령액 차이와 조건 총정리", desc:"월 비과세 20만 원이면 연봉 5,000만 원 기준 월 47,578원 차이" },
       { g:"금융", d:"2026-10-07", t:"cartax.html", href:"info-car-acq-tax.html", name:"자동차 취득세 계산법 총정리: 부가세 제외 금액부터 감면 혜택까지", desc:"광고 가격 3,300만 원 신차 취득세 210만 원, 경차·전기차 감면 계산" },
       { g:"금융", d:"2026-10-07", t:"jeonse.html", href:"info-jeonse-deduction.html", name:"전세대출 이자 연말정산 절세 팁: 원리금 상환액 40% 소득공제 계산법", desc:"이자만 내도 상환액의 40%, 청약저축과 합쳐 연 400만 원 한도" },
       { g:"금융", d:"2026-10-07", t:"cartax.html", href:"info-ev-cartax.html", name:"전기차 자동차세 13만원의 비밀: 2,000cc 내연기관 자동차세와 10년 유지비 실제 비교", desc:"10년 합계 전기차 130만 원, 2,000cc 약 426만 4천 원" },
@@ -808,6 +813,11 @@ U.needDate = function(el, name){
     "info-broker.html": '<path d="M4 21V8l8-5 8 5v13"/><path d="M9 21v-6h6v6"/><circle cx="12" cy="10" r="1.5"/>',
     "info-prepay.html": '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
     "info-bmi.html": '<path d="M4 8h16l1 12H3z"/><path d="M8 8V6a4 4 0 018 0v2"/><path d="M12 12v4M10 14h4"/>',
+    "info-minwage-2027.html": '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+    "info-bmi-table.html": '<rect x="4" y="3" width="16" height="18" rx="3"/><path d="M8 8h8"/><path d="M12 8v4"/>',
+    "info-loan-rate.html": '<path d="M4 20V10l8-6 8 6v10z"/><path d="M9 20v-6h6v6"/><path d="M12 9v2"/>',
+    "info-raise-net.html": '<path d="M4 18l6-6 4 4 6-8"/><path d="M15 8h5v5"/>',
+    "info-meal-allowance.html": '<path d="M4 3v8a3 3 0 003 3v7"/><path d="M7 3v6"/><path d="M10 3v8a3 3 0 01-3 3"/><path d="M18 3c-2 2-3 5-3 8h3v10"/>',
     "info-car-acq-tax.html": '<path d="M3 15l2-6h14l2 6"/><path d="M3 15h18v4H3z"/><circle cx="7" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/>',
     "info-jeonse-deduction.html": '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-5h6v5"/>',
     "info-ev-cartax.html": '<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>',

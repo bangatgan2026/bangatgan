@@ -1124,3 +1124,7 @@ aside.rail{display:none!important}
 .rposts .post.rrow b{font-size:18px;font-weight:700}
 .rposts .post.rrow i{font-size:13px}
 @media(max-width:600px){.rposts .post.rrow b{font-size:17px}}
+.rposts h2{font-size:21px;font-weight:800}
+.rposts h2::before{height:22px}
+.rposts h2 .rcount{font-size:14px}
+@media(max-width:600px){.rposts h2{font-size:19px}}
