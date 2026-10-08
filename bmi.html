@@ -31,7 +31,7 @@ gtag('config', 'G-1M0D88PL01');
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="assets/style.css?v=76">
+<link rel="stylesheet" href="assets/style.css?v=81">
 </head>
 <body data-section="health">
 <div class="wrap">
@@ -46,7 +46,7 @@ gtag('config', 'G-1M0D88PL01');
         <div class="inbox"><input id="h" inputmode="numeric" placeholder="키"><span class="unit">cm</span></div>
       </div>      <div class="field">
         <label for="w">몸무게 </label>
-        <div class="inbox"><input id="w" inputmode="numeric" placeholder="몸무게"><span class="unit">kg</span></div>
+        <div class="inbox"><input id="w" inputmode="decimal" placeholder="몸무게 (예: 53.4)"><span class="unit">kg</span></div>
       </div></div>
       <button class="btn" id="go">BMI 계산</button>
     </div>
@@ -90,7 +90,7 @@ gtag('config', 'G-1M0D88PL01');
   <aside class="rail"><div class="ad tall"><span>광고 자리</span></div></aside>
 </div>
 
-<script src="assets/site.js?v=76"></script>
+<script src="assets/site.js?v=81"></script>
 <script>
 (function(){
 "use strict";
@@ -98,19 +98,19 @@ var $=function(s){return document.querySelector(s);};
 function row(k,v,c){ return '<tr><td>'+k+(c?'<div class="c">'+c+'</div>':'')+'</td><td>'+v+'</td></tr>'; }
 function sumrow(k,v){ return '<tr class="sum"><td>'+k+'</td><td>'+v+'</td></tr>'; }
 
-U.comma($('#h')); U.comma($('#w'));
+U.comma($('#h')); (function(el){ el.addEventListener('input',function(){ var v=el.value.replace(/[^0-9.]/g,''); var p=v.split('.'); if(p.length>1) v=p[0]+'.'+p.slice(1).join('').slice(0,1); el.value=v; }); })($('#w'));
 function run(){
   if(!U.need($('#h'),'키')) return;
   if(!U.need($('#w'),'몸무게')) return;
   var h=U.num($('#h'))/100, w=U.num($('#w'));
   if(h<=0||w<=0){ $('#out').hidden=true; return; }
-  var bmi=w/(h*h);
+  var bmi=w/(h*h); var bmi1=Math.round(bmi*10)/10;  /* 화면에 보이는 값(소수 첫째 자리)으로 단계를 정한다 */
   var stage, note;
-  if(bmi<18.5){ stage='저체중'; note='체중이 부족한 편입니다.'; }
-  else if(bmi<23){ stage='정상'; note='적정 범위입니다.'; }
-  else if(bmi<25){ stage='과체중'; note='주의가 필요한 구간입니다.'; }
-  else if(bmi<30){ stage='비만 1단계'; note='생활습관 관리가 권장되는 구간입니다.'; }
-  else if(bmi<35){ stage='비만 2단계'; note='의료진 상담을 권합니다.'; }
+  if(bmi1<18.5){ stage='저체중'; note='체중이 부족한 편입니다.'; }
+  else if(bmi1<23){ stage='정상'; note='적정 범위입니다.'; }
+  else if(bmi1<25){ stage='과체중'; note='주의가 필요한 구간입니다.'; }
+  else if(bmi1<30){ stage='비만 1단계'; note='생활습관 관리가 권장되는 구간입니다.'; }
+  else if(bmi1<35){ stage='비만 2단계'; note='의료진 상담을 권합니다.'; }
   else { stage='비만 3단계'; note='의료진 상담이 필요합니다.'; }
   var std=22*h*h;
   var lo=18.5*h*h, hi=22.9*h*h;
