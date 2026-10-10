@@ -80,6 +80,11 @@ var SECTIONS = [
       { href: "info-lotto.html",  name: "로또",   desc: "확률, 당첨금과 세금, 수령 방법" }
     ],
     items: [
+      { g:"금융", d:"2026-10-10", t:"retire.html", href:"info-retire-1y.html", name:"퇴직금 지급 조건 1년 미만도 가능할까? 계산법과 364일 퇴사 주의사항", desc:"364일 일하고 퇴사하면 하루가 모자라 퇴직금이 없습니다" },
+      { g:"생활", d:"2026-10-10", t:"bp.html", href:"info-bp-lower.html", name:"고혈압 낮추는 방법: 나트륨 조절부터 운동까지 핵심 생활습관 정리", desc:"하루 나트륨 2,000mg 이하, 주 150분 운동이 기본 생활수칙입니다" },
+      { g:"생활", d:"2026-10-10", t:"bmi.html", href:"info-waist.html", name:"허리둘레 정상 수치와 복부비만 기준: BMI별 동반 질환 위험도 비교", desc:"남자 90cm, 여자 85cm 이상이 복부비만 기준입니다" },
+      { g:"생활", d:"2026-10-10", t:"calorie.html", href:"info-calorie-50m.html", name:"50대 남자 하루 권장 칼로리 기준과 나이에 따른 에너지 필요량 변화", desc:"50~64세 남성 하루 2,200kcal, 나이가 들수록 줄어듭니다" },
+      { g:"생활", d:"2026-10-10", t:"walk.html", href:"info-walk-60s.html", name:"60대 하루 적정 걸음수는 얼마일까? 부모님을 위한 맞춤 걷기 운동 가이드", desc:"60세 이상은 6,000~8,000보 구간에서 효과가 컸습니다" },
       { g:"금융", d:"2026-10-09", t:"compound.html,savings.html", href:"info-compound-cycle.html", name:"복리 적금 연복리 월복리 차이, 이자 주기가 수익에 미치는 실전 비교", desc:"1,000만원 10년, 월복리가 연복리보다 105,884원 많습니다" },
       { g:"금융", d:"2026-10-09", t:"loan.html", href:"info-loan-term.html", name:"대출 상환기간 이자 차이 비교, 기간 길어지면 총이자는 얼마나 늘어날까?", desc:"3억 20년→40년, 월 약 56만 원 줄고 총이자 약 1억 7,600만 원 늘어납니다" },
       { g:"금융", d:"2026-10-09", t:"car.html", href:"info-car-down.html", name:"자동차 할부 선수금 이자 차이 비교, 선수금 비율에 따른 월 납입금 총정리", desc:"4,000만 원 차, 선수금 30%면 0%보다 총이자 약 175만 원 적습니다" },
@@ -829,6 +834,11 @@ U.needDate = function(el, name){
     "info-loan-term.html": '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M8 15h8"/>',
     "info-car-down.html": '<path d="M5 16l1.5-5a2 2 0 011.9-1.4h7.2a2 2 0 011.9 1.4L19 16"/><rect x="3" y="16" width="18" height="4" rx="1.5"/><circle cx="7.5" cy="18" r=".8"/><circle cx="16.5" cy="18" r=".8"/>',
     "info-ltv-rate.html": '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-5h6v5"/><path d="M9 13h6"/>',
+    "info-retire-1y.html": '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M9 15l2 2 4-4"/>',
+    "info-bp-lower.html": '<path d="M12 20s-7-4.5-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.5-7 10-7 10z"/>',
+    "info-waist.html": '<path d="M4 9h16M4 15h16"/><path d="M8 9v3M12 9v3M16 9v3"/>',
+    "info-calorie-50m.html": '<path d="M12 3c3 4 6 5 6 9a6 6 0 01-12 0c0-2 1-3 2-4 1 2 2 2 0 0-2 1-4 2-5z"/>',
+    "info-walk-60s.html": '<circle cx="13" cy="4" r="2"/><path d="M11 21l2-6-3-3 1-5 3 3 3 1M10 12l-3 3-1 6"/>',
     "info-pension-credit.html": '<ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/>',
     "info-officetel-area.html": '<path d="M3 17L17 3l4 4L7 21z"/><path d="M7 13l2 2M10 10l2 2M13 7l2 2"/>',
     "info-medical-credit.html": '<rect x="3" y="3" width="18" height="18" rx="3"/><path d="M12 7v10M7 12h10"/>',
