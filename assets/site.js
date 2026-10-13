@@ -13,7 +13,7 @@ var SECTIONS = [
     id: "money", name: "금융계산기", home: "money.html",
     desc: "월급, 대출, 차량처럼 돈이 걸린 계산",
     items: [
-      { g:"로또", d:"2026-10-13", t:"lotto-gen.html,lotto-stat.html,lotto.html", href:"guide-avoid.html", name:"절대 피해야 할 로또 당첨 번호 조합과 비효율적인 선택 패턴", desc:"확률은 같고, 상금을 나눠 갖는 사람 수가 달라집니다" },
+      { g:"로또", d:"2026-10-13", t:"lotto.html,lotto-gen.html,lotto-stat.html,lotto-my.html,lotto-tax.html", href:"guide-avoid.html", name:"절대 피해야 할 로또 당첨 번호 조합과 비효율적인 선택 패턴", desc:"확률은 같지만 당첨금을 나눠 갖게 되는 선택 패턴" },
       { href: "salary.html",    name: "연봉계산기",    desc: "세금과 4대보험 떼고 월 얼마" },
       { href: "car.html",       name: "차량할부계산기",        desc: "월 납입금과 총 비용" },
       { href: "loan.html",      name: "대출이자계산기",        desc: "상환방식별 월 상환액" },
@@ -140,10 +140,10 @@ var SECTIONS = [
       { g:"부동산", d:"2026-09-08", t:"jeonse.html", href:"info-jeonse.html",  name:"전세 계약할 때 주의사항 총정리: 전입신고 대항력 시점부터 등기부등본 확인법까지", desc:"효력은 다음 날 0시부터" },
       { g:"생활", d:"2026-09-08", t:"age.html", href:"info-age.html",       name:"만 나이 계산법 총정리: 세는나이·연나이 차이점과 술·담배 연나이 예외 기준", desc:"태어나면 0세입니다" },
       { g:"생활", d:"2026-09-08", t:"age.html", href:"info-pension.html",   name:"기초연금 수급 조건 완벽 정리: 소득인정액 계산법부터 부부감액 예방법까지", desc:"재산도 소득으로 환산합니다" },
-      { g:"로또", d:"2026-09-07", t:"lotto.html,lotto-gen.html,lotto-stat.html", href:"guide-odds.html",     name:"로또 1등 확률 계산법: 814만 분의 1 수학적 구조와 조합 원리 분석", desc:"45개 중 6개 고르기" },
-      { g:"로또", d:"2026-09-07", t:"lotto.html,lotto-my.html,lotto-tax.html", href:"guide-prize.html",    name:"로또 1등 당첨금 세금 계산법: 20억 당첨 시 실제 수령하는 실수령액은 얼마일까?", desc:"3억을 넘으면 33%" },
-      { g:"로또", d:"2026-09-07", t:"lotto-gen.html,lotto-stat.html,lotto-my.html", href:"guide-stats.html",    name:"로또 번호 통계 분석: 1,244회 출현 횟수로 보는 수학적 무작위성", desc:"무작위라서 생기는 흔들림" },
-      { g:"로또", d:"2026-09-07", t:"lotto.html,lotto-my.html,lotto-tax.html", href:"guide-claim.html",    name:"로또 당첨금 수령방법 완벽 정리: 금액별 수령 장소와 필수 준비물", desc:"금액에 따라 가는 곳이 다릅니다" }
+      { g:"로또", d:"2026-09-07", t:"lotto.html,lotto-gen.html,lotto-stat.html,lotto-my.html,lotto-tax.html", href:"guide-odds.html",     name:"로또 1등 확률 계산법: 814만 분의 1 수학적 구조와 조합 원리 분석", desc:"45개 중 6개 고르기" },
+      { g:"로또", d:"2026-09-07", t:"lotto.html,lotto-gen.html,lotto-stat.html,lotto-my.html,lotto-tax.html", href:"guide-prize.html",    name:"로또 1등 당첨금 세금 계산법: 20억 당첨 시 실제 수령하는 실수령액은 얼마일까?", desc:"3억을 넘으면 33%" },
+      { g:"로또", d:"2026-09-07", t:"lotto.html,lotto-gen.html,lotto-stat.html,lotto-my.html,lotto-tax.html", href:"guide-stats.html",    name:"로또 번호 통계 분석: 1,244회 출현 횟수로 보는 수학적 무작위성", desc:"무작위라서 생기는 흔들림" },
+      { g:"로또", d:"2026-09-07", t:"lotto.html,lotto-gen.html,lotto-stat.html,lotto-my.html,lotto-tax.html", href:"guide-claim.html",    name:"로또 당첨금 수령방법 완벽 정리: 금액별 수령 장소와 필수 준비물", desc:"금액에 따라 가는 곳이 다릅니다" }
     ]
   }
 ];
