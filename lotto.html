@@ -31,7 +31,7 @@ gtag('config', 'G-1M0D88PL01');
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="assets/style.css?v=81">
+<link rel="stylesheet" href="assets/style.css?v=84">
 </head>
 <body data-section="lotto">
 <div class="wrap">
@@ -55,6 +55,7 @@ gtag('config', 'G-1M0D88PL01');
       <div class="rlab">1등 당첨금 <em>1게임당</em></div>
       <div class="ramt" id="bigAmt"></div>
       <div class="rnote" id="bigNote"></div>
+      <div class="rmode" id="modeBox" hidden></div>
       <div class="rcut"></div>
       <div class="rchips" id="summary"></div>
     </div>
@@ -101,7 +102,7 @@ gtag('config', 'G-1M0D88PL01');
   </main>
   <aside class="rail"><div class="ad tall"><span>광고 자리</span></div></aside>
 </div>
-<script src="assets/lotto-data.js?v=81"></script>
+<script src="assets/lotto-data.js?v=84"></script>
 <script src="assets/site.js?v=81"></script>
 <script>
 (function(){
@@ -140,6 +141,14 @@ function render(){
     $('#bigNote').textContent='이 회차에는 1등 당첨자가 나오지 않았습니다. 당첨금은 다음 회차로 이월되었습니다.';
   }
 
+  var cb=LOTTO.combo(d.no), mb=$('#modeBox');
+  if(d.w1>0 && cb){
+    mb.hidden=false;
+    mb.innerHTML='<div><span>자동</span><b>'+cb[0]+'게임</b></div>'+
+      '<div><span>반자동</span><b>'+cb[1]+'게임</b></div>'+
+      '<div><span>수동</span><b>'+cb[2]+'게임</b></div>';
+  } else { mb.hidden=true; mb.innerHTML=''; }
+
   var sum=d.n.reduce(function(a,b){return a+b;},0);
   var odd=d.n.filter(function(x){return x%2;}).length;
   var low=d.n.filter(function(x){return x<=22;}).length;
@@ -158,6 +167,7 @@ function render(){
     rows+=row('당첨 게임 수', d.w1.toLocaleString()+'게임','6개 번호를 모두 맞힌 게임');
     rows+=row('1게임당 당첨금', LOTTO.comma(d.amt),'세금을 떼기 전 금액');
     rows+=row('1등 당첨금 총액', LOTTO.comma(d.amt*d.w1),'');
+    if(cb) rows+=row('당첨 방식', '자동 '+cb[0]+' · 반자동 '+cb[1]+' · 수동 '+cb[2], '1등 '+d.w1+'게임을 구매 방식별로 나눈 수');
     rows+=row('역대 순위', LOTTO.amtRank.map[d.no]+'위',
               '1등이 나온 '+LOTTO.amtRank.total+'개 회차 가운데');
     rows+=row('역대 평균과 비교', LOTTO.comma(LOTTO.avgAmt),'1등 당첨금 평균');

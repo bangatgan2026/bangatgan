@@ -13,6 +13,7 @@ var SECTIONS = [
     id: "money", name: "금융계산기", home: "money.html",
     desc: "월급, 대출, 차량처럼 돈이 걸린 계산",
     items: [
+      { g:"로또", d:"2026-10-13", t:"lotto-gen.html,lotto-stat.html,lotto.html", href:"guide-avoid.html", name:"절대 피해야 할 로또 당첨 번호 조합과 비효율적인 선택 패턴", desc:"확률은 같고, 상금을 나눠 갖는 사람 수가 달라집니다" },
       { href: "salary.html",    name: "연봉계산기",    desc: "세금과 4대보험 떼고 월 얼마" },
       { href: "car.html",       name: "차량할부계산기",        desc: "월 납입금과 총 비용" },
       { href: "loan.html",      name: "대출이자계산기",        desc: "상환방식별 월 상환액" },
@@ -896,6 +897,7 @@ U.needDate = function(el, name){
     "info-pension.html":'<circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-5 4.5-7 8-7s6.5 2 8 7"/>',
     "guide-odds.html":'<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 .5c0 1.7-2.5 2-2.5 3.5M12 17h.01"/>',
     "guide-prize.html":'<path d="M12 3v18M8 7h6a3 3 0 010 6H9a3 3 0 000 6h7"/>',
+    "guide-avoid.html":'<circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/>',
     "guide-stats.html":'<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
     "guide-claim.html":'<rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h4"/>'
   };

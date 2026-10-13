@@ -46,6 +46,14 @@ async function getJson(url, name){
   return null;
 }
 
+/* 1등 당첨 방식별 게임 수 [자동, 반자동, 수동]. 합이 1등 게임 수와 같을 때만 믿습니다. */
+function comboOf(auto, semi, manual, w1){
+  const v = [Number(auto), Number(semi || 0), Number(manual || 0)];
+  if (!v.every(function(x){ return Number.isInteger(x) && x >= 0; })) return null;
+  if (w1 <= 0 || v[0] + v[1] + v[2] !== w1) return null;
+  return v;
+}
+
 /* 두 출처의 모양이 달라서 우리 모양으로 맞춥니다 */
 function normA(j){
   const m = new Map();
@@ -65,7 +73,8 @@ function normA(j){
       w4amt: Number(r.fourth_prize_each || 0),
       w5: Number(r.fifth_winners || 0),
       w5amt: Number(r.fifth_prize_each || 0),
-      sales: Number(r.total_sales || 0)
+      sales: Number(r.total_sales || 0),
+      c: comboOf(r.rank1_auto, r.rank1_semi_auto, r.rank1_manual, Number(r.first_winners || 0))
     });
   });
   return m;
@@ -90,7 +99,8 @@ function normB(list){
       w4amt: Number((dv[3] || {}).prize || 0),
       w5: Number((dv[4] || {}).winners || 0),
       w5amt: Number((dv[4] || {}).prize || 0),
-      sales: Number(r.total_sales_amount || 0)
+      sales: Number(r.total_sales_amount || 0),
+      c: r.winners_combination ? comboOf(r.winners_combination.auto, r.winners_combination.semi_auto, r.winners_combination.manual, Number(d1.winners || 0)) : null
     });
   });
   return m;
@@ -182,6 +192,7 @@ function expectedDrawNo(){
                  '  B: ' + b.date + ' ' + b.n.join(',') + ' +' + b.b;
         break;
       }
+      if (!a.c && b.c) a.c = b.c;
       draws.push(a);
       added++;
       console.log('추가:', no, a.date, a.n.join(','), '+' + a.b,
@@ -239,6 +250,18 @@ function expectedDrawNo(){
       process.exit(1);
     }
     js = js.replace(m[1], JSON.stringify(compact));
+
+    /* 1등 당첨 방식(자동/반자동/수동). 실패해도 회차 갱신은 막지 않습니다. */
+    try {
+      const cm = js.match(/var LOTTO_COMBO = (\{[\s\S]*?\});/);
+      const combo = cm ? JSON.parse(cm[1]) : {};
+      draws.forEach(function(d){ if (d.c) combo[d.drwNo] = d.c; });
+      const cs = JSON.stringify(combo);
+      if (cm) js = js.replace(cm[1], function(){ return cs; });
+      else js += '\nvar LOTTO_COMBO = ' + cs + ';\n';
+    } catch (e) {
+      console.log('1등 당첨 방식 갱신은 건너뜁니다:', e.message);
+    }
     fs.writeFileSync(OUT_JS, js);
     console.log(added + '개 회차를 추가했습니다. 이제 ' + draws.length + '회까지 있습니다.');
   } else {
