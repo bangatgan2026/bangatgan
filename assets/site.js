@@ -13,7 +13,6 @@ var SECTIONS = [
     id: "money", name: "금융계산기", home: "money.html",
     desc: "월급, 대출, 차량처럼 돈이 걸린 계산",
     items: [
-      { g:"로또", d:"2026-10-13", t:"lotto.html,lotto-gen.html,lotto-stat.html,lotto-my.html,lotto-tax.html", href:"guide-avoid.html", name:"절대 피해야 할 로또 당첨 번호 조합과 비효율적인 선택 패턴", desc:"확률은 같지만 당첨금을 나눠 갖게 되는 선택 패턴" },
       { href: "salary.html",    name: "연봉계산기",    desc: "세금과 4대보험 떼고 월 얼마" },
       { href: "car.html",       name: "차량할부계산기",        desc: "월 납입금과 총 비용" },
       { href: "loan.html",      name: "대출이자계산기",        desc: "상환방식별 월 상환액" },
@@ -81,6 +80,7 @@ var SECTIONS = [
       { href: "info-lotto.html",  name: "로또",   desc: "확률, 당첨금과 세금, 수령 방법" }
     ],
     items: [
+      { g:"로또", d:"2026-10-13", t:"lotto.html,lotto-gen.html,lotto-stat.html,lotto-my.html,lotto-tax.html", href:"guide-avoid.html", name:"절대 피해야 할 로또 당첨 번호 조합과 비효율적인 선택 패턴", desc:"확률은 같지만 당첨금을 나눠 갖게 되는 선택 패턴" },
       { g:"금융", d:"2026-10-10", t:"retire.html", href:"info-retire-1y.html", name:"퇴직금 지급 조건 1년 미만도 가능할까? 계산법과 364일 퇴사 주의사항", desc:"364일 일하고 퇴사하면 하루가 모자라 퇴직금이 없습니다" },
       { g:"생활", d:"2026-10-10", t:"bp.html", href:"info-bp-lower.html", name:"고혈압 낮추는 방법: 나트륨 조절부터 운동까지 핵심 생활습관 정리", desc:"하루 나트륨 2,000mg 이하, 주 150분 운동이 기본 생활수칙입니다" },
       { g:"생활", d:"2026-10-10", t:"bmi.html", href:"info-waist.html", name:"허리둘레 정상 수치와 복부비만 기준: BMI별 동반 질환 위험도 비교", desc:"남자 90cm, 여자 85cm 이상이 복부비만 기준입니다" },
