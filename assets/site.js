@@ -1057,6 +1057,101 @@ U.needDate = function(el, name){
     });
   });
   if (!isTool) return;
+
+  /* 로또 계산기 5곳은 예전 방식 그대로(글이 바로 다 보임).
+     나머지 계산기는 모두 똑같이 '분류 버튼'만 보이고, 누르면 그 분류 글이 최신순으로 나옵니다.
+     글마다 t(연결 계산기)를 적을 필요가 없습니다. 새 글은 items 에 g(분류)만 맞게 넣으면 됩니다. */
+  var LOTTO_TOOLS = { "lotto.html": 1, "lotto-gen.html": 1, "lotto-stat.html": 1, "lotto-my.html": 1, "lotto-tax.html": 1 };
+  if (!LOTTO_TOOLS[page]) { buildTabs(); return; }
+
+  /* 번호 넘기기: ‹ 1 2 3 4 5 … 마지막 › 모양. 쪽이 많아도 길어지지 않게 가운데는 … 로 줄입니다. */
+  function pagerHtml(cur, pages) {
+    if (pages <= 1) return "";
+    var show = {}, i;
+    show[1] = show[pages] = show[cur - 1] = show[cur] = show[cur + 1] = true;
+    if (cur <= 3) for (i = 1; i <= 5; i++) show[i] = true;
+    if (cur >= pages - 2) for (i = pages - 4; i <= pages; i++) show[i] = true;
+    var nums = [];
+    for (i = 1; i <= pages; i++) if (show[i]) nums.push(i);
+    var h = cur > 1 ? '<button type="button" data-p="' + (cur - 1) + '" aria-label="이전 쪽">‹</button>' : "";
+    var prev = 0;
+    nums.forEach(function (n) {
+      if (prev && n - prev > 1) h += '<span class="gap">…</span>';
+      h += '<button type="button" data-p="' + n + '"' + (n === cur ? ' class="on" aria-current="page"' : "") + ">" + n + "</button>";
+      prev = n;
+    });
+    if (cur < pages) h += '<button type="button" data-p="' + (cur + 1) + '" aria-label="다음 쪽">›</button>';
+    return h;
+  }
+
+  function buildTabs() {
+    var CATS = ["금융", "부동산", "생활", "로또"];
+    var BLURB = {
+      "금융": "연봉·세금·대출·보험 이야기",
+      "부동산": "집 사고 팔 때, 전월세 이야기",
+      "생활": "나이·날짜·건강 이야기",
+      "로또": "확률·당첨금·수령 방법"
+    };
+    var every = [];
+    SECTIONS.forEach(function (s) {
+      if (s.id !== "info") return;
+      s.items.forEach(function (it, i) { every.push({ it: it, i: i }); });
+    });
+    every.sort(function (a, b) {
+      return a.it.d < b.it.d ? 1 : a.it.d > b.it.d ? -1 : a.i - b.i;
+    });
+    var by = {};
+    every.forEach(function (p) { (by[p.it.g] = by[p.it.g] || []).push(p.it); });
+    var cats = CATS.filter(function (g) { return by[g] && by[g].length; });
+    if (!cats.length) return;
+
+    var box = document.createElement("div");
+    box.className = "card rtabbox";
+    box.id = "rposts";
+    box.innerHTML =
+      '<h2>관련 글 모아보기 <span class="rcount">전체 ' + every.length + '편</span></h2>' +
+      '<p class="rhint">분류를 누르면 글이 펼쳐지고, 다시 누르면 접힙니다.</p>' +
+      '<div class="rcats">' +
+      cats.map(function (g) {
+        return '<div class="racc" data-g="' + esc(g) + '">' +
+          '<button type="button" class="modecard rcat" aria-expanded="false">' +
+          '<div class="mt">' + esc(g) + ' <span class="rn">' + by[g].length + '편</span></div>' +
+          '<div class="mdz">' + esc(BLURB[g] || "") + '</div></button>' +
+          '<div class="rpanel" hidden><div class="postlist"></div><nav class="pager" aria-label="글 목록 페이지"></nav></div>' +
+          '</div>';
+      }).join("") + '</div>';
+    main.appendChild(box);
+
+    [].forEach.call(box.querySelectorAll(".racc"), function (acc) {
+      var g = acc.dataset.g, arr = by[g], pg = 1;
+      var $btn = acc.querySelector(".rcat"), $panel = acc.querySelector(".rpanel"),
+          $list = acc.querySelector(".postlist"), $pager = acc.querySelector(".pager");
+      function draw(scroll) {
+        var pages = Math.max(1, Math.ceil(arr.length / PER));
+        if (pg > pages) pg = pages;
+        var from = (pg - 1) * PER;
+        $list.innerHTML = arr.slice(from, from + PER).map(function (it) {
+          return '<a class="post rrow" href="' + esc(it.href) + '"><b>' + esc(it.name) +
+            '</b><i>' + esc(it.d.slice(2).replace(/-/g, ".")) + '</i></a>';
+        }).join("");
+        $pager.innerHTML = pagerHtml(pg, pages);
+        if (scroll) acc.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+      $btn.addEventListener("click", function () {
+        var willOpen = $panel.hidden;
+        if (willOpen) { pg = 1; draw(false); }
+        $panel.hidden = !willOpen;
+        acc.classList.toggle("on", willOpen);
+        $btn.setAttribute("aria-expanded", willOpen ? "true" : "false");
+      });
+      $pager.addEventListener("click", function (e) {
+        var b = e.target.closest("button[data-p]");
+        if (!b) return;
+        pg = Number(b.dataset.p); draw(true);
+      });
+    });
+  }
+
   posts.sort(function (a, b) {
     return a.it.d < b.it.d ? 1 : a.it.d > b.it.d ? -1 : a.i - b.i;
   });

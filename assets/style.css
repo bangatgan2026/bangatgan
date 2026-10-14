@@ -1138,3 +1138,38 @@ aside.rail{display:none!important}
 .rposts h2::before{height:22px}
 .rposts h2 .rcount{font-size:14px}
 @media(max-width:600px){.rposts h2{font-size:19px}}
+/* 계산기 아래 '관련 글 모아보기' — 한 줄에 분류 하나, 누르면 가로 전체로 펼쳐지고 다시 누르면 접힘 */
+.rtabbox{margin-top:16px}
+.rtabbox h2 .rcount{font-size:13px;font-weight:600;color:var(--dim);margin-left:6px}
+.rtabbox .rhint{margin:2px 0 12px;font-size:13.5px;color:var(--dim)}
+.rcats{display:flex;flex-direction:column;gap:10px}
+.racc{border:1px solid var(--edge);border-radius:14px;background:var(--card2);overflow:hidden}
+.racc.on{border-color:var(--gold)}
+.racc .rcat{display:block;width:100%;box-sizing:border-box;position:relative;text-align:left;cursor:pointer;font:inherit;border:0;border-radius:0;background:transparent;padding:15px 44px 15px 16px}
+.racc.on .rcat{background:#241F12}
+.racc .rcat .mt{font-size:16.5px}
+.racc .rcat .mdz{font-size:12.5px}
+.racc .rcat .rn{font-weight:600;font-size:12.5px;color:var(--dim);margin-left:6px}
+.racc.on .rcat .mt{color:var(--gold)}
+.racc.on .rcat .rn{color:var(--gold)}
+.racc .rcat::after{content:"";position:absolute;right:18px;top:50%;width:9px;height:9px;margin-top:-7px;border-right:2px solid var(--dim);border-bottom:2px solid var(--dim);transform:rotate(45deg);transition:transform .15s}
+.racc.on .rcat::after{border-color:var(--gold);transform:rotate(-135deg);margin-top:-2px}
+.racc .rpanel{padding:4px 16px 14px;border-top:1px solid var(--edge)}
+.racc .rpanel[hidden]{display:none}
+.racc .post.rrow{display:flex;align-items:baseline;gap:12px;padding:13px 2px}
+.racc .post.rrow b{flex:1;min-width:0;font-size:15.5px;font-weight:650;line-height:1.5}
+.racc .post.rrow i{flex:none;font-style:normal;font-size:12px;color:var(--dim);font-weight:600}
+@media(max-width:600px){.racc .post.rrow{flex-direction:column;align-items:flex-start;gap:3px;padding:13px 2px}.racc .post.rrow b{flex:none;width:100%}.racc .rpanel{padding:2px 14px 12px}}
+/* 분류마다 다른 색 (금융 금색 / 부동산 청록 / 생활 연초록 / 로또 주황) */
+.racc[data-g="금융"]{--ac:#E3B75B;--tint:#262013}
+.racc[data-g="부동산"]{--ac:#4FD1C5;--tint:#10282A}
+.racc[data-g="생활"]{--ac:#7BE08A;--tint:#112919}
+.racc[data-g="로또"]{--ac:#FF9F5A;--tint:#2B1B10}
+.racc{border-left:5px solid var(--ac)}
+.racc.on{border-color:var(--ac)}
+.racc.on .rcat{background:var(--tint)}
+.racc .rcat .mt{color:var(--ink)}
+.racc.on .rcat .mt,.racc.on .rcat .rn{color:var(--ac)}
+.racc.on .rcat::after{border-color:var(--ac)}
+.racc .rpanel{border-top-color:rgba(255,255,255,.08)}
+.pager .gap{align-self:center;min-width:22px;text-align:center;color:var(--dim);font-size:14px}
