@@ -80,11 +80,16 @@ var SECTIONS = [
       { href: "info-lotto.html",  name: "로또",   desc: "확률, 당첨금과 세금, 수령 방법" }
     ],
     items: [
-      { g:"금융", d:"2026-10-14", t:"salary.html", href:"info-salary.html", name:"[시리즈 1편] 연봉 4,000만 원인데 통장엔 왜 이것뿐일까? 4대보험과 세금 공제 원리 파악하기", desc:"월 333만 원에서 약 42만 원이 빠집니다" },
-      { g:"금융", d:"2026-10-14", t:"savings.html", href:"info-savings.html",    name:"[시리즈 2편] 적금 이자 계산기 속 '세전'과 '세후'의 차이, 과세 유형과 절세 혜택 완벽 정리", desc:"세전 13만 원, 세후 109,980원" },
-      { g:"금융", d:"2026-10-14", t:"compound.html", href:"info-compound.html", name:"[시리즈 3편] 복리의 마법 vs 단리, 복리계산기 활용해 장기 저축 목표 설정하는 법", desc:"3년만 비교해도 76,250원 차이" },
+      { g:"금융", d:"2026-10-15", t:"insurance.html", href:"info-freelancer-33.html", name:"[시리즈 10편] 4대보험 계산기 실전편: 아르바이트·프리랜서 3.3%와 4대보험의 실질 이득 비교", desc:"월 200만 원이면 약 15.6만 원 차이" },
+      { g:"금융", d:"2026-10-15", t:"retire.html", href:"info-retire.html", name:"[시리즈 9편] 퇴직금 계산기 제대로 활용하기: 평균임금 산정 시 흔히 하는 실수 3가지", desc:"상여금은 3/12만 더합니다" },
+      { g:"금융", d:"2026-10-15", t:"prepay.html", href:"info-prepay.html", name:"[시리즈 8편] 대출 중도상환수수료 계산기: 언제 갚아야 가장 수수료가 적을까?", desc:"바로 갚으면 60만 원, 3년 뒤엔 0원" },
+      { g:"금융", d:"2026-10-15", t:"vat.html", href:"info-vat-type.html", name:"[시리즈 7편] 부가세 계산기로 알아보는 간이과세자 및 일반과세자의 세금 기초 가이드", desc:"같은 매출에 70만 원 vs 364만 원" },
+      { g:"금융", d:"2026-10-15", t:"car.html", href:"info-car.html", name:"[시리즈 6편] 차량 할부 계산기와 자동차세 계산기로 계산해보는 내 연봉에 맞는 차 구하기", desc:"월 할부 47만 원, 합치면 77만~92만 원" },
+      { g:"금융", d:"2026-10-14", t:"jeonse.html", href:"info-jeonse-rate.html", name:"[시리즈 5편] 전월세 전환율 계산기로 알아보는 전세 vs 월세 실질 주거비 비교 전략", desc:"보증금 5천만 원에 월세 25만 원이면 6.0%" },
       { g:"금융", d:"2026-10-14", t:"loan.html", href:"info-loan.html",      name:"[시리즈 4편] 대출 이자 계산기 활용법: 원리금균등 vs 원금균등 상환방식 완벽 비교", desc:"총이자 약 133만 원 차이" },
-      { g:"부동산", d:"2026-10-14", t:"jeonse.html", href:"info-jeonse-rate.html", name:"[시리즈 5편] 전월세 전환율 계산기로 알아보는 전세 vs 월세 실질 주거비 비교 전략", desc:"보증금 5천만 원에 월세 25만 원이면 6.0%" },
+      { g:"금융", d:"2026-10-14", t:"compound.html", href:"info-compound.html", name:"[시리즈 3편] 복리의 마법 vs 단리, 복리계산기 활용해 장기 저축 목표 설정하는 법", desc:"3년만 비교해도 76,250원 차이" },
+      { g:"금융", d:"2026-10-14", t:"savings.html", href:"info-savings.html",    name:"[시리즈 2편] 적금 이자 계산기 속 '세전'과 '세후'의 차이, 과세 유형과 절세 혜택 완벽 정리", desc:"세전 13만 원, 세후 109,980원" },
+      { g:"금융", d:"2026-10-14", t:"salary.html", href:"info-salary.html", name:"[시리즈 1편] 연봉 4,000만 원인데 통장엔 왜 이것뿐일까? 4대보험과 세금 공제 원리 파악하기", desc:"월 333만 원에서 약 42만 원이 빠집니다" },
       { g:"로또", d:"2026-10-13", t:"lotto.html,lotto-gen.html,lotto-stat.html,lotto-my.html,lotto-tax.html", href:"guide-avoid.html", name:"절대 피해야 할 로또 당첨 번호 조합과 비효율적인 선택 패턴", desc:"확률은 같지만 당첨금을 나눠 갖게 되는 선택 패턴" },
       { g:"금융", d:"2026-10-10", t:"retire.html", href:"info-retire-1y.html", name:"퇴직금 지급 조건 1년 미만도 가능할까? 계산법과 364일 퇴사 주의사항", desc:"364일 일하고 퇴사하면 하루가 모자라 퇴직금이 없습니다" },
       { g:"생활", d:"2026-10-10", t:"bp.html", href:"info-bp-lower.html", name:"고혈압 낮추는 방법: 나트륨 조절부터 운동까지 핵심 생활습관 정리", desc:"하루 나트륨 2,000mg 이하, 주 150분 운동이 기본 생활수칙입니다" },
@@ -118,10 +123,8 @@ var SECTIONS = [
       { g:"생활", d:"2026-10-05", t:"walk.html", href:"info-walk.html", name:"걷기 1만보 칼로리 계산: 체중별 소모량과 속도별 걸리는 시간 완벽 정리", desc:"체중 60kg과 80kg은 98kcal 차이가 납니다" },
       { g:"생활", d:"2026-10-05", t:"calorie.html", href:"info-calorie.html", name:"하루 필요 칼로리 계산법: 성별·활동량별 권장 칼로리 완벽 정리", desc:"활동량에 따라 하루 860kcal 차이가 납니다" },
       { g:"생활", d:"2026-10-05", t:"bmr.html", href:"info-bmr.html", name:"기초대사량 계산법 총정리: 성별·나이·체중별 평균과 공식 비교", desc:"나이가 들면 10년에 57kcal씩 줄어듭니다" },
-      { g:"금융", d:"2026-10-05", t:"car.html", href:"info-car.html", name:"자동차 할부 이자 계산법: 3,000만 원 대출 시 기간·금리별 총이자 비교", desc:"기간이 길면 이자가 191만 원 늘어납니다" },
       { g:"금융", d:"2026-10-04", t:"savings.html", href:"info-interest-tax.html", name:"예적금 이자소득세 15.4% 계산법과 상호금융 1.4% 저율과세 절세 꿀팁", desc:"조합원이면 세율이 다릅니다" },
       { g:"생활", d:"2026-10-04", t:"bmi.html", href:"info-bmi.html", name:"BMI 아시아 태평양 기준 차이점: 서양 기준과 다른 비만 판정 수치 총정리", desc:"기준이 두 개입니다" },
-      { g:"금융", d:"2026-10-04", t:"prepay.html", href:"info-prepay.html", name:"대출 중도상환수수료 계산법과 2026년 인하 기준 비교 가이드", desc:"3년만 지나면 0원입니다" },
       { g:"생활", d:"2026-10-04", t:"bp.html", href:"info-bp.html", name:"혈압 120에 80은 정상이 아닙니다", desc:"정상의 조건은 '그리고'" },
       { g:"부동산", d:"2026-10-03", t:"broker.html", href:"info-broker.html", name:"집값 1천만원 차이로 중개수수료가 94만원 갈립니다", desc:"구간이 바뀌는 지점" },
       { g:"금융", d:"2026-10-02", t:"vat.html", href:"info-vat-split.html", name:"부가세 계산에서 1원이 틀리는 이유", desc:"1.1로 나누면 안 됩니다" },
@@ -130,7 +133,6 @@ var SECTIONS = [
       { g:"부동산", d:"2026-10-01", t:"acquisition.html", href:"info-acquisition.html", name:"6억 집과 6억 1천만원 집, 취득세가 다릅니다", desc:"구간이 바뀌는 지점" },
       { g:"금융", d:"2026-09-27", t:"vat.html", href:"info-vat-oct.html",   name:"10월 부가세 예정고지 총정리: 개인사업자 납부액 계산부터 가산세 방지 팁", desc:"미리 내고 1월에 뺍니다" },
       { g:"부동산", d:"2026-09-27", t:"pyeong.html", href:"info-pyeong.html",  name:"아파트 평수 계산법 완벽 정리: 84㎡가 34평이 되는 전용면적·공급면적의 비밀", desc:"재는 범위가 다릅니다" },
-      { g:"금융", d:"2026-09-15", t:"retire.html", href:"info-retire.html",     name:"퇴직금 회사 계산과 내 계산이 다른 이유: 상여금과 연차수당 계산법", desc:"상여금과 연차수당을 빼먹으면" },
       { g:"금융", d:"2026-09-11", t:"salary.html", href:"info-yearend-plan.html", name:"연말정산 준비는 12월 31일 전에 끝내야 하는 이유: 홈택스 미리보기 활용법", desc:"2월은 서류만 내는 날" },
       { g:"금융", d:"2026-09-08", t:"insurance.html", href:"info-insurance.html", name:"2026년 4대보험 요율 개정 총정리: 국민연금 인상과 월급 300만 원 실수령액 변화", desc:"국민연금이 28년 만에 올랐습니다" },
       { g:"금융", d:"2026-09-08", t:"insurance.html", href:"info-jobless.html",   name:"실업급여 조건 총정리: 고용보험 180일 계산법부터 자발적 퇴사 예외까지", desc:"보수 받은 날만 셉니다" },
@@ -813,6 +815,8 @@ U.needDate = function(el, name){
     /* 부동산 */
     "acquisition.html":'<path d="M4 10l8-6 8 6v10H4z"/><path d="M12 12v5M10 14h4"/>',
     "ltv.html":       '<path d="M3 20h18M6 20V9l6-5 6 5v11"/><path d="M9 20v-5h6v5"/>',
+    "info-vat-type.html": '<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/>',
+    "info-freelancer-33.html": '<circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6 7-6s7 2 7 6"/>',
     "info-salary.html": '<rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M7 10v4M17 10v4"/>',
     "info-bp.html": '<path d="M12 20s-7-4.5-7-9a4 4 0 017-2.6A4 4 0 0119 11c0 4.5-7 9-7 9z"/><path d="M4 13h4l1.5-3 2 6 1.5-3h5"/>',
     "info-cartax.html": '<path d="M4 16v-3l2-5h12l2 5v3"/><path d="M4 16h16v3h-3v-3M7 19H4v-3"/><circle cx="7.5" cy="16.5" r="1"/><circle cx="16.5" cy="16.5" r="1"/>',
@@ -1220,4 +1224,20 @@ U.needDate = function(el, name){
     cur = Number(b.dataset.p); render(true);
   });
   render(false);
+})();
+
+
+/* asof-notice: 글 맨 끝에 기준 변경 안내를 자동으로 붙입니다 (문구는 여기 한 곳만 고치면 됩니다) */
+(function () {
+  var p = location.pathname.split("/").pop() || "";
+  if (!/^(info|guide)-.+\.html$/.test(p)) return;
+  function run() {
+    var pr = document.querySelector(".prose");
+    if (!pr || pr.querySelector(".asof")) return;
+    var d = document.createElement("div");
+    d.className = "callout asof";
+    d.innerHTML = "<b>📅 기준일 안내</b><br>이 글의 요율·한도·금액은 작성 시점 기준입니다. 법령이나 제도가 바뀌면 숫자가 달라질 수 있으니, 신고·가입·계약 전에는 국세청·금융위원회·관련 공단·금융기관에서 최신 기준을 확인하세요. 계산 결과는 참고용입니다.";
+    pr.appendChild(d);
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run); else run();
 })();
