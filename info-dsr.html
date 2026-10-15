@@ -16,94 +16,73 @@ gtag('config', 'G-1M0D88PL01');
 <meta name="theme-color" content="#0E1320">
 <meta name="color-scheme" content="dark">
 <meta name="naver-site-verification" content="7ea0de7682fd50f2771c43ebd5a723369427b225" />
-<title>DSR LTV 차이 총정리: 집값과 소득으로 결정되는 대출 한도의 비밀 | 참새방앗간</title>
-<meta name="description" content="LTV는 집값 대비 대출 비율이고 DSR은 연소득 대비 원리금 비율입니다. 은행권 DSR은 40%로 기존 신용대출과 자동차 할부까지 합산합니다. 스트레스 DSR까지 정리했습니다.">
+<title>[시리즈 13편] 주택담보대출 LTV·DSR 개념 정리와 계산기 활용 시 주의해야 할 착시 현상 | 참새방앗간</title>
+<meta name="description" content="집값 6억 원에 LTV 60%면 3억 6,000만 원이지만 KB시세가 5억 5,000만 원이면 3억 3,000만 원입니다. 계산기 속 LTV·DSR 착시 3가지를 정리했습니다.">
 <link rel="canonical" href="https://bangatgan.kr/info-dsr.html">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="참새방앗간">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:url" content="https://bangatgan.kr/info-dsr.html">
-<meta property="og:title" content="DSR LTV 차이 총정리: 집값과 소득으로 결정되는 대출 한도의 비밀 | 참새방앗간">
-<meta property="og:description" content="LTV는 집값 대비 대출 비율이고 DSR은 연소득 대비 원리금 비율입니다. 은행권 DSR은 40%로 기존 신용대출과 자동차 할부까지 합산합니다. 스트레스 DSR까지 정리했습니다.">
-<meta property="og:image" content="https://bangatgan.kr/images/og-info-dsr.jpg">
+<meta property="og:title" content="[시리즈 13편] 주택담보대출 LTV·DSR 개념 정리와 계산기 활용 시 주의해야 할 착시 현상 | 참새방앗간">
+<meta property="og:description" content="집값 6억 원에 LTV 60%면 3억 6,000만 원이지만 KB시세가 5억 5,000만 원이면 3억 3,000만 원입니다. 계산기 속 LTV·DSR 착시 3가지를 정리했습니다.">
+<meta property="og:image" content="https://bangatgan.kr/images/og-series-13.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="assets/style.css?v=83">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "LTV와 DSR은 무엇이 다른가요?", "acceptedAnswer": {"@type": "Answer", "text": "LTV는 집값 대비 대출 비율로 담보 가치만 봅니다. DSR은 연간 원리금을 연소득으로 나눈 비율로 갚을 능력을 봅니다. 최종 대출 한도는 두 기준 중 낮은 쪽으로 정해집니다."}}, {"@type": "Question", "name": "DSR 40%는 어떻게 계산하나요?", "acceptedAnswer": {"@type": "Answer", "text": "1년에 갚는 모든 대출의 원금과 이자 합계가 연소득의 40%를 넘을 수 없습니다. 연소득 5,000만원이면 연간 원리금 한도가 2,000만원입니다."}}, {"@type": "Question", "name": "DSR에 기존 대출도 포함되나요?", "acceptedAnswer": {"@type": "Answer", "text": "포함됩니다. 신용대출, 마이너스통장, 자동차 할부, 카드론, 현금서비스 등 금융권 대출의 원리금이 모두 합산됩니다. 기존 대출을 갚으면 그만큼 주택담보대출 한도가 늘어납니다."}}, {"@type": "Question", "name": "스트레스 DSR이 적용되면 이자도 더 내나요?", "acceptedAnswer": {"@type": "Answer", "text": "아닙니다. 가산금리는 한도를 계산할 때만 쓰는 평가용 수치입니다. 실제로 매달 내는 이자와 원리금은 약정한 실제 금리로 계산됩니다."}}]}</script>
+<link rel="stylesheet" href="assets/style.css?v=84">
 </head>
 <body data-section="info">
 <div class="wrap">
   <aside class="side"></aside>
   <main>
-    <h1 class="page-h">DSR LTV 차이 총정리: 집값과 소득으로 결정되는 대출 한도의 비밀</h1>
-    <div class="pdate">2026.09.20 작성</div>
-    <p class="page-lead">5억짜리 집에 LTV 70%면 3억 5천을 빌릴 수 있을 것 같습니다. 그런데 은행에서는 2억밖에 안 된다고 합니다. 보는 기준이 하나가 아니기 때문입니다.</p>
+    <h1 class="page-h">[시리즈 13편] 주택담보대출 LTV·DSR 개념 정리와 계산기 활용 시 주의해야 할 착시 현상</h1>
+    <div class="pdate">2026.10.16 작성</div>
+    <p class="page-lead">집값 6억 원에 LTV 60%를 넣으면 3억 6,000만 원이 나오지만, 은행이 보는 시세가 5억 5,000만 원이면 한도는 3억 3,000만 원입니다. 계산기 결과와 실제 한도가 달라지는 이유를 정리합니다.</p>
     <div class="card"><div class="prose">
+      <figure class="fig"><img src="images/fig-series13.webp" width="760" height="428" loading="lazy" decoding="async" alt="주택담보대출 LTV와 DSR 계산기 결과를 그대로 믿으면 안 되는 이유를 정리한 시리즈 13편 이미지"></figure>
 
-      <figure class="fig">
-        <img src="images/fig-dsr.webp" width="760" height="760" loading="lazy" decoding="async"
-             alt="LTV는 집값을 보고 DSR은 소득을 본다는 대출 한도 안내 이미지">
-      </figure>
+<p>내 집 마련이라는 인생의 큰 목표를 세우고 부동산 계약을 진행할 때 가장 먼저 넘어야 할 산은 바로 '자금 조달 계획'입니다. 집값 전체를 순수 자산으로 충당하는 경우는 드물기 때문에 대부분 은행의 주택담보대출을 활용하게 됩니다.</p>
+<p>부동산 앱이나 포털 사이트의 대출 계산기를 돌려보고 "내 연봉과 집값을 입력하니 대출이 4억 원까지 나온다"는 결과를 믿고 덜컥 매매 계약을 체결했다가, 막상 은행 창구에서 실제 승인 금액이 턱없이 부족하게 나와 당황하는 분들이 많습니다. 이는 대출 상한선을 결정짓는 LTV(주택담보대출비율)와 DSR(총부채원리금상환비율)의 산정 원리와 계산기 속 착시 현상을 정확히 구분하지 못했기 때문입니다. 오늘은 주택담보대출의 핵심 규제 개념과 실질 대출 한도를 파악하는 방법을 알아보겠습니다.</p>
 
-      <h3>하나는 집을 보고 하나는 사람을 봅니다</h3>
-      <table class="t">
-        <thead><tr><th>구분</th><th>무엇을 보나</th><th>계산</th></tr></thead>
-        <tbody>
-          <tr><td>LTV</td><td>집값</td><td>대출금 ÷ 집값</td></tr>
-          <tr><td>DSR</td><td>내 소득</td><td>연간 원리금 ÷ 연소득</td></tr>
-        </tbody>
-      </table>
-      <p><b>LTV</b>는 담보로 잡는 집이 얼마짜리냐만 봅니다. 신청자의 소득이나 기존 빚은 보지 않습니다. KB시세나 감정가를 기준으로 합니다.</p>
-      <p><b>DSR</b>은 반대입니다. 집값은 안 보고 <b>이 사람이 갚을 수 있느냐</b>만 봅니다.</p>
+<h3>1. 대출의 두 가지 거대한 축: LTV와 DSR</h3>
+<p>주택담보대출 한도를 산정할 때는 '담보가 되는 집의 가치'를 보는 기준과 '돈을 빌리는 사람의 상환 능력'을 보는 기준이 동시에 적용됩니다.</p>
+<p><b>① LTV (매매 대상 주택의 가치 기준)</b><br>LTV(Loan to Value Ratio, 주택담보대출비율)는 "집값의 몇 %까지 돈을 빌려줄 것인가"를 나타내는 비율입니다.</p>
+<div class="callout"><b>LTV 기본 공식</b><br>대출 가능 한도 = 주택 평가 가치 × LTV 비율<br>
+예) LTV 60% 조건에서 6억 원짜리 아파트라면 집값 기준 최대 3억 6,000만 원까지 대출이 가능합니다.</div>
+<p>다만 LTV 비율은 주택 가격, 지역(규제지역 여부), 차주 유형에 따라 달라지고 규제가 바뀌기도 합니다. 위의 60%는 계산 원리를 보여주기 위한 예시이니, 실제 비율은 은행에서 확인하세요.</p>
+<p><b>② DSR (소득 대비 상환 능력 기준)</b><br>DSR(Debt Service Ratio, 총부채원리금상환비율)은 "내 연 소득 중에서 모든 대출의 원리금을 갚는 데 나가는 돈이 몇 %인가"를 규제하는 항목입니다.</p>
+<div class="callout"><b>DSR 기본 공식</b><br>DSR = 모든 대출의 연간 원리금 상환액 ÷ 연 소득(총급여) × 100<br>
+예) 은행권 DSR 규제가 40%라면, 연봉 5,000만 원인 사람이 한 해 동안 갚는 모든 대출의 원금과 이자 합계는 연 2,000만 원(월 약 166만 원)을 넘을 수 없습니다.</div>
+<p>LTV 기준 금액과 DSR 기준 금액 중 <b>더 적은 금액이 나의 최종 대출 한도</b>가 됩니다.</p>
 
-      <div class="callout"><b>최종 한도는 둘 중 낮은 쪽입니다.</b><br>
-      LTV로 3억 5천이 나와도 DSR로 2억이면 → <b>2억</b></div>
+<h3>2. 주택담보대출 계산기 이용 시 자주 발생하는 3가지 착시 현상</h3>
+<p>대출 계산기 수치만 믿고 자금 계획을 세웠다가 오차가 발생하는 주요 원인은 다음과 같습니다.</p>
+<p><b>착시 ① '실제 매매가'가 아닌 'KB시세/감정가'가 기준이다</b><br>LTV 계산에 들어가는 '주택 평가 가치'는 내가 실제로 계약서에 쓴 매매 금액만이 아닙니다. 금융기관에서는 국민은행(KB) 부동산 시세나 감정평가액을 기준으로 삼는 경우가 많고, 매매가와 시세 중 낮은 금액을 적용하는 경우도 있습니다.</p>
+<div class="callout"><b>실수 사례</b><br>매매가가 6억 원인 집이더라도 시세가 5억 5,000만 원으로 잡혀 있다면, LTV 60% 적용 시 3억 6,000만 원(6억 원의 60%)이 아니라 3억 3,000만 원(5억 5,000만 원의 60%)만 한도로 산출됩니다. 3,000만 원의 자금 부족이 여기서 생깁니다.</div>
+<p><b>착시 ② '신용대출 및 기존 부채'가 DSR을 갉아먹는 효과 간과</b><br>주택담보대출을 신청할 때 가지고 있는 기존 신용대출, 마이너스 통장, 자동차 할부금, 카드론 등은 모두 DSR 계산 시 '분자(연간 원리금 지출액)'에 포함됩니다. 특히 마이너스 통장은 실제 돈을 쓰지 않고 한도만 열어두었더라도, 약정 한도 금액을 기준으로 원리금 부담이 합산되어 주담대 한도를 크게 깎을 수 있습니다.</p>
+<p><b>착시 ③ 대출 금리와 만기(기간) 변화에 따른 한도 변동</b><br>DSR 계산 시 대출 금리가 오르면 연간 이자 부담액이 커지므로 DSR 한도(40%)에 더 일찍 도달하여 <b>대출 가능 원금이 줄어듭니다.</b> 반대로 대출 만기를 늘리면 매년 나누어 갚는 원리금이 줄어 DSR 비율이 낮아지고 한도가 늘어나는 구조입니다. 다만 은행별·지역별로 만기 상한을 두고 있고, 수도권 주택은 만기를 30년까지로 제한하는 은행이 많아 실제로 적용되는 만기를 먼저 확인해야 합니다.</p>
 
-      <h3>DSR 40%가 무슨 뜻인가</h3>
-      <p>1년에 갚는 원금과 이자를 모두 더한 금액이 <b>연소득의 40%를 넘으면 안 된다</b>는 규제입니다. 은행권 기준입니다.</p>
+<h3>3. 내 대출 한도를 안전하게 확보하는 3가지 실전 가이드</h3>
+<p><b>1. 계약 전 'KB부동산 시세'와 '기존 대출 상태' 점검하기</b><br>부동산 계약금을 입금하기 전, 대상 주택의 KB시세를 먼저 조회하고 본인의 신용대출 잔액을 파악해 두어야 합니다.</p>
+<p><b>2. 불필요한 마이너스 통장 및 신용대출 정리가 우선</b><br>주택담보대출 실행 전 쓰지 않는 마이너스 통장을 해지하거나 신용대출을 일부 상환하면 DSR 여유 공간이 확보되어 주담대 한도를 더 늘릴 수 있습니다.</p>
+<p><b>3. 가산금리(스트레스 DSR) 반영하여 여유 있게 계산하기</b><br>금융당국은 향후 금리 인상 가능성을 고려해 실제 금리보다 높은 금리를 적용해 한도를 산정하는 '스트레스 DSR'을 단계적으로 확대해 왔습니다. 계산기 결과보다 한도를 보수적으로 잡고 자금 계획을 세우는 것이 안전합니다.</p>
 
-      <div class="callout"><b>연소득 5,000만원이라면</b><br>
-      1년에 갚을 수 있는 원리금 = 5,000만 × 40% = <b>2,000만원</b><br>
-      월로 치면 약 <b>167만원</b></div>
+<div class="callout"><b>📌 핵심 요약</b><br>
+· LTV는 집값(시세 기준) 대비 대출 비율이며, DSR은 내 연봉 대비 갚아야 할 원리금 비중 규제입니다.<br>
+· 두 규제 중 계산 결과가 더 작은 수치가 나의 최종 대출 한도가 됩니다.<br>
+· 기존 신용대출이나 마이너스 통장이 있다면 DSR 한도를 크게 차감시키므로, 주담대 신청 전 미리 정리하는 것이 유리합니다.</div>
 
-      <p>이 2,000만원 안에서 모든 대출을 굴려야 합니다. 새로 받을 주택담보대출만이 아닙니다.</p>
+<div class="callout asof"><b>📅 기준일 안내</b><br>이 글의 요율·한도·금액은 2026년 10월 기준입니다. 법령이나 제도가 바뀌면 숫자가 달라질 수 있으니, 신고·가입·계약 전에는 국세청·금융위원회·관련 공단·금융기관에서 최신 기준을 확인하세요. 계산 결과는 참고용입니다.</div>
 
-      <h3>기존 빚이 전부 들어갑니다</h3>
-      <p>여기서 많이들 놀랍니다. DSR 계산에는 <b>금융권에서 받은 거의 모든 대출</b>이 합산됩니다.</p>
-      <p>신용대출, 마이너스통장, 자동차 할부금, 카드론, 현금서비스, 다른 담보대출이 다 들어갑니다.</p>
+<p><b>🔮 다음 편 예고</b><br>
+다음 14편에서는 장기 은퇴 설계를 위한 "퇴직연금(DB/DC/IRP) 계산법과 은퇴 후 수령액 산정 가이드"를 다룹니다. 내 퇴직연금 유형별 특징과 노후 자금을 늘리는 운용 노하우를 알아보겠습니다.</p>
 
-      <div class="callout"><b>연소득 5,000만원 · 기존 대출 원리금 연 800만원</b><br>
-      전체 한도 2,000만원 − 기존 800만원<br>
-      → 주택담보대출로 쓸 수 있는 원리금 <b>1,200만원</b><br>
-      한도가 <b>40% 줄어듭니다</b></div>
+<p><b>💬 함께 나누는 질문</b><br>
+내 집 마련이나 대출을 준비하시면서 LTV나 DSR 한도 계산 때문에 예상과 달라 당황했던 경험이 있으신가요?</p>
 
-      <p>그래서 집을 사기 전에 신용대출이나 자동차 할부를 먼저 정리하면 주택담보대출 한도가 늘어납니다. 소액이라도 원리금이 빠지면 그만큼 여유가 생깁니다.</p>
-
-      <h3>스트레스 DSR은 한도를 더 줄입니다</h3>
-      <p>금융당국이 금리가 오를 때를 대비해 만든 제도입니다. <b>실제 금리에 가산금리를 얹어서</b> 원리금을 계산합니다.</p>
-      <p>실제로 내는 이자가 늘어나는 게 아닙니다. <b>심사할 때만</b> 더 비싼 금리로 계산해 보는 것입니다. 그러면 원리금이 커 보이고, DSR 비율이 올라가 한도가 줄어듭니다.</p>
-      <p>같은 소득 같은 조건이라도 수천만원씩 한도가 깎입니다. 그래서 몇 년 전 기준으로 계산해 두면 실제와 크게 어긋납니다.</p>
-
-      <h3>계약 전에 먼저 알아봐야 합니다</h3>
-      <p>LTV만 보고 계약금을 걸었다가 대출이 모자라 곤란해지는 일이 흔합니다.</p>
-      <p>계약하기 전에 <b>연소득, 기존 대출 원리금, 스트레스 금리</b>를 모두 넣어 한도를 확인하시기 바랍니다. 은행에 미리 물어보면 가늠해 줍니다.</p>
-
-      <div class="callout"><b>한도가 모자랄 때</b><br>
-      기존 신용대출이나 소액 대출을 먼저 갚으면 DSR에 여유가 생깁니다.<br>
-      대출 기간을 늘리면 연간 원리금이 줄어 한도가 늘어나지만, 그만큼 총이자는 늘어납니다.</div>
     </div></div>
-    <div class="card faqbox">
-      <h2>자주 묻는 질문</h2>
-      <div class="prose">
-        <div class="faq"><b>LTV와 DSR은 무엇이 다른가요?</b><p>LTV는 집값 대비 대출 비율로 담보 가치만 봅니다. DSR은 연간 원리금을 연소득으로 나눈 비율로 갚을 능력을 봅니다. 최종 대출 한도는 두 기준 중 낮은 쪽으로 정해집니다.</p></div>
-        <div class="faq"><b>DSR 40%는 어떻게 계산하나요?</b><p>1년에 갚는 모든 대출의 원금과 이자 합계가 연소득의 40%를 넘을 수 없습니다. 연소득 5,000만원이면 연간 원리금 한도가 2,000만원입니다.</p></div>
-        <div class="faq"><b>DSR에 기존 대출도 포함되나요?</b><p>포함됩니다. 신용대출, 마이너스통장, 자동차 할부, 카드론, 현금서비스 등 금융권 대출의 원리금이 모두 합산됩니다. 기존 대출을 갚으면 그만큼 주택담보대출 한도가 늘어납니다.</p></div>
-        <div class="faq"><b>스트레스 DSR이 적용되면 이자도 더 내나요?</b><p>아닙니다. 가산금리는 한도를 계산할 때만 쓰는 평가용 수치입니다. 실제로 매달 내는 이자와 원리금은 약정한 실제 금리로 계산됩니다.</p></div>
-      </div>
-    </div>
 
     <div class="ad wide"><span>광고 자리</span></div>
     <div class="card">
@@ -117,6 +96,6 @@ gtag('config', 'G-1M0D88PL01');
   </main>
   <aside class="rail"><div class="ad tall"><span>광고 자리</span></div></aside>
 </div>
-<script src="assets/site.js?v=83"></script>
+<script src="assets/site.js?v=84"></script>
 </body>
 </html>

@@ -127,7 +127,7 @@
   </url>
   <url>
     <loc>https://bangatgan.kr/info-dsr.html</loc>
-    <lastmod>2026-09-09</lastmod>
+    <lastmod>2026-10-16</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -183,7 +183,7 @@
   </url>
   <url>
     <loc>https://bangatgan.kr/info-yearend.html</loc>
-    <lastmod>2026-09-09</lastmod>
+    <lastmod>2026-10-16</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -594,6 +594,24 @@
   <url>
     <loc>https://bangatgan.kr/info-freelancer-33.html</loc>
     <lastmod>2026-10-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://bangatgan.kr/info-youth-future-savings.html</loc>
+    <lastmod>2026-10-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://bangatgan.kr/info-retirement-pension.html</loc>
+    <lastmod>2026-10-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://bangatgan.kr/info-cashflow-system.html</loc>
+    <lastmod>2026-10-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
