@@ -80,6 +80,11 @@ var SECTIONS = [
       { href: "info-lotto.html",  name: "로또",   desc: "확률, 당첨금과 세금, 수령 방법" }
     ],
     items: [
+      { g:"부동산", d:"2026-10-17", t:"pyeong.html", href:"info-area-types.html", name:"아파트 전용면적과 공급면적은 왜 다를까? 실제 면적을 이해하는 방법", desc:"전용·공급·계약면적의 차이와 평 환산" },
+      { g:"부동산", d:"2026-10-17", t:"acquisition.html", href:"info-home-count-tax.html", name:"주택 수에 따라 취득세가 달라지는 이유와 확인해야 할 사항", desc:"주택 수·지역·세대 조건별 취득세율" },
+      { g:"부동산", d:"2026-10-17", t:"acquisition.html", href:"info-first-home-tax.html", name:"생애최초 주택 구입 시 알아두어야 할 취득세 감면 기준", desc:"생애최초 감면 한도·조건과 신청 전 확인" },
+      { g:"부동산", d:"2026-10-17", t:"acquisition.html", href:"info-apt-tax-basis.html", name:"아파트 취득세는 어떻게 계산할까? 과세표준과 세율의 기본 개념", desc:"과세표준×세율, 취득가액별 세율과 계산 사례" },
+      { g:"부동산", d:"2026-10-17", t:"acquisition.html,broker.html", href:"info-home-extra-costs.html", name:"집을 살 때 매매가격 외에 추가로 필요한 비용은 무엇일까?", desc:"취득세·중개보수·등기·이사비 항목별 정리" },
       { g:"금융", d:"2026-10-16", t:"salary.html", href:"info-cashflow-system.html", name:"[시리즈 15편] 직장인 현금흐름 자동화: 금융계산기로 완성하는 월별 고정비·가변비 관리 시스템", desc:"월급날 자동으로 4개 통장에" },
       { g:"금융", d:"2026-10-16", t:"retire.html", href:"info-retirement-pension.html", name:"[시리즈 14편] 퇴직연금(DB/DC/IRP) 계산법과 은퇴 후 수령액 산정 가이드", desc:"20년 뒤 2억 원은 지금 1억 1천만~1억 3천만 원" },
       { g:"금융", d:"2026-10-16", t:"ltv.html", href:"info-dsr.html", name:"[시리즈 13편] 주택담보대출 LTV·DSR 개념 정리와 계산기 활용 시 주의해야 할 착시 현상", desc:"계산기 3억 6천만 원, 실제 3억 3천만 원" },
@@ -822,6 +827,11 @@ U.needDate = function(el, name){
     "info-freelancer-33.html": '<circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6 7-6s7 2 7 6"/>',
     "info-youth-future-savings.html": '<path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.500-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/>',
     "info-retirement-pension.html": '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+    "info-home-extra-costs.html": '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/>',
+    "info-apt-tax-basis.html": '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/>',
+    "info-first-home-tax.html": '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/>',
+    "info-home-count-tax.html": '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/>',
+    "info-area-types.html": '<path d="M3 3h18v18H3z"/><path d="M3 9h6M3 15h4M9 3v6M15 3v4"/>',
     "info-cashflow-system.html": '<path d="M4 7h16M4 12h16M4 17h10"/><path d="M18 15l2 2 2-2"/>',
     "info-salary.html": '<rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M7 10v4M17 10v4"/>',
     "info-bp.html": '<path d="M12 20s-7-4.5-7-9a4 4 0 017-2.6A4 4 0 0119 11c0 4.5-7 9-7 9z"/><path d="M4 13h4l1.5-3 2 6 1.5-3h5"/>',
