@@ -80,6 +80,11 @@ var SECTIONS = [
       { href: "info-lotto.html",  name: "로또",   desc: "확률, 당첨금과 세금, 수령 방법" }
     ],
     items: [
+      { g:"부동산", d:"2026-10-18", t:"broker.html", href:"info-broker-vat.html", name:"부동산 계약 전 중개보수와 부가가치세 확인하는 방법", desc:"중개보수 부가세와 지급 전 확인 순서" },
+      { g:"부동산", d:"2026-10-18", t:"broker.html,jeonse.html", href:"info-broker-jeonse-wolse.html", name:"전세와 월세 중개수수료 계산 방법이 다른 이유와 실제 계산 사례", desc:"전세·월세 환산 거래금액과 중개보수" },
+      { g:"부동산", d:"2026-10-18", t:"broker.html", href:"info-broker-fee-rate.html", name:"부동산 중개수수료는 어떻게 정해질까? 거래금액과 요율 계산 방법", desc:"매매 중개보수 상한요율표와 계산 사례" },
+      { g:"부동산", d:"2026-10-18", t:"pyeong.html", href:"info-same-area-feel.html", name:"같은 평수인데 집 크기가 다르게 느껴지는 이유, 아파트 구조와 공간 활용의 차이", desc:"같은 평수도 다르게 느껴지는 이유" },
+      { g:"부동산", d:"2026-10-18", t:"pyeong.html", href:"info-sqm-to-pyeong.html", name:"제곱미터를 평으로 환산하는 방법과 아파트 면적 쉽게 읽는 법", desc:"㎡↔평 환산 공식과 면적 환산표" },
       { g:"부동산", d:"2026-10-17", t:"pyeong.html", href:"info-area-types.html", name:"아파트 전용면적과 공급면적은 왜 다를까? 실제 면적을 이해하는 방법", desc:"전용·공급·계약면적의 차이와 평 환산" },
       { g:"부동산", d:"2026-10-17", t:"acquisition.html", href:"info-home-count-tax.html", name:"주택 수에 따라 취득세가 달라지는 이유와 확인해야 할 사항", desc:"주택 수·지역·세대 조건별 취득세율" },
       { g:"부동산", d:"2026-10-17", t:"acquisition.html", href:"info-first-home-tax.html", name:"생애최초 주택 구입 시 알아두어야 할 취득세 감면 기준", desc:"생애최초 감면 한도·조건과 신청 전 확인" },
@@ -832,6 +837,11 @@ U.needDate = function(el, name){
     "info-first-home-tax.html": '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/>',
     "info-home-count-tax.html": '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/>',
     "info-area-types.html": '<path d="M3 3h18v18H3z"/><path d="M3 9h6M3 15h4M9 3v6M15 3v4"/>',
+    "info-sqm-to-pyeong.html": '<path d="M3 3h18v18H3z"/><path d="M3 9h6M3 15h4M9 3v6M15 3v4"/>',
+    "info-same-area-feel.html": '<path d="M3 3h18v18H3z"/><path d="M3 9h6M3 15h4M9 3v6M15 3v4"/>',
+    "info-broker-fee-rate.html": '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/>',
+    "info-broker-jeonse-wolse.html": '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/>',
+    "info-broker-vat.html": '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/>',
     "info-cashflow-system.html": '<path d="M4 7h16M4 12h16M4 17h10"/><path d="M18 15l2 2 2-2"/>',
     "info-salary.html": '<rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M7 10v4M17 10v4"/>',
     "info-bp.html": '<path d="M12 20s-7-4.5-7-9a4 4 0 017-2.6A4 4 0 0119 11c0 4.5-7 9-7 9z"/><path d="M4 13h4l1.5-3 2 6 1.5-3h5"/>',
@@ -1082,7 +1092,81 @@ U.needDate = function(el, name){
      나머지 계산기는 모두 똑같이 '분류 버튼'만 보이고, 누르면 그 분류 글이 최신순으로 나옵니다.
      글마다 t(연결 계산기)를 적을 필요가 없습니다. 새 글은 items 에 g(분류)만 맞게 넣으면 됩니다. */
   var LOTTO_TOOLS = { "lotto.html": 1, "lotto-gen.html": 1, "lotto-stat.html": 1, "lotto-my.html": 1, "lotto-tax.html": 1 };
-  if (!LOTTO_TOOLS[page]) { buildTabs(); return; }
+  /* 새 방식(계산기 바로 아래에 글이 펼쳐지고, 번호·고정글이 붙음): 먼저 시범으로 취득세 계산기만 */
+  var NEWLIST = {
+    "salary.html": "금융",
+    "car.html": "금융",
+    "loan.html": "금융",
+    "retire.html": "금융",
+    "savings.html": "금융",
+    "insurance.html": "금융",
+    "prepay.html": "금융",
+    "compound.html": "금융",
+    "vat.html": "금융",
+    "cartax.html": "금융",
+    "pyeong.html": "부동산",
+    "acquisition.html": "부동산",
+    "ltv.html": "부동산",
+    "broker.html": "부동산",
+    "jeonse.html": "부동산",
+    "bmi.html": "생활",
+    "bmr.html": "생활",
+    "calorie.html": "생활",
+    "bp.html": "생활",
+    "walk.html": "생활",
+    "birthday.html": "생활",
+    "age.html": "생활",
+    "dday.html": "생활",
+    "datecalc.html": "생활",
+    "baby.html": "생활",
+    "lotto.html": "로또",
+    "lotto-gen.html": "로또",
+    "lotto-stat.html": "로또",
+    "lotto-my.html": "로또",
+    "lotto-tax.html": "로또"
+  };  /* 값 = 이 계산기 아래에 보여줄 글 분류 */
+  var PINS = {
+    "salary.html": { href: "use-salary.html", name: "연봉계산기 활용법: 입력값 체크부터 결과 읽는 법" },
+    "car.html": { href: "use-car.html", name: "차량할부계산기 활용법: 입력값 체크부터 결과 읽는 법" },
+    "loan.html": { href: "use-loan.html", name: "대출이자계산기 활용법: 입력값 체크부터 결과 읽는 법" },
+    "retire.html": { href: "use-retire.html", name: "퇴직금계산기 활용법: 입력값 체크부터 결과 읽는 법" },
+    "savings.html": { href: "use-savings.html", name: "적금이자계산기 활용법: 입력값 체크부터 결과 읽는 법" },
+    "insurance.html": { href: "use-insurance.html", name: "4대보험 계산기 활용법: 입력값 체크부터 결과 읽는 법" },
+    "prepay.html": { href: "use-prepay.html", name: "중도상환수수료 계산기 활용법: 입력값 체크부터 결과 읽는 법" },
+    "compound.html": { href: "use-compound.html", name: "복리계산기 활용법: 입력값 체크부터 결과 읽는 법" },
+    "vat.html": { href: "use-vat.html", name: "부가세 계산기 활용법: 입력값 체크부터 결과 읽는 법" },
+    "cartax.html": { href: "use-cartax.html", name: "자동차세 계산기 활용법: 입력값 체크부터 결과 읽는 법" },
+    "pyeong.html": { href: "use-pyeong.html", name: "평수 계산기 활용법: 입력값 체크부터 결과 읽는 법" },
+    "acquisition.html": { href: "use-acquisition.html", name: "취득세 계산기 활용법: 입력값 체크부터 결과 읽는 법" },
+    "ltv.html": { href: "use-ltv.html", name: "주택담보대출 계산기 활용법: 입력값 체크부터 결과 읽는 법" },
+    "broker.html": { href: "use-broker.html", name: "부동산 중개수수료 계산기 활용법: 입력값 체크부터 결과 읽는 법" },
+    "jeonse.html": { href: "use-jeonse.html", name: "전월세 전환율 계산기 활용법: 입력값 체크부터 결과 읽는 법" },
+    "bmi.html": { href: "use-bmi.html", name: "BMI 계산기 활용법: 입력값 체크부터 결과 읽는 법" },
+    "bmr.html": { href: "use-bmr.html", name: "기초대사량 계산기 활용법: 입력값 체크부터 결과 읽는 법" },
+    "calorie.html": { href: "use-calorie.html", name: "칼로리 계산기 활용법: 입력값 체크부터 결과 읽는 법" },
+    "bp.html": { href: "use-bp.html", name: "혈압 계산기 활용법: 입력값 체크부터 결과 읽는 법" },
+    "walk.html": { href: "use-walk.html", name: "걷기 칼로리 계산기 활용법: 입력값 체크부터 결과 읽는 법" },
+    "birthday.html": { href: "use-birthday.html", name: "생년월일 계산기 활용법: 입력값 체크부터 결과 읽는 법" },
+    "age.html": { href: "use-age.html", name: "만나이계산기 활용법: 입력값 체크부터 결과 읽는 법" },
+    "dday.html": { href: "use-dday.html", name: "디데이계산기 활용법: 입력값 체크부터 결과 읽는 법" },
+    "datecalc.html": { href: "use-datecalc.html", name: "날짜 더하기·빼기 계산기 활용법: 입력값 체크부터 결과 읽는 법" },
+    "baby.html": { href: "use-baby.html", name: "아기 100일 계산기 활용법: 입력값 체크부터 결과 읽는 법" },
+    "lotto.html": { href: "use-lotto.html", name: "로또당첨번호 조회 활용법: 입력값 체크부터 결과 읽는 법" },
+    "lotto-gen.html": { href: "use-lotto-gen.html", name: "로또번호 생성기 활용법: 입력값 체크부터 결과 읽는 법" },
+    "lotto-stat.html": { href: "use-lotto-stat.html", name: "로또번호 통계 활용법: 입력값 체크부터 결과 읽는 법" },
+    "lotto-my.html": { href: "use-lotto-my.html", name: "내 로또번호 저장 활용법: 입력값 체크부터 결과 읽는 법" },
+    "lotto-tax.html": { href: "use-lotto-tax.html", name: "로또 당첨금 계산기 활용법: 입력값 체크부터 결과 읽는 법" }
+  };
+  if (!LOTTO_TOOLS[page] && !NEWLIST[page]) { buildTabs(); return; }
+  if (NEWLIST[page]) PER = 10;  /* 폰에서 길어 보이지 않게 한 쪽에 10개씩 */
+  if (NEWLIST[page]) {
+    /* 같은 분류 글만 모아 보여줍니다 (부동산 계산기에는 부동산 글만) */
+    posts = [];
+    SECTIONS.forEach(function (s) {
+      if (s.id !== "info") return;
+      s.items.forEach(function (it, i) { if (it.g === NEWLIST[page]) posts.push({ it: it, i: i }); });
+    });
+  }
 
   /* 번호 넘기기: ‹ 1 2 3 4 5 … 마지막 › 모양. 쪽이 많아도 길어지지 않게 가운데는 … 로 줄입니다. */
   function pagerHtml(cur, pages) {
@@ -1175,7 +1259,7 @@ U.needDate = function(el, name){
   posts.sort(function (a, b) {
     return a.it.d < b.it.d ? 1 : a.it.d > b.it.d ? -1 : a.i - b.i;
   });
-  posts = posts.map(function (p) { return p.it; });
+  posts = posts.map(function (p, n) { p.it.no = posts.length - n; return p.it; });
 
   function esc(t) {
     return String(t).replace(/[&<>"]/g, function (c) {
@@ -1194,9 +1278,10 @@ U.needDate = function(el, name){
     '<div class="postlist" id="rlist"></div>' +
     '<div class="rempty" id="rempty" hidden>검색어와 맞는 글이 없습니다. 다른 단어로 찾아보세요.</div>' +
     '<nav class="pager" id="rpager" aria-label="글 목록 페이지"></nav>';
-  main.appendChild(card);
+  var upAd = NEWLIST[page] && main.querySelector(".ad.wide");
+  if (upAd) main.insertBefore(card, upAd); else main.appendChild(card);
 
-  if (!posts.length) {
+  if (!posts.length || (NEWLIST[page] && posts.length <= 20)) {
     card.querySelector(".rsearch").hidden = true;
   }
   var $q = card.querySelector("#rq"), $list = card.querySelector("#rlist"),
@@ -1208,9 +1293,11 @@ U.needDate = function(el, name){
     var pages = Math.max(1, Math.ceil(shown.length / PER));
     if (cur > pages) cur = pages;
     var from = (cur - 1) * PER;
-    $list.innerHTML = shown.slice(from, from + PER).map(function (it) {
-      return '<a class="post rrow" href="' + esc(it.href) + '"><b>' + esc(it.name) +
-        '</b><i>' + esc(it.d.slice(2).replace(/-/g, ".")) + '</i></a>';
+    var pin = PINS[page], showPin = pin && cur === 1 && (!$q.value.trim() || norm(pin.name).indexOf(norm($q.value)) >= 0);
+    $list.innerHTML = (showPin ? '<a class="post rrow rpin" href="' + esc(pin.href) + '"><em class="rno pin">필독</em><b>' + esc(pin.name) + '</b></a>' : "") +
+      shown.slice(from, from + PER).map(function (it) {
+      return '<a class="post rrow" href="' + esc(it.href) + '">' + (NEWLIST[page] ? '<em class="rno">' + it.no + '</em>' : "") + '<b>' + esc(it.name) +
+        '</b><i>' + esc((NEWLIST[page] ? it.d.slice(5) : it.d.slice(2)).replace(/-/g, ".")) + '</i></a>';
     }).join("");
     $empty.hidden = shown.length > 0;
     if (!posts.length) $empty.textContent = "이 계산기와 관련된 글을 준비하고 있습니다.";

@@ -1114,62 +1114,24 @@ aside.rail{display:none!important}
 
 @media(max-width:600px){.prose h3{font-size:17px;margin:32px 0 12px;padding:10px 14px}}
 
-/* 관련 글 칸: 따뜻하고 차분한 크림색 */
-.rposts{background-color:#F1E3C8;border:1px solid #D9B97A}
-.rposts h2{color:#1B2234;font-size:17px}
-.rposts h2::before{background-image:none;background-color:#D98324;width:5px;height:18px}
-.rposts h2 .rcount{color:#7A6742}
-.rposts .post{border-top-color:rgba(60,40,10,.18)}
-.rposts .post:hover{background:rgba(60,40,10,.06)}
-.rposts .post.rrow b{color:#1B2234}
-.rposts .post:hover b{color:#B45F06}
-.rposts .post.rrow i{color:#7A6742}
-.rposts .rsearch input{background-color:#FBF3E2;color:#1B2234;border-color:#D9B97A}
-.rposts .rsearch input::placeholder{color:#8A7752}
-.rposts .rempty{color:#5A4A2C}
-.rposts .pager button{color:#1B2234;border-color:rgba(60,40,10,.35)}
-.rposts .pager button:hover{border-color:#D98324;color:#B45F06}
-.rposts .pager button.on{background-color:#D98324;border-color:#D98324;color:#fff}
-.rposts .post.rrow{padding:14px 4px}
-.rposts .post.rrow b{font-size:18px;font-weight:700}
-.rposts .post.rrow i{font-size:13px}
-@media(max-width:600px){.rposts .post.rrow b{font-size:17px}}
-.rposts h2{font-size:21px;font-weight:800}
-.rposts h2::before{height:22px}
-.rposts h2 .rcount{font-size:14px}
-@media(max-width:600px){.rposts h2{font-size:19px}}
-/* 계산기 아래 '관련 글 모아보기' — 한 줄에 분류 하나, 누르면 가로 전체로 펼쳐지고 다시 누르면 접힘 */
-.rtabbox{margin-top:16px}
-.rtabbox h2 .rcount{font-size:13px;font-weight:600;color:var(--dim);margin-left:6px}
-.rtabbox .rhint{margin:2px 0 12px;font-size:13.5px;color:var(--dim)}
-.rcats{display:flex;flex-direction:column;gap:10px}
-.racc{border:1px solid var(--edge);border-radius:14px;background:var(--card2);overflow:hidden}
-.racc.on{border-color:var(--gold)}
-.racc .rcat{display:block;width:100%;box-sizing:border-box;position:relative;text-align:left;cursor:pointer;font:inherit;border:0;border-radius:0;background:transparent;padding:15px 44px 15px 16px}
-.racc.on .rcat{background:#241F12}
-.racc .rcat .mt{font-size:16.5px}
-.racc .rcat .mdz{font-size:12.5px}
-.racc .rcat .rn{font-weight:600;font-size:12.5px;color:var(--dim);margin-left:6px}
-.racc.on .rcat .mt{color:var(--gold)}
-.racc.on .rcat .rn{color:var(--gold)}
-.racc .rcat::after{content:"";position:absolute;right:18px;top:50%;width:9px;height:9px;margin-top:-7px;border-right:2px solid var(--dim);border-bottom:2px solid var(--dim);transform:rotate(45deg);transition:transform .15s}
-.racc.on .rcat::after{border-color:var(--gold);transform:rotate(-135deg);margin-top:-2px}
-.racc .rpanel{padding:4px 16px 14px;border-top:1px solid var(--edge)}
-.racc .rpanel[hidden]{display:none}
-.racc .post.rrow{display:flex;align-items:baseline;gap:12px;padding:13px 2px}
-.racc .post.rrow b{flex:1;min-width:0;font-size:15.5px;font-weight:650;line-height:1.5}
-.racc .post.rrow i{flex:none;font-style:normal;font-size:12px;color:var(--dim);font-weight:600}
-@media(max-width:600px){.racc .post.rrow{flex-direction:column;align-items:flex-start;gap:3px;padding:13px 2px}.racc .post.rrow b{flex:none;width:100%}.racc .rpanel{padding:2px 14px 12px}}
-/* 분류마다 다른 색 (금융 금색 / 부동산 청록 / 생활 연초록 / 로또 주황) */
-.racc[data-g="금융"]{--ac:#E3B75B;--tint:#262013}
-.racc[data-g="부동산"]{--ac:#4FD1C5;--tint:#10282A}
-.racc[data-g="생활"]{--ac:#7BE08A;--tint:#112919}
-.racc[data-g="로또"]{--ac:#FF9F5A;--tint:#2B1B10}
-.racc{border-left:5px solid var(--ac)}
-.racc.on{border-color:var(--ac)}
-.racc.on .rcat{background:var(--tint)}
-.racc .rcat .mt{color:var(--ink)}
-.racc.on .rcat .mt,.racc.on .rcat .rn{color:var(--ac)}
-.racc.on .rcat::after{border-color:var(--ac)}
-.racc .rpanel{border-top-color:rgba(255,255,255,.08)}
-.pager .gap{align-self:center;min-width:22px;text-align:center;color:var(--dim);font-size:14px}
+/* 관련 글 칸: 옅은 청록색, 필독은 빨강 (줄 간격을 줄여 길이를 짧게) */
+.rposts{background-color:#DDF3F1;border:1px solid #A9D9D5}
+.rposts h2{color:#0F2F33;font-size:19px;font-weight:800}
+.rposts h2::before{background-image:none;background-color:#0E9AA7;width:5px;height:20px}
+.rposts h2 .rcount{color:#46787C;font-size:14px}
+.rposts .post{border-top-color:rgba(15,47,51,.13)}
+.rposts .post:hover{background:rgba(15,47,51,.06)}
+.rposts .post.rrow{padding:10px 4px;gap:10px}
+.rposts .post.rrow b{color:#0F2F33;font-size:15.5px;font-weight:700;line-height:1.4}
+.rposts .post:hover b{color:#0A7D88}
+.rposts .post.rrow i{color:#46787C;font-size:12px}
+.rposts .rsearch input{background-color:#EEF9F8;color:#0F2F33;border-color:#A9D9D5}
+.rposts .rsearch input::placeholder{color:#5F8C90}
+.rposts .rempty{color:#2E5558}
+.rposts .pager button{color:#0F2F33;border-color:rgba(15,47,51,.35)}
+.rposts .pager button:hover{border-color:#0E9AA7;color:#0A7D88}
+.rposts .pager button.on{background-color:#0E9AA7;border-color:#0E9AA7;color:#fff}
+.rposts .post.rrow .rno{flex:none;min-width:30px;text-align:center;font-style:normal;font-size:12.5px;font-weight:700;color:#46787C}
+.rposts .post.rrow .rno.pin{background-color:#E5322D;color:#fff;border-radius:6px;padding:2px 7px;min-width:0}
+.rposts .post.rrow.rpin{background:#FDE3E1}
+@media(max-width:600px){.rposts h2{font-size:18px}.rposts .post.rrow b{font-size:15px}}
