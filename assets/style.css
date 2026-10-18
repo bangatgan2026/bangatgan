@@ -1136,3 +1136,13 @@ aside.rail{display:none!important}
 .rposts .post.rrow .rno.pin{background-color:#E5322D;color:#fff;border-radius:6px;padding:2px 7px;min-width:0}
 .rposts .post.rrow.rpin{background:#FDE3E1}
 @media(max-width:600px){.rposts h2{font-size:18px}.rposts .post.rrow b{font-size:15px}}
+
+/* 필독 글 창: 계산기를 위에 두고 아래쪽에서 글을 읽는 창 */
+body.gsOn{padding-bottom:44vh}
+#guideSheet{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:min(820px,100%);height:44vh;min-height:290px;max-height:560px;z-index:70;background-color:#141B2B;border:1px solid #0E9AA7;border-bottom:none;border-radius:16px 16px 0 0;box-shadow:0 -12px 32px rgba(0,0,0,.5);display:flex;flex-direction:column}
+#guideSheet .gsHead{flex:none;display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.12)}
+#guideSheet .gsHead b{flex:1;font-size:14.5px;line-height:1.35;color:#E8ECF4}
+#guideSheet .gsOpen{font-size:13px;color:#7FE0D6;text-decoration:underline;white-space:nowrap}
+#guideSheet .gsClose{font:inherit;font-size:13px;font-weight:700;color:#fff;background-color:#0E9AA7;border:0;border-radius:8px;padding:7px 12px;cursor:pointer;white-space:nowrap}
+#guideSheet .gsBody{flex:1;overflow:auto;padding:12px 16px 28px;-webkit-overflow-scrolling:touch}
+#guideSheet .gsBody .prose h3{font-size:16px;margin:24px 0 10px;padding:8px 12px}

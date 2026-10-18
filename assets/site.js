@@ -318,12 +318,7 @@ var U = {
       sec.cats.forEach(function (c) {
         var on = (c.name === curCat);
         links += '<a href="' + c.href + '"' + (on ? ' class="on"' : '') + '>' + esc(c.name) + '</a>';
-        if (on) {
-          sec.items.filter(function (x) { return x.g === c.name; }).forEach(function (x) {
-            links += '<a class="sub' + (x.href === page ? ' on' : '') + '" href="' + x.href + '">' +
-              esc(x.name) + '</a>';
-          });
-        }
+        /* 가운데 목록과 같아서, 분류 아래 글 제목 나열은 뺐습니다 */
       });
     } else {
       sec.items.forEach(function (it) {
@@ -1157,6 +1152,44 @@ U.needDate = function(el, name){
     "lotto-my.html": { href: "use-lotto-my.html", name: "내 로또번호 저장 활용법: 입력값 체크부터 결과 읽는 법" },
     "lotto-tax.html": { href: "use-lotto-tax.html", name: "로또 당첨금 계산기 활용법: 입력값 체크부터 결과 읽는 법" }
   };
+  /* 필독 글: 계산기 페이지를 떠나지 않고 아래쪽 창으로 펼쳐서, 계산기를 보면서 읽게 함 */
+  function closeGuide() {
+    var g = document.getElementById("guideSheet");
+    if (g) g.remove();
+    document.body.classList.remove("gsOn");
+  }
+  function openGuide(href, title) {
+    closeGuide();
+    var sheet = document.createElement("div");
+    sheet.id = "guideSheet";
+    sheet.innerHTML = '<div class="gsHead"><b></b><a class="gsOpen" href="">새 창</a>' +
+      '<button type="button" class="gsClose" aria-label="닫기">닫기 ✕</button></div>' +
+      '<div class="gsBody"><div class="prose"><p>불러오는 중…</p></div></div>';
+    sheet.querySelector("b").textContent = title;
+    sheet.querySelector(".gsOpen").href = href;
+    document.body.appendChild(sheet);
+    document.body.classList.add("gsOn");
+    sheet.querySelector(".gsClose").addEventListener("click", closeGuide);
+    var cc = document.querySelector("main .card");   /* 계산기 칸이 창 위쪽에 보이도록 */
+    window.scrollTo({ top: cc ? Math.max(0, cc.getBoundingClientRect().top + window.scrollY - 76) : 0, behavior: "smooth" });
+    fetch(href).then(function (r) { if (!r.ok) throw 0; return r.text(); }).then(function (t) {
+      var doc = new DOMParser().parseFromString(t, "text/html");
+      var parts = [];
+      doc.querySelectorAll("main .card").forEach(function (c) {
+        var p = c.querySelector(".prose");
+        if (!p || c.classList.contains("rposts")) return;
+        parts.push(c.classList.contains("faqbox") ? "<h3>자주 묻는 질문</h3>" + p.innerHTML : p.innerHTML);
+      });
+      if (!parts.length) throw 0;
+      sheet.querySelector(".gsBody .prose").innerHTML = parts.join("");
+    }).catch(function () { location.href = href; });
+  }
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest && e.target.closest("#rposts a.rpin");
+    if (!a || e.metaKey || e.ctrlKey || e.shiftKey) return;
+    e.preventDefault();
+    openGuide(a.getAttribute("href"), (a.querySelector("b") || {}).textContent || "");
+  });
   if (!LOTTO_TOOLS[page] && !NEWLIST[page]) { buildTabs(); return; }
   if (NEWLIST[page]) PER = 10;  /* 폰에서 길어 보이지 않게 한 쪽에 10개씩 */
   if (NEWLIST[page]) {
