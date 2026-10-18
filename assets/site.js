@@ -80,6 +80,11 @@ var SECTIONS = [
       { href: "info-lotto.html",  name: "로또",   desc: "확률, 당첨금과 세금, 수령 방법" }
     ],
     items: [
+      { g:"부동산", d:"2026-10-19", t:"pyeong.html,acquisition.html", href:"info-home-checklist.html", name:"집 구하기 전 확인해야 할 체크리스트, 아파트 면적부터 취득세·중개보수까지", desc:"집 구하기 전 면적·비용·일정 체크리스트" },
+      { g:"부동산", d:"2026-10-19", t:"acquisition.html,broker.html,loan.html", href:"info-purchase-budget.html", name:"아파트 매매 전 자금계획표 작성하는 방법, 매매가격 외 비용까지 정리하기", desc:"매매 전 자금계획표 작성법" },
+      { g:"부동산", d:"2026-10-19", t:"ltv.html,loan.html", href:"info-ltv-dsr-basics.html", name:"LTV와 DSR은 무엇일까? 주택담보대출을 알아보기 전 이해해야 할 두 가지 기준", desc:"LTV·DSR 뜻과 계산, 함께 봐야 하는 이유" },
+      { g:"부동산", d:"2026-10-19", t:"loan.html", href:"info-loan-term-interest.html", name:"주택담보대출 기간이 길어지면 월 상환액과 총이자는 어떻게 달라질까?", desc:"대출 기간 10·20·30년별 월 상환액과 총이자" },
+      { g:"부동산", d:"2026-10-19", t:"loan.html", href:"info-repay-methods.html", name:"주택담보대출 원리금균등과 원금균등 상환 방식의 차이 알아보기", desc:"원리금균등 vs 원금균등 월 납입금·총이자" },
       { g:"부동산", d:"2026-10-18", t:"broker.html", href:"info-broker-vat.html", name:"부동산 계약 전 중개보수와 부가가치세 확인하는 방법", desc:"중개보수 부가세와 지급 전 확인 순서" },
       { g:"부동산", d:"2026-10-18", t:"broker.html,jeonse.html", href:"info-broker-jeonse-wolse.html", name:"전세와 월세 중개수수료 계산 방법이 다른 이유와 실제 계산 사례", desc:"전세·월세 환산 거래금액과 중개보수" },
       { g:"부동산", d:"2026-10-18", t:"broker.html", href:"info-broker-fee-rate.html", name:"부동산 중개수수료는 어떻게 정해질까? 거래금액과 요율 계산 방법", desc:"매매 중개보수 상한요율표와 계산 사례" },
@@ -837,6 +842,11 @@ U.needDate = function(el, name){
     "info-broker-fee-rate.html": '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/>',
     "info-broker-jeonse-wolse.html": '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/>',
     "info-broker-vat.html": '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/>',
+    "info-repay-methods.html": '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/>',
+    "info-loan-term-interest.html": '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/>',
+    "info-ltv-dsr-basics.html": '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/>',
+    "info-purchase-budget.html": '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/>',
+    "info-home-checklist.html": '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/>',
     "info-cashflow-system.html": '<path d="M4 7h16M4 12h16M4 17h10"/><path d="M18 15l2 2 2-2"/>',
     "info-salary.html": '<rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M7 10v4M17 10v4"/>',
     "info-bp.html": '<path d="M12 20s-7-4.5-7-9a4 4 0 017-2.6A4 4 0 0119 11c0 4.5-7 9-7 9z"/><path d="M4 13h4l1.5-3 2 6 1.5-3h5"/>',
