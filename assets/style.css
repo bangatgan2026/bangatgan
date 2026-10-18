@@ -170,6 +170,7 @@ footer{border-top:1px solid var(--edge);background:#0B0F1A;margin-top:40px}
   .gnb a.on{background:var(--card2)}
   .wrap{grid-template-columns:minmax(0,1fr);padding:16px;gap:16px}
   aside.side{position:static;order:2}
+  aside.side .sidebox:not(.chbox){display:none}  /* 폰·태블릿: 아래 푸터에 계산기 목록이 이미 있어서 중복 제거 */
   .sidebox{margin-bottom:0}
   main{order:1}
   .page-h{font-size:22px}
