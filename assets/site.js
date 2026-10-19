@@ -80,6 +80,11 @@ var SECTIONS = [
       { href: "info-lotto.html",  name: "로또",   desc: "확률, 당첨금과 세금, 수령 방법" }
     ],
     items: [
+      { g:"생활", d:"2026-10-20", t:"dday.html", href:"info-goal-dday.html", name:"다이어트와 목표 달성을 위한 남은 날짜(D-day) 역산 활용법", desc:"남은 날짜로 하루 실행량 계산하기" },
+      { g:"생활", d:"2026-10-20", t:"dday.html", href:"info-dday-today.html", name:"D-Day 계산할 때 '오늘을 포함'해야 할까? 제외해야 할까? 기준 총정리", desc:"D-Day 오늘 포함·제외 기준" },
+      { g:"생활", d:"2026-10-20", t:"dday.html", href:"info-anniversary-count.html", name:"커플 기념일 계산의 기초: 1일째부터 시작하는 디데이 계산의 함정", desc:"기념일은 1일, 디데이는 0일로 셉니다" },
+      { g:"생활", d:"2026-10-20", t:"birthday.html", href:"info-birth-zodiac.html", name:"생년월일 하나로 나이·띠·별자리까지 한 번에 계산하는 원리", desc:"띠 기준 차이와 별자리 구간 정리" },
+      { g:"생활", d:"2026-10-20", t:"age.html", href:"info-age-basis.html", name:"헷갈리는 만나이 계산법, 법적 기준과 일상 적용의 차이 완벽 정리", desc:"만 나이 공식과 연 나이를 쓰는 예외 정리" },
       { g:"부동산", d:"2026-10-19", t:"pyeong.html,acquisition.html", href:"info-home-checklist.html", name:"집 구하기 전 확인해야 할 체크리스트, 아파트 면적부터 취득세·중개보수까지", desc:"집 구하기 전 면적·비용·일정 체크리스트" },
       { g:"부동산", d:"2026-10-19", t:"acquisition.html,broker.html,loan.html", href:"info-purchase-budget.html", name:"아파트 매매 전 자금계획표 작성하는 방법, 매매가격 외 비용까지 정리하기", desc:"매매 전 자금계획표 작성법" },
       { g:"부동산", d:"2026-10-19", t:"ltv.html,loan.html", href:"info-ltv-dsr-basics.html", name:"LTV와 DSR은 무엇일까? 주택담보대출을 알아보기 전 이해해야 할 두 가지 기준", desc:"LTV·DSR 뜻과 계산, 함께 봐야 하는 이유" },
@@ -929,6 +934,11 @@ U.needDate = function(el, name){
     "info-dsr.html":'<path d="M3 20h18M6 20V9l6-5 6 5v11"/><path d="M9 20v-5h6v5"/>',
     "info-jeonse.html":'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 10h10M7 14h6"/>',
     "info-age.html":'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l4 2"/>',
+    "info-goal-dday.html":'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
+    "info-dday-today.html":'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
+    "info-anniversary-count.html":'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
+    "info-birth-zodiac.html":'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
+    "info-age-basis.html":'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
     "info-pension.html":'<circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-5 4.5-7 8-7s6.5 2 8 7"/>',
     "guide-odds.html":'<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 .5c0 1.7-2.5 2-2.5 3.5M12 17h.01"/>',
     "guide-prize.html":'<path d="M12 3v18M8 7h6a3 3 0 010 6H9a3 3 0 000 6h7"/>',
