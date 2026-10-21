@@ -80,6 +80,11 @@ var SECTIONS = [
       { href: "info-lotto.html",  name: "로또",   desc: "확률, 당첨금과 세금, 수령 방법" }
     ],
     items: [
+      { g:"생활", d:"2026-10-22", t:"dday.html,datecalc.html", href:"info-date-routine.html", name:"일상 속 시간 낭비를 줄여주는 스마트 날짜 계산기 활용 루틴 총정리", desc:"날짜 계산 활용 루틴" },
+      { g:"생활", d:"2026-10-22", t:"dday.html", href:"info-exam-dday.html", name:"수능 및 각종 자격증 시험 D-Day 카운트다운의 심리적 활용과 시간 관리", desc:"시험 D-Day 시간 관리" },
+      { g:"생활", d:"2026-10-22", t:"datecalc.html", href:"info-utc-timezone.html", name:"전 세계 시간의 기준, UTC와 타임존의 이해 및 날짜 변경선 계산", desc:"UTC·타임존·날짜 변경선" },
+      { g:"생활", d:"2026-10-22", t:"age.html,birthday.html", href:"info-leap-year.html", name:"윤년(Leap Year)이란 무엇인가? 2월 29일생의 나이 계산과 달력의 비밀", desc:"윤년과 2월 29일생 나이" },
+      { g:"생활", d:"2026-10-22", t:"loan.html,savings.html", href:"info-interest-days.html", name:"대출 이자 및 적금 만기일 계산 시 날짜 산정 방식의 비밀", desc:"이자 날짜 계산 방식" },
       { g:"생활", d:"2026-10-21", t:"dday.html", href:"info-military-date.html", name:"전역일 및 복무 기간 계산: 군 장병과 고무신을 위한 정확한 날짜 산정법", desc:"전역일 계산 요령" },
       { g:"생활", d:"2026-10-21", t:"baby.html", href:"info-baby-100-plan.html", name:"아기 100일 및 돌잔치 날짜 계산: 출생일을 1일로 잡는 이유와 계산 실무", desc:"100일·돌 날짜 계산" },
       { g:"생활", d:"2026-10-21", t:"datecalc.html", href:"info-civil-period.html", name:"계약서 작성 시 꼭 알아야 하는 기간 계산 법률 상식 (민법 제157조 이해하기)", desc:"민법 기간 계산 원칙" },
@@ -939,6 +944,11 @@ U.needDate = function(el, name){
     "info-dsr.html":'<path d="M3 20h18M6 20V9l6-5 6 5v11"/><path d="M9 20v-5h6v5"/>',
     "info-jeonse.html":'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 10h10M7 14h6"/>',
     "info-age.html":'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l4 2"/>',
+    "info-date-routine.html":'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
+    "info-exam-dday.html":'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
+    "info-utc-timezone.html":'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
+    "info-leap-year.html":'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
+    "info-interest-days.html":'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
     "info-military-date.html":'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
     "info-baby-100-plan.html":'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
     "info-civil-period.html":'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
