@@ -80,6 +80,11 @@ var SECTIONS = [
       { href: "info-lotto.html",  name: "로또",   desc: "확률, 당첨금과 세금, 수령 방법" }
     ],
     items: [
+      { g:"생활", d:"2026-10-21", t:"dday.html", href:"info-military-date.html", name:"전역일 및 복무 기간 계산: 군 장병과 고무신을 위한 정확한 날짜 산정법", desc:"전역일 계산 요령" },
+      { g:"생활", d:"2026-10-21", t:"baby.html", href:"info-baby-100-plan.html", name:"아기 100일 및 돌잔치 날짜 계산: 출생일을 1일로 잡는 이유와 계산 실무", desc:"100일·돌 날짜 계산" },
+      { g:"생활", d:"2026-10-21", t:"datecalc.html", href:"info-civil-period.html", name:"계약서 작성 시 꼭 알아야 하는 기간 계산 법률 상식 (민법 제157조 이해하기)", desc:"민법 기간 계산 원칙" },
+      { g:"생활", d:"2026-10-21", t:"datecalc.html", href:"info-business-days.html", name:"비즈니스 일정 관리를 위한 업무일(영업일) 계산기 활용법", desc:"영업일 계산 요령" },
+      { g:"생활", d:"2026-10-21", t:"datecalc.html", href:"info-travel-timezone.html", name:"여행 일정 짤 때 필수! 여행지 현지 날짜 및 시차 계산 노하우", desc:"현지 날짜와 시차 계산" },
       { g:"생활", d:"2026-10-20", t:"dday.html", href:"info-goal-dday.html", name:"다이어트와 목표 달성을 위한 남은 날짜(D-day) 역산 활용법", desc:"남은 날짜로 하루 실행량 계산하기" },
       { g:"생활", d:"2026-10-20", t:"dday.html", href:"info-dday-today.html", name:"D-Day 계산할 때 '오늘을 포함'해야 할까? 제외해야 할까? 기준 총정리", desc:"D-Day 오늘 포함·제외 기준" },
       { g:"생활", d:"2026-10-20", t:"dday.html", href:"info-anniversary-count.html", name:"커플 기념일 계산의 기초: 1일째부터 시작하는 디데이 계산의 함정", desc:"기념일은 1일, 디데이는 0일로 셉니다" },
@@ -934,6 +939,11 @@ U.needDate = function(el, name){
     "info-dsr.html":'<path d="M3 20h18M6 20V9l6-5 6 5v11"/><path d="M9 20v-5h6v5"/>',
     "info-jeonse.html":'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 10h10M7 14h6"/>',
     "info-age.html":'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l4 2"/>',
+    "info-military-date.html":'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
+    "info-baby-100-plan.html":'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
+    "info-civil-period.html":'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
+    "info-business-days.html":'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
+    "info-travel-timezone.html":'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
     "info-goal-dday.html":'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
     "info-dday-today.html":'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
     "info-anniversary-count.html":'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
