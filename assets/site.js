@@ -80,6 +80,11 @@ var SECTIONS = [
       { href: "info-lotto.html",  name: "로또",   desc: "확률, 당첨금과 세금, 수령 방법" }
     ],
     items: [
+      { g:"로또", d:"2026-10-23", t:"lotto.html,lotto-gen.html,lotto-stat.html,lotto-my.html,lotto-tax.html", href:"info-lotto-generator-prng.html", name:"로또 번호 생성기 프로그램의 동작 원리: 난수 생성 알고리즘(PRNG)과 무작위성의 이해", desc:"번호 생성기와 난수 원리" },
+      { g:"로또", d:"2026-10-23", t:"lotto.html,lotto-gen.html,lotto-stat.html,lotto-my.html,lotto-tax.html", href:"info-lotto-auto-manual.html", name:"자동선택 vs 반자동 vs 수동선택: 당첨 확률은 정말 다를까?", desc:"자동·반자동·수동 확률" },
+      { g:"로또", d:"2026-10-23", t:"lotto.html,lotto-gen.html,lotto-stat.html,lotto-my.html,lotto-tax.html", href:"info-independent-trial.html", name:"독립시행이란 무엇인가? 로또 번호 추첨에 적용되는 확률 통계학의 핵심 법칙", desc:"독립시행과 로또 추첨" },
+      { g:"로또", d:"2026-10-23", t:"lotto.html,lotto-gen.html,lotto-stat.html,lotto-my.html,lotto-tax.html", href:"info-lotto-online-buy.html", name:"인터넷 동행복권 사이트에서 로또 구매하는 방법 및 구매 한도·결제 방식 완벽 가이드", desc:"인터넷 구매 방법과 한도" },
+      { g:"로또", d:"2026-10-23", t:"lotto.html,lotto-gen.html,lotto-stat.html,lotto-my.html,lotto-tax.html", href:"info-lotto-qr-check.html", name:"로또 당첨번호 조회 기능 실전 활용법: QR코드 인식 오류 해결 및 당첨금 자동 계산 도구 이용 팁", desc:"QR코드 조회와 당첨금 계산" },
       { g:"생활", d:"2026-10-22", t:"dday.html,datecalc.html", href:"info-date-routine.html", name:"일상 속 시간 낭비를 줄여주는 스마트 날짜 계산기 활용 루틴 총정리", desc:"날짜 계산 활용 루틴" },
       { g:"생활", d:"2026-10-22", t:"dday.html", href:"info-exam-dday.html", name:"수능 및 각종 자격증 시험 D-Day 카운트다운의 심리적 활용과 시간 관리", desc:"시험 D-Day 시간 관리" },
       { g:"생활", d:"2026-10-22", t:"datecalc.html", href:"info-utc-timezone.html", name:"전 세계 시간의 기준, UTC와 타임존의 이해 및 날짜 변경선 계산", desc:"UTC·타임존·날짜 변경선" },
@@ -944,6 +949,11 @@ U.needDate = function(el, name){
     "info-dsr.html":'<path d="M3 20h18M6 20V9l6-5 6 5v11"/><path d="M9 20v-5h6v5"/>',
     "info-jeonse.html":'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 10h10M7 14h6"/>',
     "info-age.html":'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l4 2"/>',
+    "info-lotto-generator-prng.html":'<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 .5c0 1.7-2.5 2-2.5 3.5M12 17h.01"/>',
+    "info-lotto-auto-manual.html":'<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 .5c0 1.7-2.5 2-2.5 3.5M12 17h.01"/>',
+    "info-independent-trial.html":'<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 .5c0 1.7-2.5 2-2.5 3.5M12 17h.01"/>',
+    "info-lotto-online-buy.html":'<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 .5c0 1.7-2.5 2-2.5 3.5M12 17h.01"/>',
+    "info-lotto-qr-check.html":'<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 .5c0 1.7-2.5 2-2.5 3.5M12 17h.01"/>',
     "info-date-routine.html":'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
     "info-exam-dday.html":'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
     "info-utc-timezone.html":'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
