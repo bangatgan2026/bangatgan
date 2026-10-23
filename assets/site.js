@@ -82,6 +82,10 @@ var SECTIONS = [
       { href: "info-lotto.html",  name: "로또",   desc: "확률, 당첨금과 세금, 수령 방법" }
     ],
     items: [
+      { g:"로또", d:"2026-10-24", t:"lotto.html,lotto-gen.html,lotto-stat.html,lotto-my.html,lotto-tax.html", href:"info-us-lottery.html", name:"미국 복권(파워볼, 메가밀리언스)과의 당첨 구조 및 세금 체계 비교 분석", desc:"미국 복권과 한국 로또 비교" },
+      { g:"로또", d:"2026-10-24", t:"lotto.html,lotto-gen.html,lotto-stat.html,lotto-my.html,lotto-tax.html", href:"info-lotto-unclaimed.html", name:"로또 당첨금 미수령액 발생 이유와 기한 내 확인·신청 절차 완벽 안내", desc:"미수령 당첨금과 수령 절차" },
+      { g:"로또", d:"2026-10-24", t:"lotto.html,lotto-gen.html,lotto-stat.html,lotto-my.html,lotto-tax.html", href:"info-lottery-fund.html", name:"복권기금의 조성과 쓰임새: 우리가 살 때 지불한 금액은 어디로 활용될까?", desc:"복권기금과 쓰임새" },
+      { g:"로또", d:"2026-10-24", t:"lotto.html,lotto-gen.html,lotto-stat.html,lotto-my.html,lotto-tax.html", href:"info-lotto-ticket-care.html", name:"로또 복권 용지 보존 및 관리법: 감열지 훼손 방지와 당첨금 미수령 예방 체크리스트", desc:"복권 용지 보관법" },
       { g:"로또", d:"2026-10-24", t:"lotto.html,lotto-gen.html,lotto-stat.html,lotto-my.html,lotto-tax.html", href:"info-pension720-vs-lotto.html", name:"연금복권720+ vs 로또 6/45 비교: 당첨 구조, 세율, 수령 방식의 근본적 차이점", desc:"연금복권720+와 로또 비교" },
       { g:"로또", d:"2026-10-23", t:"lotto.html,lotto-gen.html,lotto-stat.html,lotto-my.html,lotto-tax.html", href:"info-lotto-generator-prng.html", name:"로또 번호 생성기 프로그램의 동작 원리: 난수 생성 알고리즘(PRNG)과 무작위성의 이해", desc:"번호 생성기와 난수 원리" },
       { g:"로또", d:"2026-10-23", t:"lotto.html,lotto-gen.html,lotto-stat.html,lotto-my.html,lotto-tax.html", href:"info-lotto-auto-manual.html", name:"자동선택 vs 반자동 vs 수동선택: 당첨 확률은 정말 다를까?", desc:"자동·반자동·수동 확률" },
@@ -958,6 +962,10 @@ U.needDate = function(el, name){
     "info-lotto-online-buy.html":'<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 .5c0 1.7-2.5 2-2.5 3.5M12 17h.01"/>',
     "info-lotto-qr-check.html":'<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 .5c0 1.7-2.5 2-2.5 3.5M12 17h.01"/>',
     "info-pension720-vs-lotto.html":'<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 .5c0 1.7-2.5 2-2.5 3.5M12 17h.01"/>',
+    "info-us-lottery.html":'<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 .5c0 1.7-2.5 2-2.5 3.5M12 17h.01"/>',
+    "info-lotto-unclaimed.html":'<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 .5c0 1.7-2.5 2-2.5 3.5M12 17h.01"/>',
+    "info-lottery-fund.html":'<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 .5c0 1.7-2.5 2-2.5 3.5M12 17h.01"/>',
+    "info-lotto-ticket-care.html":'<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 .5c0 1.7-2.5 2-2.5 3.5M12 17h.01"/>',
     "info-date-routine.html":'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
     "info-exam-dday.html":'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
     "info-utc-timezone.html":'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
