@@ -270,7 +270,7 @@ var U = {
     list.forEach(function (it) {
       var n = "";
       if (s.catOnly) {
-        var c = s.items.filter(function (x) { return x.g === it.name; }).length;
+        var c = s.items.filter(function (x) { return (x.k || x.g) === it.name; }).length;
         n = ' <em>' + c + '</em>';
       }
       sub += '<a href="' + it.href + '"><b>' + esc(it.name) + n + '</b><span>' + esc(it.desc) + '</span></a>';
