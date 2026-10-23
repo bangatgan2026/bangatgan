@@ -77,10 +77,12 @@ var SECTIONS = [
     cats: [
       { href: "info-money.html",  name: "금융",   desc: "보험료, 대출, 부가세, 연말정산" },
       { href: "info-estate.html", name: "부동산", desc: "집 살 때 드는 돈, 평수, 대출 한도, 전세" },
-      { href: "info-life.html",   name: "생활",   desc: "만 나이, 기초연금" },
+      { href: "info-date.html",   name: "날짜",   desc: "나이, 기념일, 디데이, 날짜 계산 기준" },
+      { href: "info-health.html", name: "건강",   desc: "BMI, 혈압, 칼로리, 걷기" },
       { href: "info-lotto.html",  name: "로또",   desc: "확률, 당첨금과 세금, 수령 방법" }
     ],
     items: [
+      { g:"로또", d:"2026-10-24", t:"lotto.html,lotto-gen.html,lotto-stat.html,lotto-my.html,lotto-tax.html", href:"info-pension720-vs-lotto.html", name:"연금복권720+ vs 로또 6/45 비교: 당첨 구조, 세율, 수령 방식의 근본적 차이점", desc:"연금복권720+와 로또 비교" },
       { g:"로또", d:"2026-10-23", t:"lotto.html,lotto-gen.html,lotto-stat.html,lotto-my.html,lotto-tax.html", href:"info-lotto-generator-prng.html", name:"로또 번호 생성기 프로그램의 동작 원리: 난수 생성 알고리즘(PRNG)과 무작위성의 이해", desc:"번호 생성기와 난수 원리" },
       { g:"로또", d:"2026-10-23", t:"lotto.html,lotto-gen.html,lotto-stat.html,lotto-my.html,lotto-tax.html", href:"info-lotto-auto-manual.html", name:"자동선택 vs 반자동 vs 수동선택: 당첨 확률은 정말 다를까?", desc:"자동·반자동·수동 확률" },
       { g:"로또", d:"2026-10-23", t:"lotto.html,lotto-gen.html,lotto-stat.html,lotto-my.html,lotto-tax.html", href:"info-independent-trial.html", name:"독립시행이란 무엇인가? 로또 번호 추첨에 적용되는 확률 통계학의 핵심 법칙", desc:"독립시행과 로또 추첨" },
@@ -319,7 +321,7 @@ var U = {
     var backHref = (page === sec.home) ? "index.html" : sec.home;
     var backName = (page === sec.home) ? "홈" : sec.name;
     if (sec.catOnly && item) {
-      var c2 = sec.cats.filter(function (c) { return c.name === item.g; })[0];
+      var c2 = sec.cats.filter(function (c) { return c.name === (item.k || item.g); })[0];
       if (c2) { backHref = c2.href; backName = sec.name + " · " + c2.name; }
     }
     main.insertBefore(h(
@@ -338,9 +340,9 @@ var U = {
     if (sec.catOnly) {
       /* 지금 보고 있는 글의 분류를 찾습니다 */
       var here = sec.items.filter(function (x) { return x.href === page; })[0];
-      var curCat = here ? here.g : (
+      var curCat = here ? (here.k || here.g) : (
         { "info-money.html":"금융", "info-estate.html":"부동산",
-          "info-life.html":"생활", "info-lotto.html":"로또" }[page] || null);
+          "info-date.html":"날짜", "info-health.html":"건강", "info-lotto.html":"로또" }[page] || null);
       sec.cats.forEach(function (c) {
         var on = (c.name === curCat);
         links += '<a href="' + c.href + '"' + (on ? ' class="on"' : '') + '>' + esc(c.name) + '</a>';
@@ -955,6 +957,7 @@ U.needDate = function(el, name){
     "info-independent-trial.html":'<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 .5c0 1.7-2.5 2-2.5 3.5M12 17h.01"/>',
     "info-lotto-online-buy.html":'<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 .5c0 1.7-2.5 2-2.5 3.5M12 17h.01"/>',
     "info-lotto-qr-check.html":'<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 .5c0 1.7-2.5 2-2.5 3.5M12 17h.01"/>',
+    "info-pension720-vs-lotto.html":'<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 .5c0 1.7-2.5 2-2.5 3.5M12 17h.01"/>',
     "info-date-routine.html":'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
     "info-exam-dday.html":'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
     "info-utc-timezone.html":'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
@@ -1273,11 +1276,12 @@ U.needDate = function(el, name){
   }
 
   function buildTabs() {
-    var CATS = ["금융", "부동산", "생활", "로또"];
+    var CATS = ["금융", "부동산", "날짜", "건강", "로또"];
     var BLURB = {
       "금융": "연봉·세금·대출·보험 이야기",
       "부동산": "집 사고 팔 때, 전월세 이야기",
-      "생활": "나이·날짜·건강 이야기",
+      "날짜": "나이·기념일·날짜 계산 이야기",
+      "건강": "BMI·혈압·칼로리 이야기",
       "로또": "확률·당첨금·수령 방법"
     };
     var every = [];
@@ -1289,7 +1293,7 @@ U.needDate = function(el, name){
       return a.it.d < b.it.d ? 1 : a.it.d > b.it.d ? -1 : a.i - b.i;
     });
     var by = {};
-    every.forEach(function (p) { (by[p.it.g] = by[p.it.g] || []).push(p.it); });
+    every.forEach(function (p) { var kk = p.it.k || p.it.g; (by[kk] = by[kk] || []).push(p.it); });
     var cats = CATS.filter(function (g) { return by[g] && by[g].length; });
     if (!cats.length) return;
 
