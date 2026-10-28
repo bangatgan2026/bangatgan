@@ -82,6 +82,7 @@ var SECTIONS = [
       { href: "info-lotto.html",  name: "로또",   desc: "확률, 당첨금과 세금, 수령 방법" }
     ],
     items: [
+      { g:"생활", k:"건강", d:"2026-10-29", t:"bmi.html,bmr.html", href:"info-inbody-key-numbers.html", name:"인바디 검사 결과표에서 가장 먼저 확인해야 할 핵심 수치 3가지", desc:"인바디 결과표 핵심 수치 3가지" },
       { g:"생활", k:"건강", d:"2026-10-28", t:"bmr.html,calorie.html", href:"info-bmr-age-decline.html", name:"나이대별 기초대사량 하락 속도와 근육량 유지의 골든타임", desc:"나이대별 기초대사량과 근육량" },
       { g:"생활", k:"건강", d:"2026-10-27", t:"bmr.html,calorie.html", href:"info-bmr-calculator-myth.html", name:"기초대사량 계산기 결과가 실제 다이어트와 체중 감량에 실패하는 진짜 이유", desc:"기초대사량 계산기 결과의 한계" },
       { g:"로또", d:"2026-10-25", t:"lotto.html,lotto-gen.html,lotto-stat.html,lotto-my.html,lotto-tax.html", href:"info-lotto-data-api.html", name:"로또 관련 공공 데이터 API 연동과 자동 조회 웹 도구 개발 기초 이해", desc:"당첨 데이터 API 기초" },
@@ -980,6 +981,7 @@ U.needDate = function(el, name){
     "info-gamblers-fallacy.html":'<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 .5c0 1.7-2.5 2-2.5 3.5M12 17h.01"/>',
     "info-bmr-calculator-myth.html":'<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 .5c0 1.7-2.5 2-2.5 3.5M12 17h.01"/>',
     "info-bmr-age-decline.html":'<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 .5c0 1.7-2.5 2-2.5 3.5M12 17h.01"/>',
+    "info-inbody-key-numbers.html":'<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 .5c0 1.7-2.5 2-2.5 3.5M12 17h.01"/>',
     "info-date-routine.html":'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
     "info-exam-dday.html":'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
     "info-utc-timezone.html":'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
