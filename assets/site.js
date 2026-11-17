@@ -82,6 +82,7 @@ var SECTIONS = [
       { href: "info-lotto.html",  name: "로또",   desc: "확률, 당첨금과 세금, 수령 방법" }
     ],
     items: [
+      { g:"생활", k:"건강", d:"2026-11-18", t:"bp.html", href:"info-bp-150.html", name:"혈압 150 나왔다면 꼭 알아야 할 고혈압 단계와 올바른 측정법", desc:"혈압 150이 어느 단계인지와 올바른 측정법" },
       { g:"생활", k:"건강", d:"2026-11-17", t:"walk.html,calorie.html,bmr.html", href:"info-fasted-cardio.html", name:"공복 유산소 효과 진짜 있을까? 공복 유산소 식후 유산소 차이와 실제 소모 칼로리 분석", desc:"공복 유산소와 식후 유산소 차이" },
       { g:"생활", k:"건강", d:"2026-10-31", t:"calorie.html,bmi.html", href:"info-water-intake-calc.html", name:"하루 물 2리터 마시기 오해와 진실: 내 몸에 맞는 수분 섭취량 계산법", desc:"하루 물 섭취량 계산법" },
       { g:"생활", k:"건강", d:"2026-10-30", t:"calorie.html,bmr.html", href:"info-protein-calc-mistakes.html", name:"다이어트 중 단백질 섭취량을 계산할 때 흔히 저지르는 3가지 치명적 실수", desc:"단백질 섭취량 계산 실수 3가지" },
@@ -986,6 +987,7 @@ U.needDate = function(el, name){
     "info-bmr-age-decline.html":'<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 .5c0 1.7-2.5 2-2.5 3.5M12 17h.01"/>',
     "info-inbody-key-numbers.html":'<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 .5c0 1.7-2.5 2-2.5 3.5M12 17h.01"/>',
     "info-protein-calc-mistakes.html":'<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 .5c0 1.7-2.5 2-2.5 3.5M12 17h.01"/>',
+    "info-bp-150.html":'<path d="M3 12h4l2-5 3 10 2.5-7 1.5 4h5"/>',
     "info-fasted-cardio.html":'<circle cx="12" cy="5" r="2"/><path d="M10 22l2-7 3 3v4M7 13l3-4 4 2 3-3"/>',
     "info-water-intake-calc.html":'<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 .5c0 1.7-2.5 2-2.5 3.5M12 17h.01"/>',
     "info-date-routine.html":'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
