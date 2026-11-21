@@ -52,7 +52,7 @@ gtag('config', 'G-1M0D88PL01');
       <div class="row2">
         <div class="field">
           <label for="taxfree">월 비과세액 <span class="hint">식대 등</span></label>
-          <div class="inbox"><input id="taxfree" inputmode="numeric"><span class="unit">만원</span></div>
+          <div class="inbox"><input id="taxfree" inputmode="numeric" placeholder="예: 20 (식대)"><span class="unit">만원</span></div>
         </div>
         <div class="field">
           <label for="family">부양가족 수 <span class="hint">본인 포함</span></label>
@@ -116,7 +116,7 @@ var q=$('#quick');
 [3000,4000,5000,6000,8000,10000].forEach(function(m){
   var b=document.createElement('button');
   b.type='button'; b.textContent=m>=10000?(m/10000)+'억':m+'만';
-  b.onclick=function(){ $('#annual').value=(m*10000).toLocaleString(); run(); };
+  b.onclick=function(){ $('#annual').value=m.toLocaleString(); run(); };
   q.appendChild(b);
 });
 
