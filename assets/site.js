@@ -84,6 +84,7 @@ var SECTIONS = [
     items: [
       { g:"생활", k:"건강", d:"2026-11-23", t:"walk.html", href:"info-walk-effect.html", name:"걷기 효과 제대로 보려면 얼마나 걸어야 할까? 30분·1시간·만보 기준 총정리", desc:"성인 권장량 주 150분, 하루 30분·1시간·만보 걷기 효과 비교" },
       { g:"생활", k:"건강", d:"2026-11-22", t:"bmr.html,bmi.html", href:"info-sarcopenia.html", name:"근감소증 증상과 자가 진단 기준 총정리: 종아리 둘레부터 병원 검사까지", desc:"종아리 둘레로 보는 근감소증 의심 기준" },
+      { g:"생활", k:"건강", d:"2026-11-25", t:"bp.html", href:"info-white-coat.html", name:"백의고혈압 원인과 진단 기준: 가면고혈압과의 결정적 차이점 정리", desc:"병원에서만 높은 혈압과 집에서만 높은 혈압 구분" },
       { g:"생활", k:"건강", d:"2026-11-21", t:"bp.html", href:"info-low-bp.html", name:"저혈압 수치 기준과 범위 총정리: 정상 혈압과 병원 방문이 필요한 순간", desc:"저혈압 기준 90/60과 병원 갈 신호" },
       { g:"생활", k:"건강", d:"2026-11-18", t:"bp.html", href:"info-bp-150.html", name:"혈압 150 나왔다면 꼭 알아야 할 고혈압 단계와 올바른 측정법", desc:"혈압 150이 어느 단계인지와 올바른 측정법" },
       { g:"생활", k:"건강", d:"2026-11-17", t:"walk.html,calorie.html,bmr.html", href:"info-fasted-cardio.html", name:"공복 유산소 효과 진짜 있을까? 공복 유산소 식후 유산소 차이와 실제 소모 칼로리 분석", desc:"공복 유산소와 식후 유산소 차이" },
@@ -992,6 +993,7 @@ U.needDate = function(el, name){
     "info-protein-calc-mistakes.html":'<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 .5c0 1.7-2.5 2-2.5 3.5M12 17h.01"/>',
     "info-walk-effect.html":'<path d="M4 20l4-8 4 3 4-6"/><circle cx="18" cy="5" r="1.5"/>',
     "info-sarcopenia.html":'<path d="M6 4v7a6 6 0 0012 0V4"/><path d="M9 21h6"/><path d="M12 17v4"/>',
+    "info-white-coat.html":'<path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.6-7 10-7 10z"/>',
     "info-low-bp.html":'<path d="M3 12h4l2 4 3-9 2 5h7"/><circle cx="12" cy="20" r="1"/>',
     "info-bp-150.html":'<path d="M3 12h4l2-5 3 10 2.5-7 1.5 4h5"/>',
     "info-fasted-cardio.html":'<circle cx="12" cy="5" r="2"/><path d="M10 22l2-7 3 3v4M7 13l3-4 4 2 3-3"/>',
