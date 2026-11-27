@@ -56,7 +56,7 @@ var SECTIONS = [
       { href: "bmr.html",     name: "기초대사량 계산기",     desc: "하루에 쓰는 최소 칼로리" },
       { href: "calorie.html", name: "칼로리 계산기", desc: "활동량까지 넣어서" },
       { href: "bp.html",      name: "혈압 계산기", desc: "학회 기준으로 어느 구간인지" },
-      { href: "walk.html",    name: "걷기 칼로리 계산기", desc: "얼마 걸으면 얼마가 소모되는지" }
+      { href: "walk.html",    name: "운동별 칼로리 계산기", desc: "운동 종류별로 소모 칼로리 계산" }
     ]
   },
   {
@@ -1238,7 +1238,7 @@ U.needDate = function(el, name){
     "bmr.html": { href: "use-bmr.html", name: "기초대사량 계산기 활용법: 입력값 체크부터 결과 읽는 법" },
     "calorie.html": { href: "use-calorie.html", name: "칼로리 계산기 활용법: 입력값 체크부터 결과 읽는 법" },
     "bp.html": { href: "use-bp.html", name: "혈압 계산기 활용법: 입력값 체크부터 결과 읽는 법" },
-    "walk.html": { href: "use-walk.html", name: "걷기 칼로리 계산기 활용법: 입력값 체크부터 결과 읽는 법" },
+    "walk.html": { href: "use-walk.html", name: "각 운동별 칼로리 계산기 활용법: 운동 고르기부터 결과 읽는 법" },
     "birthday.html": { href: "use-birthday.html", name: "생년월일 계산기 활용법: 입력값 체크부터 결과 읽는 법" },
     "age.html": { href: "use-age.html", name: "만나이계산기 활용법: 입력값 체크부터 결과 읽는 법" },
     "dday.html": { href: "use-dday.html", name: "디데이계산기 활용법: 입력값 체크부터 결과 읽는 법" },
