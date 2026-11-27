@@ -943,6 +943,7 @@ U.needDate = function(el, name){
     "info-jeonse-rate.html": '<path d="M4 21V9l8-6 8 6v12"/><path d="M9 21v-6h6v6"/>',
     "vat.html":       '<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/>',
     "cartax.html":    '<path d="M4 16v-3l2-5h12l2 5v3"/><path d="M4 16h16v3h-3v-3M7 19H4v-3"/><circle cx="7.5" cy="16.5" r="1"/><circle cx="16.5" cy="16.5" r="1"/>',
+    "rehab-calc.html": '<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/>',
     "pyeong.html":    '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M11 10v10"/>',
     "broker.html":    '<path d="M4 21V8l8-5 8 5v13"/><path d="M9 21v-6h6v6"/><circle cx="12" cy="10" r="1.5"/>',
     /* 날짜 */
