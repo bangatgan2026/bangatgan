@@ -31,22 +31,12 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://bangatgan.kr/bmr.html</loc>
-    <lastmod>2026-09-09</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://bangatgan.kr/bp.html</loc>
     <lastmod>2026-09-09</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://bangatgan.kr/broker.html</loc>
-    <lastmod>2026-09-09</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://bangatgan.kr/calorie.html</loc>
     <lastmod>2026-09-09</lastmod>
     <priority>0.8</priority>
   </url>
@@ -278,7 +268,7 @@
   </url>
   <url>
     <loc>https://bangatgan.kr/walk.html</loc>
-    <lastmod>2026-09-09</lastmod>
+    <lastmod>2026-11-27</lastmod>
     <priority>0.8</priority>
   </url>
 <url>
@@ -772,18 +762,6 @@
   </url>
   <url>
     <loc>https://bangatgan.kr/use-bmi.html</loc>
-    <lastmod>2026-10-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://bangatgan.kr/use-bmr.html</loc>
-    <lastmod>2026-10-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://bangatgan.kr/use-calorie.html</loc>
     <lastmod>2026-10-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
