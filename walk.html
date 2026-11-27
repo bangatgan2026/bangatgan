@@ -42,8 +42,8 @@ gtag('config', 'G-1M0D88PL01');
 
     <div class="card">
       <div class="field">
-        <label for="act">운동 종류 </label>
-        <div class="inbox"><select id="act"></select></div>
+        <label>운동 종류 <span style="color:#8A94AD;font-size:13px;">(눌러서 고르세요)</span></label>
+        <div id="chips" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;"></div>
       </div>
       <div class="field" id="speedRow" hidden>
         <label for="speed">걷기 속도 </label>
@@ -128,16 +128,16 @@ GROUPS.forEach(function(gr){ gr.items.forEach(function(it){ ALL.push(it); }); })
 var cur=ALL[0];
 var KCAL_RICE=300, KCAL_PIZZA=290, G_PER_KCAL=5.5;
 
-function buildSelect(){
+function buildChips(){
   var h='';
   GROUPS.forEach(function(gr){
-    h+='<optgroup label="'+gr.g+'">';
+    h+='<div style="width:100%;font-size:13px;color:#8A94AD;margin-top:6px;">'+gr.g+'</div>';
     gr.items.forEach(function(it){
-      h+='<option value="'+it.k+'"'+(it.k===cur.k?' selected':'')+'>'+it.n+'</option>';
+      var on=it.k===cur.k;
+      h+='<button type="button" data-k="'+it.k+'" style="padding:9px 14px;border-radius:999px;border:1px solid '+(on?'#3B6CFF':'#2A3350')+';background:'+(on?'#3B6CFF':'#161D2E')+';color:'+(on?'#FFFFFF':'#CFD6E6')+';font-size:14px;font-weight:'+(on?'700':'500')+';cursor:pointer;">'+it.n+'</button>';
     });
-    h+='</optgroup>';
   });
-  $('#act').innerHTML=h;
+  $('#chips').innerHTML=h;
 }
 function syncSpeed(){ $('#speedRow').hidden = cur.k!=='walk'; }
 
@@ -170,9 +170,11 @@ function run(){
   U.saveState({w:w,min:min,speed:met,act:cur.k});
 }
 
-$('#act').onchange=function(){
-  var k=$('#act').value;
-  cur=ALL.filter(function(a){return a.k===k;})[0]||cur;
+$('#chips').onclick=function(e){
+  var b=e.target.closest('button[data-k]');
+  if(!b) return;
+  cur=ALL.filter(function(a){return a.k===b.getAttribute('data-k');})[0]||cur;
+  buildChips();
   syncSpeed();
   run();
 };
@@ -182,7 +184,7 @@ U.comma($('#w')); U.comma($('#min'));
 
 var st=U.loadState();
 if(st.act){ cur=ALL.filter(function(a){return a.k===st.act;})[0]||cur; }
-buildSelect();
+buildChips();
 syncSpeed();
 if(st.w){
   $('#w').value=Number(st.w).toLocaleString();
