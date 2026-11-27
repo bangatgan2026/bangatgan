@@ -17,14 +17,14 @@ gtag('config', 'G-1M0D88PL01');
 <meta name="color-scheme" content="dark">
 <meta name="naver-site-verification" content="7ea0de7682fd50f2771c43ebd5a723369427b225" />
 <title>개인회생 변제금 계산기 (2026년 기준 추정) | 참새방앗간</title>
-<meta name="description" content="2026년 기준 중위소득의 60% 생계비를 적용해 개인회생 월 가용소득과 변제 총액을 추정합니다. 참고용 계산기입니다.">
+<meta name="description" content="월 소득과 빚 규모를 넣으면 개인회생 월 변제금과 변제 총액, 면책 예상액을 추정합니다. 결과를 받은 뒤 할 일과 무료 상담처도 함께 안내합니다.">
 <link rel="canonical" href="https://bangatgan.kr/rehab-calc.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="참새방앗간">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:url" content="https://bangatgan.kr/rehab-calc.html">
 <meta property="og:title" content="개인회생 변제금 계산기 (2026년 기준 추정) | 참새방앗간">
-<meta property="og:description" content="2026년 기준 생계비를 적용해 개인회생 월 가용소득과 변제 총액을 추정하는 참고용 계산기입니다.">
+<meta property="og:description" content="월 변제금, 변제 총액, 면책 예상액을 추정하고 결과 뒤 할 일을 안내하는 참고용 계산기입니다.">
 <meta property="og:image" content="https://bangatgan.kr/images/og-health.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -32,38 +32,87 @@ gtag('config', 'G-1M0D88PL01');
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="stylesheet" href="assets/style.css?v=95">
+<style>
+.qbtns{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+.qbtns button{padding:6px 10px;border-radius:999px;border:1px solid #2A3350;background:#161D2E;color:#CFD6E6;font-size:13px;cursor:pointer;}
+.qbtns button.ghost{color:#8A94AD;}
+.vbox{border-radius:12px;padding:14px 16px;margin:0 0 10px;font-size:15px;line-height:1.6;border:1px solid #2A3350;background:#161D2E;}
+.vbox.red{border-color:#FF4D4D;}
+.vbox.amber{border-color:#E6B451;}
+.vbox.green{border-color:#3DBE7A;}
+.vbox b{display:block;margin-bottom:4px;}
+.must{color:#FF4D4D;font-weight:800;margin-left:6px;}
+.steps-ol li{margin-bottom:10px;}
+.help{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.help div{border:1px solid #2A3350;border-radius:10px;padding:12px 14px;background:#161D2E;}
+.help b{display:block;font-size:17px;}
+@media(max-width:640px){.help{grid-template-columns:1fr;}}
+</style>
 </head>
 <body data-section="finance">
 <div class="wrap">
   <aside class="side"></aside>
   <main>
     <h1 class="page-h">개인회생 변제금 계산기</h1>
-    <p class="page-lead">세후 월소득, 부양가족 수, 무담보 채무를 넣으면 2026년 기준 생계비를 빼고 남는 금액을 추정합니다. 참고용이며 실제 변제금은 법원 심리 결과에 따라 달라집니다.</p>
+    <p class="page-lead">월 소득과 빚 규모를 넣으면 월 변제금, 변제 총액, 면책 예상액을 추정합니다. 결과를 받은 뒤 무엇을 해야 하는지도 아래에 정리했어요.</p>
 
     <div class="card">
-      <h2>조건 입력</h2>
+      <h2>1. 먼저 확인할 두 가지</h2>
+      <ul>
+        <li><b>정기적인 소득이 있나요?</b> 개인회생은 앞으로도 계속 소득을 얻을 가능성이 있는 사람이 신청할 수 있어요. 소득이 전혀 없다면 다른 절차를 먼저 보셔야 해요.</li>
+        <li><b>채무 한도 안인가요?</b> 대략 무담보 채무 5억 원 이하, 담보 채무 10억 원 이하가 기준이에요. 아래 결과에서 한도를 넘는지도 함께 알려 드려요.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>2. 조건 입력</h2>
       <div class="field">
-        <label for="inc">세후 월소득 (실수령) </label>
-        <div class="inbox"><input id="inc" inputmode="numeric" placeholder="월 실수령액"><span class="unit">원</span></div>
+        <label for="inc">월 소득 (상여 포함, 세금·4대보험 뺀 실수령액) </label>
+        <div class="inbox"><input id="inc" inputmode="numeric" placeholder="예: 2,500,000"><span class="unit">원</span></div>
+        <div class="qbtns">
+          <button type="button" data-target="inc" data-add="1000000">+100만</button>
+          <button type="button" data-target="inc" data-add="100000">+10만</button>
+          <button type="button" data-target="inc" data-add="10000">+1만</button>
+          <button type="button" class="ghost" data-target="inc" data-reset="1">초기화</button>
+        </div>
+        <p class="sub">프리랜서나 자영업자는 최근 1년 평균 실수령액을 넣어 주세요.</p>
       </div>
       <div class="field">
         <label for="fam">본인 포함 가구원 수 </label>
         <div class="inbox"><select id="fam"><option value="1">1명</option><option value="2">2명</option><option value="3">3명</option><option value="4">4명</option></select></div>
+        <p class="sub">5명 이상 가구는 이 계산기에서 지원하지 않아요.</p>
       </div>
       <div class="field">
-        <label for="unsec">무담보 채무 총액 </label>
-        <div class="inbox"><input id="unsec" inputmode="numeric" placeholder="신용·카드·대출 등 원금과 이자"><span class="unit">원</span></div>
+        <label for="unsec">무담보 채무 총액 (원금과 이자 합계) </label>
+        <div class="inbox"><input id="unsec" inputmode="numeric" placeholder="예: 50,000,000"><span class="unit">원</span></div>
+        <div class="qbtns">
+          <button type="button" data-target="unsec" data-add="100000000">+1억</button>
+          <button type="button" data-target="unsec" data-add="10000000">+1천만</button>
+          <button type="button" data-target="unsec" data-add="1000000">+1백만</button>
+          <button type="button" class="ghost" data-target="unsec" data-reset="1">초기화</button>
+        </div>
+        <p class="sub">신용대출, 카드론, 현금서비스, 학자금대출, 사채 등이 해당해요.</p>
       </div>
       <div class="field">
-        <label for="sec">담보 채무 총액 (참고) </label>
-        <div class="inbox"><input id="sec" inputmode="numeric" placeholder="주택·자동차 담보대출 등"><span class="unit">원</span></div>
+        <label for="sec">담보 채무 총액 (주택·자동차 담보대출 등) </label>
+        <div class="inbox"><input id="sec" inputmode="numeric" placeholder="없으면 비워두세요"><span class="unit">원</span></div>
+        <p class="sub">변제금 계산에는 넣지 않고, 채무 한도 확인에만 써요. 잘 모르겠으면 전체를 무담보 채무에 넣으세요.</p>
+      </div>
+      <div class="field">
+        <label for="extra">추가 생계비 (월, 선택) </label>
+        <div class="inbox"><input id="extra" inputmode="numeric" placeholder="주거비·의료비·교육비 등"><span class="unit">원</span></div>
+        <p class="sub">기본 생계비에 더해 계산해 봅니다. 실제 인정 여부와 금액은 법원이 판단해요.</p>
+      </div>
+      <div class="field">
+        <label for="asset">보유 재산 가치 (선택) </label>
+        <div class="inbox"><input id="asset" inputmode="numeric" placeholder="집·차·예금·보험 해지환급금 등"><span class="unit">원</span></div>
+        <p class="sub">대략의 시세나 잔액을 합쳐 넣으세요. 재산이 많으면 변제 총액이 올라갈 수 있는지 확인해요.</p>
       </div>
       <div class="field">
         <label for="term">변제 기간 </label>
-        <div class="inbox"><select id="term"><option value="36">36개월 (기본)</option><option value="60">60개월 (최대)</option></select></div>
+        <div class="inbox"><select id="term"><option value="36">36개월 (기본)</option><option value="60">60개월 (특별한 사정이 있을 때)</option></select></div>
       </div>
       <button class="btn" id="go">변제금 추정하기</button>
-      <p class="sub" style="margin-top:10px;">담보 채무는 계산에 넣지 않고 따로 처리되는 것으로 봅니다. 5명 이상 가구는 이 계산기에서 지원하지 않아요.</p>
     </div>
 
     <div id="out" hidden>
@@ -75,30 +124,97 @@ gtag('config', 'G-1M0D88PL01');
       </div>
 
       <div class="card">
+        <h2>결과 해석 (지금 상황 점검)</h2>
+        <div id="verdict"></div>
+      </div>
+
+      <div class="card">
         <h2>계산 과정</h2>
         <table class="t"><tbody id="steps"></tbody></table>
-        <p class="sub" style="margin-top:12px;" id="warn"></p>
+      </div>
+
+      <div class="card">
+        <h2>36개월과 60개월 비교</h2>
+        <p class="sub">변제 총액은 같고 기간만 달라져요. 기간이 길수록 월 부담은 줄지만 총액은 늘 수 있어요.</p>
+        <table class="t"><tbody id="cmp"></tbody></table>
       </div>
     </div>
 
     <div class="card">
-      <h2>계산 방식 설명</h2>
-      <p>생계비는 보건복지부가 고시하는 기준 중위소득의 60%를 기본으로 봅니다. 2026년 기준 중위소득은 1인 가구 2,564,238원, 4인 가구 6,494,738원이에요. 이 기준을 적용하면 1인 1,538,542원, 2인 2,519,575원, 3인 3,215,421원, 4인 3,896,842원이 생계비가 돼요(중위소득의 60%를 원 단위 아래로 내림한 값).</p>
-      <p>월 가용소득은 세후 소득에서 생계비를 뺀 금액입니다. 가용소득에 변제 기간을 곱한 것이 변제 총액의 기본 추정치예요.</p>
-      <p>최소 변제 기준은 채무 규모에 따라 정해집니다. 무담보 채무 5천만 원 미만이면 채무의 5%, 5천만 원 이상이면 채무의 3%에 100만 원을 더한 금액(상한 3,000만 원)입니다. 이 계산기는 이 기준을 하한선으로 한 번 더 비교해서 보여 줍니다.</p>
+      <h2>결과를 받은 뒤 할 일</h2>
+      <ol class="steps-ol">
+        <li><b>숫자를 한 번 더 확인하세요.</b> 소득은 실수령액인지, 채무에 이자가 들어갔는지 확인하세요. 가용소득이 0원이면 개인회생보다 다른 절차가 맞는지 먼저 전문가와 보셔야 해요.</li>
+        <li><b>서류를 미리 모아 두세요.</b> 급여 소득자는 급여명세서와 채무 내역, 프리랜서나 자영업자는 장부, 부가세 신고서, 카드 매출내역 같은 최근 1년 소득 자료가 필요해요.</li>
+        <li><b>법원에서 받은 서류가 있다면 기한부터 보세요.</b> 기한이 가까우면 132에 서류 종류와 받은 날짜, 기한을 먼저 알리고 절차를 확인하세요.</li>
+        <li><b>무료 상담을 받아 보세요.</b> 아래 기관 중 편한 곳에 전화하면 됩니다. 계산 결과를 그대로 들고 가서 물어보셔도 충분해요.</li>
+      </ol>
     </div>
 
     <div class="card">
-      <h2>꼭 알아 두세요</h2>
+      <h2>무료로 도움받을 곳</h2>
+      <div class="help">
+        <div><b>132</b>대한법률구조공단 무료 법률상담. 개인회생·파산·면책 절차를 안내해요. 소송 지원은 기준 중위소득 125% 이하 조건이 있어요.</div>
+        <div><b>1375</b>채무상담 대표번호. 빚 상담을 한 곳에서 연결받을 수 있어요.</div>
+        <div><b>1600-5500</b>신용회복위원회 채무상담. 신용회복지원제도로 빚을 조정하는 방법을 알려 줘요.</div>
+        <div><b>109</b>자살예방상담전화. 빚 걱정으로 마음이 많이 힘드시다면 언제든 이야기해 주세요.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>계산 방식 설명 <span class="must">필독</span></h2>
+      <p><b>생계비:</b> 보건복지부가 고시하는 기준 중위소득의 60%를 기본 생계비로 봐요. 2026년 기준으로 1인 1,538,542원, 2인 2,519,575원, 3인 3,215,421원, 4인 3,896,842원이에요. 여기에 입력한 추가 생계비를 더합니다.</p>
+      <p><b>월 가용소득:</b> 세후 소득에서 생계비를 뺀 금액이에요. 가용소득은 원래 변제에 쓰는 돈이라 0원보다 작아지지 않게 처리했어요.</p>
+      <p><b>변제 총액:</b> 가용소득에 변제 기간을 곱한 금액이 기본 추정치예요. 기본 변제 기간은 3년이고, 특별한 사정이 있으면 5년까지 정할 수 있어요.</p>
+      <p><b>최저 변제 기준:</b> 무담보 채무가 5천만 원 미만이면 채무의 5%, 5천만 원 이상이면 채무의 3%에 100만 원을 더한 금액(상한 3,000만 원)이에요. 가용소득 계산값보다 이 기준이 크면 그 금액을 변제 총액으로 봐요.</p>
+      <p><b>면책 예상액:</b> 무담보 채무에서 변제 총액을 뺀 금액이에요. 실제 면책 범위는 법원 인가 결과에 따라 달라져요.</p>
+      <p><b>재산(청산가치):</b> 지금 파산한다면 채권자가 받을 금액 이상을 갚도록 보는 원칙이 있어요. 재산 가치가 변제 총액보다 크면 기간을 늘리거나 월 변제금을 올릴 수 있어요.</p>
+      <p><b>이 계산기의 한계:</b> 추가 생계비 인정 여부, 재산 가치 평가, 배우자 소득 반영, 신청 시점의 소득 변동은 계산에 완전히 반영하지 못해요. 결과는 참고용이에요.</p>
+    </div>
+
+    <div class="card">
+      <h2>자주 묻는 질문</h2>
+      <p><b>Q. 소득이 적은데 신청할 수 있나요?</b><br>가용소득이 0원이면 이 계산으로는 변제금을 만들기 어려워요. 그때는 다른 절차가 맞을 수 있으니 무료 상담에서 확인해 보세요.</p>
+      <p><b>Q. 배우자 소득은 어떻게 하나요?</b><br>이 계산기는 본인 소득만 넣어요. 배우자 소득이 생계비와 어떻게 반영될지는 사안마다 달라서 상담에서 확인하세요.</p>
+      <p><b>Q. 변제 기간은 36개월과 60개월 중 무엇을 고르나요?</b><br>기본은 36개월이고, 60개월은 특별한 사정이 있을 때 쓰는 기간이에요. 비교표에서 두 경우를 함께 보세요.</p>
+    </div>
+
+    <div class="card">
+      <h2>이 결과를 쉬운 말로 풀면</h2>
       <ul>
-        <li>추가 생계비(주거·의료·교육비 등)가 인정되면 변제금이 달라질 수 있어요.</li>
-        <li>세후 소득은 세금과 4대보험을 뺀 실수령액으로 넣어 주세요.</li>
-        <li>가용소득이 0원이면 개인회생보다 다른 절차가 맞는지 법률 전문가와 확인해 보세요.</li>
-        <li>이 계산기의 결과는 참고용이며, 법률 판단이나 신청 가능 여부를 보장하지 않아요.</li>
+        <li><b>월 변제금</b>: 매달 법원이 정한 기간 동안 갚아 나가는 돈이에요.</li>
+        <li><b>면책</b>: 정해진 기간을 성실히 갚고 나면 남은 빚을 법적으로 갚지 않아도 되는 것이에요.</li>
+        <li><b>가용소득</b>: 한 달 소득에서 생활비를 뺀 나머지예요. 이 돈으로 빚을 갚아요.</li>
+        <li><b>생계비</b>: 최소한으로 살기 위해 남겨 두는 돈이에요. 가구원 수에 따라 정해져 있어요.</li>
       </ul>
     </div>
 
-    <div class="callout asof"><b>📅 기준일 안내</b><br>2026년 기준 중위소득(보건복지부 고시)을 기준으로 합니다. 2027년 기준 중위소득은 2027년 1월부터 적용되니, 그때 기준값을 다시 확인하세요.</div>
+    <div class="card">
+      <h2>혼자 고민하지 마시고, 이렇게 해 보세요</h2>
+      <p><b>1단계: 급한 서류가 있는지 먼저 보세요.</b> 법원이나 채권자에게서 받은 서류가 있다면 날짜와 "제출 기한"부터 확인하세요. 기한이 가까우면 132에 서류 종류와 받은 날짜, 기한을 먼저 알리세요.</p>
+      <p><b>2단계: 무료 상담에 전화하세요.</b> 132(법률 상담), 1600-5500(신용회복위원회 채무상담), 1375(채무상담 대표번호) 중 편한 곳에 전화하시면 됩니다. 처음이라 말이 막혀도 괜찮아요. 이 계산 결과를 보여 주면서 "이 숫자가 맞는지 봐 주세요"라고 하셔도 충분해요.</p>
+      <p><b>3단계: 상담 전에 아래 자료를 모아 두세요.</b></p>
+      <ul>
+        <li>신분증, 최근 3개월 급여명세서 (또는 최근 1년 매출·소득 자료)</li>
+        <li>빌린 곳 목록: 은행, 카드사, 대부업체, 개인 빌린 돈까지 적기 (금액, 이자, 빌린 날짜)</li>
+        <li>집·차·예금·보험 등 가진 재산 목록과 대략의 금액</li>
+        <li>법원·채권자에게서 받은 서류가 있다면 전부 사진으로 찍어 두기</li>
+      </ul>
+      <p><b>4단계: 상담에서 이 질문 세 가지를 꼭 해 보세요.</b></p>
+      <ul>
+        <li>"제가 개인회생이 가능한지, 아니면 다른 방법이 나은지 알려 주세요."</li>
+        <li>"매달 얼마를 얼마 동안 갚게 될지 제 자료로 다시 계산해 주세요."</li>
+        <li>"지금 진행 중인 독촉이나 소송을 멈추려면 무엇부터 해야 하나요?"</li>
+      </ul>
+      <p class="sub">개인회생은 혼자 신청하는 것보다 전문가와 함께 준비할 때 빠지는 서류와 실수를 줄일 수 있어요. 비용이 부담되면 무료 상담에서 먼저 물어보세요.</p>
+    </div>
+
+    <div class="card">
+      <h2>마무리</h2>
+      <p>빚 때문에 밤잠을 못 이루고 있다면, 이 계산기를 찾아오신 것만으로도 첫걸음을 떼신 거예요. 숫자 하나로 끝나는 문제는 아니지만, 대부분은 준비하면 길이 보이는 문제예요.</p>
+      <p><b>반드시 법률 전문가(변호사 또는 법무사)의 도움을 받으시기를 바랍니다.</b> 혼자서는 해결하기 어려운 일이니, 오늘 이 결과를 들고 위의 무료 상담 중 한 곳에 먼저 연락해 보세요.</p>
+    </div>
+
+    <div class="callout asof"><b>📅 기준일 안내</b><br>2026년 기준 중위소득(보건복지부 고시)을 기준으로 해요. 2027년 기준 중위소득은 2027년 1월부터 적용되니, 그때 기준값을 다시 확인하세요. 계산 결과는 참고용이며 법률 판단이나 신청 가능 여부를 보장하지 않아요.</div>
 
     <div class="ad wide"><span>광고 자리</span></div>
   </main>
@@ -111,56 +227,116 @@ gtag('config', 'G-1M0D88PL01');
 "use strict";
 var $=function(s){return document.querySelector(s);};
 var LIFE={1:1538542,2:2519575,3:3215421,4:3896842};
-function won(n){ return Math.round(n).toLocaleString()+'원'; }
-function row(k,v){ return '<tr><td>'+k+'</td><td style="text-align:right;">'+v+'</td></tr>'; }
+var WON=function(n){ return Math.round(n).toLocaleString()+'원'; };
 
-U.comma($('#inc')); U.comma($('#unsec')); U.comma($('#sec'));
-
-function run(){
-  if(!U.need($('#inc'),'세후 월소득')) return;
-  var inc=U.num($('#inc'));
-  var fam=Number($('#fam').value);
-  var unsec=U.num($('#unsec'))||0;
-  var term=Number($('#term').value);
-  if(!inc){ $('#out').hidden=true; return; }
-
-  var life=LIFE[fam];
-  var avail=Math.max(0, inc-life);
-  var total=avail*term;
-
-  // 최저변제 기준 (참고): 무담보 채무 기준 하한선
-  var floor=0;
-  if(unsec>0){
-    if(unsec<50000000) floor=unsec*0.05;
-    else floor=Math.min(unsec*0.03+1000000, 30000000);
-  }
-  var finalTotal=Math.max(total, floor);
-  var monthly=finalTotal/term;
-
-  $('#out').hidden=false;
-  $('#big').textContent = won(monthly)+' / 월';
-  $('#note').textContent = term+'개월 동안 약 '+won(finalTotal)+'을 변제하는 것으로 추정합니다.';
-  $('#kpi').innerHTML =
-    '<div><b>'+won(life)+'</b><span>월 생계비 (기준)</span></div>'+
-    '<div><b>'+won(avail)+'</b><span>월 가용소득</span></div>'+
-    '<div><b>'+won(finalTotal)+'</b><span>변제 총액 (추정)</span></div>';
-
-  $('#steps').innerHTML =
-    row('세후 월소득', won(inc))+
-    row('− 월 생계비 ('+fam+'인 가구, 기준중위소득 60%)', won(life))+
-    row('= 월 가용소득', won(avail))+
-    row('× 변제 기간', term+'개월')+
-    row('= 변제 총액 (가용소득 기준)', won(total))+
-    row('최소 변제 기준 (무담보 채무 기준, 참고)', unsec>0 ? won(floor) : '해당 없음')+
-    row('최종 추정 변제 총액', won(finalTotal));
-
-  var w='';
-  if(avail===0) w='가용소득이 없어 이 계산으로는 변제금을 산정하기 어려워요. 개인파산 등 다른 절차를 전문가와 확인해 보세요.';
-  else if(unsec>0 && floor>total) w='최소 변제 기준이 가용소득 계산값보다 커서 기준 금액으로 올려 계산했어요. 실제 기준은 채무 구조에 따라 달라질 수 있어요.';
-  $('#warn').textContent = w;
+function minPay(unsec){
+  if(unsec<=0) return 0;
+  if(unsec<50000000) return unsec*0.05;
+  return Math.min(unsec*0.03+1000000, 30000000);
 }
 
+function calc(d, term){
+  var life=LIFE[d.fam]+d.extra;
+  var avail=Math.max(0, d.inc-life);
+  var total=avail*term;
+  var floor=minPay(d.unsec);
+  var fin=Math.max(total, floor);
+  var monthly=fin/term;
+  return {
+    life:life, avail:avail, total:total, floor:floor, fin:fin, monthly:monthly,
+    forgive:Math.max(0, d.unsec-fin), leftover:d.inc-monthly, bind: floor>total
+  };
+}
+
+function read(){
+  return {
+    inc:U.num($('#inc')), fam:Number($('#fam').value), unsec:U.num($('#unsec')),
+    sec:U.num($('#sec')), extra:U.num($('#extra')), asset:U.num($('#asset')),
+    term:Number($('#term').value)
+  };
+}
+
+function verdict(d, c){
+  var out=[];
+  if(c.avail===0) out.push(['red','가용소득이 없어요','입력한 소득이 생계비보다 적어서 이 계산으로는 변제금을 만들기 어려워요. 개인파산 등 다른 절차가 맞을 수 있으니 무료 상담(132)에서 먼저 확인해 보세요.']);
+  if(d.unsec>500000000) out.push(['red','무담보 채무가 5억 원을 넘어요','개인회생 한도를 넘을 수 있어요. 한도 판단은 상담에서 확인하세요.']);
+  if(d.sec>1000000000) out.push(['red','담보 채무가 10억 원을 넘어요','담보 채무 한도를 넘을 수 있어요. 상담에서 확인하세요.']);
+  if(c.bind) out.push(['amber','최저 변제 기준이 적용돼요','가용소득으로 계산한 금액보다 최저 변제 기준이 커서 월 변제금이 더 올라갔어요.']);
+  if(d.asset>c.fin) out.push(['amber','재산 가치가 변제 총액보다 커요','재산 가치('+WON(d.asset)+')가 변제 총액보다 크면 법원이 변제 총액을 올릴 수 있어요. 재산 평가는 상담에서 확인하세요.']);
+  if(c.leftover<0) out.push(['amber','월 변제 후 남는 돈이 없어요','월 변제금이 소득보다 커요. 기간 조정이나 다른 절차를 전문가와 상의하세요.']);
+  if(!out.length) out.push(['green','입력한 조건으로는 가용소득이 있어요','아래 "결과를 받은 뒤 할 일"을 따라 서류와 상담을 준비해 보세요.']);
+  return out.map(function(v){
+    return '<div class="vbox '+v[0]+'"><b>'+v[1]+'</b>'+v[2]+'</div>';
+  }).join('');
+}
+
+function run(){
+  if(!U.need($('#inc'),'월 소득')) return;
+  var d=read();
+  if(!d.inc){ $('#out').hidden=true; return; }
+  var c=calc(d, d.term);
+  var c36=calc(d,36), c60=calc(d,60);
+
+  $('#out').hidden=false;
+  $('#big').textContent=WON(c.monthly)+' / 월';
+  $('#note').textContent=d.term+'개월 동안 약 '+WON(c.fin)+'을 변제하는 것으로 추정해요.';
+  $('#kpi').innerHTML=
+    '<div><b>'+WON(c.fin)+'</b><span>변제 총액 (추정)</span></div>'+
+    '<div><b>'+WON(c.forgive)+'</b><span>면책 예상액</span></div>'+
+    '<div><b>'+(d.unsec>0 ? Math.round(c.forgive/d.unsec*100)+'%' : '-')+'</b><span>탕감률</span></div>'+
+    '<div><b>'+WON(c.leftover)+'</b><span>변제 후 남는 월 생활비</span></div>';
+
+  $('#verdict').innerHTML=verdict(d,c);
+
+  $('#steps').innerHTML=
+    row('세후 월소득', WON(d.inc))+
+    row('− 기본 생계비 ('+d.fam+'인 가구, 기준 중위소득 60%)', WON(LIFE[d.fam]))+
+    row('− 추가 생계비 (입력값, 법원 판단)', d.extra>0 ? WON(d.extra) : '없음')+
+    row('= 월 가용소득', WON(c.avail))+
+    row('× 변제 기간', d.term+'개월')+
+    row('= 변제 총액 (가용소득 기준)', WON(c.total))+
+    row('최저 변제 기준 (무담보 채무 기준)', d.unsec>0 ? WON(c.floor) : '해당 없음')+
+    row('= 최종 추정 변제 총액', WON(c.fin));
+
+  $('#cmp').innerHTML=
+    '<tr><th>기간</th><th>월 변제금</th><th>변제 총액</th><th>면책 예상</th></tr>'+
+    cmpRow(36,c36,d,d.term===36)+cmpRow(60,c60,d,d.term===60);
+
+  U.saveState({inc:d.inc, fam:d.fam, unsec:d.unsec, sec:d.sec, extra:d.extra, asset:d.asset, term:d.term});
+}
+
+function row(k,v){ return '<tr><td>'+k+'</td><td style="text-align:right;">'+v+'</td></tr>'; }
+function cmpRow(t,c,d,on){
+  var st=on?' style="color:var(--gold);font-weight:700;"':'';
+  return '<tr'+st+'><td>'+t+'개월'+(on?' ← 선택':'')+'</td><td>'+WON(c.monthly)+'</td><td>'+WON(c.fin)+'</td><td>'+WON(c.forgive)+'</td></tr>';
+}
+
+['inc','unsec','sec','extra','asset'].forEach(function(id){ U.comma($('#'+id)); });
+
+document.querySelectorAll('[data-add]').forEach(function(b){
+  b.onclick=function(){
+    var el=$('#'+b.getAttribute('data-target'));
+    var n=U.num(el)+Number(b.getAttribute('data-add'));
+    el.value=n?n.toLocaleString():'';
+  };
+});
+document.querySelectorAll('[data-reset]').forEach(function(b){
+  b.onclick=function(){ $('#'+b.getAttribute('data-target')).value=''; };
+});
+
 $('#go').onclick=run;
+
+var st=U.loadState();
+if(Number(st.inc)){
+  $('#inc').value=Number(st.inc).toLocaleString();
+  $('#fam').value=st.fam||'1';
+  if(Number(st.unsec)) $('#unsec').value=Number(st.unsec).toLocaleString();
+  if(Number(st.sec)) $('#sec').value=Number(st.sec).toLocaleString();
+  if(Number(st.extra)) $('#extra').value=Number(st.extra).toLocaleString();
+  if(Number(st.asset)) $('#asset').value=Number(st.asset).toLocaleString();
+  $('#term').value=st.term||'36';
+  run();
+}
 })();
 </script>
 </body>
