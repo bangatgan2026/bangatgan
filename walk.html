@@ -16,15 +16,15 @@ gtag('config', 'G-1M0D88PL01');
 <meta name="theme-color" content="#0E1320">
 <meta name="color-scheme" content="dark">
 <meta name="naver-site-verification" content="7ea0de7682fd50f2771c43ebd5a723369427b225" />
-<title>운동별 칼로리 계산기 (걷기·달리기·수영·스쿼트 외)</title>
-<meta name="description" content="걷기, 달리기, 계단, 등산, 자전거, 수영, 요가, 줄넘기, 테니스, 축구까지 운동별 소모 칼로리를 계산합니다. 밥 공기, 피자 조각, 방울토마토 양으로도 바꿔 보여 줍니다.">
+<title>운동별 칼로리 계산기 — 하루 필요 칼로리·운동 소모량 | 참새방앗간</title>
+<meta name="description" content="하루에 먹을 칼로리(유지·감량·증량)와 운동 종류별 소모 칼로리를 한 페이지에서 계산합니다. 밥 공기, 피자 조각으로 바꿔 보여 줍니다.">
 <link rel="canonical" href="https://bangatgan.kr/walk.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="참새방앗간">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:url" content="https://bangatgan.kr/walk.html">
-<meta property="og:title" content="운동별 칼로리 계산기 (걷기·달리기·수영·스쿼트 외)">
-<meta property="og:description" content="운동 종류와 체중, 시간을 넣으면 소모 칼로리를 계산하고 음식 양으로 환산해 보여 줍니다.">
+<meta property="og:title" content="운동별 칼로리 계산기 — 하루 필요 칼로리·운동 소모량">
+<meta property="og:description" content="기본 정보를 넣으면 하루 필요 칼로리를, 운동 종류와 시간을 넣으면 소모 칼로리를 계산합니다.">
 <meta property="og:image" content="https://bangatgan.kr/images/calc-exercise-thumb.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="675">
@@ -38,42 +38,100 @@ gtag('config', 'G-1M0D88PL01');
   <aside class="side"></aside>
   <main>
     <h1 class="page-h">운동별 칼로리 계산기</h1>
-    <p class="page-lead">운동 종류를 고르고 체중과 시간을 넣으면 소모 칼로리를 계산합니다. 밥 공기, 피자 조각, 방울토마토 양으로도 바꿔 보여 줍니다.</p>
+    <p class="page-lead">하루에 먹을 칼로리와 운동으로 쓰는 칼로리를 한 페이지에서 계산합니다.</p>
 
     <div class="card">
+      <h2>1. 나의 기본 정보</h2>
       <div class="field">
-        <label>운동 종류 <span style="color:#8A94AD;font-size:13px;">(눌러서 고르세요)</span></label>
-        <div id="chips" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;"></div>
+        <label for="sex">성별 </label>
+        <div class="inbox"><select id="sex"><option value="m">남성</option><option value="f">여성</option></select></div>
       </div>
-      </div>
-      <div class="row2">
+      <div class="row3">
         <div class="field">
-          <label for="w">몸무게 </label>
+          <label for="age">나이 </label>
+          <div class="inbox"><input id="age" inputmode="numeric" placeholder="나이"><span class="unit">세</span></div>
+        </div>
+        <div class="field">
+          <label for="h">키 </label>
+          <div class="inbox"><input id="h" inputmode="numeric" placeholder="키"><span class="unit">cm</span></div>
+        </div>
+        <div class="field">
+          <label for="w">현재 몸무게 </label>
           <div class="inbox"><input id="w" inputmode="numeric" placeholder="몸무게"><span class="unit">kg</span></div>
         </div>
-        <div class="field">
-          <label for="min">운동 시간 </label>
-          <div class="inbox"><input id="min" inputmode="numeric" placeholder="운동 시간"><span class="unit">분</span></div>
-        </div>
       </div>
-      <button class="btn" id="go">소모 칼로리 계산</button>
+      <p class="sub">몸무게는 2번과 3번 계산에 함께 쓰입니다.</p>
     </div>
 
-    <div id="out" hidden>
+    <div class="card">
+      <h2>2. 하루 필요 칼로리 (먹는 양 기준)</h2>
+      <div class="field">
+        <label for="act">활동량 <span class="hint">평소 생활을 기준으로 고르세요</span></label>
+        <div class="inbox"><select id="act">
+          <option value="1.2">거의 안 움직임 (대부분 앉아서 생활)</option>
+          <option value="1.375">가벼운 활동 (주 1~3회 운동이나 산책)</option>
+          <option value="1.55">보통 활동 (주 3~5회 운동)</option>
+          <option value="1.725">활발한 활동 (주 6~7회 운동)</option>
+          <option value="1.9">매우 활발함 (육체노동이나 하루 두 번 운동)</option>
+        </select></div>
+      </div>
+      <div class="field">
+        <label for="target">목표 몸무게 <span class="hint">없으면 비워두세요</span></label>
+        <div class="inbox"><input id="target" inputmode="numeric" placeholder="목표 몸무게 (선택)"><span class="unit">kg</span></div>
+      </div>
+      <button class="btn" id="go1">하루 필요 칼로리 계산</button>
+    </div>
+
+    <div id="outA" hidden>
       <div class="result">
-        <div class="lab" id="lab">소모 칼로리</div>
-        <div class="big" id="big"></div>
-        <div class="note" id="note"></div>
-        <div class="kpi" id="kpi"></div>
+        <div class="lab">하루 필요 칼로리</div>
+        <div class="big" id="big1"></div>
+        <div class="note" id="note1"></div>
+        <div class="kpi" id="kpi1"></div>
+      </div>
+      <div class="callout" id="warn1" hidden></div>
+      <div class="card">
+        <h2>목표별 계획</h2>
+        <p class="sub" id="tsub1"></p>
+        <table class="t"><tbody id="rows1"></tbody></table>
+      </div>
+      <div class="callout" id="guide1"></div>
+    </div>
+
+    <div class="card">
+      <h2>3. 운동별 소모 칼로리 (쓰는 양 기준)</h2>
+      <div class="field">
+        <label>운동 종류 <span class="hint">눌러서 고르세요</span></label>
+        <div id="chips" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;"></div>
+      </div>
+      <div class="field">
+        <label for="min">운동 시간 </label>
+        <div class="inbox"><input id="min" inputmode="numeric" placeholder="운동 시간"><span class="unit">분</span></div>
+      </div>
+      <button class="btn" id="go2">소모 칼로리 계산</button>
+    </div>
+
+    <div id="outB" hidden>
+      <div class="result">
+        <div class="lab">소모 칼로리</div>
+        <div class="big" id="big2"></div>
+        <div class="note" id="note2"></div>
+        <div class="kpi" id="kpi2"></div>
       </div>
       <div class="card">
         <h2>시간별 소모량</h2>
-        <table class="t"><tbody id="rows"></tbody></table>
+        <table class="t"><tbody id="rows2"></tbody></table>
         <p class="sub" style="margin-top:12px;">운동 강도 기준 참고값(MET)으로 계산합니다. 체력과 운동 강도에 따라 실제 소모량은 달라요.</p>
       </div>
-      <div class="card">
-        <h2>이어서 보기</h2>
-        <div class="next" id="nextTools"></div>
+      <div class="callout" id="guide2"></div>
+    </div>
+
+    <div class="card">
+      <h2>이어서 보기</h2>
+      <div class="next">
+        <a href="bmi.html"><b>BMI 계산기</b><span>지금 체중이 어느 단계인지</span></a>
+        <a href="bp.html"><b>혈압 계산기</b><span>학회 기준으로 어느 구간인지</span></a>
+        <a href="info-diet-plateau.html"><b>다이어트 정체기 글</b><span>체중이 멈췄을 때 점검할 것들</span></a>
       </div>
     </div>
 
@@ -82,7 +140,7 @@ gtag('config', 'G-1M0D88PL01');
   <aside class="rail"><div class="ad tall"><span>광고 자리</span></div></aside>
 </div>
 
-<script src="assets/site.js?v=95"></script>
+<script src="assets/site.js?v=96"></script>
 <script>
 (function(){
 "use strict";
@@ -123,7 +181,14 @@ var GROUPS=[
 var ALL=[];
 GROUPS.forEach(function(gr){ gr.items.forEach(function(it){ ALL.push(it); }); });
 var cur=ALL[0];
-var KCAL_RICE=300, KCAL_PIZZA=290, G_PER_KCAL=5.5;
+var KCAL_RICE=300, KCAL_PIZZA=290;
+
+['age','h','w','target','min'].forEach(function(id){ U.comma($('#'+id)); });
+
+function bmrOf(sex,age,h,w){
+  return sex==='m' ? 88.362+13.397*w+4.799*h-5.677*age : 447.593+9.247*w+3.098*h-4.330*age;
+}
+function fmt(v){ return Math.round(v).toLocaleString(); }
 
 function buildChips(){
   var h='';
@@ -137,53 +202,123 @@ function buildChips(){
   $('#chips').innerHTML=h;
 }
 
-function run(){
+function saveAll(){
+  U.saveState({
+    sex:$('#sex').value,
+    age:U.num($('#age'))||'', h:U.num($('#h'))||'', w:U.num($('#w'))||'',
+    act:$('#act').value, target:U.num($('#target'))||'',
+    ex:cur.k, min:U.num($('#min'))||''
+  });
+}
+
+function run1(){
+  if(!U.need($('#age'),'나이')) return;
+  if(!U.need($('#h'),'키')) return;
+  if(!U.need($('#w'),'몸무게')) return;
+  var sex=$('#sex').value, age=U.num($('#age')), h=U.num($('#h')), w=U.num($('#w'));
+  var act=Number($('#act').value)||1.2, target=U.num($('#target'));
+  if(!age||!h||!w){ $('#outA').hidden=true; return; }
+
+  var bmr=bmrOf(sex,age,h,w), tdee=bmr*act;
+  var maint=tdee, mild=tdee-300, mod=tdee-500, gain=tdee+300;
+
+  $('#outA').hidden=false;
+  $('#big1').textContent=fmt(maint)+' kcal';
+  $('#note1').textContent='지금 체중을 유지하려면 하루에 이만큼 먹으면 됩니다. 기초대사량 '+fmt(bmr)+'kcal는 가만히 있어도 쓰는 양이라 식사 목표는 아닙니다.';
+  $('#kpi1').innerHTML=
+    '<div><b>'+fmt(bmr)+'</b><span>기초대사량</span></div>'+
+    '<div><b>'+fmt(maint)+'</b><span>유지 칼로리</span></div>'+
+    '<div><b>'+fmt(mod)+'</b><span>감량 · 주 약 0.5kg</span></div>'+
+    '<div><b>'+fmt(gain)+'</b><span>증량</span></div>';
+
+  var rows='<tr><th>목표</th><th>하루 섭취</th><th>속도</th></tr>'+
+    '<tr><td>체중 유지</td><td>'+fmt(maint)+' kcal</td><td>변화 없음</td></tr>'+
+    '<tr><td>천천히 감량</td><td>'+fmt(mild)+' kcal</td><td>주 약 0.3kg</td></tr>'+
+    '<tr><td>보통 감량</td><td>'+fmt(mod)+' kcal</td><td>주 약 0.5kg</td></tr>';
+  var days=0;
+  if(target>0 && target<w){
+    days=Math.round((w-target)*7700/500);
+    rows+='<tr class="sum"><td>목표 '+target+'kg까지</td><td>'+fmt(mod)+' kcal</td><td>약 '+days+'일 ('+Math.round(days/7)+'주)</td></tr>';
+  }
+  $('#rows1').innerHTML=rows;
+  $('#tsub1').textContent = days
+    ? '목표까지는 보통 감량(하루 500kcal 줄이기)으로 계산했어요. 체중 1kg은 약 7,700kcal로 봤습니다.'
+    : '감량 줄은 하루 300·500kcal를 줄인다고 가정한 값입니다. 목표 체중을 넣으면 걸리는 기간도 나옵니다.';
+
+  var wr=$('#warn1');
+  if(mod<bmr){
+    wr.hidden=false;
+    wr.innerHTML='<b>주의</b><br>보통 감량 칼로리('+fmt(mod)+'kcal)가 기초대사량('+fmt(bmr)+'kcal)보다 낮아요. 이 칸은 피하고, 천천히 감량 줄을 고르거나 활동량을 한 칸 올려서 다시 계산해 보세요.';
+  } else {
+    wr.hidden=true; wr.innerHTML='';
+  }
+
+  $('#guide1').innerHTML=
+    '<b>이 숫자를 쓰는 법</b>'+
+    '<ol style="margin:8px 0 0 18px;padding:0;">'+
+    '<li>활동량을 한 줄로 고르세요. 헷갈리면 한 칸 낮은 쪽을 고르세요. 높게 잡으면 먹는 양이 과해집니다.</li>'+
+    '<li>목적에 맞는 줄 하나만 보세요. 유지는 '+fmt(maint)+'kcal, 천천히 감량은 '+fmt(mild)+'kcal, 보통 감량은 '+fmt(mod)+'kcal입니다.</li>'+
+    '<li>2~4주 뒤 같은 시간에 체중을 재서 주 평균을 보세요. 2주 넘게 그대로면 활동량을 한 칸 올리거나 먹은 양을 기록해 점검하세요.</li>'+
+    '</ol>';
+  saveAll();
+}
+
+function run2(){
   if(!U.need($('#w'),'몸무게')) return;
   if(!U.need($('#min'),'운동 시간')) return;
   var w=U.num($('#w')), min=U.num($('#min'));
-  var met = cur.met;
-  if(!w||!min){ $('#out').hidden=true; return; }
+  if(!w||!min){ $('#outB').hidden=true; return; }
 
-  var kcal = met*w*(min/60);
-  $('#out').hidden=false;
-  $('#big').textContent = Math.round(kcal).toLocaleString()+' kcal';
-  $('#note').textContent = min+'분 동안 '+cur.n+'을 했을 때의 소모 칼로리입니다.';
-  $('#kpi').innerHTML =
-    '<div><b>'+(kcal/KCAL_RICE).toFixed(1)+'공기</b><span>밥</span></div>'+
-    '<div><b>'+(kcal/KCAL_PIZZA).toFixed(1)+'조각</b><span>피자</span></div>'+
-    '<div><b>'+Math.round(kcal*G_PER_KCAL)+'g</b><span>방울토마토</span></div>';
+  var kcal=cur.met*w*(min/60);
+  var perMin=cur.met*w/60;
+  var mRice=Math.round(KCAL_RICE/perMin), mPizza=Math.round(KCAL_PIZZA/perMin);
+
+  $('#outB').hidden=false;
+  $('#big2').textContent=fmt(kcal)+' kcal';
+  $('#note2').textContent=min+'분 동안 '+cur.n+'을 했을 때의 소모 칼로리입니다.';
+  $('#kpi2').innerHTML=
+    '<div><b>'+mRice+'분</b><span>밥 1공기(300kcal) 태우기</span></div>'+
+    '<div><b>'+mPizza+'분</b><span>피자 1조각(290kcal) 태우기</span></div>'+
+    '<div><b>'+(kcal/KCAL_RICE).toFixed(1)+'공기</b><span>이번 운동 소모량 (밥 기준)</span></div>';
 
   var html='<tr><th>운동 시간</th><th>소모 칼로리</th></tr>';
   [10,20,30,60].forEach(function(m){
-    html+='<tr><td>'+m+'분</td><td>'+Math.round(met*w*(m/60)).toLocaleString()+' kcal</td></tr>';
+    html+='<tr><td>'+m+'분</td><td>'+fmt(perMin*m)+' kcal</td></tr>';
   });
-  $('#rows').innerHTML=html;
+  $('#rows2').innerHTML=html;
 
-  $('#nextTools').innerHTML=
-    '<a href="calorie.html?w='+w+'"><b>칼로리 계산기</b><span>먹는 쪽도 함께 계산해 보세요</span></a>'+
-    '<a href="bmi.html?w='+w+'"><b>BMI 계산기</b><span>지금 체중이 어느 단계인지</span></a>';
-
-  U.saveState({w:w,min:min,speed:met,act:cur.k});
+  $('#guide2').innerHTML=
+    '<b>이 숫자를 쓰는 법</b>'+
+    '<ul style="margin:8px 0 0 18px;padding:0;">'+
+    '<li>먹은 음식을 상쇄하고 싶다면 위의 "태우기" 분을 보세요. 지금 몸무게 기준 밥 한 공기는 약 '+mRice+'분입니다.</li>'+
+    '<li>소모량은 하루 필요 칼로리에서 그대로 빼는 값이 아니에요. 그날 얼마나 움직였는지 보는 참고값입니다.</li>'+
+    '<li>같은 운동도 숨이 차는 정도에 따라 값이 달라요. 표의 10·20·30분 값을 보고 시간을 정하세요.</li>'+
+    '</ul>';
+  saveAll();
 }
 
+$('#go1').onclick=run1;
+$('#go2').onclick=run2;
 $('#chips').onclick=function(e){
   var b=e.target.closest('button[data-k]');
   if(!b) return;
-  cur=ALL.filter(function(a){return a.k===b.getAttribute('data-k');})[0]||cur;
+  cur=ALL.filter(function(a){ return a.k===b.getAttribute('data-k'); })[0]||cur;
   buildChips();
-  run();
+  if(U.num($('#w'))&&U.num($('#min'))) run2(); else saveAll();
 };
-$('#go').onclick=run;
-U.comma($('#w')); U.comma($('#min'));
 
 var st=U.loadState();
-if(st.act){ cur=ALL.filter(function(a){return a.k===st.act;})[0]||cur; }
+if(st.sex) $('#sex').value=st.sex;
+if(st.age) $('#age').value=Number(st.age).toLocaleString();
+if(st.h) $('#h').value=Number(st.h).toLocaleString();
+if(st.w) $('#w').value=Number(st.w).toLocaleString();
+if(st.act) $('#act').value=st.act;
+if(st.target) $('#target').value=Number(st.target).toLocaleString();
+if(st.min) $('#min').value=Number(st.min).toLocaleString();
+if(st.ex) cur=ALL.filter(function(a){ return a.k===st.ex; })[0]||cur;
 buildChips();
-if(st.w){
-  $('#w').value=Number(st.w).toLocaleString();
-  $('#min').value=st.min;
-    run();
-}
+if(Number(st.age)&&Number(st.h)&&Number(st.w)) run1();
+if(Number(st.w)&&Number(st.min)) run2();
 
 })();
 </script>
