@@ -45,9 +45,6 @@ gtag('config', 'G-1M0D88PL01');
         <label>운동 종류 <span style="color:#8A94AD;font-size:13px;">(눌러서 고르세요)</span></label>
         <div id="chips" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;"></div>
       </div>
-      <div class="field" id="speedRow" hidden>
-        <label for="speed">걷기 속도 </label>
-        <div class="inbox"><select id="speed"><option value="3.0">천천히 (시속 4km)</option><option value="3.5" selected>보통 (시속 5km)</option><option value="4.3">빠르게 (시속 6km)</option><option value="5.0">매우 빠르게 (시속 6.5km)</option></select></div>
       </div>
       <div class="row2">
         <div class="field">
@@ -94,7 +91,7 @@ var $=function(s){return document.querySelector(s);};
 // 운동 강도 참고값(MET)
 var GROUPS=[
   {g:'걷기·달리기', items:[
-    {k:'walk', n:'걷기', met:3.5, speed:true},
+    {k:'walk', n:'걷기 (보통 속도, 시속 5km)', met:3.5},
     {k:'run', n:'달리기 (런닝머신, 시속 8km)', met:8.3},
     {k:'stair', n:'계단 오르기', met:4.0},
     {k:'hike', n:'등산', met:6.0},
@@ -139,13 +136,12 @@ function buildChips(){
   });
   $('#chips').innerHTML=h;
 }
-function syncSpeed(){ $('#speedRow').hidden = cur.k!=='walk'; }
 
 function run(){
   if(!U.need($('#w'),'몸무게')) return;
   if(!U.need($('#min'),'운동 시간')) return;
   var w=U.num($('#w')), min=U.num($('#min'));
-  var met = cur.speed ? (Number($('#speed').value)||3.5) : cur.met;
+  var met = cur.met;
   if(!w||!min){ $('#out').hidden=true; return; }
 
   var kcal = met*w*(min/60);
@@ -175,22 +171,18 @@ $('#chips').onclick=function(e){
   if(!b) return;
   cur=ALL.filter(function(a){return a.k===b.getAttribute('data-k');})[0]||cur;
   buildChips();
-  syncSpeed();
   run();
 };
-$('#speed').onchange=run;
 $('#go').onclick=run;
 U.comma($('#w')); U.comma($('#min'));
 
 var st=U.loadState();
 if(st.act){ cur=ALL.filter(function(a){return a.k===st.act;})[0]||cur; }
 buildChips();
-syncSpeed();
 if(st.w){
   $('#w').value=Number(st.w).toLocaleString();
   $('#min').value=st.min;
-  if(st.speed && cur.speed) $('#speed').value=String(st.speed);
-  run();
+    run();
 }
 
 })();
