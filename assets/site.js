@@ -24,7 +24,8 @@ var SECTIONS = [
       { href: "insurance.html", name: "4대보험 계산기",        desc: "근로자와 회사 부담액" },
       { href: "compound.html",  name: "복리계산기",        desc: "매달 넣으면 얼마가 되는지" },
       { href: "vat.html",       name: "부가세 계산기",           desc: "공급가액과 합계금액을 갈라서" },
-      { href: "cartax.html",    name: "자동차세 계산기",         desc: "배기량과 연식으로, 취득세까지" }
+      { href: "cartax.html",    name: "자동차세 계산기",         desc: "배기량과 연식으로, 취득세까지" },
+      { href: "rehab-calc.html", name: "개인회생 변제금 계산기", desc: "월 가용소득과 변제 총액 추정" }
     ]
   },
   {
@@ -1186,6 +1187,7 @@ U.needDate = function(el, name){
   /* 새 방식(계산기 바로 아래에 글이 펼쳐지고, 번호·고정글이 붙음): 먼저 시범으로 취득세 계산기만 */
   var NEWLIST = {
     "salary.html": "금융",
+    "rehab-calc.html": "금융",
     "car.html": "금융",
     "loan.html": "금융",
     "retire.html": "금융",
