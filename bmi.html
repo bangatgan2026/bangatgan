@@ -75,7 +75,7 @@ gtag('config', 'G-1M0D88PL01');
   <aside class="rail"><div class="ad tall"><span>광고 자리</span></div></aside>
 </div>
 
-<script src="assets/site.js?v=95"></script>
+<script src="assets/site.js?v=96"></script>
 <script>
 (function(){
 "use strict";
@@ -119,8 +119,7 @@ function run(){
   });
   $('#rows').innerHTML=html;
   $('#nextTools').innerHTML=
-    '<a href="bmr.html?h='+U.num($('#h'))+'&w='+w+'"><b>기초대사량 계산기</b><span>하루에 쓰는 최소 칼로리</span></a>'+
-    '<a href="calorie.html"><b>칼로리 계산기</b><span>활동량까지 넣어서 계산</span></a>';
+    '<a href="walk.html"><b>운동별 칼로리 계산기</b><span>하루 필요량과 운동 소모량 한 번에</span></a>';
   U.saveState({h:U.num($('#h')),w:w});
 }
 $('#go').onclick=run;
