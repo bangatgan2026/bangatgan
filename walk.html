@@ -16,14 +16,14 @@ gtag('config', 'G-1M0D88PL01');
 <meta name="theme-color" content="#0E1320">
 <meta name="color-scheme" content="dark">
 <meta name="naver-site-verification" content="7ea0de7682fd50f2771c43ebd5a723369427b225" />
-<title>운동 칼로리 계산기 (걷기·계단·등산·수영) | 참새방앗간</title>
-<meta name="description" content="걷기, 계단 오르기, 등산, 수영, 요가, 복싱, 줄넘기, 자전거까지 운동별 소모 칼로리를 계산합니다. 밥 공기, 피자 조각, 방울토마토 양으로도 바꿔 보여 줍니다.">
+<title>운동 칼로리 계산기 (걷기·달리기·수영·스쿼트 외) | 참새방앗간</title>
+<meta name="description" content="걷기, 달리기, 계단, 등산, 자전거, 수영, 요가, 줄넘기, 테니스, 축구까지 운동별 소모 칼로리를 계산합니다. 밥 공기, 피자 조각, 방울토마토 양으로도 바꿔 보여 줍니다.">
 <link rel="canonical" href="https://bangatgan.kr/walk.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="참새방앗간">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:url" content="https://bangatgan.kr/walk.html">
-<meta property="og:title" content="운동 칼로리 계산기 (걷기·계단·등산·수영) | 참새방앗간">
+<meta property="og:title" content="운동 칼로리 계산기 (걷기·달리기·수영·스쿼트 외) | 참새방앗간">
 <meta property="og:description" content="운동 종류와 체중, 시간을 넣으면 소모 칼로리를 계산하고 음식 양으로 환산해 보여 줍니다.">
 <meta property="og:image" content="https://bangatgan.kr/images/calc3-walk.jpg">
 <meta property="og:image:width" content="1200">
@@ -41,9 +41,14 @@ gtag('config', 'G-1M0D88PL01');
     <p class="page-lead">운동 종류를 고르고 체중과 시간을 넣으면 소모 칼로리를 계산합니다. 밥 공기, 피자 조각, 방울토마토 양으로도 바꿔 보여 줍니다.</p>
 
     <div class="card">
-      <h2>운동 종류</h2>
-      <div id="tabs" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:4px 0 18px 0;"></div>
-
+      <div class="field">
+        <label for="act">운동 종류 </label>
+        <div class="inbox"><select id="act"></select></div>
+      </div>
+      <div class="field" id="speedRow" hidden>
+        <label for="speed">걷기 속도 </label>
+        <div class="inbox"><select id="speed"><option value="3.0">천천히 (시속 4km)</option><option value="3.5" selected>보통 (시속 5km)</option><option value="4.3">빠르게 (시속 6km)</option><option value="5.0">매우 빠르게 (시속 6.5km)</option></select></div>
+      </div>
       <div class="row2">
         <div class="field">
           <label for="w">몸무게 </label>
@@ -53,10 +58,6 @@ gtag('config', 'G-1M0D88PL01');
           <label for="min">운동 시간 </label>
           <div class="inbox"><input id="min" inputmode="numeric" placeholder="운동 시간"><span class="unit">분</span></div>
         </div>
-      </div>
-      <div class="field" id="speedRow" hidden>
-        <label for="speed">걷기 속도 </label>
-        <div class="inbox"><select id="speed"><option value="3.0">천천히 (시속 4km)</option><option value="3.5" selected>보통 (시속 5km)</option><option value="4.3">빠르게 (시속 6km)</option><option value="5.0">매우 빠르게 (시속 6.5km)</option></select></div>
       </div>
       <button class="btn" id="go">소모 칼로리 계산</button>
     </div>
@@ -71,7 +72,7 @@ gtag('config', 'G-1M0D88PL01');
       <div class="card">
         <h2>시간별 소모량</h2>
         <table class="t"><tbody id="rows"></tbody></table>
-        <p class="sub" style="margin-top:12px;">MET 기준 참고값으로 계산합니다. 체력과 운동 강도에 따라 실제 소모량은 달라요.</p>
+        <p class="sub" style="margin-top:12px;">운동 강도 기준 참고값(MET)으로 계산합니다. 체력과 운동 강도에 따라 실제 소모량은 달라요.</p>
       </div>
       <div class="card">
         <h2>이어서 보기</h2>
@@ -90,37 +91,61 @@ gtag('config', 'G-1M0D88PL01');
 "use strict";
 var $=function(s){return document.querySelector(s);};
 
-// MET 참고값 (운동 강도 기준)
-var ACTS=[
-  {k:'walk', n:'걷기', met:3.5},
-  {k:'stair', n:'계단 오르기', met:4.0},
-  {k:'hike', n:'등산', met:6.0},
-  {k:'swim', n:'수영', met:6.0},
-  {k:'yoga', n:'요가', met:2.5},
-  {k:'box', n:'복싱', met:5.5},
-  {k:'rope', n:'줄넘기', met:10.0},
-  {k:'bike', n:'자전거', met:6.8}
+// 운동 강도 참고값(MET)
+var GROUPS=[
+  {g:'걷기·달리기', items:[
+    {k:'walk', n:'걷기', met:3.5, speed:true},
+    {k:'run', n:'달리기 (런닝머신, 시속 8km)', met:8.3},
+    {k:'stair', n:'계단 오르기', met:4.0},
+    {k:'hike', n:'등산', met:6.0},
+    {k:'bike', n:'자전거 (사이클)', met:6.8},
+    {k:'rope', n:'줄넘기', met:10.0},
+    {k:'hoop', n:'훌라후프', met:4.0}
+  ]},
+  {g:'수영·요가·유연', items:[
+    {k:'swim', n:'수영 (자유형)', met:6.0},
+    {k:'yoga', n:'요가', met:2.5},
+    {k:'pilates', n:'필라테스 (매트)', met:3.0},
+    {k:'aerobic', n:'에어로빅 (저강도)', met:5.0}
+  ]},
+  {g:'맨몸 근력', items:[
+    {k:'situp', n:'윗몸일으키기', met:3.8},
+    {k:'bodyw', n:'맨몸 운동 (스쿼트·푸시업 등)', met:3.8},
+    {k:'weight', n:'웨이트 트레이닝', met:3.5}
+  ]},
+  {g:'구기·격투', items:[
+    {k:'box', n:'복싱 (샌드백)', met:5.5},
+    {k:'squash', n:'스쿼시', met:7.3},
+    {k:'tennis', n:'테니스', met:7.3},
+    {k:'badminton', n:'배드민턴', met:5.5},
+    {k:'tabletennis', n:'탁구', met:4.0},
+    {k:'basket', n:'농구', met:6.5},
+    {k:'soccer', n:'축구', met:7.0}
+  ]}
 ];
+var ALL=[];
+GROUPS.forEach(function(gr){ gr.items.forEach(function(it){ ALL.push(it); }); });
+var cur=ALL[0];
 var KCAL_RICE=300, KCAL_PIZZA=290, G_PER_KCAL=5.5;
-var cur=ACTS[0];
 
-var TAB_CSS='padding:12px 0;border-radius:10px;border:1px solid #2A3350;background:#161D2E;color:#CFD6E6;font-size:15px;font-weight:600;cursor:pointer;';
-var TAB_ON='padding:12px 0;border-radius:10px;border:1px solid #3B6CFF;background:#3B6CFF;color:#FFFFFF;font-size:15px;font-weight:700;cursor:pointer;';
-
-function renderTabs(){
+function buildSelect(){
   var h='';
-  ACTS.forEach(function(a){
-    h+='<button type="button" data-k="'+a.k+'" style="'+(a.k===cur.k?TAB_ON:TAB_CSS)+'">'+a.n+'</button>';
+  GROUPS.forEach(function(gr){
+    h+='<optgroup label="'+gr.g+'">';
+    gr.items.forEach(function(it){
+      h+='<option value="'+it.k+'"'+(it.k===cur.k?' selected':'')+'>'+it.n+'</option>';
+    });
+    h+='</optgroup>';
   });
-  $('#tabs').innerHTML=h;
-  $('#speedRow').hidden = cur.k!=='walk';
+  $('#act').innerHTML=h;
 }
+function syncSpeed(){ $('#speedRow').hidden = cur.k!=='walk'; }
 
 function run(){
   if(!U.need($('#w'),'몸무게')) return;
   if(!U.need($('#min'),'운동 시간')) return;
   var w=U.num($('#w')), min=U.num($('#min'));
-  var met = cur.k==='walk' ? (Number($('#speed').value)||3.5) : cur.met;
+  var met = cur.speed ? (Number($('#speed').value)||3.5) : cur.met;
   if(!w||!min){ $('#out').hidden=true; return; }
 
   var kcal = met*w*(min/60);
@@ -145,23 +170,24 @@ function run(){
   U.saveState({w:w,min:min,speed:met,act:cur.k});
 }
 
-$('#tabs').onclick=function(e){
-  var b=e.target.closest('button[data-k]');
-  if(!b) return;
-  cur=ACTS.filter(function(a){return a.k===b.getAttribute('data-k');})[0]||cur;
-  renderTabs();
+$('#act').onchange=function(){
+  var k=$('#act').value;
+  cur=ALL.filter(function(a){return a.k===k;})[0]||cur;
+  syncSpeed();
   run();
 };
+$('#speed').onchange=run;
 $('#go').onclick=run;
 U.comma($('#w')); U.comma($('#min'));
 
 var st=U.loadState();
-if(st.act){ cur=ACTS.filter(function(a){return a.k===st.act;})[0]||cur; }
-renderTabs();
+if(st.act){ cur=ALL.filter(function(a){return a.k===st.act;})[0]||cur; }
+buildSelect();
+syncSpeed();
 if(st.w){
   $('#w').value=Number(st.w).toLocaleString();
   $('#min').value=st.min;
-  if(st.speed && cur.k==='walk') $('#speed').value=String(st.speed);
+  if(st.speed && cur.speed) $('#speed').value=String(st.speed);
   run();
 }
 
