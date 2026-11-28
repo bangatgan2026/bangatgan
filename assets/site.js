@@ -1295,7 +1295,13 @@ U.needDate = function(el, name){
     posts = [];
     SECTIONS.forEach(function (s) {
       if (s.id !== "info") return;
-      s.items.forEach(function (it, i) { if ((it.k || it.g) === NEWLIST[page]) posts.push({ it: it, i: i }); });
+      s.items.forEach(function (it, i) {
+        if ((it.k || it.g) !== NEWLIST[page]) return;
+        /* 이 계산기와 연결된 글(t)만 넣습니다. 연결 글이 없으면 목록 자체를 숨깁니다. */
+        var ts = String(it.t || "").split(",").map(function (x) { return x.trim(); });
+        if (ts.indexOf(page) < 0) return;
+        posts.push({ it: it, i: i });
+      });
     });
   }
 
@@ -1392,6 +1398,7 @@ U.needDate = function(el, name){
     return a.it.d < b.it.d ? 1 : a.it.d > b.it.d ? -1 : a.i - b.i;
   });
   posts = posts.map(function (p, n) { p.it.no = posts.length - n; return p.it; });
+  if (NEWLIST[page] && !posts.length) return;
 
   function esc(t) {
     return String(t).replace(/[&<>"]/g, function (c) {
