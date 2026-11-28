@@ -169,6 +169,7 @@ var SECTIONS = [
       { g:"금융", d:"2026-10-08", t:"loan.html", href:"info-loan-rate.html", name:"대출금리 0.5%p 차이, 3억 주담대 월 상환액과 총이자는 얼마나 달라질까?", desc:"3억 30년, 금리 0.5%p 오르면 월 +88,861원, 총이자 +3,199만 원" },
       { g:"금융", d:"2026-10-08", t:"salary.html", href:"info-raise-net.html", name:"연봉 500만원 인상되면 월급 실수령액은 얼마나 늘어날까?", desc:"500만 원 인상 시 월 실수령액 +317,546원, 인상분의 약 76%" },
       { g:"금융", d:"2026-10-08", t:"salary.html", href:"info-meal-allowance.html", name:"식대 비과세 20만원에 따른 연봉별 실수령액 차이와 조건 총정리", desc:"월 비과세 20만 원이면 연봉 5,000만 원 기준 월 47,578원 차이" },
+      { g:"금융", d:"2026-11-28", t:"rehab-calc.html", href:"info-rehab-basic.html", name:"개인회생 변제금 계산 기준과 36개월·60개월 차이, 모르고 시작하면 손해 보는 이유", desc:"변제금은 빚 액수보다 월 가용소득과 기간으로 정해집니다" },
       { g:"금융", d:"2026-10-07", t:"cartax.html", href:"info-car-acq-tax.html", name:"자동차 취득세 계산법 총정리: 부가세 제외 금액부터 감면 혜택까지", desc:"광고 가격 3,300만 원 신차 취득세 210만 원, 경차·전기차 감면 계산" },
       { g:"금융", d:"2026-10-07", t:"jeonse.html", href:"info-jeonse-deduction.html", name:"전세대출 이자 연말정산 절세 팁: 원리금 상환액 40% 소득공제 계산법", desc:"이자만 내도 상환액의 40%, 청약저축과 합쳐 연 400만 원 한도" },
       { g:"금융", d:"2026-10-07", t:"cartax.html", href:"info-ev-cartax.html", name:"전기차 자동차세 13만원의 비밀: 2,000cc 내연기관 자동차세와 10년 유지비 실제 비교", desc:"10년 합계 전기차 130만 원, 2,000cc 약 426만 4천 원" },
